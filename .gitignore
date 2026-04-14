@@ -1,0 +1,71 @@
+# Data files - never commit
+*.csv
+*.xlsx
+*.xls
+*.rds
+*.RData
+*.parquet
+
+# Figures - local only
+*.png
+*.jpg
+*.jpeg
+
+# PDFs excluded except notes
+*.pdf
+!notes/*.pdf
+
+# Figures folder (redundant but explicit)
+figures/
+
+# R artifacts
+.Rhistory
+.RData
+
+# LaTeX artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.nav
+*.snm
+
+# macOS
+.DS_Store
+
+# Local review notes
+.gitignored/
+
+
+# API Calls Password
+*.env
+
+# Folders with data and outputs
+data/*
+papers/*
+figures/*
+# R temporary data
+.RDataTmp
+
+# BGI Slab documentation (local only)
+slab/
+
+# Claude local settings (machine-specific)
+.claude/settings.local.json
+
+# Job posting text outputs (local only)
+output/job_posting_text/
+
+# Ad-hoc exploration scripts (local only)
+code/explore/
+
+
+
+*.HEIC
+*.jpg
+*.jpeg
