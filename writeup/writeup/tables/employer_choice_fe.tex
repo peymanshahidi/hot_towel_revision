@@ -1,0 +1,37 @@
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Mon, May 10, 2021 - 09:20:52 AM
+\begin{table}[!htbp] \centering 
+  \caption{Employer vertical preference signal over time, by treatment assignemnt} 
+  \label{tab:employer_choice_fe} 
+\small 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \textsc{LowTier} & \textsc{MedTier} & \multicolumn{2}{c}{\textsc{HighTier}} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ \textsc{OpeningRank} & $-$0.001$^{*}$ & $-$0.002$^{***}$ & 0.002$^{***}$ & 0.002$^{***}$ \\ 
+  & (0.0003) & (0.0004) & (0.0003) & (0.0003) \\ 
+  \textsc{ShownPref} &  &  &  & $-$0.030 \\ 
+  &  &  &  & (0.026) \\ 
+  \textsc{ShownPref} x \textsc{OpeningRank} &  &  &  & 0.0004 \\ 
+  &  &  &  & (0.001) \\ 
+ \hline \\[-1.8ex] 
+Observations & 228,702 & 228,702 & 228,702 & 228,702 \\ 
+R$^{2}$ & 0.727 & 0.647 & 0.669 & 0.669 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+\begin{minipage}{1\textwidth} 
+ \emph{Notes:} This table reports regressions where the dependent variable is an indicator for an employer's vertical preference selection and the independent variables are the chronological rank of the opening (ascending order) for that particular employer, \textsc{OpeningRank}, and its interactions with \textsc{ShownPref}.
+\shownprefdef{}.
+The sample is restricted to employers assigned to the explicit arm that posted more than 1 but fewer than 10 openings.
+\explicitdef{}.
+In each regression, an employer-specific fixed-effect is included. 
+Standard errors are clustered at the employer level. 
+ \starlanguage
+ \end{minipage}
+\end{table}

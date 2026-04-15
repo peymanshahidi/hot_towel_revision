@@ -1,0 +1,36 @@
+\subsection{Discussion of signaling, sorting, and bidding results}
+\label{ssec:discussion1}
+
+Our results demonstrate that indeed, a separating equilibrium is obtained: employers separate based on their relative preference between price and expertise; and applicants sort in response to the signal.  This is in contrast to a pooling equilibrium, where the employers do not credibly signal, and thus workers ignore the signal entirely.  
+
+Why would employers choose to credibly reveal their preferences?  To understand the tradeoffs they face, consider a simple model with two types of employers: $H$ (``high'') type and $L$ (``low'') type.  Workers are endowed with a quality $\theta$.  If an employer of type $t$ hires a worker of quality $\theta$ at wage $w$, their payoff is:
+\[ v_t \theta - w, \]
+where $v_H > v_L$ represents the relative preference of quality vs.~price for each type of employer.  We assume employers maximize expected payoff (where expectations are over all uncertainty related to matching and wages).
+
+For a separating equilibrium to obtain, high (resp., low) type employers must prefer to declare themselves high (resp., low) type.  Let $q_t$ denote the expected quality obtained by an employer when they declare type $t = H, L$, and let $w_t$ be the resulting.  Then these equilibrium conditions are that:
+\[ v_H q_H - w_H > v_H q_L - w_L; \ \ \ v_L q_L - w_L > v_L q_H - w_H. \]
+Our empirics suggest that in the marketplace, $q_H > q_L$ and $w_H > w_L$: in other words, declaring that one is a high type employer leads to a higher quality worker as a match, but at the cost of a higher wage.  Similarly, declaring that one is a low type employer leads to a lower wage, but at the cost of a lower quality worker.  In a separating equilibrium, these effects work out favorably for each type of employer, and thus preference revelation is sustained.
+
+
+\subsection{Discussion of match outcome results}
+
+Our results suggest that the separating equilibrium obtained {\em increased} welfare over the pooling equilibrium that would obtain without any signaling.  Under what conditions can we expect an increase in welfare in the separating equilibrium?
+
+To obtain some insight into this question, we return to the simplified framework introduced in Section \ref{sec:discussion1}.  If we presume that workers' payoffs are only the wages they earn (as opposed to any non-wealth preference), then since wages are just transfers, overall market welfare in the equilibrium is simply the average value of $v_t \theta$ over all employers (where $t$ is the employer type and $\theta$ is the quality of the hired worker).  Suppose there is a unit mass of employers in the market, with a fraction $\mu$ being high type, and $1-\mu$ being low type$.  It follows that aggregate market welfare in the separating equilibrium is:
+\[ \mu v_H q_H + (1 - \mu) v_L q_L. \]
+On the other hand, suppose in the pooling equilibrium that average hired worker quality is $q$; we make the simplifying assumption that this is independent of the employer type, since no signaling takes place in the pooling equilibrium.\footnote{Note this may not be completely accurate, since wage negotiation is endogenous, and employers' type may be partially revealed by wage negotiations.}    Thus welfare in the pooling equilibrium is:
+\[ (\mu v_H + (1 - \mu) v_L) q. \]
+We thus obtain the following condition for welfare in a separating equilibrium to dominate welfare in a pooling equilibrium:
+\begin{equation}
+\label{eq:welfarecond}
+ \alpha_H q_H + \alpha_L q_L > q, 
+\end{equation}
+where:
+\[ \alpha_H = \frac{\mu v_H}{\mu v_H + (1 - \mu) v_L},\ \ \alpha_L = \frac{(1 - \mu)v_L }{\mu v_H + (1 - \mu) v_L}. \]
+We can interpret $\alpha_H$ (resp., $\alpha_L$) as the {\em value-weighted} fraction of high (resp., low) types in the marketplace.  As one simple case where \eqref{eq:welfarecond} holds, suppose that:
+\[ \mu q_H + (1 - \mu) q_L \geq q. \]
+In other words, this implies that the average quality of hired workers in the separating equilibrium is at least as high as the average quality of hired workers in the pooling equilibrium.  For example, in supply-constrained markets, where most workers are hired, we would expect this condition approximately holds.  As long as $q_H > q_L$, then since $v_H > v_L$ it is straightforward to verify that \eqref{eq:welfarecond} holds.
+
+The preceding discussion provides some insight into how to interpret the suggested welfare increase in our setting.  Essentially, the welfare gains to high type employers are sufficiently high to offset the welfare losses of low type employers, either because there is a sufficient differentiation in quality ($q_H \gg q_L$), or there is a sufficient mass of high type employers ($\alpha_H \gg \alpha_L$).  [[[ JOHN: ANYTHING WE CAN SAY EMPIRICALLY ON WHICH OF THESE IS GOING ON? ]]]
+
+

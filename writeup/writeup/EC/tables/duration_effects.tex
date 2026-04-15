@@ -1,0 +1,51 @@
+
+% Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Tue, Aug 19, 2014 - 11:10:23 AM
+\begin{table}[!htbp] \centering 
+  \caption{Project duration and tier selection} 
+  \label{tab:duration} 
+\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{2}{c}{contractor\_tier} & delta.y \\ 
+\\[-1.8ex] & \multicolumn{2}{c}{\textit{linear}} & \textit{OLS} \\ 
+ & \multicolumn{2}{c}{\textit{mixed-effects}} & \textit{} \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
+\hline \\[-1.8ex] 
+ factor(duration\_weeks)3 & 0.033$^{***}$ &  &  \\ 
+  & (0.003) &  &  \\ 
+  & & & \\ 
+ factor(duration\_weeks)9 & $-$0.021$^{***}$ &  &  \\ 
+  & (0.003) &  &  \\ 
+  & & & \\ 
+ factor(duration\_weeks)18 & $-$0.040$^{***}$ &  &  \\ 
+  & (0.004) &  &  \\ 
+  & & & \\ 
+ factor(duration\_weeks)52 & $-$0.034$^{***}$ &  &  \\ 
+  & (0.003) &  &  \\ 
+  & & & \\ 
+ duration\_weeks &  & $-$0.001$^{***}$ &  \\ 
+  &  & (0.0001) &  \\ 
+  & & & \\ 
+ delta.x &  &  & $-$0.001$^{***}$ \\ 
+  &  &  & (0.0001) \\ 
+  & & & \\ 
+ Constant & 1.973$^{***}$ & 1.976$^{***}$ &  \\ 
+  & (0.002) & (0.002) &  \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 354,373 & 354,373 & 354,373 \\ 
+R$^{2}$ &  &  & 0.0003 \\ 
+Adjusted R$^{2}$ &  &  & 0.0003 \\ 
+Log Likelihood & $-$312,026.800 & $-$312,166.300 &  \\ 
+Akaike Inf. Crit. & 624,067.700 & 624,340.600 &  \\ 
+Bayesian Inf. Crit. & 624,143.100 & 624,383.700 &  \\ 
+Residual Std. Error &  &  & 0.409 (df = 354372) \\ 
+F Statistic &  &  & 120.487$^{***}$ (df = 1; 354372) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+\\ \begin{minipage}{\textwidth} \emph{Notes:} Here are some notes. \end{minipage}
+\end{table}

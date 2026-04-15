@@ -1,0 +1,21 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Calls:
+% \parbox[t][][t]{2cm}{\centering (1) \\ \emph{DV=} Fraction selecting low tier}:  lm(formula = I(as.character(contractor_tier) == "1") ~ G2, data = df.hyp.2) 
+% \parbox[t][][t]{2cm}{\centering (2) \\ \emph{DV=} Fraction selecting middle tier}:  lm(formula = I(as.character(contractor_tier) == "2") ~ G2, data = df.hyp.2) 
+% \parbox[t][][t]{2cm}{\centering (3) \\ \emph{DV=} Fraction selecting high tier}:  lm(formula = I(as.character(contractor_tier) == "3") ~ G2, data = df.hyp.2) 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tabular}{lcD{.}{.}{7}cD{.}{.}{7}cD{.}{.}{7}}
+\toprule
+&&\multicolumn{1}{c}{\parbox[t][][t]{2cm}{\centering (1) \\ \emph{DV=} Fraction selecting low tier}} && \multicolumn{1}{c}{\parbox[t][][t]{2cm}{\centering (2) \\ \emph{DV=} Fraction selecting middle tier}} && \multicolumn{1}{c}{\parbox[t][][t]{2cm}{\centering (3) \\ \emph{DV=} Fraction selecting high tier}}\\
+\midrule
+(Intercept)                         &  &  0.247^{***} &&  0.551^{***} &&  0.202^{***}\\
+                                    &  &  (0.005)     &&  (0.006)     &&  (0.005)    \\
+G2---Employer knows choice revealed &  &   0.003      &&  -0.008      &&   0.005     \\
+                                    &  &  (0.007)     &&  (0.008)     &&  (0.007)    \\
+\midrule
+R-squared                           &  &      0.000   &&      0.000   &&      0.000  \\
+N                                   &  &  14382       &&  14382       &&  14382      \\
+\bottomrule
+\end{tabular}

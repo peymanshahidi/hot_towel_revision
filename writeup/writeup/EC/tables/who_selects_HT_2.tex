@@ -1,0 +1,22 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Calls:
+% Select HT (1):  lm(formula = HT ~ I(employer_country == "United States"), data = subset(DT.openings, is.first.opening)) 
+% Select HT (2):  lm(formula = HT ~ I(prior_spend > 0), data = subset(DT.openings, is.first.opening)) 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tabular}{lcD{.}{.}{7}cD{.}{.}{7}}
+\toprule
+&&\multicolumn{1}{c}{Select HT (1)} && \multicolumn{1}{c}{Select HT (2)}\\
+\midrule
+(Intercept)             &  &  0.190^{***} &&  0.185^{***}\\
+                        &  &  (0.004)     &&  (0.004)    \\
+From US                 &  &  0.029^{***} &&             \\
+                        &  &  (0.005)     &&             \\
+Any past spend on oDesk &  &              &&  0.043^{***}\\
+                        &  &              &&  (0.005)    \\
+\midrule
+R-squared               &  &      0.001   &&      0.003  \\
+N                       &  &  22690       &&  22690      \\
+\bottomrule
+\end{tabular}

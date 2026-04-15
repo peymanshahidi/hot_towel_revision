@@ -1,0 +1,42 @@
+
+% Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Jan 01, 2015 - 08:29:49 AM
+\begin{table}[!htbp] \centering 
+  \tbl{Effect of knowledge that p/q choice will be exposed to would-be applicants on the employer's p/q choice  \label{tab:revelation} }{ 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & Tier z-score & Low Tier & Middle Tier & High Tier \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ P/Q choice shown to applicants, ShownPref & 0.007 & $-$0.002 & 0.002 & 0.001 \\ 
+  & (0.009) & (0.005) & (0.005) & (0.004) \\ 
+  & & & & \\ 
+ Any prior spend on oDesk, AnyPriorSpend &  & $-$0.125$^{***}$ & 0.080$^{***}$ & 0.045$^{***}$ \\ 
+  &  & (0.006) & (0.007) & (0.005) \\ 
+  & & & & \\ 
+ ShownPref $\times$ AnyPriorSpend &  & $-$0.012 & 0.018$^{*}$ & $-$0.007 \\ 
+  &  & (0.008) & (0.009) & (0.007) \\ 
+  & & & & \\ 
+ Constant & $-$0.003 & 0.313$^{***}$ & 0.500$^{***}$ & 0.187$^{***}$ \\ 
+  & (0.006) & (0.003) & (0.004) & (0.003) \\ 
+  & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 51,767 & 51,767 & 51,767 & 51,767 \\ 
+R$^{2}$ & 0.00001 & 0.019 & 0.007 & 0.002 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+}
+\begin{minipage}{1\linewidth} 
+ \emph{Notes:} This table reports OLS regressions of an employer's p/q selection---as captured by a z-score in Column~(1) or as tier-specific indicators in Columns~(2) through (4)---on an indicator for whether that p/q choice would or would not be shown to would-be applicants.
+In Columns~(2) through (4) the ShowPref indicator is interacted with an indicator for whether the employer had previously spent any money on the platform.
+Column~(1) shows estimates for Equation~\ref{eq:tierz}, while Columns~(2) through (4) show estimates for variants of Equation~\ref{eq:tieri}. 
+The sample is restricted to employers in the explicit arm. \explicitdef \tierdef
+The Column~(1) z-score of p/q tier choice is constructed by treating tiers selections as integers in successive, ascending order.
+Standard errors are robust to heteroscedasticity. 
+ \starlanguage
+ \end{minipage}
+\end{table}

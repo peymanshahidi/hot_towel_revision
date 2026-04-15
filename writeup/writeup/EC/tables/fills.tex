@@ -1,0 +1,49 @@
+
+% Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Jan 01, 2015 - 08:30:28 AM
+\begin{table}[!htbp] \centering 
+  \tbl{The effect of p/q revelation on the quantity of matches formed\label{tab:fills} }{ 
+  \begin{tabular}{@{\extracolsep{5pt}}lccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{3}{c}{Employer spent any money against the opening:} \\ 
+ & Explicit Arm & Ambiguous Arm & Ambiguous Arm \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
+\hline \\[-1.8ex] 
+ P/Q choice shown to applicants, ShownPref & $-$0.009 & $-$0.005 & $-$0.007 \\ 
+  & (0.005) & (0.008) & (0.016) \\ 
+  & & & \\ 
+ Medium Tier (MT) &  &  & $-$0.031$^{*}$ \\ 
+  &  &  & (0.016) \\ 
+  & & & \\ 
+ High Tier (HT) &  &  & $-$0.084$^{***}$ \\ 
+  &  &  & (0.019) \\ 
+  & & & \\ 
+ HT x ShownPref &  &  & 0.004 \\ 
+  &  &  & (0.019) \\ 
+  & & & \\ 
+ MT x ShownPref &  &  & 0.0001 \\ 
+  &  &  & (0.023) \\ 
+  & & & \\ 
+ Constant & 0.358$^{***}$ & 0.359$^{***}$ & 0.394$^{***}$ \\ 
+  & (0.004) & (0.006) & (0.013) \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 31,778 & 16,993 & 16,993 \\ 
+R$^{2}$ & 0.0001 & 0.00002 & 0.004 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+}
+\centering
+\begin{minipage}{1\linewidth} 
+ \emph{Notes:} This table reports OLS regressions where the dependent variable is an indicator for whether the employer spent any money against the opening and the independent variables are ShownPref---in Columns~(1) and (2)---and ShownPref interacted with the employer's p/q tier selection---Column~(3).
+Columns~(1) and (2) report estimates of Equation~\ref{eq:fill} and Column~(3) reports estimates of Equation~\ref{eq:filli}. 
+\shownprefdef
+\tierdef
+The sample for Column~(1) consists of openings from the explict arm, whereas in Columns~(2) and (3), the sample consists of openings from the ambiguous arm.
+\ambigdef \explicitdef Standard errors are robust to heteroscedasticity.  \starlanguage
+ \end{minipage}
+\end{table}

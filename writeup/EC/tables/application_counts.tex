@@ -1,0 +1,44 @@
+
+% Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Sun, Aug 17, 2014 - 12:42:20 PM
+\begin{table}[!htbp] \centering 
+  \caption{Application counts} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{log(num.apps)} \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ contractor.shown & $-$0.060$^{***}$ & $-$0.006 \\ 
+  & (0.019) & (0.019) \\ 
+  & & \\ 
+ tierMedium Tier & $-$0.016 & 0.037$^{**}$ \\ 
+  & (0.016) & (0.018) \\ 
+  & & \\ 
+ tierHigh Tier & $-$0.057$^{***}$ & 0.126$^{***}$ \\ 
+  & (0.020) & (0.020) \\ 
+  & & \\ 
+ contractor.shownTRUE:tierMedium Tier & 0.070$^{***}$ & 0.001 \\ 
+  & (0.023) & (0.022) \\ 
+  & & \\ 
+ contractor.shownTRUE:tierHigh Tier & 0.057$^{**}$ & $-$0.046$^{*}$ \\ 
+  & (0.028) & (0.025) \\ 
+  & & \\ 
+ Constant & 2.777$^{***}$ & 0.581$^{***}$ \\ 
+  & (0.014) & (0.016) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & 61,812 & 42,648 \\ 
+R$^{2}$ & 0.0004 & 0.002 \\ 
+Adjusted R$^{2}$ & 0.0004 & 0.002 \\ 
+Residual Std. Error & 1.154 (df = 61806) & 0.795 (df = 42642) \\ 
+F Statistic & 5.535$^{***}$ (df = 5; 61806) & 16.743$^{***}$ (df = 5; 42642) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\\
+\emph{Notes}: Here are some notes.
+\end{tabular}
+\end{table}

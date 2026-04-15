@@ -1,0 +1,30 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Calls:
+% \parbox[t][][t]{2cm}{\centering (1) \\ \emph{DV=} Num. Interviewed}:  lm(formula = num_interviewed ~ tier * contractor.shown + num_invites, data = DT.openings[(is.first.opening) & ambigious.arm & num_interviewed < 10]) 
+% \parbox[t][][t]{2cm}{\centering (2) \\ \emph{DV=} Num. Interviewed}:  lm(formula = num_interviewed ~ tier * contractor.shown + num_invites, data = DT.openings[(is.first.opening) & (G2 | G3) & num_interviewed < 10]) 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tabular}{lcD{.}{.}{7}cD{.}{.}{7}}
+\toprule
+&&\multicolumn{1}{c}{\parbox[t][][t]{2cm}{\centering (1) \\ \emph{DV=} Num. Interviewed}} && \multicolumn{1}{c}{\parbox[t][][t]{2cm}{\centering (2) \\ \emph{DV=} Num. Interviewed}}\\
+\midrule
+(Intercept)                                           &  &  1.194^{***} &&  1.286^{***}\\
+                                                      &  &  (0.088)     &&  (0.053)    \\
+tier: Medium Tier/Low Tier                            &  &  0.643^{***} &&  0.450^{***}\\
+                                                      &  &  (0.105)     &&  (0.062)    \\
+tier: High Tier/Low Tier                              &  &  0.612^{***} &&  0.382^{***}\\
+                                                      &  &  (0.128)     &&  (0.076)    \\
+contractor.shown                                      &  &  -0.044      &&   0.028     \\
+                                                      &  &  (0.105)     &&  (0.071)    \\
+num_invites                                           &  &  0.029^{***} &&  0.030^{***}\\
+                                                      &  &  (0.003)     &&  (0.002)    \\
+tier: Medium Tier/Low Tier $\times$ contractor.shown &  &  -0.065      &&  -0.033     \\
+                                                      &  &  (0.126)     &&  (0.086)    \\
+tier: High Tier/Low Tier $\times$ contractor.shown   &  &  -0.118      &&   0.051     \\
+                                                      &  &  (0.155)     &&  (0.106)    \\
+\midrule
+R-squared                                             &  &      0.025   &&      0.019  \\
+N                                                     &  &   7225       &&  13535      \\
+\bottomrule
+\end{tabular}

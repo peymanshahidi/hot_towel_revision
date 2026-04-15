@@ -1,0 +1,1630 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{commath} 
+\usepackage{dcolumn}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{setspace} 
+\usepackage{subcaption}
+\usepackage{dsfont}
+
+\usepackage[margin=1.5in]{geometry}
+
+\usepackage{adjustbox}
+\usepackage{rotating}
+
+\hypersetup{
+  colorlinks = TRUE,
+  citecolor=blue,
+  linkcolor=red,
+  urlcolor=black
+}
+
+\input{params_chi_square.tex} 
+\input{params_choices_by_cat.tex}
+\input{params_signal_effects_wage_bidding.tex}
+\input{params_signal_effects_experience.tex}
+
+\input{params_reg_experience.tex}
+\input{params_reg_wb_pr_apps.tex}
+\input{params_welfare.tex}
+
+\input{params_bidding_effect.tex}
+\input{params_app_counts.tex}
+\input{params_worker_targeted_apps.tex}
+\input{params_condition_on_pool_size.tex}
+\input{params_trt_effects.tex}
+\input{params_exp_details.tex}
+
+\renewcommand{\H}{\ensuremath{\mathsf{H}}}
+\renewcommand{\L}{\ensuremath{\mathsf{L}}}
+\newcommand{\poiss}{\ensuremath{\mathsf{Poisson}}}
+
+\newtheorem{theorem}{Theorem}
+
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{prop}{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+
+%\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+%\input{tcilatex}
+%\begin{document}
+
+
+\newcommand{\hottowel}{vertical preference signaling}
+\newcommand{\starlanguage}{Significance indicators: $\dagger$:$p < 0.10$, $*$:$p < 0.05$, $**$:$p < 0.01$, $***$:$p \le 0.001$.}
+\newcommand{\tierdef}{See Figure~\ref{fig:tradeOff} for vertical preference tier definitions.\,} 
+
+\newcommand{\signaldef}{When posting a job opening, employers had to select from one of three ``tiers'' to describe the kinds of applicants they were most interested in:
+(1) Entry level: ``I am looking for [workers] with the lowest rates.'';
+(2) Intermediate: ``I am looking for a mix of experience and value.'';
+(3) Expert: ``I am willing to pay higher rates for the most experienced [workers].''
+We refer to these tiers as ``low,'' ``medium,'' and ``high,'' respectively}
+
+\newcommand{\shownprefdef}{If $\textsc{ShownPref} = 1$, would-be applicants could observe the employer's vertical preference before applying, otherwise they could not, \mbox{$\textsc{ShownPref}=0$}}
+\newcommand{\ambigdef}{Employers in the ambiguous arm were told that the platform \emph{might} reveal their preferences to workers; whether workers were shown employer vertical preferences was randomly determined \emph{ex post}}
+\newcommand{\explicitdef}{Employers in the two-cell explicit arm were told \emph{ex ante} that the platform would reveal or would not reveal their vertical preferences to workers}
+\newcommand{\threefacetdesc}{\textsc{ShownPref} is on the x-axis, the outcome is on the y-axis and vertical preference signal selection determines the facets. Each facet contains a label with the percentage change in the outcome variable caused by preference revelation.\,}
+\newtheorem{hyp}{Hypotheses}
+
+\newcommand{\newrj}[1]{{\color{blue} #1}}
+
+\begin{document} 
+
+\newcommand{\WorkingTitle}{Improving Search Markets with Cheap Talk Messages:\\
+       Theory and Evidence in a Directed Search Labor Market}
+
+\title{\WorkingTitle\footnote{Author contact information available at
+     \href{http://www.john-joseph-horton.com/}{http://www.john-joseph-horton.com/}.
+     Thanks to Andrey Fradkin,
+     Dave Holtz,
+     Ed Lazear,
+     Paul Oyer,
+     Isaac Sorkin,
+     Liran Einav,
+     Mike Luca,
+     Meng Liu,
+     Steve Tadelis,
+     Steven Davis,
+     Dean Eckles, and Richard Zeckhauser for helpful comments and suggestions.
+     Thanks to participants at the Marketplace Innovation Workshop at Stanford, the ACM-EC Conference, and the NBER Summer Institute for IT \& Digitization.
+     Thanks to \href{https://john-joseph-horton.com/papers/ayh.jpg}{Ada Yerkes Horton} for help in preparing the manuscript.
+     Slides: \href{https://john-joseph-horton.com/papers/hot_towel.slides.html}{http://john-joseph-horton.com/papers/hot\_towel.slides.html}.
+     Code (eventually): \href{https://john-joseph-horton.com/papers/hot_towel.code.html}{http://john-joseph-horton.com/papers/hot\_towel.code.html}.
+}}
+
+\newcommand{\JPEabstract}{
+  \noindent
+  We develop a theory of cheap talk signaling in matching markets in which employers can announce their preferences, which workers can use to direct their search. 
+  In a large online labor market, employers were given the opportunity to state their relative willingness to pay for productivity.
+  Preferences were elicited for all firms, but preferences were only revealed to job-seekers for treated firms.
+  Job-seekers clearly targeted their applications to employers of the right ``type'' even when they could not observe preferences.
+  However, revelation of preferences caused substantial additional sorting.
+  This additional sorting strongly affected who was matched to whom, and at what price, implying seekers regarded revealed information as credible \emph{ex ante} commitments. 
+  Overall, the treatment raised the average wage bill and the number of hours-worked and likely increased match quality. 
+  \newline \newline
+}
+
+\date{\today (see \href{http://john-joseph-horton.com/papers/hot_towel_pk.pdf}{\color{blue} here} \color{black} for updates)}
+
+\author{John J. Horton\\MIT \& NBER \and Ramesh Johari\\Stanford University \and Philipp Kircher \\ Cornell University}
+\maketitle
+
+\begin{abstract} 
+\JPEabstract{} \\
+  %\emph{JEL classification}: C72, C78, D80, J44 \newline 
+  \emph{Keywords:} search, matching, market design, experimentation 
+\end{abstract} 
+
+\onehalfspacing
+
+\section{Introduction}
+Market designers must design the environment in which buyers and sellers communicate match-relevant information.
+One commonplace design is to simply give buyers and sellers ``free text'' to describe themselves, their preferences, what they are selling, and so on.
+Although cheap talk, this approach is attractive because it is low cost and can clearly convey useful information without the need of the market designer to verify that information.
+However, the platform can go beyond simply allowing free text by creating standardized ways to communicate information---say allowing employers to select from a standardized list of job title or specify the precise geographic location of office.
+This standardization in turn makes the signal more useful by making it easier for counter-parties to search, make comparisons, and ultimately meet their desired counter-party.
+There is of course a large literature on cheap talking following the seminal paper by \cite{crawford1982strategic}.
+But there has been comparatively little exploration of using cheap talk as an explicit tool for market design, as we do in this paper.
+
+Although cheap talk approach clearly works when interests are aligned---an employer generally would have no incentive to mislead about the location of their office or what kind of role they were hiring for---the situation is more strategically fraught when incentives are not so aligned. 
+For example, can cheap talk signaling work for the employer to convey ``vertical'' preferences, such as their relative willingness to pay for quality or more able workers?
+
+In this paper, we consider the market designer's platform, both in theory and with a large experiment in an online labor market. 
+Recent theory work have suggested that cheap talk could improve market outcomes.
+\cite{menzio2007theory} and \cite{kimKircher2015} for settings in which workers are not sure about the value that firms have for the jobs and cheap-talk is able to reveal some of this.
+The market structure in our experiment is remarkably close to the latter, with workers placing wage demands to obtain jobs.
+Yet in contrast to previous theories that modeled private valuation environments, there is a strong concern in the market for the quality of applicants in this market which is revealed by the fact that higher wage bids are often accepted over lower wage bids by firms. 
+
+In our model, we extend \cite{kimKircher2015} by incorporating observable ability differences between workers and we allow for higher value jobs to gain more from higher ability workers.
+Firms can provide a cheap talk message about their ``type''---whether they are primarily interested in high or low ability workers.
+Obviously real firms can already use existing language to convey the relevant information, for example through the use of words in the job description or the text.
+But whether this is successful depends on many features, not least whether words carry a commonly understood connotation that allows sorting in the market and easy ``searchability.''
+We model this distinction as the market without cheap talk signaling possibility as workers having uncertainty about precisely what kind of firm they face.
+
+We characterize when an informative cheap talk equilibrium is possible, showing that firms have to be sufficiently heterogeneous for cheap talk to be informative.
+We can contrast the allocation with truthful revelation with a setting without cheap-talk messages but in which workers still have some information about what kind of firm they face once they decide to apply---which in turn affects their bidding.
+Compared to this equilibrium, when cheap talk signaling is possible, high-type firms now direct search only to high-type firms and both kinds of workers tailor their wage bids.
+The total number of applications decreases, with low-type firms enduring the reduction, but they are compensated with lower wage bids; high-type firms get more of the kinds of applicants they are interested in, albeit they now face higher wage bids.
+Cheap talk messaging improves sorting.
+
+Our theory constructs a setting where cheap talk leads to an improvement, but the theory also shows cheap talk is not always sustainable, and there is always a ``babbling'' equilibrium where cheap-talk messages convey no information.
+Whether an actual marketplace could benefit from introduced signaling therefore remains an empirical matter---one we approach with our experiment. 
+
+%This implies that cheap-talk has the potential to improve the sorting in the market and at the same time allow for more tailored wage bids to the valuation of firms.
+
+%We show that in this imperfect information environment, there s 
+%e also for workers to have some uncertainty about what kind of firm they face
+
+%We assume that in such a setting any information about jobs is much harder to search for, and we model this in a stark case by assuming that it is only revealed after the worker has chosen a firm and prepares his bid.
+%Also, the information is very informative but not perfect.
+%These assumptions mean that visit strategies in this case are random, and bids have to incorporate some uncertainty about the type of firm that the worker is facing.
+%Relative to this, truthful cheap talk messages by firms do not alter the visit behavior of low type workers who continue to randomize between firms, but these workers bid less aggresively at low type firms and more aggressively at high type firms.
+%High type workers above some ability threshold now only visit high type firms, and they bid more aggressively there than in the absence of cheap-talk.
+%The selectivity of the high type workers means that the overall number of applicants increases at high type firms when cheap talk is introduced, and since these workers are now absent at low type firms the overall number of applications there goes down.
+%This improves the sorting in the market.
+%Low type firms are willing to accept the lower number of applicants and the lack of high quality applicants precisely because the workers that they do get bid less aggressively. 
+
+Our experiment introduced a clear and searchable language (three options) for expressing vertical preferences for better but more costly candidates. 
+In the experiment, firms self-reported their willingness to pay for worker productivity, as proxied by worker experience.
+However, only treated employers had their reports shown to job seekers.
+This novel design allowed us to isolate the effects of the signal revelation on sorting. 
+
+Consistent with workers already engaging in substantial directed search, job-seekers clearly targeted their applications to employers of the right ``type,'' even when they could not observe elicited preferences.
+However, experimental revelation of preferences caused substantial additional sorting.
+Job-seekers avoided firms revealed to have a low willingness to pay. 
+This additional sorting strongly affected who was matched to whom, and at what price, implying seekers regarded revealed information as credible \emph{ex ante} commitments. 
+Overall, the treatment raised the wage bill and the number of hours-worked---under some reasonable assumptions, this combination suggests increased match quality. 
+
+The main effect of revelation was to make applicant pool compositions---and eventual formed matches---more consistent with employer stated cheap talk preferences.
+Importantly, we find no evidence that employers were reluctant to communicate their preferences.
+Employers evidently \emph{wanted} job seekers to know their preferences to get more of the kinds of applicants they are interested in and/or change the wage they had to pay.
+There is no evidence that once workers applied that the bargaining process ``undid'' the employer stated preferences, consistent with viewing the \emph{ex ante} statements about preferences as commitments.   
+
+The first contribution of this paper is that we believe it is the first to explicitly explore the use of cheap-talk messages to improve the search process in matching markets, both theoretically and experimentally.
+The paper provides strong evidence in favor of a directed search characterization of the matching process.
+Employers sent cheap-talk messages that turned out to deliver credible information in equilibrium.
+Employers apparently found making these commitments attractive because of how it affected applicant pool composition and the resultant matches.
+Although our empirical context is an online labor market, the search and matching process is similar in its fundamentals to the matching process in more conventional markets. 
+
+A second implication of the paper is a market design and public policy implication---namely that a market-designing platform can substantiviely improve market information with low cost market interventions.
+In contrast to conventional models that take information limitations as essentially a fixed feature not under central control, our paper shows the role that can be played by third-parties \citep{autor2008economics}.
+Even though our context is an online labor market, the exact intervention could be implemented by any computer-mediated job board (Monster, Indeed, SimplyHired, LinkedIn, Craigslist, Facebook Jobs) that controls how job posts are initially posted and displayed to job seekers---and indeed, there is an emerging literature on platform information interventions \citep{bhole2021}.
+As more of economic life---including the job search process---becomes computer-mediated \citep{kuhn2004internet,kuhn2014internet,varian2010computer,marinescu2016opening}, the opportunity to shape matching markets through purely informational interventions is likely to grow. 
+
+The rest of the paper is organized as follows:
+In Section \ref{sec:empirical_context}, we explain the empirical context and related work.
+In Section \ref{sec:exp_design}, we explain the experimental design.
+In Section~\ref{sec:results_existence}, we show that employers have vertical preferences and are willing to state them \emph{ex ante}. 
+How workers sort and bid in response to these revealed preferences, and how the composition of filled job openings changes are presented in Section~\ref{sec:results_sorting}.
+The effects of revelation on match formation and match outcomes are reported in Section~\ref{sec:results_outcomes}.
+We discuss future directions for research and conclude in Section \ref{sec:conclusion}.
+
+\section{Empirical context} \label{sec:empirical_context}
+
+The empirical setting for our analysis is a large online labor market.
+In these markets, employers hire workers to perform tasks that can be done remotely.
+Markets differ in their scope and focus, but common services provided by the platform include soliciting and promulgating job openings, hosting user profile pages, processing payments, arbitrating disputes, certifying worker skills, and maintaining a reputation system \citep{Horton2010, horton2015reputation}.
+
+In the online labor market we use as our empirical setting, would-be employers write job descriptions, self-categorize the nature of the work and required skills, and then post the job openings to the platform website.
+Job openings are learned about by workers via electronic searches or email notifications.
+Employers can also search worker ``profiles'' and invite workers to apply for their openings \citep{horton2017effects}.
+Worker ``profiles''  are similar to resumes, containing the details of past jobs completed by the worker, education history, skills, and so on.
+For both workers and employers, some of the information available to the other side of the market is verified by the platform.
+Examples of verified, public information include hours-worked, hourly wage rates, total earnings, and feedback ratings from past trading partners.
+
+If a worker chooses to apply to a particular job opening, they submit an application, which includes a wage bid (for hourly jobs) or a total project bid (for fixed-price jobs) and a cover letter.
+In our analysis, we only make use of hourly job openings, as the preference revelation opportunity was only available for hourly job openings. 
+
+After a worker submits an application, the employer can choose to interview the applicant.
+They can also hire an applicant at the terms proposed in the application, or make a counteroffer, which the worker can counter, and so on.
+The process is not an auction and neither the employer nor the worker are bound to accept any offer. 
+Despite the possibility of back-and-forth bargaining, it is fairly rare, with about 90\% of hired workers being hired at the wage they initially proposed \citep{barach2016info}.
+
+To work on hourly contracts, workers must install custom tracking software on their computers. 
+The tracking software essentially serves as a digital punch clock.
+The software records not only the time spent working (to the second), but also the count of keystrokes and mouse movements.
+The software also captures an image of the worker's computer screen at random intervals.
+All of this captured data is sent to the platform's servers and then made available to the employer for inspection, in real time.
+These features give employers tools to precisely monitor hours-worked, and to an extent, effort.
+As employers can end contracts at will, the employer can arguably be thought of as the party choosing hours-worked.
+
+The marketplace we study is not the only market for online work, and so it is important to keep in mind the ``market'' versus ``marketplace'' distinction made by \cite{roth2018}.
+Relatedly, a concern with treating job openings as our primary unit of analysis is that every job opening we see on the platform could be simultaneously posted on several other online labor market sites and in the conventional market.
+However, survey evidence suggests that online and offline hiring are only very weak substitutes and that multi-homing of job openings is relatively rare.
+When asked what they would have done with their most recent project if the platform were not available, only 15\% of employers responded that they would have made a local hire.
+Online employers report that they are generally deciding among (a) getting the work done online, (b) doing the work themselves, and (c) not having the work done at all.
+The survey also found that 83\% of employers said that they listed their last job opening only on the platform in question. 
+
+\subsection{Sources and uses of information}
+The matching process in our setting is largely about the acquisition and evaluation of information.
+Some information is not cheap talk, as the platform verifies it, such as past hours-worked and wages, the platform serves as a kind of labor market intermediary \citep{autor2008economics}.
+There are several papers that explore the effects of a ``platform'' changing the information available, which is typically about sellers, such as their quality \citep{luca2016reviews, jin2003}, past experience, \citep{barach2016info} and capacity to take on more work \citep{horton2018scs}.
+The stylized fact of these information disclosures is that they redirect buyers to ``better'' sellers, and, in the shadow of this effect, improve seller quality.
+
+Seller improvement is not the only effect of information disclosures---in some cases, they can be used to thicken markets by coordinating buyers and sellers.
+Several papers have considered the effect of signaling in matching markets, though all have focused on 1:1 matching scenarios in which participants are privately signaling their interest in a particular counter-party \citep{lee2011propose, coles2013preferencem, kushnir2013harmful}.
+Another kind of coordination, however, is with respect to something more general---namely buyer vertical preferences.
+When buyers have differentiation in their willingness to pay for vertical attributes, platform quality disclosures can serve a coordinating function. 
+For example, there are buyers specifically looking for distressed assets, damaged cars, and in the case of labor markets, entry level workers.
+In these markets, the platform revealing information about the quality of the good can beneficially lead buyers to sellers of the right ``type,'' as in \cite{tadelis2011information}.
+
+Our question is whether this same kind of coordination around vertical preferences can occur through cheap talk rather than platform-provided information.  
+Despite its advantages, platform-provided information can be expensive to generate, and much of the information in a market is cheap talk.
+Some self-reported cheap talk information has little strategic import---an employer looking for a web developer has no incentive to claim that he or she wants to hire an accountant.
+But beyond that, considerations such as willingness to pay, willingness to accept, productivity, match-specific surplus, capacity to take on more work---and important to matching but are likely to be subject to misreporting.\footnote{
+  Even if there are some pieces of self-reported information that could self-servingly influence a match if misstated---such as a worker over-claiming experience with some technology---the shadow of bad feedback following bad performance---and the potential verifiability of some claims during the pre-hire screening process used by the employer---probably curtails gross misrepresentation.
+As an example of how this works in another online market, \cite{lewis2011} shows that on eBay, the revelation of information about quality (through descriptions and prices) and the contracts created by these disclosures largely overcome the adverse selection problem.
+}
+
+The vertical preference revelation we consider differs fundamentally from buyer-specific ``pin point'' preference revelation exemplified by the economics job market signaling mechanism.
+First, the party signaling is the buyer and his or her stated preferences are relevant to many sellers.
+Second, given that a signal is informative about a buyer's willingness to pay, there is scope for strategic misreporting, wheres for pin point preferences, the market function is mostly coordination.
+
+%A question 
+%Although any self-reported information on the platform is cheap talk, employers and workers have little strategic incentive to misreport much of it, as incentives are aligned \citep{farrell1996cheap}.
+
+\section{Theory}
+
+\textbf{Setup:} \textit{Players}: Assume there are two types of firms.
+Mass $ \delta _{L}$ of firms has type $v_{L}$ and mass $\delta _{H}$ of firms has type $v_{H}.$
+This type is their private information.
+There is a unit measure of workers.
+This is without loss of generality as throughout only the ratio of workers to high and low type firms matters.
+Let $\lambda=1/(\delta _{L}+\delta _{H})$ denote the marketwide ratio of workers to firms.
+Workers differ in ability $a$ drawn from distribution $F$ with support on $[\underline{a},\bar{a}],$ with continous strictly positive density $f(a).$
+Ability is known and publicly observable.
+
+%\bigskip
+
+\textit{Payoffs}:
+Each firm can hire at most one worker, each worker can accept at most one job.
+A firm with valuation $v$ that hires a worker of ability $a$ produces $va;$ and if it pays the worker $b$ its profit $\pi $ is
+\begin{align}
+ \pi =va-b 
+\end{align}
+while the workers utility is $b.$
+The utility of an unmatched firm or worker are normalized to zero.
+
+%\bigskip
+
+\textit{Timing}:
+Assume firms first post a message $m\in \{L,H\}.$
+Let $\mu_{m}(v_{m})$ be the equilibrium fraction of firms of type $v_{m}$ that post message $m.$
+Then each worker chooses one firm to approach.
+Absent any further information he can only choose whether to approach a high or low message firm and then selects among them at random.
+In this setting the message serves two purposes: (1) it possibly conveys information about the value of the job and (2) it does so before workers decide which job to approach.
+We assume that the job description also itself provides some signal about the job, but the worker needs to spend time on the job description to understand this and the information may not be perfect.
+We capture this in a stark way by assuming that the worker only gets an additional signal about the job once he decided which firm to approach.
+Then he obtains a signal $s\in \{L,H\}$ of the type of the firm which is iid condition on the firm's type, where $\psi \in \lbrack 1/2,1)$ denotes the probability of signal $s$ if the firm has type $v_{s}.$
+Then the worker submits a wage bid $b_{m,s}(a)$ that conditions on his own type, the firm's message and the signal.
+Each firm observes all the bids it receives, chooses the worker the delivers the highest payoff $\pi ,$ and pays this worker his wage bid.
+It can reject all workers if it wants.
+
+For the equilibrium analysis, let $\gamma _{m}$ denote the equilibrium fraction of workers that approach message $m.$
+For some of the analysis it will be useful to define 
+\begin{align*}
+\lambda _{m}=\frac{\gamma _{m}}{\delta _{m}\mu _{m}(v_{m})+\delta _{-m}\mu_{m}(v_{-m})} 
+\end{align*}
+as the ratio of workers to firms at a given message, where $-m=L$ if $m=H$ and vice versa.
+Conditional on approaching message $m,$ let $F_{m}(a)$ denote the fraction of workers that have type weakly below $a.$
+Denote its density by $f_{m}(a)$ whenever it exists.
+Within each message, workers lack further information and choose a firm at random (the usual anonymity assumption in directed search).
+Then the signal is realized and workers submit bids $b_{m,s}(a)$.
+The equilibrium objects are ($\mu _{m}(v),\gamma_{m},F_{m}(a),b_{m,s}(a))$ for $m,s\in \{L,H\}$.
+
+\textbf{Analysis:}
+Assume that firms fully reveal their types: $\mu_{L}(v_{L})=\mu _{H}(v_{H})=1.$
+We will check at the very end when such type revelation is incentive compatible.
+It implies that workers have a degenerate prior about firms, and therefore do not update on the signal.
+We therefore suppress the subscripts for signals here.
+Given this, workers know the type of firms they face.
+With slight abuse of notation, let 
+\begin{align*}
+\pi _{m}(a)=v_{m}a-b_{m}(a)\text{ for }m\in \{L,H\} 
+\end{align*}
+denote the utility that the firm obtains when it hires a worker of type $a$ in equilibrium.
+
+Let $D_{m}$ be the equilibrium distribution of profits $\pi _{m}$ at message  $m$, that is $D_{m}(\pi )=\int_{a:v_{m}a-b_{m}\leq \pi }dF_{m}.$
+Standard arguments in the literature imply that $D_{m}$ cannot have a mass point:
+if there was a mass point then those workers would tie and have a strictly positive probability of loosing the job to someone who bid exactly the same, while a tiny reduction in the wage demand would have negligible costs to the worker but he would always obtain the job in such circumstances.
+
+Now consider a worker of type $a$ who leaves profit $\pi $ to the firm with message $m$.
+He wins if no other worker at this firm leaves a higher profit.
+There are in total $\alpha _{m}(1-D_{m}(\pi ))$ such workers at message $m$, and divided by the mass of firms $\delta _{m}$ this yields the queue length of more profitable workers.
+Since workers approach firms at random, a well-known result from the directed search literature is that the distribution of bids in a large market is Poisson distribution, where the Poisson parameter is the queue length \cite{TK}.
+So the chance that no better worker arrives at the firm is $e^{-\lambda _{m}(1-D_{m}(\pi ))}.$
+This is the winning probability for this workers.
+To generate $\pi ,$ he had to bid $b=v_{m}a-\pi ,$ and therefore his total expected utility is 
+\begin{align} \label{util-p}
+e^{-\lambda _{m}(1-D_{m}(\pi ))}(v_{m}a-\pi ).  
+\end{align}%
+Note that this is strictly supermodular in ($a,\pi ).$
+Therefore, in equilibrium higher worker types leave strictly higher profits.
+In particular: if $\pi _{m}(a)$ is the optimal profit that worker type $a$ wants to leave, then it is optimal for lower worker types to leave less and for higher worker types to leave more. So in equilibrium higher worker types will always choose to leave a higher profit to firms, conditional upon approaching firms with the same message.
+Then we can invert $\pi _{m},$ and call the inverse $\alpha _{m},$ and the distribution of profits equals the distribution of types that generates these profits:
+$D_{m}(\pi )=F_{m}(\alpha _{m}(\pi )).$
+We can then rewrite the equilibrium utility (\ref{util-p}) directly in terms of the bids as 
+\begin{align} \label{util}
+e^{-\lambda _{m}(1-F_{m}(\alpha _{m}(va-b)))}b.  
+\end{align}%
+In equilibrium workers choose where to go and what to bid to maximize (\ref{util}), taking equilibrium objects \{$\gamma _{L},\gamma_{H},F_{L}(a),F_{H}(a),b_{L,s}(a),b_{H,s}(a)$\} as given.
+
+\begin{proposition} \label{workers}
+  Assume firms reveal their type truthfully so that message $m=H$ is sent only by $v_{H}$ firms and $m=L$ only by $v_{L}$ firms.
+  In equilibrium all worker with types below some cutoff $\hat{a}\in \lbrack \underline{a},\bar{a})$ choose among all firms at random, while workers with type above $\hat{a}$ only approach firms with the high message.
+  That means that the expected number of applicants with types below $a\in \lbrack \underline{a},\hat{a})$ has the form%
+\begin{align*}
+\lambda _{L}F_{L}(a)=\lambda _{H}F_{H}(a)=\lambda F(a),
+\end{align*}
+where the queue length at the firms is%
+\begin{equation}
+\lambda _{L}=\frac{1-\delta _{H}\ln (v_{H}/v_{L})}{\delta _{H}+\delta _{L}},%
+\text{ }\lambda _{H}=\frac{1+\delta _{L}\ln (v_{H}/v_{L})}{\delta
+_{H}+\delta _{L}}  \label{queue-length-separating}
+\end{equation}%
+and the number of workers that queue for each message is $\gamma _{m}=\delta_{m}\lambda _{m}$.
+The interval $[\underline{a},\hat{a})$ is non-empty whenever $1-\delta _{H}\ln (v_{H}/v_{L})>0.$
+  For $a\in \lbrack \hat{a},\bar{a}]$ it holds that $F_{L}(a)=1$ and $F_{H}(a)=1-(1-F(a))/\lambda _{H}$.
+The bid distribution is given by 
+\begin{equation}
+b_{m,s}(a)=v_{m}g(a)  \label{bid}
+\end{equation}%
+where $g(a)$ is uniquely characterized by differential equation%
+\begin{align*}
+\lambda _{m}f_{m}(a)g_{m}(a)=1-g_{m}^{\prime }(a).
+\end{align*}
+with boundary condition $g_{m}(\underline{a})=1.$
+Bids are increasing in type if the type distribution is sufficiently dispersed, i.e., $f(a)$ sufficiently small at all $a.$
+\end{proposition}
+
+See Appendix~\ref{sec:proofs} for proof of Proposition~\ref{workers}. 
+What we get from Proposition~\ref{workers} is that if a truthful cheap-talk equilibrium is obtained, we get worker above a certain threshold in ability only approach high-type firms.
+Workers below that cut-off still apply at random, but adjust their bids in response to the type of the firm they face.
+We will compare these predictions against the outcomes in the experiment. 
+
+We are now equipped to consider the truthtelling behavior of firms.
+Focus on the parameter range where some worker choose message $L$ after truthtelling, as this seems the empirically relevant case.
+We obtain that truthtelling is an equilibrium when $v_{H}$ is substantially larger than $v_{L},$ while it is generically not when $v_{H}$ becomes arbitrarily close to $v_{L}.$
+Note that $v_{H}$ large and workers visiting both messages (conditional on truthtelling) can only happen when $\delta _{H}$ is small, so conditions on $\delta _{H}$ are part of the proposition.
+
+\begin{proposition} \label{prop:gap_incentive_compat}
+  Fix $v_{L},\delta _{L}$ and $F(a).$
+  Truthtelling is incentive compatible when $\delta _{H}$ is sufficiently small, and conditional on this, $v_{H}$ is large.
+  Truthtelling is generically not incentive compatible when $v_{H}$ becomes arbitrarily close to $v_{L}.$
+\end{proposition}
+
+A direct consequence of Proposition~\ref{prop:gap_incentive_compat} is that a platform designer does not want to use cheap talk when valuations are close, but has incentives to do so for far apart valuations.
+
+\bigskip
+
+\textit{Pooling}: Now consider a ``babbling'' equilibrium where messages are uninformative, i.e., $\mu _{L}(v_{L})=\mu _{H}(v_{H}).$
+Equilibrium bidding strategies $b_{m,s=L}(a)$ and $b_{m,s=H}(a)$ now depend on the signal, but the message is completely uninformative and we will drop it for expositional clarity in the following.
+This is always an equilibrium in cheap-talk games.
+It coincides with a world without the possibility of sending messages or a world in which there is no clear convention about the meaning of different messages.\footnote{%
+  No clear convention might be modeled as existence of to messages $M_{L}$ and $M_{H},$ but when the other side reads the message it will ``understand'' $m_{L}$ with probability $p(M_{L})$ after the true message was $M_{L}$ and ``understands'' $m_{H}$ otherwise. The corresponding probability is $p\left(M_{H}\right) $ after true message $M_{H},$ where $p(M_{L})\geq p(M_{H}).$
+  The case we study here is the case where $p(M_{L})=p(M_{H}).$
+}
+In this case the worker approaches firms at random, and only updates from the signal.
+Using Bayes' rule workers assign probabilities $\psi _{H,s=H}$ and $\psi_{H,s=L}$ to the high type firms according to 
+\[
+\psi _{H,s=H}=\frac{\psi \delta _{H}}{\psi \delta _{H}+(1-\psi )\delta _{L}}%
+,\psi _{H,s=L}=\frac{(1-\psi )\delta _{H}}{(1-\psi )\delta _{H}+\psi \delta
+_{L}}, 
+\]%
+and low value firms have complementary probabilities $\psi _{L,s=H}=1-\psi_{H,s=H}$ and $\psi _{L,s=L}=1-\psi _{H,s=L}.$
+
+We obtain the following 
+
+\begin{proposition} \label{bid-signal-low}
+  Consider a setting in which $v_{h}$ sufficiently large, and conditional on that $\psi $ is sufficiently informative, all else constant.
+  Consider a babbling equilibrium with $\mu _{L}(v_{L})=\mu _{H}(v_{H}).$
+  The queue length at all vacancies is $\lambda =1/(\delta _{L}+\delta _{H})$ and the type distribution is $F(a).$
+  In equilibrium the bidding strategy is determined by differential equations 
+\begin{eqnarray}
+\frac{\lambda f(a)b_{s=H}(a)}{v_{H}-b_{s=H}^{\prime }(a)} &=&1\text{ with }%
+b_{s=H}(\underline{a})=v_{H}\underline{a},  \label{bid-signal-high} \\
+\sum_{s\in \{L,H\}}\lambda f(a)\frac{1}{v_{s}-b_{m,s=L}^{\prime }(a)}%
+b_{s=L}(a) &=&1\text{ with }b_{s=L}(\underline{a})=v_{L}\underline{a}.
+\end{eqnarray}
+\end{proposition}
+
+See Appendix~\ref{sec:proofs} for proof of Proposition~\ref{bid-signal-low}.
+
+\bigskip 
+
+It might be useful to note that the differential equation after the high signal (\ref{bid-signal-high}) coincides with the differential equation at high messages in the truth-telling equilibrium in (\ref{bid}) for $m=H$ on $[\underline{a},\hat{a})$.
+  Moreover, conditional on the same bid $b,$ the differential equation $(\ref{bid-signal-low})$ generates a derivative $b^{\prime }(a)$ that inbetween the derivatives given in the truth-telling equilibrium at the low and high message characterized by (\ref{bid}).
+  Here, the workers are not quite sure which firms they face, and their increase their bids according to some (inverse) weighted average. 
+
+  \subsection{Comparing the truth-telling and the uninformative ``babbling'' equilibrium}
+  In the experiment, we observe firm messages but then randomize whether this message is available to job-seekers.
+  To map the theory to the experimental context, we will compare the truthtelling cheap talk equilibrium to the babbling equilibrium.  
+  For the comparison, assume that we can see the message of each firm in the truth-telling equilibrium, and can also elicit a truthful message even in the babbling equilibrium.
+  This assumption we can observe the truth even in the babbling equilibrium might seem odd, but recall that in the experiment, we have an arm where we ask the firm for their message but do no reveal it to job-seekers.  
+  This allows us to know the type of the firm while the market participants to do not.
+ 
+  In the truth-telling equilibrium worker types below cutoff ability $\hat{a}$ approach all firms at random (from Proposition~\ref{workers}).
+  This is also true in the babbling equilibrium.
+  Only the types above $\hat{a}$ are selective and only approach high type firms, while in the uninformative babbling equilibrium these types also visit firms at random.
+  How pronounced the selection is depends on the level of $\hat{a}.$
+
+  Conditional on the visit of a worker of type $a,$ we can compare the bids that firms receive.
+  Consider first a high type firm.
+  Under babbling, it receives bid $b_{s=H}(a)$ with probability $\psi $ from the workers and $b_{s=L}(a)$ with complementary probability $1-\psi .$
+  Under truth-telling it receives bid $b_{m=H}(a)$ for sure.
+  For worker types below the cutoff $\hat{a}$ we know that the distribution of these types is unchanged, but for the bids we have $b_{m=H}(a)=b_{s=H}(a)>b_{s=L}(a).$
+  The first equality follow trivially from the equivalence of the differential equations.
+  The inequality follows because at the lowest type $b_{s=L}(\underline{a})=v_{L}\underline{a} <v_{H}\underline{a}=b_{m=H}(\underline{a}),$ and if at any higher type $a> \hat{a}$ the bids should approach one another in the sense that $b_{s=L}(\underline{a})\approx b_{m=H}(\underline{a}),$ comparison of the differential equations readily reveals that $b_{s=L}^{\prime }(\underline{a})<b_{m=H}^{\prime }(\underline{a}),$ so that equality of these bids can never be achieved. Since the firm faces a mix between $b_{s=H}(a)$ and $b_{s=L}(a)$ under babbling, the expected bids per applicant are lower.
+
+
+    %% This is a placeholder 
+  For high types firms that face a worker of type $a>\hat{a}$ we know that they are more likely to face such a type under truth-telling than babbling, as truth-telling implies that all high-ability workers will go only to high-value firms.
+
+  The expected wage bid of a worker with ability slightly above $\hat{a}$ is higher to such a high-value firm truth-telling then under babbling.
+  This arises because babbling implies that the bid is a weighted average of $b_{s=H}(a)$ and $b_{s=L}(a).$
+  We have seen in the previous paragraph that $b_{m=H}(\hat{a})=b_{s=H}(\hat{a})>b_{s=L}(\hat{a})$, so at the cutoff the average bid under babbling is lower.
+  But continuity this also holds for types that are higher.
+  It is possible, though, that for very high type workers this no longer holds. The reason is that under cheap talk all high types compete for jobs at high value firms, and that increase in competition decreases the wage bid. 
+  
+%% But truth-telling also implies their bids are higher than under either signal in the babbling equilibrium: $b_{m=H}(a)>b_{s=H}(a)>b_{s=L}(a).$
+%%   The reason is that at $a=\hat{a}$ we know that $b_{m=H}(a)=b_{s=H}(\hat{a})>b_{s=L}(\hat{a})$ by the previous paragraph.
+%%   At higher $a$ it holds that $b_{m=H}^{\prime }(a)=b_{s=H}^{\prime }(a)$ whenever $b_{m=H}(a)\approx b_{s=H}(a)$ since $\lambda _{L}f_{L}(a)=\lambda _{L}f(a)>\lambda f(a)$ in that range.
+%%   Also $b_{s=H}^{\prime }(a)>b_{s=L}^{\prime }(a)$ whenever $b_{s=H}(a)\approx b_{s=L}(a).$
+
+For low type firms, we know that the expected number of types below any $a\in (\underline{a},\hat{a})$ is identical under truthtelling and babbling.
+But any such type bids more aggressively under babbling under either signal: $b_{m=L}(a)<b_{s=L}(a)<b_{s=H}(a).$
+The second inequality follows as in the previous paragraph.
+The first inequality follows because bids are equal at the lowest type, and again the bids increase faster under $m=L$ than under $s=L$ whenever they are roughly similar. 
+
+
+The following proposition sums up these findings: 
+
+\begin{proposition}\label{comparison}
+Under the assumptions outlined above, a wold with truthful cheap talk compares with a wold without cheap talk as follows:
+\begin{enumerate}
+    \item Ability sorting: truthful cheap talk induces more assortative matching. For high value firms the average quality of the applicant increases under cheap talk, while for low value firms the average quality of applicants decreases. This is driven through changes at the top: workers with high ability ($a>\hat{a}$) choose high type firms more often under cheap-talk, while workers with low ability ($a< \hat{a}$) choose high types equally likely in either setting.
+    \item Number of applications: The number of applications at low value firms decreases, while the number of applications at high value firms increases under cheap talk. 
+    \item Wage bidding: Any given worker type bids less at low value firms under cheap talk. Any given worker type $a$ bids more at high value firms under cheap talk, except possibly those with the highest ability levels (i.e., bids increase for any $a<a'$ for some $a'>\hat{a}$, where $a'=\bar{a}$ is possible).
+\end{enumerate}
+
+\end{proposition}
+
+% PK - change accordingly 
+%\textit{Robustness: } Assume that firm valuations are distributed with %CDF $H(v)$ on $[\underline{v},\bar{v}]$ with $\underline{v}>0$ and with %continuous strictly positive density $h(v).$
+%An analysis analogous to the one above readily establishes that perfect %type revelation is generically not possible, as the truth-telling %incentives for firms with close-by valuations conflict.
+%It is also relatively easy to generate examples of type distributions %that allow equilibrium with multiple messages $m_{k}$ such that all %firms in $[v,v_{1})$ select message $m_{1},$ firms with types in %$[v_{1,}v_{2})$ select message $m_{2},$ and so forth.
+%The maximal number of messages is finite but can be larger than two. 
+
+\section{Experimental design and internal validity} \label{sec:exp_design}
+
+During the experiment, employers posting job openings were asked for their vertical preference, using the interface shown in Figure~\ref{fig:tradeOff}.
+The choice was mutually exclusive and was mandatory.
+Employers selecting ``Entry Level (\$)'' are referred to as ``low'' throughout the paper, those selecting ``Intermediate (\$\$)'' as ``medium,'' and those selecting ``Expert (\$\$\$)'' as ``high.''  
+The use of varying dollar symbols to indicate an option's relative position in some vertical price/quality space is commonplace, particularly in online settings (e.g., \cite{diamond2019}). 
+
+\begin{figure} 
+\caption{Vertical preference signaling opportunity presented to employers when posting their job openings\label{fig:tradeOff}} 
+\centering 
+\begin{minipage}{0.80 \linewidth}
+\includegraphics[width = \linewidth]{./images/tradeOff.pdf} \\
+\begin{footnotesize}
+\begin{singlespace}
+  \emph{Notes:} This figure shows the vertical preference signaling interface and language presented to employers when they posted a job.
+  %\signaldef{}.
+\end{singlespace}
+\end{footnotesize} 
+\end{minipage} 
+\end{figure} 
+
+The experiment was run by the platform from \expStart{} to \expEnd{}. 
+A total of \totalOpeningCount{} employers were allocated to the experiment.
+These employers collectively posted \totalOpeningCountMultiple{} job openings, though we typically only use the first opening posted by an employer in our analysis.\footnote{ 
+  The duration of the experiment was chosen \emph{ex ante} by the platform to detect a 1 percentage point change in the fill rate with 80\% power, but the experiment was ultimately run substantially longer than this for unrelated business reasons, i.e., one author was traveling and neglected to turn the experiment off at the agreed-upon date. 
+}
+Upon posting a job opening, employers were randomized to one of two experimental ``arms,'' with each arm having two groups. 
+The two arms of the experiment and their component experimental cells with their allocations are listed in Table~\ref{tab:cell_descriptions}. 
+All the data we use in this paper was obtained directly from the platform.
+
+\begin{table} 
+\caption{Description of the arms of the experiment and the experimental groups} \label{tab:cell_descriptions} 
+\centering 
+\begin{tabular}{llccc}
+\toprule
+&  & Allocation &  \parbox[t][][t]{3cm}{\centering Vertical Preference Shown to Job-Seekers? ($\textsc{ShownPref}$)} & \parbox[t][][t]{3cm}{\centering Employer knows \emph{ex ante} whether signal will be revealed:} \\ 
+\hline
+\multicolumn{3}{l}{\bf{Explicit Arm}} \\ 
+ & $\textsc{ShownPref} = 1$ & \ExpShownN{}; \ExpShown{}\%  & Yes & Yes  \\
+ & $\textsc{ShownPref} = 0$ & \ExpNotShownN{}; \ExpNotShown{}\%  & No  & Yes  \\
+\multicolumn{3}{l}{\bf{Ambiguous Arm}} \\ 
+& $\textsc{ShownPref} = 1$ & \AmbigShownN{}; \AmbigShown{}\%  &  Yes & No  \\
+& $\textsc{ShownPref} = 0$  & \AmbigNotShownN; \AmbigNotShown{}\% & No  & No   \\ 
+\bottomrule
+\end{tabular} 
+\begin{minipage}{1.0 \textwidth}
+\begin{footnotesize}
+\begin{singlespace} 
+  \emph{Notes:} This table lists the cells of the experiment and the number of assigned employers.
+  The fraction in each cell is also reported.
+  Employers made the vertical preference signaling choice when they posted their opening.
+  See Figure~\ref{fig:tradeOff} for the actual interface.
+\explicitdef{}.
+\ambigdef{}.
+\shownprefdef{}.
+\end{singlespace} 
+\end{footnotesize} 
+\end{minipage}  
+\end{table} 
+
+In the two cell ``explicit arm,'' employers knew for certain, \emph{ex ante}, whether their tier choice would be revealed.
+We use an indicator variable, $\textsc{ShownPref}$, to indicate whether preferences were revealed. 
+Because the value of $\textsc{ShownPref}$ was known by employers \emph{ex ante} in the explicit arm, tier choice cannot be considered exogenous: 
+an employer might claim ``high'' preferences when they know the choice will not be shown, but ``medium'' when they know the choice will be shown.
+This conditioning is not a concern in our other experimental arm, the two cell  ``ambiguous arm,'' in which employers were told that their choice \emph{might} be shown to job-seekers.
+In this arm, employers were then randomized to either have their choice revealed or not. 
+For these employers, tier choice can be regarded as exogenous, as it is chosen before $\textsc{ShownPref}$ is determined.
+If the employer's preferences were to be revealed, their job opening was labeled with the employer's vertical preference in the interface shown to workers.
+The labeling was prominently displayed to make it salient to applying workers.\footnote{
+  In the ambiguous arm, among those employers shown preferences, employers were further split to have a notice about whether the worker was able to condition upon their signal.
+  The idea motivating this treatment was that employers might infer that bids were more shaded up/down if they knew the worker knew the signal.
+  However, we find no evidence this was the case, and so for simplicity, we pool these observations together, ignoring this feature of the design.
+  As it is, it appeared to have no effect on any outcome it could have affected. 
+}
+
+To assess the effectiveness of randomization, in Table~\ref{tab:balance_big} we report the mean values for various pre-randomization attributes of employers (the top panel) and their job openings (the bottom panel), for both the ambiguous and explicit arms pooled, by whether preferences were shown.
+We can see there is excellent balance on pre-treatment characteristics, both for employers and job openings.
+Balance is unsurprising, as the platform has used the software for randomization many times in previous experiments.
+
+\begin{table}
+\begin{center}
+\caption{Employer and job opening characteristics by whether tier choice was shown, with job openings pooled from both arms of the experiment}
+\label{tab:balance_big}
+\begin{small}
+\begin{adjustbox}{center}
+\begin{tabular}{lllccccc}
+\toprule
+&   & \multicolumn{1}{c}{\parbox[t][][t]{2.3cm}{{\footnotesize \textsc{ShownPref}=0}}}
+&     \multicolumn{1}{c}{\parbox[t][][t]{2.3cm}{\footnotesize  \textsc{ShownPref=1}}}
+&     \multicolumn{1}{c}{\parbox[t][][t]{2.0cm}{$\Delta$}}
+&     \multicolumn{1}{c}{\parbox[t][][t]{1cm}{\% Change}}
+\\
+\hline
+
+  \input{./tables/balance_big.tex}
+
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{small}
+\end{center}
+\begin{minipage}{1.0 \textwidth}
+\begin{footnotesize}
+\begin{singlespace}
+  \emph{Notes:} This table reports means for a number of pre-randomization characteristics for the employer and job opening by \textsc{ShownPref} status.
+  The data are pooled to include employers from both the ambiguous and explicit arms.
+Standard errors are reported next to the estimate, in parentheses.
+The far right column also reports the percentage change in the $\textsc{ShownPref}=1$ group, relative to the mean in the control group. 
+\starlanguage
+\end{singlespace}
+\end{footnotesize}
+\end{minipage}
+\end{table}
+
+It is important to note that with our experimental design, workers could simultaneously see and interact with job openings by employers in different cells. 
+As such, the SUTVA condition is inherently---and intentionally---violated.
+This kind of violation is a typical concern in marketplace experiments \citep{blake2014marketplace}.
+However, we \emph{want} ``interference'' both in our experiment and in equilibrium, as a goal of the signaling opportunity is to get workers to sort, by applying to some job openings and not applying to others.
+This feature of our experimental design does require care when generalizing the results to a market equilibrium.
+
+Employers can and do post multiple job openings, though they are not allowed to have multiple listings for the same position. 
+During the five month experimental period, all subsequent job postings received the same treatment assignment as the original posting, to prevent employer ``hunting'' for a better cell.
+This feature of our data can potentially give us more statistical power, though as experimental group assignment could affect the probability an employer posts a follow-on opening---or the attributes of that opening---we generally restrict our analysis to the first job opening by an employer after the start of the experiment.  
+However, when assessing the effects of the signaling feature on match outcomes, we will use all the job openings to gain more statistical power.
+
+\subsection{Measuring seller vertical differentiation} 
+A separating equilibrium depends on the existence of vertical differentiation in workers.
+In the competitive labor market model, ``verticality'' is nicely summarized by a worker's market wage, as it equals his or her marginal product.
+For workers that have worked recently in the platform market, this past market wage is available.
+However, any particular wage could reflect idiosyncratic job amenities/disamenities and furthermore, the farther back in time the wage was observed, the more likely that it does not reflect current worker productivity or market conditions. 
+As an alternative measure of worker productivity that suffers from fewer of these defects, we use a worker's profile rate. 
+The profile rate is an hourly wage that is displayed publicly on each worker's profile page.
+
+The profile rate is set by the worker at his or her desired level, but it tends to closely follow a worker's hourly wage bid.
+This correlation is due in part to employers consider the profile rate when recruiting, and so workers have an incentive to keep it ``honest.''
+However, workers can and do tailor their bids to the job opening they are applying to. 
+We also use a worker's experience on the platform at the time of application as an outcome to measure sorting.
+The preference in online labor markets for workers with more on-platform experience is well-established~\citep{pallais2010inefficient, stanton2011landing}.
+
+\section{Truthtelling of vertical preferences} \label{sec:results_existence}
+We first examine whether there is variation in employer vertical preferences. 
+Using only data from the explicit arm of the experiment, Figure~\ref{fig:choices_by_cat} plots the fraction of employers selecting each of the three tiers, by category of work and by whether their choice was to be revealed.
+For each fraction, a 95\% confidence interval is reported. 
+The number of openings in that category is reported at the top of each facet ($n = \ldots$). 
+Figure~\ref{fig:choices_by_cat} shows that vertical preferences vary both within and between categories of work.
+
+\begin{figure} 
+\caption{Employer tier choice by category of work in the explicit arm of the experiment, by whether their choice would be shown to would-be applicants \label{fig:choices_by_cat}}
+\centering 
+\begin{minipage}{0.90 \linewidth}
+\includegraphics[width = \textwidth]{./plots/choices_by_cat.pdf}
+\\
+  {\footnotesize
+    \begin{singlespace}
+      \emph{Notes:} This figure shows the fraction of employers in the explicit arm of the experiment selecting the various vertical preference tiers, by $\textsc{ShownPref}$,  and by the category of work of the associated job opening.
+      \signaldef{}.
+      \shownprefdef{}.
+      \explicitdef{}.
+      A 95\% confidence interval is shown for each point estimate.
+      Above each tier fraction in a category of work, the difference between the \mbox{$\textsc{ShownPref} = 1$} and \mbox{$\textsc{ShownPref} = 0$} fractions is shown, as well as the standard error for the difference. 
+    \end{singlespace}
+  }
+\end{minipage} 
+\end{figure} 
+
+Between categories, if we look only at the $\textsc{ShownPref} = 0$ fractions, we can see that in ``Administrative Support,'' about \fracLowAdminSpt{}\% of employers selected the low tier.
+In contrast, in ``Networking and Information Systems'' only about \fracLowNetworking{}\% of employers selected the low tier.
+Vertical preferences clearly vary between categories, but the relationship is far from deterministic.
+Within categories, there is substantial variation, though the medium tier is the most common selection in all categories except for ``Administrative Support'' and ``Customer Service.'' 
+Because of this within-category variation in tier choice, workers cannot fully learn an employer's vertical preferences by knowing the category of work. 
+
+When the experiment was designed, it was expected that employers would condition their tier choice on the nature of their project---and also on whether their choice would be shown to would-be applicants.
+In particular, we expected to observe more ``pooling'' in the medium tier when $\textsc{ShownPref = 1}$. 
+The design intent of the explicit arm was to test this ``endogenous tier'' hypothesis.
+Proposition~\ref{prop:gap_incentive_compat} from the model highlights the importance of a difference in employer vertical preferences as necessary for informative signaling. 
+
+There is no visual evidence in Figure~\ref{fig:choices_by_cat} that tier selection depended on revelation:
+within each category, the fractions choosing the different tiers do not seem to depend on \textsc{ShownPref}.
+In none of the categories of work is the difference in fractions (shown between bars, with the standard error) conventionally significant, and furthermore, a $\chi^2$-test of \textsc{ShownPref} versus tier selection has a p-value of $\pValue{}$.
+
+Despite no evidence of a difference in the fractions of employers picking the various tiers by \textsc{ShownPref}, there could be some hidden compositional shift that leaves the fractions unchanged.
+However, the simplest explanation is that employers did not---at least during the experimental period---believe that revelation to workers would be harmful, and so tier choices reflected preferences they were willing to share to both would-be applicants and with the platform.
+
+\section{Worker changing the firms they approach in response to the firm message} \label{sec:results_sorting}
+We now turn to the question of how tier revelation affected applicant pool composition.
+For this analysis, we use the two cell ambiguous arm of the experiment.
+Recall that in the ambiguous arm, the tier was chosen \emph{ex ante} by the employer, without knowing whether it would be revealed.
+As such, differences in the applicant pool composition are causally attributable to revelation.
+
+To measure changes in the applicant pool composition, we estimate the \emph{application level} regression 
+\begin{align} \label{eq:app_reg}
+ \log y_{ij} = \sum_k \beta^s_k \cdot \textsc{Tier}_{kj} + \epsilon_j \big| s = \textsc{ShownPref}_{j}, 
+\end{align}
+where $y_{ij}$ is some outcome of interest for worker $i$ applying to job opening $j$, $\textsc{Tier}_{kj}$ is an indicator for whether employer $j$ selected signal tier $k$ and $\textsc{ShownPref}_j$ is an indicator for the treatment status of employer $j$. 
+We estimate this model separately for $\textsc{ShownPref} = 1$ and ${\textsc{ShownPref} = 0}$, giving coefficients $\beta^1_k$ and $\beta^0_k$ for these two models, respectively.
+In both regressions,  we use weighted least squares, weighting each observation by the inverse of the total number of applicants to the associated job opening.
+This weighting ensures that all job openings count equally towards the point estimate, regardless of the number of applications received.
+We cluster standard errors by the job opening. 
+
+The left panel of Figure~\ref{fig:compare_experience} plots both sets of $\hat{\beta}^s_k$ coefficients from Equation~\ref{eq:app_reg} where the outcome is the applicant's total prior earnings at the time of application. 
+For each of the three tiers, the difference between the two coefficients for the two regressions i.e., $\hat{\beta}_k^1 - \hat{\beta}^0_k$ is labeled, with the standard errors reported below the point estimate.\footnote{
+  The standard error for the difference is calculated directly from the point estimates for the two tiers, without considering the covariance, which should be mechanically zero because of the randomization of $\textsc{ShownPref}$.
+}
+Workers with no experience at the time of application are dropped from the sample. 
+
+\begin{figure}
+\centering
+\caption{Comparison of applying and hired worker experience by employer vertical preference tier and revelation of the signal using applicant-level regression in the ambiguous arm \label{fig:compare_experience}}
+\begin{minipage}{1.0 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/compare_experience.pdf}
+\begin{footnotesize}
+\begin{singlespace}
+  \emph{Notes:} This figure plots coefficients from estimates of Equation~\ref{eq:app_reg}.
+  The outcome in both panels is the applicant's cumulative prior hourly earnings at the time of application.
+  The sample in the left panel is all applicants in the ambiguous arm of the experiment, whereas in the right panel, the sample is hired workers in the ambiguous arm. 
+    \signaldef{}.
+    \ambigdef{}. 
+    The error bars indicate the 95\% confidence interval for the conditional mean.
+\end{singlespace}
+\end{footnotesize}
+\end{minipage} 
+\end{figure} 
+
+
+\begin{figure}
+\centering
+\caption{Comparison of outcomes using applicant-level regression in
+  the ambiguous arm with extensive pre-treatment job level controls} \label{fig:compare_outcomes_controlled}
+\begin{minipage}{1.0 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/compare_outcomes_controlled.pdf}
+\begin{footnotesize}
+\begin{singlespace}
+  \emph{Notes:} This figure plots coefficients from estimates of Equation~\ref{eq:app_reg}.
+  The outcome in both panels is the applicant's cumulative prior hourly earnings at the time of application.
+  The sample in the left panel is all applicants in the ambiguous arm of the experiment, whereas in the right panel, the sample is hired workers in the ambiguous arm. 
+    \signaldef{}.
+    \ambigdef{}. 
+    The error bars indicate the 95\% confidence interval for the conditional mean.
+\end{singlespace}
+\end{footnotesize}
+\end{minipage} 
+\end{figure} 
+
+
+We can see from the pattern of $\hat{\beta}^0_k$ that even when preferences are not revealed, there is already substantial sorting.
+High tier employers get more experienced applicants and low tier employers get less experienced applicants, with medium tier employers getting applicants in the middle.
+
+Despite the clear evidence of sorting---with workers presumably responding to the category and other observable attributes correlated with vertical preferences---if we look at the $\textsc{ShownPref} = 1$ coefficients, $\hat{\beta}^1_k$, we can see that revelation increases sorting in the expected directions.
+The effects of revelation are substantial. 
+Revealing the employer's vertical preference raised past average hourly earnings by \EffectEarningsExperienceHighTierRegression{}\% in the high tier and \EffectEarningsExperienceMedTierRegression{}\% in the medium tier.
+In the low tier, revelation lowered prior earnings by \EffectEarningsExperienceLowTierRegression{}\%.
+
+In addition to the application level approach, we can also detect changes in composition by examining quantiles of the distribution of applicant experience, by job opening.
+As an example of how this measure is constructed, if we had three job openings, and the 10th percentile of past workers earnings for each was \$100, \$200, \$0, then the average 10th percentile would be \$300.
+Using this method allows us to create opening-level measures, which we can average by group and estimate treatment effects as simple means comparisons. 
+We do this in Figure~\ref{fig:signal_effects_experience}, which plots the effects of revelation on the experience of applicants, as measured by log past earnings (in the top panel) and  log hours-worked on the platform (in the bottom panel). 
+
+\begin{figure}
+\centering
+\caption{Effects of showing employer vertical preferences on applicant pool composition with respect to experience, by tier quantile} \label{fig:signal_effects_experience} 
+\begin{minipage}{0.90 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/signal_effects_experience.pdf}
+\begin{footnotesize}
+  \begin{singlespace}
+  \emph{Notes:}
+  This figure shows the effects of employer vertical preference revelation on the composition of applicant pools in the ambiguous arm of the experiment for worker experience at the time of their application. 
+  The top panel is for cumulative earnings, while the bottom panel is for hours-worked.
+  Workers with no experience are excluded.   
+  Each point is the mean effect of revelation of the employer's vertical preference on some applicant attribute at that quantile of the applicant pool.
+  The error bars indicate the 95\% confidence interval.
+ % \signaldef{}.
+   \ambigdef{}.
+ % \shownprefdef{}. 
+  \end{singlespace}
+  \end{footnotesize}
+\end{minipage} 
+\end{figure} 
+
+For the earnings measure, we can see that above the 25th percentile, revelation had the desired worker sorting effects:
+past-experience was higher in the high tier, about the same in the medium tier, and lower in the low tier.
+The magnitudes are similar to those estimated from the application-level regressions presented in Figure~\ref{fig:compare_experience}.
+
+For the hours-worked measure, we see more or less the same pattern of sorting, with more evidence of separation between medium and high tiers.
+This greater separation in hours-worked could reflect workers interpreting the signal as specifically referring to experience as measured by hours-worked. 
+
+\subsection{Number of job applications per opening}
+By making some job openings more or less attractive to workers, signal revelation could change the number of applicants received.
+The size of the applicant pool (in logs) is the outcome in the regression results reported in Figure~\ref{fig:app_counts}. 
+Our baseline regression is 
+\begin{align} \label{eq:apps}
+\log A_j = \beta_0 + \beta_1 \textsc{ShownPref}_j + \epsilon, 
+\end{align} 
+where $A_j$ is the number of applications received by opening $j$. 
+
+In the left panel of Figure~\ref{fig:app_counts}, the sample is all job openings in the ambiguous arm, whereas in the right panel, the sample is all job openings in the explicit arm.
+For both arms, the samples are restricted to only those job openings receiving at least one applicant.
+This restriction removes about 1\% of job openings.
+There is no evidence that the fraction of openings dropped differs by $\textsc{ShownPref}$ status.\footnote{
+      Job openings sometimes receive no applicants because the employer removes the job post shortly after posting. As this could be affected in principle by the experimental group assignment, we make no attempt to drop these openings from our sample, with the exception of removing them for this specific purpose. 
+}
+
+Within each panel, the error bar (to the far right, above the label ``Pooled'') shows the group means (i.e., $\hat{\beta_0}$ versus $\hat{\beta_0} + \hat{\beta_1}$) from Equation~\ref{eq:apps}.
+In the explicit arm, the point estimates imply that revelation leads to an overall decline of {\AppCountsRevealedExplicit{}\%} in the size of the applicant pool.
+The ambiguous arm shows larger effects, with an overall decline of \AppCountsRevealedAmbig{}\%.
+\begin{figure}
+\centering
+\caption{Effect of employer vertical preference revelation on the size of the applicant pool} \label{fig:app_counts}
+\begin{minipage}{0.90 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/app_counts.pdf}
+\begin{footnotesize}
+\begin{singlespace}
+  \emph{Notes:}  This figure reports regression results where the outcome is the log number of applications received by that opening.
+  The right panel uses job openings from the explicit arm, whereas the left panel uses openings from the ambiguous arm.
+  The samples are restricted to job openings receiving at least one application.
+  In each panel, the far-right error bars indicate the overall treatment effect, not conditioning by the employer vertical preference tier.
+  The rest of the point estimates in a panel are for the respective tiers.
+  Standard errors are calculated for the conditional means and a 95\% CI is shown.  
+  Standard errors are robust to heteroscedasticity.
+\end{singlespace}
+\end{footnotesize}
+\end{minipage} 
+\end{figure} 
+
+We would expect reductions in the applicant pool to differ by tier.  
+To test for heterogeneous effects, we estimate
+\begin{align} \label{eq:appsi}
+  \log A_{j} & = \beta_0 + \beta_1 \textsc{ShownPref}_j + \beta_2 \textsc{MedTier}_j + \beta_3 \textsc{HighTier}_j  + \nonumber\\  
+           & \beta_4 \left(\textsc{MedTier}_j \times \textsc{ShownPref}_j \right) + \nonumber \\  
+           & \beta_5 \left(\textsc{HighTier}_j \times \textsc{ShownPref}_j\right) + \epsilon,
+\end{align}
+where $\textsc{MedTier}_j$ and $\textsc{HighTier}_j$ are indicators for the medium and high tier employers, respectively.
+The low tier is the omitted category.
+%An estimate of this regression is reported in Column~(4) of Table~\ref{tab:app_counts}. 
+
+We can see from Figure~\ref{fig:app_counts} that in both arms, applicant pool reductions are concentrated in the low tier for both samples, with revelation having little discernible effect in the other tiers.
+It seems that the low tier was uniquely off-putting to would-be applicants.
+
+\subsection{Worker wage bidding in response to the signal}
+
+We now turn to the question of how revelation of the signal affected the wage bidding of applicants.
+We again estimate Equation~\ref{eq:app_reg} but the outcome is the log wage bid.
+In the second panel from the right of Figure~\ref{fig:compare_wb_to_pr}, we see the same pattern of separation in wage bids that we observed with experience, even with $\textsc{ShownPref} = 0$.
+And as before, revelation of the tier intensified the sorting.
+Revelation caused wage bids to be \EffectWageBidAppHighTierRegression{}\% higher in the high tier, \EffectWageBidAppMedTierRegression{}\% higher in the medium tier and \EffectWageBidAppLowTierRegression{}\% lower in the low tier.
+
+\begin{figure}
+\centering
+\caption{Comparison of applicant mean log wage bids and profile rates by employer vertical preference tier and revelation of the signal} \label{fig:compare_wb_to_pr}
+\begin{minipage}{0.90 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/compare_wb_to_pr.pdf}
+\begin{footnotesize}
+\begin{singlespace}
+  \emph{Notes:} This figure plots predictions from estimates of Equation~\ref{eq:app_reg}, using the wage bid and profile rate as the outcomes.
+  \signaldef{}.
+  \shownprefdef{}.
+  The sample is restricted to the ambiguous arm of the experiment.
+  \ambigdef{}. 
+  The error bars indicate the 95\% confidence interval.
+\end{singlespace}
+\end{footnotesize}
+\end{minipage} 
+\end{figure} 
+
+Observing a change in wage bids by revelation is unsurprising given the compositional changes caused by revelation.
+High tier employers who have their signal revealed should receive higher wage bids because the workers who apply to those employers are more experienced (recall Figure~\ref{fig:compare_experience}).
+But composition does not have to be the only explanation: workers could also directly condition their bid on perceived employer willingness-to-pay.
+
+One way to disentangle the two effects on wage bidding---composition and conditional bidding---is to look at changes in the applicant {\em profile rate} (i.e., the rate declared on their profile) and compare it to changes in the wage bid.
+The profile rate is not likely to be conditioned on the job opening (unless the worker changed it specifically for that opening), whereas the wage bid can be conditioned on the specific features of the job opening, including the employer's tier choice, if available. 
+
+Using the log profile rate as the outcome in the leftmost panel of Figure~\ref{fig:compare_wb_to_pr}, we see the same sorting pattern and revelation effect as we have for all outcomes.
+However, the revelation effects are much smaller for the profile rate than they were for the wage bid: 
+revelation raised the profile rates of applicants to high tier openings by \EffectProfileRateAppHighTierRegression{}\%, raised them by \EffectProfileRateAppMedTierRegression{}\% to medium tier openings, and lowered them by \EffectProfileRateAppLowTierRegression{}\% for low tier openings.
+Note that these low and high tier revelation effects for the wage bid are about twice as large in magnitude compared to the profile rates. 
+
+\begin{figure}
+\centering
+\caption{Effects of showing employer vertical preferences, $\textsc{ShownPref}=1$, on applicant pool composition with respect to wage bidding in the ambiguous arm} \label{fig:signal_effects_wage_bidding} 
+\begin{minipage}{0.90 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/signal_effects_wage_bidding.pdf}
+\begin{footnotesize}
+\begin{singlespace}
+  \emph{Notes:} The figure shows the effects of vertical preference revelation on the composition of applicant pools with respect to wage bidding and profile rates.
+  The sample is the ambiguous arm of the experiment.
+  Each point is the mean effect of revelation on some applicant attribute at that quantile of the pool.
+  For example, in the top facet, the effect of signal revelation for a high tier employer on the median applicant's wage bid is about 10 log points, of 10\%. 
+  The error bars indicate the 95\% confidence interval for the conditional mean.
+\end{singlespace}
+\end{footnotesize}
+\end{minipage} 
+\end{figure} 
+
+Finding smaller effects for profile rates than for wage bids is suggestive that workers are marking up or marking down their wage bids directly in response to the tier choice.
+As a direct measure of a bargaining effect, we can use as an outcome the ``markup'' in the wage bid, or the difference between the wage bid and profile rate, divided by the profile rate.
+Using this outcome, in the bottom panel of Figure~\ref{fig:signal_effects_wage_bidding} (which also shows the quantile means for the wage bid and profile rate), we can see that markups were higher in the high tier and lower in the low tier following signal revelation.
+There is some evidence that revelation has little effect on markups for all tiers around the 80th percentile.
+But outside of this range, we can see clear effects on markups in the expected direction. 
+The effect of revelation on the markup shows us that compositional changes do not explain all of the change in wage bids.
+
+\subsection{Within-worker approach to detecting conditioning}
+
+We can directly test for wage bid conditioning by exploiting the fact that workers on the platform apply to multiple job openings.
+We estimate the application-level regression  
+\begin{align} \label{eq:bidding}
+\log w_{ij} & = \alpha_i + \beta_1 \textsc{ShownPref}_j + \beta_2 \textsc{MedTier}_j + \beta_3 \textsc{HighTier}_j  + \nonumber\\  
+           & \beta_4 \left(\textsc{MedTier}_j \times \textsc{ShownPref}_j \right) + \nonumber \\  
+           & \beta_5 \left(\textsc{HighTier}_j \times \textsc{ShownPref}_j\right) + \epsilon.  
+\end{align}
+where $\alpha_i$ is a worker-specific fixed effect. 
+This ``within'' estimator allows us to compare the decision-making of workers that applied to job openings with the same tier, but that differed in $\textsc{ShownPref}$, as well as jobs that differed in their tier.
+
+\begin{figure}
+\centering
+\caption{Worker wage bid, profile rate and experience at time of application, by employer vertical preference and revelation status in the ambiguous arm} \label{fig:bidding_effect}
+\begin{minipage}{0.90 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/bidding_effect.pdf}
+\begin{footnotesize}
+\begin{singlespace}
+  \emph{Notes:} This figure reports estimates of Equation~\ref{eq:bidding}.
+  The sample consists of all applications sent to job openings in the ambiguous arm of the experiment.
+  In each regression, a worker specific fixed effect is included.
+  Standard errors are clustered at the level of the individual worker.
+  The dependent variables are the worker's hourly wage bid, profile rate at time of application and past hours-worked at time of application.
+  Standard errors are calculated for each of these conditional means and a 95\% CI is shown.  
+  Standard errors are robust to heteroscedasticity.
+\end{singlespace}
+\end{footnotesize}
+\end{minipage} 
+\end{figure} 
+
+In Figure~\ref{fig:bidding_effect}, the left panel shows the mean predicted values from the estimate of Equation~\ref{eq:bidding} when the outcome is the log wage bid.
+The sample consists of all applications to job openings in the ambiguous arm of the experiment. 
+
+We can see that even when workers cannot observe the tier choice, \mbox{$\textsc{ShownPref} = 0$}, they still ``pick up'' some of the employer's vertical preference, 
+bidding more when facing a higher tier employer. 
+The coefficient on \textsc{MedTier} implies workers increase their wage bids by \BidIncreaseMedWorkerFE{}\%, and the coefficient on \textsc{HighTier} implies a \BidIncreaseHighWorkerFE{}\% increase in the wage bid.
+
+When the tier is revealed, workers adjust their wage bids much more strongly.
+They bid \BidChangeLowRevealedWorkerFE{}\% less when $\textsc{ShownPref = 0}$ when they know it is a low tier opening; if the worker learns it is a high tier job opening, they bid an additional \BidChangeHighRevealedWorkerFE{}\% more, on top of the \BidIncreaseHighWorkerFE{}\% increase noted above.
+
+If our within-worker approach removes worker composition effects, neither the tier nor the revelation of the tier should matter (much) for outcomes that are quasi-fixed attributes of the applicant.
+In the middle panel of Figure~\ref{fig:bidding_effect} the outcome is the applicant's profile rate. 
+In the rightmost panel the outcome is the worker's cumulative hours-worked on the platform at the time of application---if any (note the smaller sample).
+
+Regardless of \textsc{ShownPref}, for both of these quasi-fixed worker attributes, experience and profile rates are slightly increasing in the vertical preference tier. 
+This increase reflects that over the 5 month course of the experiment, workers gain experience and shift to their applications to more demanding job openings ``organically'' and increase their profile rates.
+However, the effect sizes are only 1/10th of the size of the effects on the wage bid.
+This implies our within-worker approach more or less ``works'' at netting out composition effects. 
+
+\subsection{Alternative explanations for bargaining effects}
+The effects on wage bidding are consistent with workers directly conditioning on employer willingness to pay, but there are alternative explanations. 
+For example, a worker  might infer something about an employer's expectations---and hence the worker's costs---if they are hired.
+Despite the plausibility of this ``compensating differentials'' argument, there are several pieces of evidence against this explanation.
+
+First, workers should submit lower bids to employers they preferred to work with, implying that low tier employers are the most desirable, and yet this was precisely the tier that applicants avoided applying to (recall Figure~\ref{fig:app_counts}).
+Furthermore, as we show in Appendix~\ref{sec:compensating_differentials}, there is no evidence that high tier employers were harsher reviewers when giving feedback even when preferences were not revealed.
+Finally, the kinds of job openings where employers were more likely to claim high tier preferences (e.g., software development, networking and information systems---recall Figure~\ref{fig:choices_by_cat}) were not those where we would expect ``harder'' work so much as smarter work.\footnote{
+  The relatively impersonal nature of these online interactions, along with their short-duration and lack of brand-name firms all make it unlikely workers have strong non-monetary preference over firms \emph{\`{a} la} \cite{sorkin2018ranking}. 
+}
+
+Another non-amenities channel by which the treatment could alter wage bids is through its effect on applicant pool size.
+For example, applicants to the low tier might anticipate they will be facing less competition and bid up, offsetting some of the effect of the low perceived willingness to pay. 
+We explore this possibility in Appendix~\ref{sec:condition_on_pool_size}, finding that any wage bid adjustment would be exceedingly modest, even if workers could fully anticipate changes in pool sizes. 
+
+\subsection{Effects of revelation on the characteristics of hired applicants}
+To see whether revelation affects the characteristics of hired workers, we estimate Equation~\ref{eq:app_reg}, but with the sample restricted to hired workers.
+As before, standard errors are clustered at the level of the job opening.
+Observations are weighted by the inverse of the number of workers who were hired for that opening, so as to count all job openings equally. 
+
+First, we look at the experience of hired workers. 
+Returning to Figure~\ref{fig:compare_experience}, which showed how the composition of the applicant pool changed with revelation, we now examine the right panel, where the outcome is still the  worker's cumulative earnings at the time of application, but the sample is restricted to hired applicants.
+We can see that although there is the same separation between the tiers when preferences are not shown, hired workers are---compared to applicants---systematically more experienced.
+For example, in the high tier, the prior cumulative earnings of applicants is about $\exp(8) \approx \$3,000$.
+In contrast, for hired workers, prior experience is closer to $\exp(8.6) \approx \$5,400$.
+
+The effects of revelation on hired worker experience mirror the effects of revelation on applicant experience.
+In the low tier, we can see that signal revelation caused hired workers to have \EffectEarningsExperienceLowTierHiredRegression{}\% lower cumulative prior hourly earnings.
+In the other tiers, the effects of revelation are positive and broadly similar in magnitude to what was observed for the change in the applicant pool composition but the point estimates are quite imprecise, due to the much smaller samples. 
+
+For the effects of revelation on the wage bids and profile rates of hired workers, we return to Figure~\ref{fig:compare_wb_to_pr}.
+From the left, the second and fourth panels have the sample restricted to hired workers. 
+Hired worker profile rates were higher in the medium tier and high tier and about the same in the low tier, though again the effects are fairly imprecisely estimated.
+For the wage bid, we see that revelation raised the wage bids of hired worker in the medium and high tiers, and lowered it in the low tier by \EffectWageBidAppLowTierHiredRegression{}\%. 
+
+%% \subsection{Discussion of signaling, sorting, and bidding results} \label{sec:discussion1}
+%% Our results demonstrate that a separating equilibrium is obtainable, with employers credibly signaling their relative vertical preferences.
+%% Further, workers sort based on experience in a manner consistent with the revealed preferences of employers.
+%% Finally, our analysis shows these sorting effects are sustained through the formation of matches.
+
+\section{Results on match outcomes} \label{sec:results_outcomes}
+
+We now examine whether revelation of the employer's tier affected the quantity and characteristics of matches formed.
+Of course, we only observe match characteristics, such as hours-worked, if a match is formed.
+As such, we are inherently selecting samples that could be influenced by treatment assignment.
+This selection could matter, biasing ``downstream'' measures.  
+Selection forces us to be cautious in interpretation, but as we will see, there is no evidence that revelation affected the \emph{quantity} of matches formed.
+Furthermore, there is no strong evidence that the kinds of job openings that filled differed by \textsc{ShownPref} with respect to pre-treatment attributes.
+In Appendix~\ref{sec:soo}, we show that job openings where a match was made had good balance on pre-treatment characteristics by treatment status, consistent with idiosyncratic factors affecting which openings were actually filled. 
+
+An additional inferential issue is that slightly less than half of all job openings are filled, and so we have less power than for outcomes that we always observe.
+To increase statistical power, we pool both the explicit and ambiguous arms.
+Furthermore, we include not only the first job opening, but all subsequent openings by that employer during the experimental period, adjusting for the hierarchical data that results.
+This gives us a total sample size of \TotalSampleSize{} jobs openings, of which  \TotalFilledSampleSize{} were filled. 
+
+Although our preferred estimates for match outcomes are made with the full sample, in Appendix~\ref{sec:trt_effects_robust} we report estimates for all the different possible sample combinations (e.g., explicit arm, first openings; ambiguous arm, first openings, all arms, all openings, and so on).
+The point estimates differ with the sample, but the same general pattern of results is the same as reported when using all arms and all openings. 
+
+\subsection{Objective match outcomes} 
+Our regression specification for match outcomes is 
+\begin{align} \label{eq:match_outcomes}
+  y_j = \beta^k_0 + \beta^k_1 \textsc{ShownPref}_j + \epsilon  \big| k = \textsc{SignalTier}_{j}
+\end{align}
+where $\textsc{SignalTier}_{j}$ is the associated tier for the opening. 
+We estimate separate regressions for each tier.
+We also estimate the regression with all job openings pooled together, which we label ``Pooled.'' 
+To account for the nested structure of the data, we cluster all standard errors at the level of the employer. 
+
+Using the full data, we report estimates of the coefficient on \textsc{ShownPref} from Equation~\ref{eq:match_outcomes} in Figure~\ref{fig:trt_effects}, using as outcomes:
+(1) the log number of applications,
+(2) whether any worker was hired and 
+then, selecting only filled openings, 
+(3) the log wage of the hired worker,
+(4) the log hours-worked of the hired worker, 
+and (5) the log total wage bill.
+Note that (3) and (5) are based on the actual mean wage over the contract, not the worker's original bid. 
+
+For the filled openings, the sample is all job openings for which hired workers worked at least 15 minutes at a wage greater than 25 cents per hour.\footnote{
+  We make this restriction on hours-worked and wages because a small number of employers (against the platform's wishes) create very low wage contracts to simply use the hours-tracking feature but not process payments through the platform.
+}
+If multiple workers were hired for a job opening, we average outcomes. 
+For each estimate, we report the number of observations (``$n=\ldots$'') and for the pooled regression, the number of distinct employers (``$g=\ldots$'').
+
+In the top panel of Figure~\ref{fig:trt_effects}, we see a reduction in applicant pool sizes from revelation in both the high and low tiers (recapitulating Figure~\ref{fig:app_counts}, but with a larger sample).
+In the low tier, the reduction is about \NumAppsEffectLow{}\% and in the high tier about \NumAppsEffectHigh{}\%.
+There is also a reduction in the medium tier, but it is quite small. 
+As in Figure~\ref{fig:app_counts}, applicant pool reductions seem to be concentrated in the low tier.
+However, these effects are smaller than those in the Figure~\ref{fig:app_counts}, suggesting that our previous estimate might be an overestimate due to sampling variation.
+
+Despite a reduction in the number of applications, there is no evidence of fewer matches formed, which we can see in the second panel from the top in Figure~\ref{fig:trt_effects}.
+The point estimates are small and the associated confidence intervals comfortably include zero. 
+
+Although the number of matches did not change, there are several pieces of evidence that the matches themselves changed.
+In the third panel from the top of Figure~\ref{fig:trt_effects}, we can see that revelation in the high tier increased hired worker wages by \mbox{\WageEffectHigh{}\%}, while revelation in the low tier decreases wages by \mbox{\WageEffectLow{}\%}, with little effect on the medium tier.
+The net overall effect, indicated by ``Pooled,'' is slightly negative.
+However, this does not necessarily imply workers were made worse-off, as we saw that substantially less experienced workers hired in the low tier (recall Figure~\ref{fig:signal_effects_experience}).
+In Appendix~\ref{sec:welfare}, we show that on a per-application basis and with worker specific fixed effects, workers had higher application success probabilities and higher expected values (wage bids times success probability), when applying to {$\textsc{ShownPref}=1$} job openings.
+
+In the bottom two panels, we can see that revelation led to more hours-worked and a larger wage bill.
+Pooled across tiers, revelation increased hours-worked by \HoursEffectPool{}\%, with increases of \HoursEffectHigh{}\% in the high tier and \HoursEffectLow{}\% in the low tier.  
+Revelation increased the wage bill by \WageBillEffectPool{}\%.
+These increases in quantities are suggestive of better matches being formed. 
+
+\begin{figure}
+\centering
+\caption{Effects of revealing employer vertical preferences on job opening outcomes} \label{fig:trt_effects} 
+\begin{minipage}{0.95 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/trt_effects.pdf} 
+\begin{footnotesize}
+  \begin{singlespace}
+    \emph{Notes:} This figure shows the effects of revealing employer preferences, ${\textsc{ShownPref} = 1}$, on a number of outcomes.
+    The sample consists of all job openings from both the ambiguous and explicit arms. 
+    Each point estimate is surrounded by at a 95\% CI. 
+  \end{singlespace}                  
+\end{footnotesize}
+\end{minipage} 
+\end{figure} 
+
+\subsection{Subjective match outcomes} 
+As we discussed, a problem with the hours-worked and wage bill measures of match quality is that both could be inflated by hours-padding.
+As such, we might see buyers buying more hours or paying more, but being less satisfied.
+For these reasons, we also use \emph{ex post} subjective feedback ratings as an outcome. 
+
+If buyers are less satisfied, they might leave worse feedback for the worker or the platform.
+The effects of revelation on these feedback measures is reported in Figure~\ref{fig:trt_effects_feedback}.
+All feedback outcomes are transformed into z-scores, and so point estimates are interpretable as fractions of a standard deviation. 
+The top panel is the employer's feedback to the hired worker, the middle panel is the worker's feedback to the hiring employer, and the bottom panel is the feedback of the employer to the platform (framed as a probability of recommending the platform to someone else).  
+
+For the worker-on-employer and employer-on-worker feedback, parties are prompted to give feedback after the conclusion of a contract but are not obligated to, hence the sample of contracts for feedback is smaller than the number of contracts.
+For the platform feedback, employers are randomly sampled and asked for feedback about 1/3 of the time, explaining why this sample is considerably smaller. 
+
+From Figure~\ref{fig:trt_effects_feedback}, we can see that there is little change in the feedback to the worker.
+For the feedback to the employer, there is some evidence of better feedback to high tier employers and lower feedback to low tier employers who had their preference revealed.
+This would be consistent with worker feedback increasing in the hourly wage received, perhaps due to feeling grateful to the employer for the higher wage \citep{akerlof1982labor}.
+Despite somewhat lower feedback to workers, the platform itself got slightly higher marks from employers---effects were higher in all tiers, with an overall effect that is about 0.025 standard deviations, though the estimates are not very precise.  
+
+\begin{figure}
+\centering
+\caption{Effects of revealing employer vertical preferences on job opening feedback scores (z-scores)} \label{fig:trt_effects_feedback} 
+\begin{minipage}{0.95 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/trt_effects_feedback.pdf} 
+\begin{footnotesize}
+  \begin{singlespace}
+    \emph{Notes:} This figure shows the effects of revealing employer vertical preferences on various feedback measures.
+    \signaldef{}.
+    The sample consists of job openings from both the ambiguous and explicit arms.
+    Each point estimate is surrounded by at a 95\% CI.
+    Point sizes are scaled by the sample size. 
+  \end{singlespace}                  
+\end{footnotesize}
+\end{minipage} 
+\end{figure} 
+
+\subsection{Separating equilibrium in the long-run} 
+A limitation of our experimental design is that it does not directly shed light on the full market equilibrium. 
+At the conclusion of the experiment, all employers received an experience identical to the ${\textsc{ShownPref} = 1}$ cell in the explicit arm, meaning that all employers now knew their preferences would be revealed (and they were revealed).
+There are two empirical approaches that allow us to investigate whether a separating equilibrium persisted:
+we can (1) look at trends within employer in the tier choice and (2) look at the fraction of job openings selecting the various tiers in the post period. 
+
+During the experiment, among employers that posted multiple job openings, we can look for trends in their choice.
+If we saw employers pooling on a tier---the medium tier, which is the most common tier and seems like the most natural place for employers to ``pool''---the long run viability of the separating equilibrium would be endangered. 
+In Appendix~\ref{sec:choice_over_time}, we show that if anything, the trend is towards employers being more likely to select the high tier. 
+Of course, we could have an uninformative high tier pooling equilibrium, but if employers were ``moving up'' because they were receiving bad applicants in the low tier, we would expect more medium tier employers as a first step, but this is not the case. 
+
+Another measure of whether the separating equilibrium persisted comes the period after the experiment ended. 
+Figure~\ref{fig:tiers_over_time} shows the fraction of employers choosing the various tiers over time, with the end of the experiment indicated.
+There is perhaps some evidence of an immediate post roll-out increase in low tier selections, but this does not persist and the long-run pattern seems to be one of relatively stable shares for each of the tiers.  
+
+\begin{figure}
+\centering
+\caption{Employer vertical preference signal choice over time, both before and after the experiment} \label{fig:tiers_over_time} 
+\begin{minipage}{0.95 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/tiers_over_time.pdf} 
+\begin{footnotesize}
+\begin{singlespace}
+  \emph{Notes:} This figure shows the fraction of job openings each month selecting each of the three possible tiers.
+  \signaldef{}. 
+  The vertical red line indicates when the experiment ended and all employers were asked for their preferences.
+  After the experiment, these preferences were always shown to applicants, and employers knew upfront that their signal choices would be revealed. 
+\end{singlespace}                  
+\end{footnotesize}
+\end{minipage} 
+\end{figure} 
+
+\section{Conclusion} \label{sec:conclusion}
+
+Platform-engineered signaling opportunities can move designed markets to more desirable equilibria.
+In our setting, match efficiency was improved and the quantity transacted in the market increased via a platform intervention that had essentially zero marginal cost.
+Given the platform's pricing structure of applying an \emph{ad valorem} charge, the market intervention raised platform revenue by nearly 3\%. 
+Despite this positive result, there are several open questions, such as whether a more separated equilibrium would be desirable and whether the method could be applied to other preference dimensions and other market settings.
+
+A feature of the signaling opportunity described here is that workers were able to apply cross-tier. 
+It would be straight-forward to design a version of the signaling opportunity in which workers would have to choose a tier and only apply within a tier for some period of time.
+The tier selection could also be made centrally by the platform, using prior experience or feedback to create cut-off scores rather than allowing workers to self-select. 
+This could lead to more sorting and more ``refined'' pools, but at the cost of greater intervention by the platform and the greater chance of leaving jobs under- or over-filled if supply is not managed.
+
+In addition to determining which workers are allowed in which tier, another possible direction could be for the platform to define what different tiers ``mean,'' such as by labeling them with experience requirements.
+This might get more informed separation, though it also increases the burden on the platform in deciding what are reasonable tier labels. 
+These wage standards could be scaled by the category to try to induce equal shares selecting each tier.
+
+Although our context is an online labor market, the matching process in this market mirrors that found in conventional markets. 
+The signaling opportunity in this paper is with respect to vertical preference, but there are other potential pieces of information that might be conveyed by a signaling mechanism. 
+For example, if employers could choose to describe their project as ``urgent'' could we get a similar sorting equilibrium? 
+Employers could also signal information about their management ``style'' (e.g., closely managed or hands-off),  their degree of confidence in what works needs to be done, the degree of contract completeness, and so on.  
+Essentially any feature of the economic relationship for which buyers and sellers have heterogeneous preferences or attributes and have imperfectly aligned incentives is a potential candidate for a signaling ``treatment.'' 
+
+\bibliographystyle{aer}
+\bibliography{hot_towel}
+
+\newpage
+
+\appendix
+
+\section{Proofs} \label{sec:proofs}
+
+\subsection{Proposition~\ref{workers}}
+\begin{proof}
+The following pages prove this proposition, and then we move to truthtelling of firms, and bidding when there is no message (or the message is not perfectly revealing).
+To establish proposition \ref{workers}, consider first the \textit{equilibrium bidding behavior}:
+Clearly, in equilibrium he should be $b=b_{m}(a).$
+Note that in this case $\alpha _{m}(ve-b))=a.$
+Taking first order conditions of the expected utility with respect to $b$ evaluated at $b=b(e)$ gives%
+\begin{align*}
+\text{FOC: }-e^{-\lambda _{m}(1-F_{m}(a))}\lambda _{m}f_{m}(a)\alpha
+_{m}^{\prime }(\pi _{m}(a)))b(a)+e^{-\lambda _{m}(1-F_{m}(a))}=0 
+\end{align*}
+or, noting that $\alpha _{m}^{\prime }(\pi )=\frac{1}{v_{m}-b_{m}^{\prime}(a)},$ this gives 
+\begin{align}
+\lambda _{m}f_{m}(a)b_{m}(a)=v_{m}-b_{m}^{\prime }(a).  \label{FOC}
+\end{align}%
+This immediately means that $\pi _{m}(a)$ is indeed increasing in equilibrium, as the right hand side represents $\pi _{m}^{\prime }(a).$
+Note that the lowest type $\underline{a}$ only wins if no other worker is present.
+This type therefore asks for the full surplus: 
+\begin{equation}
+b_{m}(\underline{a})=v_{m}\underline{a}.  \label{end-point}
+\end{equation}%
+The differential equation (\ref{FOC}) together with endpoint condition (\ref{end-point}) uniquely determines $b_{m}(a).$
+It can easily be verified that the solution takes the form 
+\begin{align}
+b_{m}(a)=v_{m}g_{m}(a),  \label{bidding}
+\end{align}
+where 
+\begin{eqnarray}
+\lambda _{m}f_{m}(a)g_{m}(a) &=&1-g_{m}^{\prime }(a),  \label{g} \\
+g_{m}(\underline{a}) &=&\underline{a}.  \nonumber  \label{g-boundary}
+\end{eqnarray}%
+The approach just taken is equivalent to choosing how much profit to leave to firms in (\ref{util-p}) via its first order condition.
+Supermodularity then readily establishes global optimality.\footnote{%
+This follows from standard arguments: strict supermodularity implies that it
+is optimal for $a$ to choose a profit weakly lower than any optimal profit $%
+a^{\prime }>a$ and weakly smaller than any optimal profit of $a^{\prime
+\prime }<a.$}
+
+Next, consider \textit{where workers search for jobs.}
+One remaining difficulty is that the queue length $\lambda _{m}$ and the type density $f_{m}(a)$ at each of the messages is endogeneous.
+It is a choice of workers where to attempt to get a job. \textit{Conjecture: Low types in }$[%
+\underline{a},\hat{a})$\textit{\ mix between both announcements, while high
+types in }$[\hat{a},\bar{a}]$\textit{\ only go to message }$H$ (to be verified). As we will see, the first interval may be empty.
+
+For types to mix, they have to be indifferent.
+We will exploit the indifference condition to find the endogeneous distribution types at each announcement.
+The indifference condition is:
+\begin{align} \label{indiff}
+e^{-\lambda _{L}(1-F_{L}(a))}b_{L}(a)=e^{-\lambda _{H}(1-F_{H}(a))}b_{H}(a).
+\end{align}
+
+For the lowest type, recall his bid in (\ref{end-point}) to obtain indifference condition 
+\begin{eqnarray}
+&&e^{-\lambda _{L}}v_{L}\underline{a}=e^{-\lambda _{H}}v_{H}\underline{a} 
+\nonumber \\
+&\Leftrightarrow &e^{-(1-\gamma _{H})/\delta _{L}}v_{L}=e^{-\gamma
+_{H}/\delta _{H}}v_{H}  \nonumber
+\end{eqnarray}%
+which can be achieved with $\gamma _{H}\in \lbrack 0,1]$ if and only if $1\geq \delta _{H}\ln (v_{H}/v_{L}).$
+Otherwise all worker types only queue at the $H$ message.
+We can solve the previous equation to get 
+\begin{eqnarray}
+\gamma _{L} &=&\frac{\delta _{L}(1-\delta _{H}\ln (v_{H}/v_{L}))}{\delta
+_{H}+\delta _{L}},  \label{fractions} \\
+\gamma _{H} &=&\frac{\delta _{H}(1+\delta _{L}\ln (v_{H}/v_{L}))}{\delta
+_{H}+\delta _{L}}.  \nonumber
+\end{eqnarray}%
+which are exclusively determined by exogeneous parameters.
+
+But the indifference condition (\ref{indiff}) has to hold at all types in $[\underline{a},\hat{a}).$
+So we can differentiate (\ref{indiff}) with respect to $a$ and obtain in this range
+\begin{eqnarray*}
+&&e^{-\lambda _{L}(1-F_{L}(a))}\lambda _{L}f_{L}(a)b_{L}(a)+e^{-\lambda
+_{L}(1-F_{L}(a))}b_{L}^{\prime }(a) \\
+&=&e^{-\lambda _{H}(1-F_{H}(a))}\lambda _{H}f_{H}(a)b_{H}(a)+e^{-\lambda
+_{H}(1-F_{H}(a))}b_{H}^{\prime }(a).
+\end{eqnarray*}%
+Recall that by the first order condition for optimal bidding (\ref{FOC}) we have $\lambda _{m}f_{m}(a)b(a)=v_{m}-b_{m}^{\prime }(a),$ so the previous inequality reduces to
+\begin{equation}
+e^{-\lambda _{L}(1-F_{L}(a))}v_{L}=e^{-\lambda _{H}(1-F_{H}(a))}v_{H}.
+\label{indiff1}
+\end{equation}%
+Note that this trivially holds for the lowest type, as seen in (\ref{indiff-low2}).
+Dividing each side in (\ref{indiff1}) by the same side in (\ref{indiff-low2}) and taking logs, we obtain
+\begin{equation}
+\lambda _{L}F_{L}(a)=\lambda _{H}F_{H}(a)  \label{lower queue length}
+\end{equation}%
+on $[\underline{a},\hat{a}).$
+That means that at both messages, for any type  $a$ in that set, the ratio of worse workers to firms is equalized across messages.
+Recall that the number of types across the messages has to add up to the overall number of types in the population:
+\begin{align}
+\gamma _{L}F_{L}(a)+\gamma _{H}F_{H}(a)=F(a).  \label{adding up}
+\end{align}
+Recalling that $\lambda _{m}=\gamma _{m}/\delta _{m},$ we can solve the system (\ref{lower queue length}) and (\ref{adding up}) to obtain
+\begin{eqnarray}
+F_{L}(a) &=&\frac{\delta _{L}}{\gamma _{L}(\delta _{H}+\delta _{L})}F(a)=%
+\frac{1}{1-\delta _{H}\ln (v_{H}/v_{L})}F(a),  \label{distribution} \\
+F_{H}(a) &=&\frac{\delta _{H}}{\gamma _{H}(\delta _{H}+\delta _{L})}F(a)=%
+\frac{1}{1+\delta _{L}\ln (v_{H}/v_{L})}F(a).  \nonumber
+\end{eqnarray}%
+on $[\underline{a},\hat{a}),$ where the second equality in each line follows from (\ref{fractions}).
+For $a>\hat{a},$ $F_{L}(a)=1$ and $F_{H}(a)=1-(1-F(a))/\gamma _{H}$.\footnote{%
+  The expression for $F_{H}(a)$ at $a>\hat{a}$ arises because the mass of all higher types $1-F(a)$ goes to the high message, and so has to equal the probability of going to that message times the conditional probability of having a type above $a,$ which equals $\gamma _{H}(1-F_{H}(a)).$
+  }
+The boundary type $\hat{a}$ is simply determined by $F_{L}(\hat{a})=1,$ or equivalently $F(\hat{a})=1-\delta _{H}\ln (v_{H}/v_{L}).$
+
+It is noteworthy that on the part where workers mix which message to visit, the type distribution at each auction is just a linear transformation of the original one.
+That means that if the original distribution is uniform, it remains uniform in this range for each message.
+Moreover, from (\ref{lower queue length}) we have for the type densities that 
+\begin{align*}
+\lambda _{L}f_{L}(a)=\lambda _{H}f_{H}(a)=:x(a) 
+\end{align*}
+on $[\underline{a},\hat{a}).$
+We introduced $x(a)$ only to ease notation, and let $X(a):=\lambda _{H}F_{H}(a).$
+So at both messages the queue-length-weighted densities are equal.
+But then the differential equation in (\ref{g}) is independent of message: $g_{L}(a)=g_{H}(a)=:g(a).$
+Therefore
+\begin{align}
+b_{m}(a)=v_{m}g(a), 
+\end{align}
+on $[\underline{a},\hat{a}).$
+That is, the bidding distribution at message $H $ is simply $v_{H}/v_{L}$ higher than that at message $L,$ at least in the area where agents visit both messages.
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:gap_incentive_compat}}
+\begin{proof}
+The next paragraphs establish this proposition.
+Note first that the probability that a firm at message $m$ has no applicant with qualification
+above $a$ is $e^{-\lambda _{m}(1-F_{m}(a))}.$ That means that the density of
+the best applicant is of type $a$ is $\lambda _{m}f_{m}(a)e^{-\lambda
+_{m}(1-F_{m}(a))}.$ So the expected profit at message $m$ for firm type $%
+v_{m}$ is 
+\begin{eqnarray*}
+\Pi _{m} &=&\int (v_{m}a-b_{m}(a))\lambda _{m}f_{m}(a)e^{-\lambda
+_{m}(1-F_{m}(a))}da. \\
+&=&v_{m}\int (a-g(a))x(a)e^{-\lambda _{m}(1-F_{m}(a))}da.
+\end{eqnarray*}%
+It simply integrates the profits over the highest type worker that arrives.
+Consider first the deviation condition for $v_{H}$ firms. We know that $v_{L}a-b_{L}(a)$ is positive and increasing, so we also know that $v_{H}a-b_{L}(a)$ is also positive and increasing. So if a $v_{H}$ firm chooses message $L,$ it still wants to hire the highest worker type.
+Truthtelling now becomes%
+\begin{eqnarray}
+v_{H}\int (a-g(a))x(a)e^{-\lambda _{H}(1-F_{H}(a))}da &\geq &\int_{a\leq 
+\hat{a}}(v_{H}a-v_{L}g(a))x(a)e^{-\lambda _{L}(1-F_{L}(a))}da  \nonumber \\
+\Longleftrightarrow v_{H}\int (a-g(a))x(a)e^{-\lambda _{H}(1-F_{H}(a))}da
+&\geq &v_{H}\int_{a\leq \hat{a}}(a-\frac{v_{L}}{v_{H}}g(a))x(a)e^{-\lambda
+_{H}(1-F_{H}(a))}\frac{v_{H}}{v_{L}}da,  \nonumber \\
+\Longleftrightarrow \int (a-g(a))x(a)e^{-\lambda _{H}(1-F_{H}(a))}da &\geq
+&\int_{a\leq \hat{a}}(\frac{v_{H}}{v_{L}}a-g(a))x(a)e^{-\lambda
+_{H}(1-F_{H}(a))}da,  \label{truthtelling-H}
+\end{eqnarray}%
+where the second line used the workers indifference condition (\ref{indiff1}).
+For high firm types the effects of sending an $L$ message are threefold:
+they loose the best worker types who no longer apply, any given type is asking for less money, and finally the distribution of bids is slightly shifted. So in the last line this can be reduced to two effects: they get less of the good applicants, but get more out of each of the applicants that do apply.
+
+Fixing $v_{L},\delta _{L}$ and $\delta _{H},$ let $\tilde{v}_{H}$ be such that $\delta _{H}\ln (\tilde{v}_{H}/v_{L})<1.$ As $v_{H}$ approaches $\tilde{v}_{H}$ from below, clearly truthtelling condition (\ref{truthtelling-H}) is satisfied as the right hand side goes to zero since $\hat{a}$ goes to $\underline{a}.$
+
+Now consider the opposite alternative where $v_{H}\approx v_{L}.$
+In particular, take derivatives of both side of (\ref{truthtelling-H}) with respect to $v_{H},$ and evaluate it at $v_{H}=v_{L}$ (and therefore $\hat{a}=\bar{a}).$
+For truthtelling we need that the right hand side grows weakly less than the left hand side:%
+\begin{align*}
+0\geq \frac{\partial \hat{a}}{\partial v_{H}}(\bar{a}-g(\bar{a}))x(\bar{a}%
+)e^{-\lambda _{H}}+\int_{a\leq \hat{a}}\frac{1}{v_{L}}ax(a)e^{-\lambda
+_{H}(1-F_{H}(a))}da. 
+\end{align*}
+Recall that $F(\hat{a})=1-\delta _{H}\ln (v_{H}/v_{L}),$ so that $\frac{\partial \hat{a}}{\partial v_{H}}=-\frac{-\delta _{H}\frac{v_{L}}{v_{H}}\frac{1}{v_{L}}}{-f(\bar{a})}.$ So we can write the inequality as 
+\[
+0\geq -\delta _{H}(\bar{a}-g(\bar{a}))x(\bar{a})+f(\bar{a})\int
+ax(a)e^{\lambda _{H}F_{H}(a))}da. 
+\]%
+Clearly for $f(\bar{a})$ small enough this is satisfied, and clearly one can choose $f(\bar{a})$ so that this is violated.
+
+Now consider the low types.
+Studying deviations for low types is much harder, as after a deviation to message $H$ it is no longer obvious that the profit $v_{L}a-b_{H}(a)$ is increasing in worker type.
+If it is not increasing, then they would not necessarily choose the highest worker type who applies to them.
+We will therefore look at two extreme cases that mirror the previous analysis of high types: the case where $v_{H}$ is large, and the case where $v_{H}\approx v_{L}.$
+Consider first the part where $v_{H}$ is large.
+We can establish that low types do not want to deviate if $b_{H}(a)\geq v_{L}a$ for all skill levels.
+In this case the low types can never benefit from deviating. Note that this is clearly the case at $a=\underline{a},$ as $b_{H}(\underline{a})=v_{H}\underline{a}.$
+At higher levels $v_{L}a-b_{H}(a)$ can fall, as long as it always stays positive.
+We are done if we can show that $b_{H}^{\prime }(a)-v_{L}\geq 0$ at any $a$ where $b_{H}(a)-v_{L}a=0.$
+This reduces to the requirement that 
+\begin{eqnarray}
+v_{H}-\lambda _{H}f_{H}(a)v_{L}a-v_{L} &\geq &0  \nonumber \\
+\Leftrightarrow v_{H}-v_{L}(\lambda _{H}f_{H}(a)a+1)\geq &&0  \label{inequ}
+\end{eqnarray}%
+Intuitively this should hold when $v_{H}$ becomes large.
+But to make this formal we have to take into account that $\lambda _{H}f_{H}(a)$ are endogeneous and can vary with $v_{H}.$
+Moreover, $v_{H}$ is only possible when $\delta _{H}$ is sufficiently small, as otherwise we are in the uninteresting case where workers do not visit the low signal.
+So, fix $v_{L},\delta _{L},F(a).$ Then fix $\delta _{H}$ sufficiently small.
+Finally let $v_{H}$ be sufficiently large, but still workers mix between both, i.e., below but close to $\tilde{v}_{H}(\delta _{H})$ which is defined by $1=\delta _{H}\ln (\tilde{v}_{H}(\delta _{H})/v_{L}).$
+It is useful to note that $\delta _{H}\tilde{v}_{H}(\delta _{H})$ goes to infinity as $\delta_{H} $ becomes small.
+
+On $[\hat{a},\bar{a}]$ where types only visit message $H,$ we have $\lambda_{H}f_{H}(a)=f(a)/\delta _{H}.$ Insertion into (\ref{inequ}) readily establishes that the inequality holds when $\delta _{H}$ small and $v_{H}$ close to $\tilde{v}_{H}(\delta _{H}),$ precisely since $\delta _{H}\tilde{v}_{H}(\delta _{H})$ goes to infinity.
+
+On $[\underline{a},\hat{a})$ in the area of mixing 
+\begin{eqnarray*}
+\alpha _{L}f_{L}(\alpha )+\alpha _{H}f_{H}(a) &=&f(a) \\
+\Leftrightarrow \delta _{L}\lambda _{L}f_{L}(\alpha )+\delta _{H}\lambda
+_{H}f_{H}(a) &=&f(a) \\
+\Leftrightarrow \delta _{L}\lambda _{H}f_{H}(\alpha )+\delta _{H}\lambda
+_{H}f_{H}(a) &=&f(a) \\
+\Leftrightarrow \lambda _{H}f_{H}(a) &=&\lambda f(a)=\lambda _{L}f_{L}(a).
+\end{eqnarray*}%
+where $\lambda =1/(\delta _{H}+\delta _{L})$. Clearly $\lambda _{H}f_{H}(a)$ remains bounded even for vanishing $\delta _{H},$ and so (\ref{inequ}) holds when $\delta _{H}$ small and $v_{H}$ large.
+So we have established that all wage bids at the high message are above the valuation of low types, and deviation to the high message is strictly unprofitable.
+
+Consider now the case where $v_{H}$ is close to $v_{L}.$ In this part the surplus continues to increase, and we can write the truthtelling condition in analogue to the previous one%
+\begin{eqnarray}
+v_{L}\int_{a\leq \hat{a}}(a-g(a))x(a)e^{-\lambda _{L}(1-F_{L}(a))}da &\geq
+&\int (v_{L}a-v_{H}g(a))x(a)e^{-\lambda _{H}(1-F_{H}(a))}da  \nonumber \\
+\Longleftrightarrow v_{L}\int_{a\leq \hat{a}}(a-g(a))x(a)e^{-\lambda
+_{L}(1-F_{L}(a))}da &\geq &v_{L}\int (a-\frac{v_{H}}{v_{L}}%
+g(a))x(a)e^{-\lambda _{L}(1-F_{L}(a))}\frac{v_{L}}{v_{H}}da,  \nonumber \\
+\Longleftrightarrow \int_{a\leq \hat{a}}(a-g(a))x(a)e^{-\lambda
+_{L}(1-F_{L}(a))}da &\geq &\int (\frac{v_{L}}{v_{H}}a-g(a))x(a)e^{-\lambda
+_{L}(1-F_{L}(a))}da,
+\end{eqnarray}%
+Taking derivatives gives%
+\begin{eqnarray*}
+\frac{\partial \hat{a}}{\partial v_{H}}(\bar{a}-g(\bar{a}))x(\bar{a}%
+)e^{-\lambda _{L}} &\geq &-\int \frac{1}{v_{L}}ax(a)e^{-\lambda
+_{L}(1-F_{L}(a))}da \\
+\Leftrightarrow f(\bar{a})\int ax(a)e^{\lambda _{L}F_{L}(a)}da-\delta _{H}(%
+\bar{a}-g(\bar{a}))x(\bar{a}) &\geq &0.
+\end{eqnarray*}%
+Note that $\lambda _{L}F_{L}(a)=\lambda _{H}F_{H}(a),$ so that whenever truthtelling for the $L$ type is ensured, it is violated for the $H$ type.
+Therefore, for small differences in valuation truthtelling cannot be achieved.
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{bid-signal-low}}
+
+\begin{proof}
+Consider workers facing a firm with high signal $s=H.$
+With sufficient signal precision workers are nearly sure to face a high value firm.
+Therefore their bids are mostly targeted to them, and one can prove that a supermodularity condition in analog to that associated with (\ref{util-p}) applies when $\psi $ is sufficiently large.
+This assures that for high value firms $\pi _{H,s=H}(a)=v_{H}a-b_{s=H}(a)$ is increasing in $a.$
+In analogy to the previous proofs, let $\alpha _{H,s=H}$ be the inverse of $\pi _{H}.$
+It will become clear that firms only want to cater high types.
+Assume that all workers submit bids only acceptable to the high value firms.
+Then the equilibrium payoff of workers $a$ bidding $b$ and facing a firm with signal $s=H$ is 
+\begin{align*}
+\left( \psi _{H,s=H}e^{-\lambda (1-F(\alpha _{H,s=H}(va-b)))}\right) b,
+\end{align*}
+since $e^{-\lambda (1-F(\alpha _{H,s=H}(va-b)))}$ is the probability that no other bidder is present that offers a better value to high type firms, with probability $\psi $ the firm is actually of high type and accepts, in which case the return is $b.$
+The first order condition evaluated at $b=b_{s=H}$ is (\ref{bid-signal-high}).
+From the first order condition it is again clear that $\pi _{m}$ is increasing, as mentioned.
+This means that the lowest type can only win if no other bidder is present, in which case he can demand the whole surplus if high types, given the boundary condition in (\ref{bid-signal-high}).
+It remains to be verified that low firms would not accept any of the bids, i.e., $b_{m,s=H}(a)>v_{L}a$ for all $a\in \lbrack \underline{a},\bar{a}]$.
+The bidding function here is identical to the bidding function at the high message in the separating equilibrium since $\lambda _{H}f_{H}(a)=\lambda f(a),$ and so the proof that bids outpace the valuation of low firms in (\ref{inequ}) applies also here.
+Finally, we have to check that firms never want to attract low types: since bids are bounded away by some $\bigtriangleup $ from the valuation of low types implies that this would substantially lower the payoff at least by $\psi_{H,s=H}e^{-\lambda }\bigtriangleup $ while the gains are vanishing as $\psi$ goes to one.
+
+Now consider workers facing a firm with low signal $s=L.$
+When signal precision is high workers are nearly fully convinced that they face a low type firm, and it is easy to show that it is strictly profitable to make bids that low types will accept. And since high types value the service even more all firm types will accept.
+One can also again prove a single crossing condition in analogue to (\ref{util-p}) on the profit for low types when the signal is sufficiently precise, so $\pi _{L,s=H}(a)=v_{L}a-b_{s=L}(a)$ is again strictly increasing. Then $\pi _{H,s=L}=v_{H}a-b_{s=L}(a)$ is also strictly increasing.
+Let $\alpha _{L,s=L}$ and $\alpha _{H,s=H}$ be the inverse of them, respectively.
+
+The lowest worker type $\underline{a}$ can only win if no other worker is present.
+So he will extract the who surplus from low firms $b_{s=L}(\underline{a})=v_{L}\underline{a},$ and obtain utility $e^{-\lambda }v_{L}\underline{a}.$
+Clearly this exceeds the value increasing his bid further and extracting all value from high types $(1-\psi _{L})e^{-\lambda }v_{H}\underline{a}$ as long as signal precision is high.
+A similar argument holds for all other types.
+In general the expected utility of a worker of type $a$ who bids $b$ is given by
+\begin{align*}
+\left( \psi _{L,s=L}e^{-\lambda (1-F(\alpha _{L}(v_{L}a-b)))}+\psi
+_{H,s=H}e^{-\lambda (1-F(\alpha _{H}(v_{H}a-b)))}\right) b.
+\end{align*}
+That is, he wins if he meets a low type firm (probability $\psi _{L}$) and if none of the other workers are ranked higher by this firm, and with complementary probability the same for a high type firm.
+The first order condition evaluated at $b=b_{m,s=L}(a)$ is 
+\begin{eqnarray*}
+\sum_{s\in \{L,H\}}\psi _{s}\left( -e^{-\lambda (1-F(a))}\lambda f(a)\alpha
+_{m}^{\prime }(\pi _{m}(a)))b(a)+e^{-\lambda (1-F(a))}\right)  &=&0 \\
+\Leftrightarrow \sum_{s\in \{L,H\}}\psi _{s}\lambda f(a)\frac{1}{%
+v_{m}-b^{\prime }(a)}b(a) &=&1,
+\end{eqnarray*}%
+where we omitted the subscripts of the bidding function for notational brevity.
+\end{proof}
+
+
+\section{Appendix}
+
+\subsection{Do wage bids reflect compensating differentials?} \label{sec:compensating_differentials}
+A high type employer might also be a more demanding employer, expecting greater effort from their hires.
+Anticipating these great expectations, workers might bid more, as they know their costs will higher, either from greater effort or perhaps the greater probability of receiving bad feedback.
+As such, part of the higher wage bid observed in the high tier could reflect this anticipated greater, costly effort.
+Although we have no direct test of this hypothesis, several pieces of evidence make this compensating differential explanation relatively improbable relative to the straightforward perceived willingness to pay argument.
+
+First, the pattern of results in Figure~\ref{fig:choices_by_cat} is suggestive that employers selecting a high tier are not looking for harder work that would require more effort, but rather ``smarter'' work.
+A high tier selection is commonplace in highly skilled categories such as web and software development, whereas in categories like a support---which is largely data entry---the most common selection is low tier.
+Second, there is little empirical evidence for the notion that vertical preferences reflect higher employer expectations that might manifest in bad feedback if not met. 
+
+Among employers selecting a high tier in the ambiguous arm but not having their preferences revealed, there is no evidence that high tier employers are harsher evaluators.
+In Column~(1) of Table~\ref{tab:compensating_differential_argument}, the outcome is the z-score of feedback (on a 1 to 5 point scale).
+Controls are included for the job category.
+The key independent variable are indicators for the employers (un-revealed) vertical preference---the sample is restricted to the $\textsc{ShownPref} = 0$ cell in the ambiguous arm.
+There is no evidence of systematically better or worse feedback scores by tier.
+
+In Column~(2), we report the same regression, but use the z-score of the employer's net promoter score (NPS) for the platform.
+Employers are randomly sampled to give a score, so the sample is smaller.
+Again, there is no evidence of a tier-related difference.
+In Columns~(3) and (4), we still use the NPS measure but expand the sample.
+There is no overall effect of revelation on NPS, though there is some evidence of improved scores for employers that had medium- and high-vertical preferences revealed. 
+
+\input{./tables/compensating_differential_argument.tex}
+
+In addition to lack of empirical evidence that workers should ``fear'' high tier employers because of increased expectations, there is little evidence that employers would justifiably think that paying higher wages would have anything but a selection effect: 
+\cite{gilchrist20163} shows via a field experiment in an online labor market that higher wages do not lead to greater measurable productivity.
+This is consistent with the relatively poor empirical support for persistent gift-exchange effects in labor settings \citep{gneezy2006putting}. 
+
+\subsection{Should workers consider changed applicant pool size when bidding?} \label{sec:condition_on_pool_size}
+As we saw, signal revelation had some effect on applicant pool size, particularly in the low tier.
+A natural question is whether these different pool sizes influenced wage bids.
+If workers thought they faced less competition, all else equal, they have an incentive to bid up.
+In settings where it can be examined, endogenous entry has proven empirically important \citep{bajari2003winner}. However, in contrast to common value auctions, there is presumably a much greater role of idiosyncratic worker-specific surplus in the case of hiring, muting the effects.  
+
+Whether this consideration is important in practice is an empirical question---the competition effects might be sufficiently small that the worker does not have to consider them from a worker's perspective.
+To test whether anticipated pool size ``matters,'' we can test what workers do naturally, in the sense that we could consider how they adjust their bidding behavior on a job-to-job basis. 
+Ideally we would estimate a regression of the form 
+\begin{align} \label{eq:endog_bidding}
+  \log w_{ij} = \alpha_i + \beta_1 \log A_{j} + \epsilon
+\end{align} 
+where $w$ is the individual wage bid of worker $i$ to job opening $j$, $\alpha_i$ is an individual worker fixed effect and $A_j$ is the number of applications opening $j$ will receive, which is determined at random.
+Of course, in practice, $A_j$ is very likely to be correlated with other factors that could affect the wage bid, such as how attractive or unattractive the job opening is to workers or how quickly a job opening is filled.
+However, there are factors that affect how many applications a job opening is likely to receive that is plausibly exogenous with respect to other opening characteristics, and so an instrumental variables approach is feasible. 
+
+To start, we ignore the endogeneity of $A_j$ and simply estimate Equation~\ref{eq:endog_bidding}, reporting the results in Column~(1) of Table~\ref{tab:condition_on_pool_size}.
+This regression uses the full set of applications to job openings in the ambiguous arm of the experiment.
+We can see that a larger applicant pool is associated with a lower wage bid---a worker bids about 0.36\% less when facing a 10\% larger applicant pool. 
+
+\input{./tables/condition_on_pool_size.tex}
+
+To account of the endogeneity in $A_j$, we construct an instrument. 
+We use the mean log applicant pool size of other job openings in that same category, posted on that same day.\footnote{
+  This is conceptually similar to the instrument used by \cite{camerer1997labor}. 
+}
+We include day-specific fixed effects in the second stage.
+The identifying assumption is that there is day-to-day variation in the number of jobs posted and the number of workers active that changes the number of applicants per job for exogenous reasons.
+In Column~(2), we report the first stage of the IV estimate.
+We can see that is a powerful instrument, with a conditional F-statistic of \IVcondFstat{}. 
+
+In Column~(3) report the 2SLS estimate.
+We can see that the larger the pool, the lower the wage bid, with an effect size of \PoolSizeIV{}\%. 
+As expected, when the applicant pool is larger for plausibly exogenous reasons, a worker bids less.
+Despite being negative, the point estimate from Column~(3) implies that that the equilibrium adjustment would be minuscule: 
+ for the low tier, where pool size dropped about 5\%, workers would bid up by a bit more than 1/2 of 1\%. 
+The implication of these point estimates is that the change in bidding to perceived pool size---while in the expected theoretical direction---is relatively unimportant.
+%As such, it seems reasonable to model workers as not considering the changed composition when choosing their bids or what market to participate in. 
+
+\subsection{Selection on observables for filled openings} \label{sec:soo}
+
+Table~\ref{tab:balance_big_filled} compares the pre-randomization attributes of filled job openings, by \textsc{ShownPref}.
+The sample consists of all job openings pooled over the ambiguous and explicit arms of the experiment.
+Three is perhaps some slight evidence that more experienced employers were more likely to fill their job openings when their preferences were revealed, though the differences are not conventionally statistically significant.
+
+\begin{table}
+\begin{center}
+\caption{Employer and job opening characteristics for filled job openings,  by whether tier choice was shown, with job openings pooled from both arms of the experiment}
+\label{tab:balance_big_filled}
+\begin{small}
+\begin{adjustbox}{center}
+\begin{tabular}{lllccccc}
+\toprule
+&   & \multicolumn{1}{c}{\parbox[t][][t]{2.3cm}{{\footnotesize \textsc{ShownPref}=0}}}
+&     \multicolumn{1}{c}{\parbox[t][][t]{2.3cm}{\footnotesize  \textsc{ShownPref=1}}}
+&     \multicolumn{1}{c}{\parbox[t][][t]{2.0cm}{$\Delta$}}
+&     \multicolumn{1}{c}{\parbox[t][][t]{1cm}{\% Change}}
+\\
+\hline
+
+\input{tables/balance_big_filled.tex}
+
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{small}
+\end{center}
+\begin{minipage}{1.0 \textwidth}
+\begin{footnotesize}
+\begin{singlespace}
+  \emph{Notes:} This table reports means for a number of pre-randomization characteristics for the employer and job opening by \textsc{ShownPref} status.
+  The data are pooled to include employers from both the ambiguous and explicit arms.
+Standard errors are reported next to the estimate, in parentheses.
+The far right column also reports the percentage change in the $\textsc{ShownPref}=1$ group, relative to the mean in the control group. 
+\starlanguage
+\end{singlespace}
+\end{footnotesize}
+\end{minipage}
+\end{table}
+
+\subsection{Worker welfare} \label{sec:welfare}
+
+The overall effect of the signaling equilibrium on workers is challenging to estimate.
+For one, workers applied to both kinds of job openings, so it is not the case that we have treated and control workers whose outcomes we can compare.
+We can see, however, measure with applications had a higher expected value, on average, when they were sent to those employers whose preferences were shown. 
+In Table~\ref{tab:welfare}, we report application level regressions in which the independent variable is the treatment assignment of the job opening. 
+In Column~(1), the outcome is an indicator for whether the worker was hired.
+In Column~(2), the outcome is the indicator for whether the worker was hired times their wage bid, in levels.  
+
+\input{tables/welfare.tex}
+
+From Column~(1), we see evidence of an increase in per-application win rate, which is consistent with the overall decline in the quantity of applications and no reduction in the probability a match was formed.
+This coefficient on the \textsc{ShownPref} indicator implies a \EffectOnHireProbability{}\% increase relative to the mean application success probability.
+In Column~(2), the point estimate is positive, though fairly imprecise.  
+At the mean value, this point estimate corresponds to a \EffectOnExpectedWage{}\% increase.
+The average effect on workers was to increase in application success probability, leave the expected wage per-application the same or perhaps slightly higher.
+
+\subsection{Match outcome result robustness to sample definition} \label{sec:trt_effects_robust}
+
+Figure~\ref{fig:trt_effects_robust} reports results for a number of outcomes using different sample definitions. 
+
+\begin{figure}
+\centering
+\caption{Effects of revealing employer vertical preferences on job opening outcomes} \label{fig:trt_effects_robust} 
+\begin{minipage}{0.95 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/trt_effects_robust.pdf} 
+\begin{footnotesize}
+  \begin{singlespace}
+    \emph{Notes:} This figure shows the effects of revealing employer preferences, ${\textsc{ShownPref} = 1}$, on a number of outcomes, for several different samples.
+    Each point estimate is surrounded by at a 95\% CI. 
+  \end{singlespace}                  
+\end{footnotesize}
+\end{minipage} 
+\end{figure} 
+
+\subsection{Tier choice over time} \label{sec:choice_over_time}
+
+As employers can and do post multiple job openings during the experiment, we can observe if their tier choices change over time.
+Note that we only use the first observation for our experimental analysis. 
+Table~\ref{tab:employer_choice_fe} reports estimates where the outcome is an indicator for a particular tier choice, and the key explanatory variable is the ordering of the opening, or \textsc{OrderRank}.
+The regressions show no change in probability of selecting low tier over time.
+
+However, there is some movement away from the medium tier, into the high tier.
+In Column~(4), the order rank is interacted with the treatment assignment---there is no evidence that treatment assigned affected the choice over time.
+
+\input{./tables/employer_choice_fe.tex} 
+
+This is obviously a short-run view, but it does show that there is no evidence that employers are experimenting with truthful revelation but then returning back to a ``pooled'' state after a bad experience.
+If anything, there appears to be less pooling over time. 
+
+\appendix
+\newpage 
+
+
+\end{document}
+
+

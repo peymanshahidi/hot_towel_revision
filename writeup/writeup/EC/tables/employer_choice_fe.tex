@@ -1,0 +1,40 @@
+
+% Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Jan 01, 2015 - 08:30:19 AM
+\begin{table}[!htbp] \centering 
+  \tbl{Employer p/q  selection over time, by treatment assignment \label{tab:employer_choice_fe}}{ 
+  \begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & Select Low Tier & Select Middle Tier & \multicolumn{2}{c}{Select High Tier} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ OpeningRank & $-$0.0004 & $-$0.005$^{***}$ & 0.006$^{***}$ & 0.006$^{***}$ \\ 
+  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
+  & & & & \\ 
+ ShownPref &  &  &  & $-$0.024 \\ 
+  &  &  &  & (0.035) \\ 
+  & & & & \\ 
+ ShownPref x OpeningRank &  &  &  & $-$0.001 \\ 
+  &  &  &  & (0.002) \\ 
+  & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 228,702 & 228,702 & 228,702 & 228,702 \\ 
+R$^{2}$ & 0.727 & 0.647 & 0.669 & 0.669 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+}
+\centering
+\begin{minipage}{1\linewidth} 
+ \emph{Notes:} This table reports regressions where the dependent variable is an indicator for an employer's p/q tier selection and the independent variables are the chronological rank of the opening (ascending order) for that particular employer, OpeningRank, and its interactions with ShownPref.
+\shownprefdef
+The sample is restricted to employers assigned to the explicit arm that posted more than 1 but fewer than 10 openings.
+\explicitdef
+In each regression, an employer-specific fixed-effect is included. 
+Standard errors are clustered at the employer level. 
+ \starlanguage
+ \end{minipage}
+\end{table}

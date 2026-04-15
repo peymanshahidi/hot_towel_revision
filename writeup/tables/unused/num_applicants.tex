@@ -1,0 +1,29 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Calls:
+% \parbox[t][][t]{2cm}{\centering (1) \\ \emph{DV=} Log num apps (G2 and G3 only)}:  lm(formula = log1p(num_applications) ~ tier * contractor.shown, data = DT.openings[(is.first.opening & (G2 | G3))]) 
+% \parbox[t][][t]{2cm}{\centering (2) \\ \emph{DV=} Log num apps (Ambigious Arm)}:  lm(formula = log1p(num_applications) ~ tier * contractor.shown, data = DT.openings[(is.first.opening) & ambigious.arm]) 
+% \parbox[t][][t]{2cm}{\centering (2) \\ \emph{DV=} Log num apps (All but G1)}:  lm(formula = log1p(num_applications) ~ tier * contractor.shown, data = DT.openings[(is.first.opening) & !G1]) 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tabular}{lcD{.}{.}{7}cD{.}{.}{7}cD{.}{.}{7}}
+\toprule
+&&\multicolumn{1}{c}{\parbox[t][][t]{2cm}{\centering (1) \\ \emph{DV=} Log num apps (G2 and G3 only)}} && \multicolumn{1}{c}{\parbox[t][][t]{2cm}{\centering (2) \\ \emph{DV=} Log num apps (Ambigious Arm)}} && \multicolumn{1}{c}{\parbox[t][][t]{2cm}{\centering (2) \\ \emph{DV=} Log num apps (All but G1)}}\\
+\midrule
+(Intercept)                                           &  &  2.147^{***} &&  2.170^{***} &&  2.157^{***}\\
+                                                      &  &  (0.017)     &&  (0.028)     &&  (0.014)    \\
+tier: Medium Tier/Low Tier                            &  &  0.235^{***} &&  0.217^{***} &&  0.228^{***}\\
+                                                      &  &  (0.020)     &&  (0.034)     &&  (0.017)    \\
+tier: High Tier/Low Tier                              &  &  0.213^{***} &&  0.170^{***} &&  0.195^{***}\\
+                                                      &  &  (0.025)     &&  (0.043)     &&  (0.022)    \\
+contractor.shown                                      &  & -0.061^{**}  && -0.085^{*}   && -0.071^{***}\\
+                                                      &  &  (0.023)     &&  (0.034)     &&  (0.019)    \\
+tier: Medium Tier/Low Tier $\times$ contractor.shown &  &  0.088^{**}  &&   0.071      &&  0.081^{***}\\
+                                                      &  &  (0.029)     &&  (0.042)     &&  (0.023)    \\
+tier: High Tier/Low Tier $\times$ contractor.shown   &  &  0.070^{*}   &&   0.093      &&  0.079^{**} \\
+                                                      &  &  (0.036)     &&  (0.052)     &&  (0.029)    \\
+\midrule
+R-squared                                             &  &      0.008   &&      0.007   &&      0.007  \\
+N                                                     &  &  51767       &&  27963       &&  80458      \\
+\bottomrule
+\end{tabular}

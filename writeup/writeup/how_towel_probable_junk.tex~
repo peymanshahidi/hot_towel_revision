@@ -1,0 +1,43 @@
+
+In labor markets, employers recognize that signals about their preferences will affect the set of sellers that could be potential partners in trade.
+For example, the most basic form of signaling is a job posting:
+a firm looking for a software engineer will likely attract applicants with software engineering experience.
+This form of signaling is related to {\em horizontal differentiation} in the preferences of buyers:
+e.g., some employers want software engineers, and others want accountants.
+Conveying preferences relating to horizontal differentation is straightforward and lacks much strategic consideration:
+a firm looking to hire a software engineer has no incentive to say they are looking for an accountant.
+The would-be job applicants and the employer essentially have aligned incentives.
+
+By contrast, conveying preferences related to {\em vertical} differentiation---differences in quality---gives rise to complex incentives.
+Nominally, if an employer declares they are willing to pay for the highest skilled talent, reasoning similar to the previous paragraph suggests they would attract only high quality workers to their job openings.
+Of course, there is a serious countervailing force:
+if an employer has stated that they have a high willingness to pay, but are unable to perfectly ascertain quality, they might find themselves looking at applicants of the same quality as before, but now at a higher price.
+
+
+This pooling equilibrium is unwelcome because it likely leads to worse matches: 
+employers have a more heterogeneous pool of would-be applicants than they would like. 
+Giving them a pool of applicants that they would prefer more is socially attractive, even if it also means employers may end up with a relatively worse deal in negotiations (conditional on matching).
+From the perspective of the market, efficiency is driven by increasing the quality and quantity of matches.
+Changes that lead to buyers getting a relatively worse deal when they do match---but only because they have to pay higher wages---might be very attractive if objectively more and better matches were formed.
+However, due to the competing incentives described above, and despite the potential welfare benefits, in practice honest information disclosure cannot be easily compelled in the labor market.
+
+In this paper we study whether employers would {\em endogeneously} choose to signal their true price and quality preferences to the other side of the market, despite the potential adverse consequences.
+We consider a market intervention in which buyers in an online labor market were forced to make a claim about their relative preference over price and quality. 
+
+
+
+\title{Eliciting Buyer Preferences as a Platform Design Problem\footnote{Author contact information, data sets and code are
+     currently or will be available at
+     \href{http://www.john-joseph-horton.com/}{http://www.john-joseph-horton.com/}.}}
+
+\title{Eliciting and Conveying Preferences in a Matching Market: \\
+  Evidence from a Field Experiment\footnote{Author contact information, data sets and code are
+     currently or will be available at
+     \href{http://www.john-joseph-horton.com/}{http://www.john-joseph-horton.com/}.}}
+
+
+\title{Eliciting and Conveying Preferences: \\
+  Evidence from a Field Experiment\footnote{Author contact information, data sets and code are
+     currently or will be available at
+     \href{http://www.john-joseph-horton.com/}{http://www.john-joseph-horton.com/}.}}
+

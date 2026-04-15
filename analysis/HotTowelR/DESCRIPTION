@@ -1,0 +1,24 @@
+Package: HotTowelR
+Title: Analysis for Hot Towel Experiments
+Version: 1.0
+Authors@R: person("John", "Horton", email = "john.joseph.horton@gmail.com", role = c("aut", "cre"))
+Description: What the package does (one paragraph).
+Depends: R (>= 3.2.1), 
+	 ggplot2 (>= 0.0), 
+	 scales (>= 0.0), 
+	 data.table (>= 0.0), 
+	 stargazer (>= 0.0), 
+	 JJHmisc (>= 0.0), 
+	 reshape (>= 0.0), 
+	 reporttools (>= 0.0), 
+	 lfe (>= 0.0),
+	 directlabels (>= 0.0),
+	 multiwayvcov (>= 0.0),
+	 magrittr (>= 0.0),
+	 dplyr (>= 0.0),
+	 ggrepel (>= 0.0),
+	 lmtest (>= 0.0),
+	 lubridate (>= 0.0),
+	 broom (>= 0.0)
+License: All rights reserved. 
+LazyData: true

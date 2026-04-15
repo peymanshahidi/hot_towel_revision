@@ -1,0 +1,669 @@
+\documentclass[11pt]{article}
+
+\usepackage{booktabs}
+\usepackage{dcolumn} 
+\usepackage{epstopdf}
+\usepackage{fourier}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{longtable} 
+\usepackage{natbib}
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{amsmath} 
+\usepackage{color} 
+\usepackage{setspace} 
+
+\usepackage{amsthm,amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{fullpage}
+
+\renewcommand{\H}{\ensuremath{\mathsf{H}}}
+\renewcommand{\L}{\ensuremath{\mathsf{L}}}
+\newcommand{\NoHT}{\ensuremath{\mathsf{NoPQ}}}
+\newcommand{\HT}{\ensuremath{\mathsf{PQ}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\renewcommand{\P}{\ensuremath{\mathbb{P}}}
+\renewcommand{\v}[1]{\ensuremath{\boldsymbol{#1}}}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{corollary}{Corollary}
+{\theoremstyle{definition}
+\newtheorem{definition}{Definition}}
+{\theoremstyle{remark}
+\newtheorem{remark}{Remark}}
+
+\newcommand{\hottowel}{P/Q-signaling}
+
+
+\title{New Hot Towel Model}
+\author{Ramesh Johari}
+\date{June 12, 2015}
+
+\begin{document}
+\maketitle
+
+\section{Model}
+
+In this section we present a stylized theoretical model that provides a lens through which to view many of the empirical findings of this paper.
+The model we develop allows us to study the difference between the market without  \hottowel, and the market with \hottowel;
+in particular, we study what incentives employers have to sort given the option to do so, and how workers bid in response to employer sorting.
+To drive the focus on these phenomena, the model we consider assumes that workers are {\em ex ante} homogeneous.
+This is of course a strong assumption: there are clearly publicly observable differences in worker ability on the oDesk platform.
+However, as we will see, by simplifying the model in this way we are able to focus specifically on employer sorting, and how this sorting drives the strategic response of workers.
+
+\subsection{Preliminaries}
+
+We consider a model with a unit mass of employers.
+We suppose there are two types of employers: ``high'' ($\H$), comprising a total mass of $\mu$;
+and ``low'' ($\L$), comprising a total mass of $1-\mu$.
+A total mass of $R$ workers populate the platform as well; we view $R$ as the {\em market imbalance},
+and in general note that $R > 1$ (since most platforms have many more workers than employers available).
+
+Each employer of type $t =\H, \L$ has a quality sensitivity $\theta_t > 0$, while each worker $i$ has a quality $\epsilon_i$.
+The {\em utility} derived by a type $t$ employer who hires a quality $\epsilon$ worker, and pays wage $w$, is:
+\begin{equation}
+\label{eq:employer_util}
+u_t(\epsilon, w) = \theta_t \epsilon - w.
+\end{equation}
+Of particular importance in our analysis will be the ratio $\theta_\H/\theta_\L$;
+consistent with the definition of low and high types, we assume $\theta_\H/\theta_\L > 1$.  
+
+In the stylized model we consider, workers first apply, and then employers screen and hire.
+Each worker $i$ can (costlessly) send a single application to an employer of their choice; this application contains a bid $w_i$. 
+The bids are take-it-or-leave-it offers: if applicant $i$ is hired, she earns $w_i$.
+Workers choose their applications and bids to maximize their expected wage, i.e., the probability of being hired times their bid.  
+
+Importantly, we assume that the worker's quality $\epsilon_i$ is only observed by the employer.
+That is, $\epsilon_i$ is the idiosyncratic variation in worker quality that is revealed to the employer by the screening process.
+We assume that $\epsilon_i$ is uniformly distributed on $[0,1]$, independently across workers.\footnote{Note that with a continuum game, when we say ``independently across workers'', we mean that the qualities of any finite subcollection of workers are independent.
+Care must be taken to ensure that a measure exists on the continuum with this property, but we suppress the technical details here and throughout for simplicity.
+See \cite{duffie_sun} for a standard approach to justifying such continuum games.}
+In every other respect workers are {\em ex ante} homogeneous in our model, as noted above.
+
+Given a pool of $N$ applicants with qualities $\v{\epsilon} = (\epsilon_1, \ldots, \epsilon_N)$ and bids $\v{w} = (w_1, \ldots, w_N)$, an employer of type $t$ hires the worker $i$ such that:
+\begin{equation}
+\label{eq:emp_hiring}
+i = \arg \max_j \left\{ \theta_t \epsilon_j - w_j \right\}.
+\end{equation}
+Note that we do not assume a reservation utility for the employer;
+this assumption is made largely for technical simplicity ---
+we conjecture our insights below continue to hold even if employers have an outside option.
+
+Workers make two decisions: which employer to apply to, and what wage bid to choose.
+Importantly, we allow workers to condition their application decision on the number of other competitors applying to the same employer (in a sense made precise below).
+This is consistent with workers' behavior on oDesk, where they are able to observe the number of competitors before applying to a job.
+
+We consider a simplified version of the intervention studied in this paper.
+In particular, we consider two games: one without price-quality preference signaling (or \hottowel~for short), and one with \hottowel.  
+Without \hottowel, workers must apply to openings without receiving any signal about the employers price-quality tradeoff.
+(Note that empirically we observed some sorting even in the absence of \hottowel, but our model is deliberately stylized to simplify the presentation.)
+With \hottowel, workers receive a signal from the employer, and can use this in their application strategy.
+In the subsequent sections, we analyze these two games.
+%(All proofs can be found in Appendix \ref{sec:proofs}.)
+
+\subsection{A bidding game as a building block}
+
+A key building block of our model is the wage bidding game played among workers applying to a given employer.
+With this in mind, in this section we study equilibrium of the bidding game among workers, leading to a result that we use throughout this section to characterize equilibrium.
+
+In the game we consider, an employer receives $N$ applicants, and we search for a symmetric equilibrium wage bid among the workers.
+We assume the type of the employer is $\theta_{\H}$ with probability $p$, and $\theta_{\L}$ with probability $1-p$.
+(In our analysis below $p$ will vary depending on whether the market is with \hottowel~or without \hottowel.)
+Suppose a given worker bids $w$, and that all other workers bid $w_0$.
+The expected utility of this worker is:
+\begin{equation}
+\label{eq:worker_util}
+U(w;w_0,N) = 
+ w \int_0^1 \left( p \P(\theta_{\H} \epsilon - w > \theta_{\H} \epsilon' - w_0)^{N-1} + (1-p) \P(\theta_{\L} \epsilon - w > \theta_{\L} \epsilon' - w_0)^{N-1}\right) d\epsilon.
+\end{equation}
+The probability inside the integral is over $\epsilon'$; all other quantities are fixed.
+We have the following proposition.
+
+%% We require the following lemma.
+%% \begin{lemma}
+%% \label{lem:g}
+%% Suppose that $N \sim \poiss(m)$ with $m > 0$.  Then:
+%% \[ \E\left[ \frac{1}{N+1} \right] = g(m) \triangleq \frac{1 - e^{-m}}{m}. \]
+%% Further, $g$ is strictly decreasing, with $g(m) \to 1$ as $m \to 0$.
+%% \end{lemma}
+
+%% \begin{proof}[Proof of Lemma \ref{lem:g}.]
+%% We directly compute the expectation:
+%% \begin{align*}
+%% \E\left[ \frac{1}{N+1} \right] &= \sum_{k \geq 0} e^{-m} \left( \frac{m^k}{k!} \right) \left( \frac{1}{k+1}\right) \\
+%% & = \frac{1}{m} \sum_{k \geq 1} e^{-m} \frac{m^k}{k!} \\
+%% & = \frac{1 - e^{-m}}{m}.
+%% \end{align*}
+%% The fact that $g$ is strictly decreasing follows by differentiating:
+%% \[ g'(m) = \frac{e^{-m}}{m} - \frac{1 - e^{-m}}{m^2} = \frac{m e^{-m} - 1 + e^{-m}}{m^2}. \]
+%% Observe that $1 + m < e^m$ for $m > 0$, so the result follows.
+%% The limit as $m \to 0$ follows by L'H\^{o}pital's rule.
+%% \end{proof}
+
+\begin{prop}
+\label{prop:general_eq}
+There exists at most one $w^*$ such that:
+\begin{equation}
+\label{eq:equilibrium}
+U(w^*; w^*, N) = \sup_{w \geq 0} U(w ; w^*, N),
+\end{equation}
+given by:
+\begin{equation}
+\label{eq:general_w_eq}
+w^* = \frac{1}{N \E[1/\theta]}.
+\end{equation}
+In particular, there exists $p_0$ such that if $p \in [0,p_0]$ then \eqref{eq:equilibrium} holds for this $w^*$.
+
+At this $w^*$ there holds:
+\begin{equation}
+\label{eq:w_eq_surplus}
+U(w^* ; w^*, N) = \frac{w^*}{N} = \frac{1}{N^2 \E[1/\theta]}.
+\end{equation}
+\end{prop}
+
+This proposition states that there exists at most one symmetric equilibrium of the bidding game among workers;
+and as long as $p$ is small enough, this candidate equilibrium is in fact an equilbrium.
+Further, \eqref{eq:general_w_eq} and \eqref{eq:w_eq_surplus} characterize the equilibrium wage bid and worker welfare, respectively.
+For later reference, we note that the preceding proposition is valid even when $N$ is non-integral.
+
+We emphasize that the bound $p_0$ required in Proposition \ref{prop:general_eq} is not very stringent.
+For example, we have numerically verified that if $\theta_\H/\theta_\L = 10$, then $p_0 \approx 0.33$;
+in other words, 33\% of the employers should be in the high tier, when high tier clients value quality $10$ times more than low tier clients.
+Given our empirical observations of both hourly rates and fractions of clients in each of the tiers in Section \ref{??}, the equilibrium we study in our model is quite reasonable.
+
+
+An important corollary of the preceding proposition is that if $\theta$ is deterministically known, then the equilibrium always exists.
+
+\begin{corollary}
+\label{cor:fixed_theta_eq}
+Suppose that the employer has deterministic type $\theta$.
+Then there exists a unique $w^*$ such that:
+\begin{equation}
+\label{eq:fixed_theta_equilibrium}
+U(w^*; w^*, N) = \sup_{w \geq 0} U(w ; w^*, N),
+\end{equation}
+given by:
+\begin{equation}
+\label{eq:fixed_theta_w_eq}
+w^* = \frac{\theta}{N}.
+\end{equation}
+
+At this $w^*$ there holds:
+\begin{equation}
+\label{eq:fixed_theta_w_eq_surplus}
+U(w^* ; w^*, N) = \frac{w^*}{N} = \frac{\theta}{N^2}.
+\end{equation}
+\end{corollary}
+
+\subsection{No \hottowel}
+
+Without \hottowel, each employer cannot signal her type to the worker.  
+Therefore, workers are unable to distinguish the employer's quality preference {\em ex ante}.
+
+Recall that as discussed above, we want to study equilibria of a game where workers are able to condition on the number of competitors they face.  
+Formally, we want to find equilibria where each worker chooses the same wage bid $w$, and workers apply to employers in such a way that:
+(a) no worker can profitably deviate by changing their bid; and
+(b) no worker can profitably deviate by applying to another employer.
+We capture these features using an appropriate definition of equilibrium for our game.
+
+Let $U_{\NoHT}$ denote the utility function \eqref{eq:worker_util} with $p = \mu$.
+Also recall that $R$ is the market imbalance.
+We have the following definition.
+
+\begin{definition}
+\label{def:noht}
+A bid $w^*$ is a {\em $\NoHT$ symmetric equilibrium} if the following two conditions hold:
+\begin{enumerate}
+\item $U_{\NoHT}(w^* ; w^*, R) = \sup_{w\geq 0} U_{\NoHT}(w ; w^*, R)$.
+\item $U_{\NoHT}(w^* ; w^*, R) \geq \sup_{w \geq 0} U_{\NoHT}(w ; w^*, R+1)$.
+\end{enumerate}
+\end{definition}
+
+The first condition in the definition requires that each worker maximizes her payoff by bidding $w^*$, holding fixed the number of competitors as $R - 1$, and assuming each competitor bids $w^*$.  
+The second condition requires that each worker cannot improve her payoff by deviating and applying to another employer (who has already received $R$ applicants.
+Note that this definition is inspired by the setting where $R$ is an integer; however, the definition is formally valid even if $R$ is non-integral, and accordingly we use the definition even for non-integral $R$ as an approximation of equilibrium behavior.  
+(See the remark at the end of this section for further discussion on non-integral $R$.)
+
+Note that for a bid to be a $\NoHT$ symmetric equilibrium, in particular $w^*$ must be given by the bid in \eqref{eq:general_w_eq}, i.e., $w^* = 1/(R\E[1/\theta])$.
+In the following proposition, we show that this bid is in fact a $\NoHT$ symmetric equilibrium, as long as $\mu$ is sufficiently small.
+
+\begin{prop}
+\label{prop:noht}
+For all sufficiently small $\mu$, the following bid is a $\NoHT$ symmetric equilibrium:
+\begin{equation}
+\label{eq:noht_eq}
+w^* = \frac{1}{R(\mu/\theta_{\H} + (1-\mu)/\theta_{\L})}.
+\end{equation}
+\end{prop}
+
+\begin{remark}
+Note that in principle, our analysis here is only easily interpreted for integral values of $R$.
+Nevertheless, we view our analysis as a reasonable approximation even in the case where $R$ is non-integral.
+In this remark we briefly outline how non-integral $R$ might be directly addressed, at the expense of significantly greater technical complexity.
+
+Our goal is to study symmetric equilibria where workers are able to condition on the number of competing applicants.
+To do this formally, we can consider a model with finitely many workers and employers, where workers apply sequentially.
+We consider an equilibrium structure where each worker applies uniformly at random among those jobs that have received the minimum number of competing applicants, and where all workers submit the same wage bid.
+In any such equilibrium, each job will obtain $\lfloor R \rfloor$ applicants with probability $\lceil R \rceil - R$, and $\lceil R \rceil$ applicants with probability $R - \lfloor R \rfloor$.
+Note the expected number of applicants is $R$.
+
+We conjecture that for sufficiently small $\mu$ there is a $\NoHT$ symmetric equilibrium of this game where each applicant submits the wage bid:
+\[ w^* = \frac{\E[1/N]}{\E[1/\theta]},\]
+where $N$ is the (random) number of applicants to a job, distributed as described above.
+The equilibrium we study in this paper is an approximation to this sequential application equilibrium.
+\end{remark}
+
+\subsection{\hottowel}
+
+Next, we consider the game with \hottowel.
+In this game, employers make a choice of whether to signal ``high'' ($\H$) or ``low'' ($\L$), and workers can condition their application on this signal.
+In line with our empirical findings, we search for {\em separating} symmetric equilibria of this game, where:
+(a) all $\H$ type employers declare $\H$, and all $\L$ type employers declare $\L$;
+(b) all applicants to $\H$ (resp., $\L$) employers submit the same bid;
+(c) no worker can profitably deviate by changing her wage bid; and
+(d) no worker can profitably deviate by applying to another employer.
+As above, we capture these features using an appropriate definition of equilibrium for our game.
+
+To proceed, we first need to analyze the utility of an employer.
+From \eqref{eq:employer_util}, the {\em ex ante} expected utility of a type $t$ employer who anticipates receiving $N$ applications all with wage bid $w$ is:
+\[ \theta_t \E[\max_{1 \leq i \leq N} \epsilon_i] - w,\]
+where the $\epsilon_i$ are i.i.d.~uniform random variables on $[0,1]$.
+(Recall that we assumed the employer always hires.)
+The following lemma is useful in characterizing this expectation.
+
+\begin{lemma}
+Let $\epsilon_i$, $i = 1, \ldots, N$, be i.i.d.~uniform random variables on $[0,1]$.  Then:
+\[ \E[\max_{1 \leq i \leq N} \epsilon_i] = 1 - \frac{1}{N}. \]
+\end{lemma}
+
+Motivated by the preceding lemma we define $V_t(N, w)$ as the {\em ex ante} expected utility of an employer who receives $N$ applications, all with wage bid $w$:
+\begin{equation}
+\label{eq:employer_util2}
+V_t(N,w) = \theta_t \left( 1- \frac{1}{N}\right) - w.
+\end{equation}
+
+Finally, let $U_{\H}$ (resp., $U_{\L}$) be the utility function in \eqref{eq:worker_util} with $p = 1$ (resp., $p = 0$).
+Thus $U_{\H}$ (resp., $U_{\L}$) is the utility of a worker who applies to a known high (resp., low) type employer.  
+
+We have the following definition.
+
+\begin{definition}
+\label{def:ht}
+A pair of bids $w_\H^*$ and $w_\L^*$, together with applicant counts $M_\H^*, M_\L^* \geq 0$ form a {\em $\HT$ symmetric equilibrium} if the following conditions hold:
+\begin{enumerate}
+\item $\mu M_\H^* + (1-\mu) M_\L^* = R$;
+\item $U_{\H}(w_\H^* ; w_\H^*, M_\H^*) = \sup_{w\geq 0} U_{\H}(w ; w_\H^*, M_\H^*)$;
+\item $U_{\H}(w_\H^* ; w_\H^*, M_\H^*) \geq \sup_{w\geq 0} U_{\H}(w ; w_\H^*, M_\H^*+1)$;
+\item $U_{\H}(w_\H^* ; w_\H^*, M_\H^*) \geq \sup_{w\geq 0} U_{\L}(w ; w_\L^*, M_\L^*+1)$;
+\item $U_{\L}(w_\L^* ; w_\L^*, M_\L^*) = \sup_{w\geq 0} U_{\L}(w ; w_\L^*, M_\L^*)$;
+\item $U_{\L}(w_\L^* ; w_\L^*, M_\L^*) \geq \sup_{w\geq 0} U_{\L}(w ; w_\L^*, M_\L^*+1)$;
+\item $U_{\L}(w_\L^* ; w_\L^*, M_\L^*) \geq \sup_{w\geq 0} U_{\H}(w ; w_\H^*, M_\H^*+1)$;
+\item $V_\H(M_\H^*, w_\H^*) \geq V_\H(M_\L^*, w_\L^*)$;
+\item $V_\L(M_\L^*, w_\L^*) \geq V_\L(M_\H^*, w_\H^*)$.
+\end{enumerate}
+\end{definition}
+
+Here $w_\H^*$ and $w_\L^*$ are the wage bids submitted by workers to high and low type employers, respectively.
+The quantities $M_\H^*$ and $M_\L^*$ represent the number of applications received by high and low type employers, respectively.
+The first condition requires that if we aggregate these application counts over employers, we should recover the market imbalance.
+(As before we ignore the possibility that these are not integers; the definition is formally valid even without integrality.)
+
+Conditions (2)-(4) require that applicants to high type employers have optimized their utility.
+Specifically, their bid should be optimal given the number of competitors they face;
+and they should not want to deviate and apply to either another high type employer or a low type employer.
+
+Analogously, conditions (5)-(7) require that applicants to low type employers have optimized their utility.
+
+Conditions (8)-(9) require that neither high type nor low type employers wish to misdeclare their type.
+If a high type employer misdeclares as a low type, for example, then her {\em ex ante} expected payoff changes:
+she receives $M_\L^*$ applicants instead of $M_\H^*$, each bidding $w_\L^*$ instead of $w_\H^*$.
+Condition (8) ensures this is not a profitable deviation.
+Condition (9) ensures the same for low type employers.
+
+In our search for an equilibrium, we will simplify conditions (4) and (7) of the definition, by looking for an equilibrium where:
+\[ U_{\L}(w_\L^* ; w_\L^*, M_\L^*) = U_{\H}(w_\H^* ; w_\H^*, M_\H^*). \]
+If the preceding relation holds, then applicants to low and high type employers earn the same utility.
+This indifference condition is natural, as it captures the tradeoff between more competition when applying to higher type employers, against the possibility of earning higher wages.
+As we show in the next proposition, this indifference condition is sufficient to ensure that both conditions (4) and (7) hold, and allows us to solve for an equilibrium.  
+
+\begin{prop}
+\label{prop:ht}
+There exists a $\HT$ symmetric equilibrium $w_\H^*$, $w_\L^*$, $M_\H^*$, $M_\L^*$ where:
+\begin{gather}
+M_{\H}^* = \frac{\gamma^* R}{\mu};  \quad M_{\L}^* = \frac{(1-\gamma^*)R}{1 - \mu}, \text{with} \label{eq:ht_M_eq}\\
+\gamma^* = \frac{\mu\sqrt{\theta_\H}}{\mu\sqrt{\theta_\H} + (1-\mu)\sqrt{\theta_\L}}; \label{eq:ht_gamma_eq}\\
+w_\H^* = \frac{\theta_\H}{M_\H^*};\quad w_\L^* = \frac{\theta_\L}{M_\L^*}. \label{eq:ht_w_eq}
+\end{gather}
+In this equilibrium, worker surplus is equal among applicants to high and low type employers:
+\begin{equation}
+\label{eq:equal_util}
+ U_{\L}(w_\L^* ; w_\L^*, M_\L^*) = U_{\H}(w_\H^* ; w_\H^*, M_\H^*).
+\end{equation}
+\end{prop}
+
+The structural simplicity of the preceding equilibrium allows us to make sharp comparisons between the markets with and without \hottowel.
+Before carrying out these comparisons we summarize some useful facts in the following remark.
+
+\begin{remark}
+\label{rem:ht_notes}
+In the $\HT$ symmetric equilibrium of Proposition \ref{prop:ht}, the number of applicants to the two types of employers are related as follows:
+\[ \frac{M_\H^*}{M_\L^*} = \sqrt{\frac{\theta_\H}{\theta_\L}}. \]
+In particular the preceding expression implies the low type employers receive fewer applicants.
+It follows from the preceding result together with \eqref{eq:ht_M_eq} and \eqref{eq:ht_gamma_eq} that the fraction of workers who apply to high type employers, $\gamma^*$, satisfies $\gamma^* > \mu$.  
+
+The ratio of wage bids of workers satisfies:
+\[ \frac{w_\H^*}{w_\L^*} = \sqrt{\frac{\theta_\H}{\theta_\L}}. \]
+In particular the preceding expression implies applicants to low type employers make lower wage bids.
+\end{remark}
+
+\subsection{Comparison}
+
+In this section we compare the markets with and without \hottowel, using the equilibria in Propositions \ref{prop:noht} and \ref{prop:ht}.
+We study two features.
+First, we compare wage bids with \hottowel~to the equilibrium wage bid without \hottowel.
+As expected, we find that the wage bids with \hottowel~``bracket'' the equilibrium wage bid without \hottowel: $w_H^* > w^* > w_L^*$.
+Second, we compare welfare with \hottowel~to welfare without \hottowel.
+We find that the separating equilibrium with \hottowel~increases welfare relative to the pooling equilibrium without \hottowel.
+
+\subsubsection{Wage bids}
+
+We have the following proposition.
+
+\begin{prop}
+\label{prop:compare_wages}
+Suppose that $\mu$ is sufficiently small that the $\NoHT$ symmetric equilibrium described in Proposition \ref{prop:noht} exists, and let $w^*$ be the corresponding wage bid.
+Analogously, let $w_H^*$ and $w_L^*$ be the $\HT$ symmetric equilibrium wage bids in Proposition \ref{prop:ht}.
+Then:
+\[ w_H^* > w^* > w_L^*. \]
+\end{prop}
+
+\subsubsection{Welfare}
+
+In this section we compare aggregate welfare with and without \hottowel.  
+
+\begin{prop}
+\label{prop:compare_welfare}
+Suppose that $\mu$ is sufficiently small that the $\NoHT$ symmetric equilibrium described in Proposition \ref{prop:noht} exists.
+The resulting aggregate welfare is:
+\begin{equation}
+\label{eq:noht_aggw}
+W_{\NoHT} = (\mu \theta_H + (1-\mu)\theta_L)\left( 1 - \frac{1}{R}\right).
+\end{equation}
+
+The aggregate welfare in the $\HT$ symmetric equilibrium of Proposition \ref{prop:ht} is:
+\begin{equation}
+\label{eq:ht_aggw}
+W_{\HT} = \mu \theta_H\left( 1- \frac{1}{M_H^*}\right) + (1-\mu)\theta_L \left( 1 - \frac{1}{M_L^*}\right),
+\end{equation}
+where $M_H^*, M_L^*$ are defined as in \eqref{eq:ht_M_eq}.
+
+Further, welfare is higher in the $\HT$ symmetric equilibrium than in the $\NoHT$ symmetric equilibrium:
+\begin{equation}
+\label{eq:welfare_ineq}
+W_{\HT} > W_{\NoHT}.
+\end{equation}
+\end{prop}
+
+\appendix
+\section{Proofs}
+
+\begin{proof}[Proof of Proposition \ref{prop:general_eq}]
+It is straightforward to check that all workers bidding zero cannot be a Nash equilibrium:
+in this case, an applicant can bid a small positive amount, and since there is positive probability that no other competitors are present, this deviation yields positive expected profit.
+Thus any symmetric Nash equilibrium bid must be positive.
+
+The remainder of the proof proceeds in two stages.
+First, we show that if a positive symmetric Nash equilibrium exists, then it must take the form described in \eqref{eq:general_w_eq}.
+Second, we show that for a given worker, if all other workers bid $w^*$, then $w^*$ is the unique best response.
+This establishes that $w^*$ is in fact a symmetric Nash equilibrium bid.
+
+To simplify notation in this part of the proof, we let $F$ denote the distribution of $\theta$.  
+With this definition \eqref{eq:worker_util} becomes:
+\begin{equation}
+\label{eq:worker_util2}
+ w \int_\theta  \int_\epsilon \P(\theta \epsilon - w > \theta \epsilon' - w_0)^{N-1} d\epsilon dF(\theta).
+\end{equation}
+We define $f(x)$ as:
+\begin{equation}
+\label{eq:f}
+f(x) = \int_\theta \int_\epsilon \P\left(\epsilon' < \epsilon - \frac{x}{\theta}\right)^{N-1} d\epsilon dF(\theta)  .
+\end{equation}
+Then note that \eqref{eq:worker_util2} becomes $w f(w - w_0)$, i.e., $f(w - w_0)$ is the probability the worker is hired. 
+Observe that $f(x) \to 1$ as $x \to -\infty$, and $f(x) \to 0$ as $x \to \infty$.
+
+We differentiate $f(x)$ with respect to $x$ to obtain:
+\begin{equation}
+\label{eq:fprime}
+f'(x) = \int_\theta \int_\epsilon {N-1} \P\left(\epsilon' < \epsilon - \frac{x}{\theta}\right)^{N-2} h\left( \epsilon - \frac{x}{\theta}\right) \left( - \frac{1}{\theta} \right) d\epsilon dF(\theta),
+\end{equation}
+where $h(\epsilon)$ is the uniform density: $h(\epsilon) = 1$ if $\epsilon \in [0,1]$, and $h(\epsilon) = 0$ otherwise.
+
+The first order condition for a solution $w > 0$ that maximizes $w f(w - w_0)$ is:
+\begin{equation}
+\label{eq:foc}
+f(w - w_0) = - w f'(w - w_0),
+\end{equation}
+i.e., that:
+\begin{multline*}
+\int_\theta \int_\epsilon \P\left(\epsilon' < \epsilon - \frac{w - w_0}{\theta}\right)^{N-1} d\epsilon dF(\theta) 
+ = w \int_\theta \int_\epsilon (N-1) \P\left(\epsilon' < \epsilon - \frac{w - w_0}{\theta}\right)^{N-2} h\left( \epsilon - \frac{w - w_0}{\theta}\right) \left(\frac{1}{\theta} \right) d\epsilon dF(\theta). 
+\end{multline*}
+Now if $w^* > 0$ is a symmetric Nash equilibrium bid, then $w^*$ should be optimal when $w_0 = w^*$, and in particular must satisfy the preceding first order condition with equality.
+Setting both $w$ and $w_0$ to $w^*$ in the preceding expression, and noting that $\epsilon \in [0,1]$, so that $\P(\epsilon' < \epsilon) = \epsilon$ and $h(\epsilon) = 1$, we obtain:
+\[  \int_\theta \int_\epsilon \epsilon^{N-1} d\epsilon dF(\theta) = w^* \int_\theta \int_\epsilon (N-1) \epsilon^{N-2} \left(\frac{1}{\theta}\right) d\epsilon dF(\theta). \]
+The left hand side is $f(0) = 1/N$, while the right hand side is $w^* f'(0) = w^* E[1/\theta]$, yielding \eqref{eq:general_w_eq}.
+Observe that the worker surplus at this equilibrium is $w^* f(0) = w^*/N$.
+Our derivation shows this is the only possible symmetric equilibrium.
+
+To complete the proof, we need to show that for sufficiently small $p$, $w^*$ is in fact the optimal response for a worker when all other workers bid $w^*$.
+To start, we note that there must be some optimal response $w > 0$ for a given applicant that yields positive surplus, given that all other applicants bid $w^*$.
+In particular, observe that if the applicant bids $w^*$, then her surplus is positive;
+if she bids $w = 0$, her surplus is zero (since no income is earned even if she is hired);
+and if $w \to \infty$, her surplus approaches zero (since she won't be hired).
+Therefore, it suffices to show that there is a unique solution $w > 0$ to the first order condition \eqref{eq:foc} when $w_0 = w^*$, at which the worker earns positive surplus.
+
+For the remainder of the proof it is useful to rewrite $f'$ as follows:
+\begin{equation}
+\label{eq:fprime2}
+ f'(x) = \int_\theta \int_{-x/\theta}^{1-x/\theta} (N-1) \P\left(\epsilon' < u\right)^{N-2} h\left( u \right) \left( - \frac{1}{\theta} \right) du dF(\theta),
+\end{equation}
+where we made the substitution $u = \epsilon - x/\theta$.
+(Note that $\theta > 0$ so this substitution is well defined.)
+From this formulation, and recalling that $h$ is the indicator function of the interval $[0,1]$, it is straightforward to check that $f'(x)$ is unimodal, with $f'(x) = 0$ for $x \leq -\theta_{\H}$ or $x \geq \theta_{\H}$;
+$f'(x)$ is monotonically nonincreasing for $-\theta_{\H} \leq x < 0$;
+and $f'(x)$ is monotonically nondecreasing for $0 < x \leq \theta_{\H}$.
+These observations follow by differentiating once more:
+\[ f''(x) = \int_\theta (N-1) \left(\P\left(\epsilon' < 1 - \frac{x}{\theta}\right)^{N-2} h\left( 1 - \frac{x}{\theta}\right) - \P\left(\epsilon' < -\frac{x}{\theta}\right)^{N-2} h\left( - \frac{x}{\theta}\right) \right) \left( \frac{1}{\theta} \right)^2 dF(\theta), \]
+and then applying the definition of $h$.
+(The second derivative is well defined since the terms involving $h$ are continuous as long $x \neq 0$.)
+
+We now return to the basic first order condition \eqref{eq:foc} with $w_0 = w^*$, which we rewrite for $w > 0$ as:
+\begin{equation}
+\label{eq:foc2}
+\frac{f(w-w^*)}{w} = - f'(w - w^*).
+\end{equation}
+Observe that the left hand side is strictly decreasing in $w$, and approaches infinity as $w \to 0$.
+On the other hand, for $w < w^*$, the right hand side is monotonically nondecreasing in $w$.
+Finally, at $w = w^*$, the left hand side is equal to the right hand side.
+Therefore we know that for $0 < w < w^*$, $f(w - w^*)/w > f'(w - w^*)$.
+In other words, no other solution to \eqref{eq:foc2} exists in this region.
+
+To complete the proof, we need to show there do not exist any solutions to \eqref{eq:foc2} where $w > w^*$, and the worker earns positive surplus.
+We start by simplifying $f(w - w^*)$ in this region.
+Similar to \eqref{eq:fprime2}, we rewrite $f(x)$ as follows:
+\begin{equation}
+\label{eq:f2}
+f(x) = \int_\theta \int_{-x/\theta}^{1-x/\theta} \P\left(\epsilon' < u\right)^{N-1} h(u) du dF(\theta),
+\end{equation}
+where we again used the substitution $u = \epsilon - x/\theta$.
+Note that for any $\theta \in \{ \theta_{\L}, \theta_{\H} \}$, and any $x$ such that $0 < x < \theta$  we have:
+\[ \int_{-x/\theta}^{1-x/\theta} \P\left(\epsilon' < u\right)^{N-1} h(u) du  = \left( \frac{1}{N} \right) \left( 1 - \frac{x}{\theta} \right)^{N}. \]
+On the other hand, if $x > \theta$, then both integrals above are zero.
+From this expression, it follows that the surplus of the worker at a bid $w = w^* + x$ where $x > 0$, assuming all other workers bid $w^*$, is given by:
+\begin{equation}
+\label{eq:surplus}
+ (w^* + x) f(x) = \left( \frac{1}{N} \right) \left( w^* + x \right) \left( p \left( \left[1 - \frac{x}{\theta_{\H}} \right]_+ \right)^{N} + (1-p) \left( \left[1 - \frac{x}{\theta_{\L}} \right]_+ \right)^{N} \right).
+\end{equation}
+Here we have explicitly written the distribution over $\theta$.
+
+Our goal is to show that for $x > 0$, the surplus of the worker is less than her surplus when $x = 0$, i.e.:
+\begin{equation}
+\label{eq:ratio}
+ \frac{(w^* + x) f(x)}{w^* f(0)} < 1.
+\end{equation}
+From \eqref{eq:surplus} and the definition of $w^*$, this ratio is given by:
+\[ \left( p \left( 1 + \frac{Nx}{\theta_{\H}}\right) + (1-p)\left( 1 + \frac{Nx}{\theta_{\L}} \right) \right) \left( p \left( \left[1 - \frac{x}{\theta_{\H}} \right]_+ \right)^{N} + (1-p) \left( \left[1 - \frac{x}{\theta_{\L}} \right]_+ \right)^{N} \right). \]
+We now note that $1 - y \leq e^{-y}$, so the preceding ratio is bounded above by:
+\begin{equation}
+\label{eq:ratio2}
+\left( p \left( 1 + \frac{Nx}{\theta_{\H}}\right) + (1-p)\left( 1 + \frac{Nx}{\theta_{\L}} \right) \right) 
+\left( p \exp \left( -\frac{Nx}{\theta_{\H}} \right) + (1-p) \exp \left( -\frac{Nx}{\theta_{\L}} \right) \right).
+\end{equation}
+
+We complete the proof in two steps: first by considering small values of $x$, and then by considering larger values of $x$.
+Let $\tilde{x} = Nx$.
+First, we note that since $e^{-x} < 1 -x + x^2/2$, the expression in \eqref{eq:ratio2} is upper bounded by:
+\begin{equation}
+\label{eq:ratio3}
+ (1 + \delta_1 \tilde{x})\left(1 - \delta_1 \tilde{x} + \frac{1}{2} \delta_2 \tilde{x}^2 \right),
+\end{equation}
+where
+\[ \delta_1 = \frac{p}{\theta_{\H}} + \frac{1-p}{\theta_{\L}}, \]
+and
+\[ \delta_2 =  \frac{p}{\theta_\H^2} + \frac{1-p}{\theta_{\L}^2}. \]
+Expanding \eqref{eq:ratio3} we obtain:
+\[ 1 - \left(\delta_1^2 - \left(\frac{1}{2}\right) (1 + \delta_1 x) \delta_2\right)\tilde{x}^2. \]
+We aim to show that the coefficient on $\tilde{x}^2$ can be made positive for sufficiently small $p$ and $x$.
+As $p \to 0$, we have $2 \delta_1^2/\delta_2 \to 2$.
+Fix a sufficiently small $\epsilon > 0$, and choose $p_1$ such that if $p \in [0,p_1]$, then $2\delta_1^2/\delta_2 > 1 + \epsilon$.
+Also, we note that $\delta_1 \leq 1/\theta_\L$.  
+It follows from the preceding observations that:
+\[ \left(\frac{1}{\delta_1}\right) \left( \frac{2 \delta_1^2}{\delta_2} - 1\right) > \theta_\L\epsilon. \]
+Thus in particular, if $0 \leq p < p_1$ and $0 < \tilde{x} \leq \theta_\L \epsilon$, then:
+\[ 1 - \left(\delta_1^2 - \left(\frac{1}{2}\right) (1 + \delta_1 x) \delta_2\right)\tilde{x}^2 < 1. \]
+
+To complete the proof, we turn attention to the region where $\tilde{x} > \theta_\L \epsilon$.
+We upper bound \eqref{eq:ratio2} by:
+\begin{equation}
+\label{eq:ratio4}
+ \left( 1 + \frac{\tilde{x}}{\theta_{\L}} \right)
+\left( p \exp \left( -\frac{\tilde{x}}{\theta_{\H}} \right) + (1-p) \exp \left( -\frac{\tilde{x}}{\theta_{\L}} \right) \right).
+\end{equation}
+For $\tilde{x} > \theta_\L \epsilon$, the preceding expression is upper bounded by:
+\begin{equation}
+\label{eq:ratio5}
+ p \Delta_1 + (1 - p)  \Delta_2,
+\end{equation}
+where:
+\[ \Delta_1 = \sup_{\tilde{x} > \theta_\L \epsilon}  \left[ \left( 1 + \frac{\tilde{x}}{\theta_{\L}} \right)  \exp \left( -\frac{\tilde{x}}{\theta_{\H}} \right)\right] < \infty, \]
+and:
+\[ \Delta_2 = \sup_{\tilde{x} > \theta_\L \epsilon}  \left[ \left( 1 + \frac{\tilde{x}}{\theta_{\L}} \right)  \exp \left( -\frac{\tilde{x}}{\theta_{\L}} \right)\right] < 1. \]
+(The latter result follows by standard bounds for the exponential function.)
+Thus there exists $p_2$ such that for $p \in [0,p_2]$, $p \Delta_1 + (1-p)\Delta_2 < 1$.
+
+Defining $p_0 = \min\{ p_1, p_2 \}$, we have shown that as long as $p \in [0,p_0]$, \eqref{eq:ratio} holds for any $x > 0$.
+This establishes that $w^*$ is an optimal response for the worker, and therefore all workers bidding $w^*$ constitutes a symmetric Nash equilibrium.
+\end{proof}
+
+\begin{proof}[Proof of Proposition \ref{prop:noht}]
+Proposition \ref{prop:general_eq} already establishes condition (1) in Definition \ref{def:noht}.
+So we only need to show condition (2) holds.  
+
+To see this, note from \eqref{eq:worker_util} that $U_{\NoHT}(w; w_0, N)$ is decreasing in $N$.
+Therefore, we have for all $w \geq 0$:
+\[ U_{\NoHT}(w ; w^*, R+1) \leq U_{\NoHT}(w ; w^*, R) \leq U_{\NoHT}(w^*; w^*, R), \]
+as required.
+\end{proof}
+
+\begin{proof}[Proof of Proposition \ref{prop:ht}]
+The strategy of our proof is to use \eqref{eq:equal_util} as an equation to solve for $\gamma^*$, then to show that conditions (1)-(9) of Definition \ref{def:ht} hold with the resulting candidate equilibrium.
+
+We start by noting that from conditions (2) and (5) of Definition \ref{def:ht},
+in our desired equilibrium $w_\H^*$ (resp., $w_\L^*$) must be a symmetric equilibrium for a bidding game among $M_\H^*$  (resp., $M_\L^*$) workers applying to a single employer of deterministic type $\theta_\H$ (resp., $\theta_\L$).
+From Corollary \ref{cor:fixed_theta_eq}, this implies \eqref{eq:ht_w_eq}.
+Using the expression for worker surplus in \eqref{eq:fixed_theta_w_eq_surplus}, we can rewrite \eqref{eq:equal_util} as $\theta_\H/(M_\H^*)^2 = \theta_\L/(M_\L^*)^2$.
+If we use the definition in \eqref{eq:ht_M_eq}, \eqref{eq:equal_util} becomes:
+\begin{equation}
+\label{eq:equal_util2}
+\frac{\theta_\H}{(\gamma^*)^2 R^2/\mu^2} = \frac{\theta_\L}{(1-\gamma^*)^2R^2/(1-\mu)^2}.
+\end{equation}
+This equation implies that:
+\begin{equation}
+\label{eq:ratio_of_numapps}
+ \frac{\gamma^*}{1-\gamma^*} = \left( \frac{\mu}{1-\mu}\right) \sqrt{\frac{\theta_\H}{\theta_\L}}.
+\end{equation}
+Solving, we find:
+\[ \gamma^* = \frac{\mu\sqrt{\theta_\H}}{\mu\sqrt{\theta_\H} + (1-\mu)\sqrt{\theta_\L}}. \]
+This is the equilibrium fraction of workers that apply to high type employers.
+Observe that $0 < \gamma^* < 1$.
+
+We now check conditions (1)-(9) of Definition \ref{def:ht}.
+Condition (1) follows from the definition of $M_\H^*$ and $M_\L^*$ in \eqref{eq:ht_M_eq}.
+Next, we consider the workers' optimization.
+Conditions (2) and (5) follow from our choice of $w_\H^*$ and $w_\L^*$ as the equilibrium bids derived in Corollary \ref{cor:fixed_theta_eq}.
+Conditions (3) and (6) follow as in the proof of Proposition \ref{prop:noht}, since $U(w ; w_0, N)$ as given in \eqref{eq:worker_util} is decreasing in $N$.
+Finally, conditions (4) and (7) follow using \eqref{eq:equal_util} together with conditions (3) and (6); e.g., for condition (4) we have:
+\[  \sup_{w \geq 0} U_\L(w ; w_\L^*, M_\L^* + 1) \leq U_{\L}(w_\L^* ; w_\L^*, M_\L^*) = U_{\H}(w_\H^* ; w_\H^*, M_\H^*). \]
+The argument for condition (7) is analogous.
+
+We are left to show conditions (8) and (9).
+First we write out the equilibrium employer surplus explicitly:
+\[ V_\H(M_\H^*, w_\H^*) = \theta_\H \left( 1 - \frac{2}{M_\H^*}\right);\ \ \ V_\L(M_\L^*, w_\L^*) = \theta_\L\left( 1 - \frac{2}{M_\L^*}\right). \]
+These expressions follow from \eqref{eq:employer_util2}  together with the definition of $w_\H^*$ and $w_\L^*$ in \eqref{eq:ht_w_eq}.
+
+On the other hand we also have:
+\[ V_\H(M_\L^*, w_\L^*) = \theta_\H \left( 1 - \frac{1}{M_\L^*}\right) - \frac{\theta_\L}{M_\L^*};\ \ \ V_\L(M_\H^*, w_\H^*) = \theta_\L\left( 1 - \frac{1}{M_\H^*}\right) - \frac{\theta_\H}{M_\H^*}. \]
+
+We show condition (8); the analysis for condition (9) is analogous and is omitted.
+Note from \eqref{eq:ratio_of_numapps} together with \eqref{eq:ht_M_eq} that $M_\H^*/M_\L^* = \sqrt{\theta_\H/\theta_\L}$.
+Using this fact, condition (8) can be reduced to:
+\[ \theta_\H \left( 1 - \frac{2}{M_\H^*}\right) > \theta_\H \left( 1 - \frac{1}{M_\L^*}\right) - \frac{\sqrt{\theta_\H \theta_\L}}{M_\H^*}. \]
+Multiplying through by $M_\H^*/\theta_\H$ and simplifying yields:
+\[ \frac{M_\H^*}{M_\L^*} + \sqrt{\frac{\theta_\L}{\theta_\H}} > 2. \]
+Substituting again using the fact that $M_\H^*/M_\L^* = \sqrt{\theta_\H/\theta_\L}$, we find that condition (8) is equivalent to:
+\[ \sqrt{\frac{\theta_\H}{\theta_\L}} + \sqrt{\frac{\theta_\L}{\theta_\H}} > 2. \]
+To establish the preceding identity, note that for any $y > 0$, $(\sqrt{y} - 1)^2 > 0$, from which it follows that $\sqrt{y} + \sqrt{1/y} > 2$.
+Letting $y = \theta_\H/\theta_\L$ yields the desired result.
+This completes the proof.
+\end{proof}
+
+\begin{proof}[Proof of Proposition \ref{prop:compare_wages}]
+Let $\gamma^*$, $M_H^*$, and $M_L^*$ be defined as in Proposition \ref{prop:ht}.
+It follows that:
+\[ \gamma^* w_H^* + (1- \gamma^*) w_L^* = \frac{\theta_H}{R/\mu} + \frac{\theta_L}{R/(1-\mu)} = \E[\theta]/R. \]
+By Jensen's inequality, we know that $\E[\theta] \geq 1/\E[1/\theta]$.
+Thus we conclude:
+\[ \gamma^* w_H^* + (1- \gamma^*) w_L^* \geq w^*. \]
+Since $w_H^* > w_L^*$ (see Remark \ref{rem:ht_notes}), we conclude that $w_H^* > w^*$.
+
+On the other hand, note that:
+\[ \frac{\mu}{w_H^*} + \frac{1-\mu}{w_L^*} = \frac{\gamma^*R}{\theta_H} + \frac{(1-\gamma^*)R}{\theta_L}. \]
+Remark \ref{rem:ht_notes} shows that $\gamma^* > \mu$.
+Since $1/\theta_H < 1/\theta_L$, we conclude that:
+\[ \frac{\gamma^*R}{\theta_H} + \frac{(1-\gamma^*)R}{\theta_L} < \frac{\mu R}{\theta_H} + \frac{(1-\mu)R}{\theta_L} = \frac{1}{w^*}. \]
+Thus:
+\[ \frac{\mu}{w_H^*} + \frac{1-\mu}{w_L^*} \leq \frac{1}{w^*}.\]
+Since $1/w_L^* > 1/w_H^*$, we conclude that $1/w_L^* > 1/w^*$, or $w^* > w_L^*$, as required.
+\end{proof}
+
+\begin{proof}[Proof of Proposition \ref{prop:compare_welfare}]
+We first consider welfare in the market without \hottowel.
+Here each employer receive $R$ applicants, and the wage bid is $w^*$ as defined in \eqref{eq:noht_eq}.
+Since wages are just a transfer in \eqref{eq:employer_util}, the aggregate welfare is:
+\[ (\mu \theta_H + (1-\mu)\theta_L)\left( 1 - \frac{1}{R}\right). \]
+This is \eqref{eq:noht_aggw}.
+The expression \eqref{eq:ht_aggw} for welfare in the market without \hottowel~follows analogously.  
+
+To show \eqref{eq:welfare_ineq}, it suffices to show that:
+\[ \frac{\mu\theta_H}{M_H^*} + \frac{(1-\mu)\theta_L}{M_L^*} < \frac{\mu \theta_H + (1-\mu)\theta_L}{R}. \]
+Using the definition of $M_H^*$ and $M_L^*$ in \eqref{eq:ht_M_eq}, the previous inequality is equivalent to:
+\[ \frac{\mu^2 \theta_H}{\gamma^*} + \frac{(1-\mu)^2 \theta_L}{1 - \gamma^*} < \mu \theta_H + (1-\mu)\theta_L. \]
+If we substitute the definition of $\gamma^*$ from \eqref{eq:ht_gamma_eq}, then the previous inequality becomes equivalent to:
+\[ ( \mu \sqrt{\theta}_H + (1-\mu) \sqrt{\theta_L})^2 < \mu \theta_H + (1- \mu)\theta_L. \]
+Jensen's inequality implies the preceding inequality, and so we conclude that \eqref{eq:welfare_ineq} holds, as desired.
+\end{proof}
+
+\end{document}

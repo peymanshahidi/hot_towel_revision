@@ -1,0 +1,37 @@
+\section{Model sketch}
+
+There is a continuum of sellers of type $y$ in $[0,1]$ that might choose to participate in a market.
+Sellers have an outside option of $u_0$. 
+There is a continuum of buyers of type $\theta$ in $[0,1]$.
+It costs buyers $k$ to create a vacancy.
+A buyer can only hire a worker they are ``matched''' with according to a constant returns to scale matching function, $m(\cdot,\cdot)$.
+Because it is CRS, all the matters is the market tightness, or the ratio of buyers to sellers. 
+Let $n = n_b / n_s$ and let $m(n_b, n_s) = m(n, 1) n_s$.
+Let $\alpha(n) = m(n,1)$.
+A seller's probability of being matched is thus $\alpha(n)$ and a buyer's probability of matching is $\alpha(n)/n$. 
+
+If matched, the buyer can observe the worker's type and has the right---but not the obligation to---hire the worker at the market wage.
+Buyers can only produce the output if they hire a worker with a type at least as high as their own, i.e., a buyer of type $\theta_j$ is matched with a seller of type $y_i$, the buyer only wants to hire them if $y_i > \theta_j$.
+If they output is produced, they get $v$ but have to pay $w$ in wages. 
+
+An equilibrium is defined by three quantities: a market wage, $w$, the lowest type seller that wants to participate, $y_L$ and the highest type buyer that wants to participate, $\theta_H$.
+There are to individual rationality constraints: the lowest type seller that wants to participate and the highest type buyer that wants to participate.
+For the high-type buyer, call them $\theta_H$, if they form a match, the probability they want to hire the worker is
+\begin{align}
+  Pr\{Hire\} = \frac{1 - \theta_H}{1 - y_L}
+\end{align}
+This is because only those sellers in the range $[\theta_H,1]$ can produce the output for $\theta_H$, but there are $1 - y_L$ sellers. 
+The binding IR constraint for this buyer is thus
+\begin{align}
+  k = \frac{1 - \theta_H}{\theta_H}
+  \alpha\left(\frac{\theta_H}{1-y_L}\right) \left(v - w\right)
+\end{align}
+The finding IR constraint for the marginal seller is
+\begin{align}
+  u_0 = \frac{y_L}{\theta_H} \alpha\left(\frac{\theta_H}{1-y_L}\right) w
+\end{align}
+Combing, we know that in equilibrium: 
+\begin{align}
+  \frac{k}{u_0} = \frac{w-v}{w} \left(\frac{1 - \theta_H}{y_L} \right).
+\end{align}
+But this still seems consistent with lots of equilibria.

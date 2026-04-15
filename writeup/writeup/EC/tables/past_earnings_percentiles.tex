@@ -1,0 +1,47 @@
+
+% Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Jan 01, 2015 - 08:35:12 AM
+\begin{table}[!htbp] \centering 
+  \tbl{The effects of p/q revelation on the past experience of applicants, as measured by cumulative prior earnings  \label{tab:past_earnings_percentiles} }{ 
+\begin{tabular}{@{\extracolsep{5pt}}lccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{5}{c}{Per-opening percentiles of applicant log past earnings} \\ 
+\cline{2-6} 
+\\[-1.8ex] & 25th & 50th & 75th & 90th & 50th (with RE) \\ 
+\\[-1.8ex] & \textit{OLS} & \textit{OLS} & \textit{OLS} & \textit{OLS} & \textit{linear} \\ 
+ & \textit{} & \textit{} & \textit{} & \textit{} & \textit{mixed-effects} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5)\\ 
+\hline \\[-1.8ex] 
+ ShownPref & $-$0.192$^{***}$ & $-$0.191$^{***}$ & $-$0.205$^{***}$ & $-$0.211$^{***}$ & $-$0.168$^{***}$ \\ 
+  & (0.047) & (0.040) & (0.038) & (0.039) & (0.037) \\ 
+  & & & & & \\ 
+ Medium Tier (MT) & 0.730$^{***}$ & 0.688$^{***}$ & 0.614$^{***}$ & 0.543$^{***}$ & 0.419$^{***}$ \\ 
+  & (0.046) & (0.039) & (0.037) & (0.038) & (0.037) \\ 
+  & & & & & \\ 
+ High Tier (HT) & 1.087$^{***}$ & 1.044$^{***}$ & 0.953$^{***}$ & 0.871$^{***}$ & 0.659$^{***}$ \\ 
+  & (0.056) & (0.048) & (0.045) & (0.047) & (0.045) \\ 
+  & & & & & \\ 
+ MT $\times$ ShownPref & 0.255$^{***}$ & 0.243$^{***}$ & 0.248$^{***}$ & 0.250$^{***}$ & 0.202$^{***}$ \\ 
+  & (0.056) & (0.048) & (0.045) & (0.047) & (0.044) \\ 
+  & & & & & \\ 
+ HT $\times$ ShownPref & 0.280$^{***}$ & 0.274$^{***}$ & 0.274$^{***}$ & 0.263$^{***}$ & 0.252$^{***}$ \\ 
+  & (0.068) & (0.058) & (0.055) & (0.057) & (0.054) \\ 
+  & & & & & \\ 
+ Constant & 5.616$^{***}$ & 6.823$^{***}$ & 7.898$^{***}$ & 8.654$^{***}$ & 6.999$^{***}$ \\ 
+  & (0.038) & (0.033) & (0.031) & (0.032) & (0.061) \\ 
+  & & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 23,918 & 23,918 & 23,918 & 23,918 & 23,918 \\ 
+R$^{2}$ & 0.070 & 0.086 & 0.083 & 0.066 &  \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+}
+\centering
+\begin{minipage}{1\linewidth} 
+ \emph{Notes:} This table reports regressions of the various per-opening percentiles of the log cumulative prior earnings of applicants on ShownPref interacted with indicators for the employer's p/q tier selection. All regressions are OLS estimates of a variant of Equation~\ref{eq:pr} (with differing percentiles and earnings substituted for profile wage) except in Column~(5), which reports a regression with a category-specific random-effect to control for the type of work asked for in the opening e.g., computer programming, graphic design etc.
+The sample for each regression consists of job openings assigned to the ambiguous arm of the experiment. \ambigdef
+Workers with zero prior earnings are counter-factually given \$1 in past earnings. Standard errors are robust to heteroscedasticity.  \starlanguage
+ \end{minipage}
+\end{table}

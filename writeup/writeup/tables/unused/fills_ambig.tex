@@ -1,0 +1,44 @@
+
+% Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Wed, Oct 22, 2014 - 09:19:10 AM
+\begin{table}[!htbp] \centering 
+  \caption{Probability that the job is filled, by tier} 
+  \label{tab:fills_ambig} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & I(total\_charge \textgreater  0) \\ 
+\hline \\[-1.8ex] 
+ contractor.shown & $-$0.007 \\ 
+  & (0.016) \\ 
+  & \\ 
+ tierMedium Tier & $-$0.031$^{**}$ \\ 
+  & (0.016) \\ 
+  & \\ 
+ tierHigh Tier & $-$0.084$^{***}$ \\ 
+  & (0.019) \\ 
+  & \\ 
+ contractor.shownTRUE:tierMedium Tier & 0.004 \\ 
+  & (0.019) \\ 
+  & \\ 
+ contractor.shownTRUE:tierHigh Tier & 0.0001 \\ 
+  & (0.023) \\ 
+  & \\ 
+ Constant & 0.394$^{***}$ \\ 
+  & (0.013) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 16,993 \\ 
+R$^{2}$ & 0.004 \\ 
+Adjusted R$^{2}$ & 0.003 \\ 
+Residual Std. Error & 0.478 (df = 16987) \\ 
+F Statistic & 11.941$^{***}$ (df = 5; 16987) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+\begin{minipage}{0.9\linewidth} 
+ \emph{Notes:} Here are some notes
+ \end{minipage}
+\end{table}

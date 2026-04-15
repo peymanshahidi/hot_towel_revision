@@ -1,0 +1,23 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Calls:
+% (1) HT:  lm(formula = mlpr ~ contractor_shown, data = subset(df.openings, ambigious_arm & HT)) 
+% (2) LT:  lm(formula = mlpr ~ contractor_shown, data = subset(df.openings, ambigious_arm & LT)) 
+% (3) HT:  lm(formula = mlpr ~ contractor_shown, data = subset(df.openings, HT)) 
+% (4) LT:  lm(formula = mlpr ~ contractor_shown, data = subset(df.openings, LT)) 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+&& \multicolumn{5}{c}{Mean of mean log profile wage of applicants:} \\ 
+ \begin{tabular}{lcD{.}{.}{7}cD{.}{.}{7}cD{.}{.}{7}cD{.}{.}{7}}
+\toprule
+&&\multicolumn{1}{c}{(1) HT} && \multicolumn{1}{c}{(2) LT} && \multicolumn{1}{c}{(3) HT} && \multicolumn{1}{c}{(4) LT}\\
+\midrule
+(Intercept)          &  &  3.247^{***} &&  2.968^{***} &&  3.357^{***} &&  2.991^{***}\\
+                     &  &  (0.162)     &&  (0.110)     &&  (0.073)     &&  (0.078)    \\
+Employer pref. shown &  &   0.034      &&  -0.057      &&  -0.064      &&  -0.112     \\
+                     &  &  (0.202)     &&  (0.140)     &&  (0.100)     &&  (0.108)    \\
+\midrule
+R-squared            &  &     0.000    &&     0.002    &&     0.002    &&     0.004   \\
+N                    &  &    90        &&   102        &&   269        &&   257       \\
+\bottomrule
+\end{tabular}

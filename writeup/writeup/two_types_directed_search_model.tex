@@ -1,0 +1,318 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{commath} 
+\usepackage{dcolumn}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{setspace} 
+\usepackage{subcaption}
+\usepackage{dsfont}
+
+\newcommand{\Lsm}{$\mathcal{L}$}
+\newcommand{\Hsm}{$\mathcal{H}$}
+
+\begin{document}
+
+\section{Model}
+
+\subsection{Motivation}
+The experimental intervention only makes sense in market with substantial search frictions---if the two sides could easily find the counter-party of their choice, no additional effort to help direct search would be needed.
+
+In the directed search literature, by making \emph{ex ante} commitments and announcements, buyers/workers can direct their search.
+There are still matching frictions, but they happen ``later'' after parties have used ex ante information (like announced prices) to decide where to search.
+In the directed search literature, there is often the notion of sub-markets (say all buyers announcing a given price that they are willing to pay), with sellers then joining sub-markets in response to these announcements, weighing off the price they will pay with their matching probability.
+In these models, these sub-markets are often conjured only to show they will not actuall exist---in the sense that the big so-what is that that separate sub-markets cannot exist in equilibrium (and hence price dispersion cannot exist in equilibrium). 
+
+Our situation is different from the rest of the literature, in that sub-markets existing in equilibrium.  
+The reason we might try to induce these sub-markets is to improve something about matching. 
+By creating sub-markets, we potentially thin out the markets and reduce the total quantity of ``meetings,'' but at the benefit that both sides are more likely to find a suitable counter-party.
+Assuming there are gains from creating sub-markets, there is next the question of whether that separation can actually be implemented.
+In particular, we need to check whether all workers and firms will find it incentive compatible to participate in ``their'' sub-market. 
+
+\subsection{Worker and firm types}
+Consider a labor market with types of workers, H and L, with the fraction of H-type workers being $g$ (think ``g'' for ``good'').
+There are also two types of firms, H and L, with the fraction of H-type firm being $p$ (think ``p'' for ``picky'').
+The market is balanced in the sense that there is a unit measure of both firms and workers. 
+
+\subsection{Production} 
+Firms need to hire a single worker to produce the output.
+To produce the output, firms need workers that is their type or higher:
+an L-type firm can produce the output with an L-type worker or an H-type worker, but an H-type firm needs an H-type worker.
+The value of the output for an L-type firm is $v_L$ and for an H-type firm, $v_H$, with $v_H > v_L$.
+It is costless for the worker to produce the output, but the firm does have to pay wages. 
+For now, we will set aside how wages are determined---and hence pay-offs are determined---and simply state wages exist.
+
+\subsection{Meetings and hiring}
+Neither the firm nor the worker can directly find the counter-party of the compatible type.
+They first have to ``meet'' according to a balanced constant returns to scale matching function, $m(n_b, n_s) = \mu \sqrt{n_b n_s}$, that operates at the level of the market.
+If a firm and a worker meet, the firm observes the worker's type and decides whether to hire the worker at their proposed wage.
+We use the term ``meet'' rather than ``match'' to emphasize that the matching function only returns the \emph{opportunity} to hire, rather than a hire.
+Hiring is a two-step process---first the firm and worker need to meet, then the firm needs to decide they want to hire that worker they met.
+
+With all workers and firms participating in the market---which we call the ``pooled'' market---the number of meetings that occur is $m(1,1) = \mu$, but the number of hires is only
+\begin{align*}
+\mbox{Hires} = \left( pg + (1 - p) \right)\mu.
+\end{align*}
+Among the meetings, the number of hires is comprised of (a) the picky firms that happen to meet with good workers ($pg$) and (b) the non-picky firms, who hire anyone they meet with ($1-p$).
+To emphasize, not all meetings lead to a hire---when H-type firms meets with L-type workers, they decide not hire.
+The hires that do no occur are the $(1-g)p$.
+The total surplus from the pooled market is 
+\begin{align}
+  S = \left(v_H pg + v_L (1 - p) \right)\mu.
+\end{align}
+
+Aside from the hires that do not occurr, another defect of this pooled equilibrium is some hires are of poor ``quality.''
+In particular, there are H-type workers hired by L-type firms.
+This is better than no hire at all, but it is not as good as if those H-type workers could have met with H-type firms. 
+
+%Let $w_L$ be the wage paid by L-type employers and $w_H$ be the wage paid by H-type employers.
+%If there is a single market-clearing wage, then $w_L = w_H$.
+%If there is bargaining, then we could have, even in the decentralized equilibrium, different wages (e.g., $w_L = \frac{1}{2} v_L$ and $w_H = \frac{1}{2} w_H$). 
+
+%% \subsection{Wages} 
+%% It is costless for both sides to participate in the matching market, but firms have to pay a cost $k$ to hire.
+%% Firms tell an auctioneer the most they would be willing to pay to hire a worker that can produce the output.
+%% The market wage is the lowest bid submitted and prevails for all relationships.
+%% This is $v_L - k$.
+
+\subsection{Enabling directed search by creating sub-markets}
+Now consider a market structure where the auctioneer can separate firms and workers into two sub-markets, \Lsm{} and \Hsm{}.
+Meetings also occurr within these sub-markets according to the same matching function. 
+The equilibrium we are interested in is a pure equilibrium where all market participants go to the market of their type:
+we have an \Lsm{} sub-market where all the firms and workers are L-types and an \Hsm{} sub-market where all the firms and workers are H-types.
+
+\verb+JJH: What would happen if we allowed mixed strategies?+
+
+The benefit of this separation is that all meetings lead to a hire and the hires are of the best possible quality:
+sorting firms and workers never meet with a counter-party that is not their type.
+The downside of this sorting is that there are fewer meetings---and hence chances to hire---except in the edge case of perfect balance (i.e., $p = g$). 
+The reason for the loss in meetings is that:
+\begin{align*}
+  m(1,1) \ge m(p,g) + m(1-p, 1-g). 
+\end{align*}
+
+The market designer trade-off is fairly straightforward:
+by creating sub-markets, we almost certainly reduce the number of meetings, but we might increase the number and quality of hires.
+If we expect firms and workers to sort into the right sub-market, we have to consider incentive compatibility.
+Will firms and workers try to go the right market for their type?
+
+\subsection{Worker incentive compatibility}
+On the worker side, first note that we do no need to worry about incentive compatibility for the L-type worker.
+They would never want to choose the \Hsm{} sub-market---if they happen to get a meeting, they will be revealed as an L-type to the H-type firm, which will not hire them.
+The case to consider is the H-type worker. 
+
+In the \Hsm{} sub-market, there will be $m(p,g)$ meetings, and so an H-type worker's probability of being hired is $m(p,g)/g$.
+In the \Lsm{} sub-market, there will be $m(1 - p, 1 - g)$ meetings, and so the H-type worker's probability of being hired if they switch to the \Lsm{} sub-market is $m(1-p,1-g)/(1-g)$.
+As such, for the H-type worker, incentive compatibility requires that 
+\begin{align*}
+  \frac{m(p,g)}{g} w_\mathcal{H} \ge \frac{m(1 - p, 1 - g)}{1 - g}w_\mathcal{L}.
+\end{align*}
+
+From this formula, we can gain some intuition for the comparative statics of the equilibrium. 
+For a given $p$, as the number of other H-type workers increases (higher $g$), the \Hsm{} market becomes less attractive.
+The problem from a H-type worker's perspective is that although more H-type workers increase the total number of meetings, those meetings are split over a larger pool of workers, and so meeting/hiring probability goes down, as $\frac{\partial}{\partial g}[\frac{m(p,g)}{g}] < 0$.
+%For the same reason, a higher $g$ makes the L market relatively more attractive to the H worker. 
+For a given $g$, more picky firms (higher $p$) makes the \Hsm{} market more attractive to an H-type worker---there are more meetings but they still split over the same fixed number of H-type workers.
+Unsurprisingly, all else equal, the higher the wage in \Hsm{} sub-market and the lower the wage in \Lsm{} sub-market, the more attractive the H sub-market is to H-type workers. 
+
+The incentive compatibility constraint for the H-type worker binds for a $\hat{p}_S$ (think ``S'' for supply-side) when
+\begin{align*}
+  \hat{p}_S = \frac{1}{\left(\frac{1}{g} - 1\right) \left(\frac{w_H}{w_L}\right)^2 + 1}.
+\end{align*}
+With $g$ is higher (more H-workers), more H-type firms are needed to keep the H-type worker indifferent: $\frac{\partial \hat{p}}{\partial g} > 0$. 
+If wages in the H sub-market are higher than the L sub-market, then a relatively worse meeting probability can keep the H-type worker indifferent: $\frac{\partial \hat{p}}{\partial (w_H/w_L)} < 0$.  
+
+\subsection{Firm incentive compatibility}
+Mirroring the worker case, on the firm side, we only have to consider one firm type---the L-type firm. 
+L-type firms can produce the output with either kind of worker, whereas the H-type firms are not interested in the \Lsm{} sub-market, as they do not want to hire any worker they would meet with.
+
+Let $\pi_{\mathcal{L}|L} = v_L - w_{\mathcal{L}}$ be a L-type firm's profits from hiring in the \Lsm{} sub-market and paying $w_\mathcal{L}$ in wages. 
+If they instead join the \Hsm{} sub-market, their profit would be $\pi_{\mathcal{H}|L} = v_L - w_{\mathcal{H}}$. 
+
+In the \Hsm{} sub-market, there will be $m(p, g)$ meetings, and so a firm's probability of hiring is $m(p, g)/p$.
+In the \Lsm{} sub-market, there will be $m(1 - p, 1 - g)$ meetings, and so the firm's probability of hiring is $m(1 - p, 1 - g)/(1 - p)$.
+For the L-type firm, incentive compatibility requires that 
+\begin{align*}
+  \frac{m(1 - p, 1 - g)}{1 - p} \pi_{\mathcal{L}|L} \ge \frac{m(p, g)}{p} \pi_{\mathcal{H}|L}
+\end{align*}
+The incentive compatibility constraint binds for a $\hat{p}_D$ (think ``D'' for demand-side), given $g$ when
+\begin{align*}
+ \hat{p}_D = \frac{1}{\left(\frac{1}{g} - 1\right) \left(\frac{ \pi_{\mathcal{L}|L}}{\pi_{\mathcal{H}|L}} \right)^2 + 1}.
+\end{align*}
+
+For the L-type firm, they only get $v_L$ regardless of which worker they hire, but they have to pay higher wages in the \Hsm{} sub-market.
+As such, $\pi_{\mathcal{L}|L} > \pi_{\mathcal{H}|L}$.
+Thus for the L-type firm to entertain switching, it is has to be because the \Hsm{} offers a higher probability of meeting a worker. 
+If there is no difference in wages across the two sub-markets $(\pi_H = \pi_L)$, in which case $\hat{p} = g$, and for a separating equilibrium to be possible, $p > g$.
+Without any cost savings, the L-type firm has to find the \Hsm{} sub-market as unattractive because it offers a low meeting probability---which in turn is the result of lots of other firms in \Hsm{} and relatively few workers.  
+
+\subsection{Which constraint binds?}
+
+There are two incentive compatibility constraints with similar structures.
+For a given $g$, there are two threshold picky firm fractions---$\hat{p}_D$ and $\hat{p}_S$ needed to support a separating equilibrium.
+We are interested in $\max\{\hat{p}_D, \hat{p}_S\}$.
+
+Two ratios matter for determining which incentive compatibility constraint matters---$\pi_L / \pi_H$ and $w_H / w_L$.
+The smaller ratio is the one that determines the binding constraint. 
+If $\pi_L / \pi_H > w_H / w_L$, then $w_H / w_L$ determines the $\hat{p}$ and it is L-type worker we have to consider.
+
+Let the ratio of wages be $r = w_H / w_L$ and let the ratio of L-type firm value to L sub-market wage be $s_L = v_L/w_L$.
+The profit ratio is greater than the wage ratio when 
+\begin{align*}
+  \frac{\pi_L}{\pi_H} & = \frac{v_L - w_L}{v_L - w_H} > \frac{w_H}{w_L} \\
+                      &  = \frac{v_L/w_L - 1}{v_L/w_L - w_H/w_L} > \frac{w_H}{w_L} \\
+                      & =  \frac{s_L - 1}{s_L - r} > r.
+\end{align*}
+If $s_L < 2$, this holds when  $s_L > r$.
+If $s > 2$, then it holds if $s_L > r$ and $s_L < r + 1$.
+
+If $w_L$ is a really small share of $v_L$, making $s_L$ it is going to be an even smaller share of $v_H$.
+
+What if Nash bargaining?
+In this case, $w_L = \frac{1}{2} v_L$ and  $w_H = \frac{1}{2} v_H$.
+\begin{align*} 
+  \frac{\pi_L}{\pi_H} & = \frac{v_L - w_L}{v_L - w_H} > \frac{w_H}{w_L} \\
+  & = \frac{v_L}{2 v_L - v_H}     > \frac{v_H}{v_L} \\
+  & = \frac{1}{2  - r}   >  r
+\end{align*}
+Which is true if $r > 1$. 
+
+\subsection{Social welfare from creating sub-markets}
+The social surplus with two sub-markets is
+\begin{align*}
+ S = v_H m(p,g) + v_L m(1-p, 1 - g)
+\end{align*}
+and so the sub-market approach is more efficient than the pooled equilibrium when:
+\begin{align*}
+  \Delta S = v_H \left(m(p,g) - pg \mu  \right)  + v_L \left( m(1 - p, 1 - g) - (1 - p) \mu \right) > 0.
+\end{align*}
+
+Note that as both $p < 1$ and $g < 1$, $\frac{1}{\mu} m(p,g) > pg$, and so we always have more high-type \emph{hires} from creating sub-markets. 
+As we might intuit, all else equal, a greater social value from creating H-type hires recommends market-splitting. 
+
+Although H-type hires always increase, the effects on the number of low-type hires is ambiguous. 
+There are more low-type matches with a sub-market when $\frac{1}{\mu} m(1 - p, 1 - g) - (1 - p) > 0$.
+This is the case when $g < p$, i.e., when there are relatively more picky firms than H-type workers.
+In this case, market-splitting is kind of a free lunch---we get more hires of both kinds. 
+The intuition is that when there are lots of picky firms and not many H type workers, many of the ``matches'' in the pooled market led to non-hires: picky firms paired with not-good workers do not hire, and so the compensatory H-worker/L-firm matches do not occur, as is the case when the good workers are the short side of the pooled market.  
+By creating sub-markets when there are lots of picky firms, otherwise matched but un-hired L-type workers are hired. 
+
+If $g > p$, the welfare case for splitting into sub-markets is less straight-forward---the increase in $v_H$ has to weighed against the loss from fewer $v_L$ matches.
+However, it is ``hard'' for $g > p$ but still have incentive compatibility unless there are large wage/profit differences---the problem is when $g$ exceeds $p$---lots of good workers and not many picky firms---the \Hsm{} has a low hire probability for H-type workers and so unless wages in \Lsm{} are really low, or wages in \Hsm{} are really high, the marginal H-type worker is inclined to defect.
+Similarly, when $g > p$, for the L-type firm, jumping to the \Hsm{} sub-market is tempting because it offers a high hire probability so unless \Hsm{} wages are really high or \Lsm{} wages are low, incentive compatibility is hard.  
+
+\subsection{Wage bids}
+
+\paragraph{Assumig TIOLI offers} 
+Consistent with our empirical context, we assume that workers have to propose wages \emph{ex ante} and that these offers are TIOLI.
+In the pooled market, an L-type worker knows that if they meet an H-type firm, they will not be hired, and so they only need to consider the effect of their wage offer when they meet an L-type firm.
+Given that hires can only happen with a meeting, the L-type worker knows they can extract the full surplus and so they bid $w_L = v_L$.
+
+For an H-type worker, the situation is more complex, as they can potentially be hired by both kinds of firms. 
+As they can meet with a L-type firm, if they want to be hired, they have to bid no more than $v_L$.
+But this is a very low bid when paired with an H-type firm---the worker could bid upto $v_H$ and still be hired.
+In the pooled market, a worker meets a H-type firm with probability $p$. 
+In the pooled equilibrium, an risk-neutral worker will bid $v_H$ if $p v_H > v_L$ and $v_L$ otherwise. 
+If workers differ in their risk-aversion, we might see some fraction choosing $w = v_H$ and some fraction choosing $v_L$.
+
+If $p < v_L / v_H$, then there is a single market-clearing wage, $v_L$.
+
+If $p > v_L / v_H$, then the average wage is $pg v_H + (1-p)(1- g)v_L$.
+Note that we get fewer hires, as now H-type worker / L-type employer pairings do not go through. 
+
+\paragraph{Conditional TIOLI offers} 
+If workers can condition offers at time of meeting, then we get $w = v_L$ when matched with L-type firms and $w = v_H$ when matched with H-type firms. 
+
+\subsection{Full information Nash bargaining}
+If workers Nash bargain, they split the surplus, and so it looks like the conditional TIOLI offers. 
+
+\subsection{Incomplete information Nash bargaining}
+If workers Nash bargain but do not know the firm's type, we should probably see H-type workers agreeing to some wage $w$ that both H-type and L-type firms would accept but with the firm getting a relatively better deal with L-type firms e.g, $\frac{1}{2} v_L < w < \frac{1}{2}v_H$.
+I.e., the H-type workers shades up 
+
+\verb+Myerson and others have stuff on Nash bargaining with incomplete info - not sure what it predicts.+
+
+\subsection{What about with sub-markets?}
+Even if TIOLI offers, the H-type workers can now bid $w_H$, as they know they will get paired with H-type firms.
+There is also no uncertainty about types, so the Nash bargaining also looks different.
+
+%% \paragraph{Wages}
+%% One possibility that workers must pre-commit to an hourly wage.
+%% If it was a TIOLI offer, in the decentralized, pooled equilibrium, an L-type worker would just bid $v_L$.
+%% An L-type firm would just accept it, and an H-type firm would not hire them at any offer anyway.
+%% The H-type worker has to make a choice:
+%% they can bid $w_L$, ensuring they get hired by either kind of firm they get matched with, or they can bid $v_H$, eschewing L-type matches.
+
+%% Another way to model wages if to assume their is Nash bargaining, in which case L-firms pay $w_L = \frac{1}{2} v_L$ and H-type firms pay $w_H = \frac{1}{2} v_H$.
+%% A question, however, is whether workers know what kind of firm they are paired with---an H-type worker doesn't know if they will produce $v_L$ or $v_H$ for the employer. 
+
+\subsection{Equilibrium preference?}
+
+\paragraph{Firms}
+A H type firm in the single market hired with probability $g$.
+They paid $w_L$.
+With sub-markets, they not pay $w_H$ and they hire with probability $m(p,g)/p$.
+The sub-market hire rate is greater than the pooled hire rate when
+\begin{align}
+  \frac{m(p,g)}{p} > g,
+\end{align}
+which holds when $\frac{1}{p} > g$, but since $p < 1$ and $g < 1$, this is always the case.
+So the high-type matching probability always increases. 
+The question for H type firms then becomes whether the higher matching probability is ``worth'' the lower profits. 
+
+For the L type firm, they were willing to hire anyone they matched with, and so the hire probability was $1$.
+Now, it is $\frac{m(1 - p, 1 - g)}{1 - p}$ which, with a CRS matching function, is always lower except when the market is perfectly balanced $p = g$.
+They still pay $w_L$, so they are unambiguously made worse-off.
+
+\paragraph{Workers}
+
+L type workers have a higher probability of being hired in the sub-market, as they will not get paired with H firms that will not hire them.
+\begin{align}
+  \frac{m(1 - p, 1 - g)}{1 - g} > \mu (1 - p)
+\end{align}
+
+H type workers were alwars hired.
+d
+
+% Mathematica: Reduce[m[1 - p, 1 - g]/(1 - g) > (1 - p) && p > 0 && p < 1 && g > 0 && g < 1]
+
+\subsection{Social planner solution}
+
+\begin{enumerate}
+\item Put all the picky firms in the \Hsm{}
+\item Add good workers to the \Hsm{} market until total surplus is maximized 
+\end{enumerate} 
+
+\begin{align}
+  \max_{0 < g* < g} v_H m(p, g^*) + v_L m(1 - p, 1 -  g^*) 
+\end{align}
+
+The optimal
+\begin{align}
+  g^* = \frac{1}{\left(\frac{v_L}{v_H}\right)^2 \left(\frac{1}{p} - 1\right) + 1}
+\end{align}
+
+If a social planner could direct workers, it would pair H-type firms with H-type workers until it ran out.
+If it ran out of H-type workers first ($p > g$), then the social pay-off would be
+\begin{align}
+  v_H g + v_L (1 - p)
+\end{align}
+
+If it ran out of H-type firms first ($g > p$), then the social pay-off would be
+\begin{align}
+  v_H p + v_L (1 - g)
+\end{align}
+or
+\begin{align}
+ S = v_H \min\{p, g\} + v_L \max\{1-p,1-g\}
+\end{align}
+
+
+
+\end{document}
+

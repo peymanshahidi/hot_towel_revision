@@ -1,0 +1,1441 @@
+\documentclass[prodmode,acmec]{ec-acmsmall}
+
+\usepackage{booktabs}
+\usepackage{dcolumn} 
+\usepackage{epstopdf}
+%\usepackage{fourier}
+%\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{longtable} 
+\usepackage[numbers]{natbib}
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{amsmath} 
+\usepackage{color} 
+\usepackage{setspace} 
+
+%\usepackage{amsthm,amssymb,amsmath}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+%\usepackage{fullpage}
+
+\renewcommand{\H}{\ensuremath{\mathsf{H}}}
+\renewcommand{\L}{\ensuremath{\mathsf{L}}}
+\newcommand{\poiss}{\ensuremath{\mathsf{Poisson}}}
+
+%\newtheorem{lemma}{Lemma}
+\newtheorem{prop}{Proposition}
+
+\newcommand{\hottowel}{P/Q-signaling}
+
+% use for version with colored claims 
+%\newcommand{\important}[1]{\textcolor{blue}{\textbf{#1}}}
+%\newcommand{\quantclaim}[1]{\textcolor{red}{\textbf{#1}}}
+
+\newcommand{\important}[1]{#1}
+\newcommand{\quantclaim}[1]{#1}
+
+\newcommand{\starlanguage}{Significance indicators: $\dagger$:$p < 0.10$, $*$:$p < 0.05$, $**$:$p < 0.01$, $***$:$p \le 0.001$.}
+\newcommand{\tierdef}{See Figure~\ref{fig:tradeOff} for p/q tier definitions.\,} 
+\newcommand{\shownprefdef}{If $\mbox{ShownPref} = 1$, would-be applicants could observe the employer's price/quality preference before applying, otherwise they could not.\,}
+\newcommand{\ambigdef}{Employers in the ambiguous arm were told that the platform \emph{might} reveal their preferences to workers; whether workers were shown employer price/quality preferences was randomly determined ex post.\,}
+\newcommand{\explicitdef}{Employers in the two-cell explicit arm were told ex ante that the platform would reveal (ShownPref = 1) or would not reveal (ShownPref = 0) their price/quality preferences to workers.\,}
+\newcommand{\threefacetdesc}{ShowPref is on the x-axis, the outcome is on the y-axis and p/q selection determines the facets. Each facet contains a label with the percentage change in the outcome variable caused by preference revelation.\,}
+\newtheorem{hyp}{Hypotheses}
+
+% Metadata Information
+\acmVolume{X}
+\acmNumber{X}
+\acmArticle{X}
+\acmYear{2015}
+\acmMonth{2}
+
+
+\begin{document} 
+
+% Page heads
+\markboth{J.~J.~Horton and R.~Johari}{At What Quality and What Price?: Eliciting Buyer Preferences as a Market Design Problem}
+
+% Title portion
+\title{At What Quality and What Price?:\\Eliciting Buyer Preferences as a Market Design Problem}
+\author{
+JOHN J. HORTON
+\affil{Leonard N. Stern School of Business, New York University}
+RAMESH JOHARI
+\affil{Stanford University}
+}
+
+\begin{abstract}
+  \noindent  Buyers and sellers in markets often signal to inform the other side about their preferences.
+  Both have a mutual incentive to reveal information with respect to horizontal differentiation, but the case of vertical differentiation is more complex:
+  a buyer claiming they place a high value on quality may attract more sellers of the right ``type'' increasing efficiency, but they might also simply pay a higher price.
+  Although an efficiency-minded social planner may not care about higher prices, if this fear prevents a buyer from stating his of her true preferences, then desirable sorting caused by information-revelation may be unattainable.
+  In this paper, we consider the buyer's vertical differentiation disclosure problem through the lens of a large field experiment conducted in an online labor market. 
+  A new signaling mechanism was introduced into the market that allowed buyers to state their relative preferences over price and quality.
+  We find that the buyer signal improved seller-side sorting, with more sellers going to buyers of the right ``type''; the total number of applications also fell.
+  However, sellers also clearly tailored their wages bid to the type of buyer they faced.
+  Despite this markup, buyers chose to honestly disclose their preferences, suggesting they found the sorting effect to dominate the bargaining power effect.
+\end{abstract} 
+
+\category{J4}{Social and Behavioral Sciences}{Economics}
+%\category{C78}{?}{?}[?]
+%\category{D80}{?}{?}[?]
+%\category{J44}{?}{?}[?]
+
+%% \terms{?????? Algorithms; Design; Documentation; Economics; Experimentation; Human factors; Languages; Legal aspects; Management; Measurement; Performance; Reliability; Security; Standardization; Theory; Verification;
+%% }
+
+\terms{Economics; Experimentation} 
+\keywords{signaling, matching, market design}
+
+\acmformat{John J. Horton and Ramesh Johari, 2015. At What Quality and What Price?: Eliciting Buyer Preferences as a Market Design Problem}
+
+\begin{bottomstuff}
+Author contact information, data sets and code are currently or will
+be available at \href{http://www.john-joseph-horton.com/}{http://www.john-joseph-horton.com/}.
+
+This work was carried out in part while the authors were employed by oDesk Corporation.
+\end{bottomstuff}
+
+\maketitle
+
+%\doublespacing
+
+\section{Introduction}
+
+In labor markets, employers recognize that signals about their preferences will affect the set of sellers that could be potential partners in trade.
+For example, the most basic form of signaling is a job posting:
+a firm looking for a software engineer will likely attract applicants with software engineering experience.
+This form of signaling is related to {\em horizontal differentiation} in the preferences of buyers:
+e.g., some employers want software engineers, and others want accountants.
+Conveying preferences relating to horizontal differentiation is straightforward and lacks much strategic consideration:
+a firm looking to hire a software engineer has no incentive to say they are looking for an accountant.
+The would-be job applicants and the employer essentially have aligned incentives.
+
+By contrast, conveying preferences related to {\em vertical} differentiation---differences in quality---gives rise to complex incentives.
+Nominally, if an employer declares they are willing to pay for the highest skilled talent, reasoning similar to the previous paragraph suggests they would attract only high quality workers to their job openings.
+Of course, there is a serious countervailing force:
+if an employer has stated that they have a high willingness to pay, but are unable to perfectly ascertain quality, they might find themselves looking at applicants of the same quality as before, but now at a higher price.
+At the other end of the market, employers who are quite price sensitive might find that they receive a cheap but adversely selected pool of applicants if they openly declare their preferences.
+Faced with this conundrum, employers might counterfactually claim ``average'' tastes in quality, regardless of their true preferences.
+
+This pooling equilibrium is unwelcome because it likely leads to worse matches: 
+employers have a more heterogeneous pool of would-be applicants than they would like. 
+Giving them a pool of applicants that they would prefer more is socially attractive, even if it also means employers may end up with a relatively worse deal in negotiations (conditional on matching).
+From the perspective of the market, efficiency is driven by increasing the quality and quantity of matches.
+Changes that lead to buyers getting a relatively worse deal when they do match---but only because they have to pay higher wages---might be very attractive if objectively more and better matches were formed.
+However, due to the competing incentives described above, and despite the potential welfare benefits, in practice honest information disclosure cannot be easily compelled in the labor market.
+
+In this paper we study whether employers would {\em endogeneously} choose to signal their true price and quality preferences to the other side of the market, despite the potential adverse consequences.
+We consider a market intervention in which buyers in an online labor market were forced to make a claim about their relative preference over price and quality. 
+When posting a job, buyers were asked for the desired experience level of applicants.
+They were forced to select from one of three ``tiers'': 
+\begin{itemize}
+\item Entry level: ``I am looking for workers with the lowest rates.''
+\item Intermediate: ``I am looking for a mix of experience and value.''
+\item Expert: ``I am willing to pay higher rates of the most experienced workers.''
+\end{itemize} 
+The experimental design consisted of five experimental groups, split between two experimental arms.
+In two of the groups, which comprise the ``explicit'' arm, employers were explicitly informed ex ante that their price/quality choice would, or would not, be revealed to the workers as part of the job posting, respectively.
+
+In the remaining three groups, which comprise the ``ambiguous'' arm, employers were not provided any information ex ante as to whether their tier selection would be disclosed.
+As such, all price/quality tier choices can be treated as exogeneous.
+In the first of these cells, applicants were not informed of the employer's p/q choice;
+in the other cells, applicants were informed of the p/q choice when they applied.
+This variation allows us to test how the disclosure of the p/q choice affected applicant behavior, both in terms of what jobs they applied to and how they bid. 
+This design allowed us to cleanly distinguish how employer behavior was affected by the interaction of tier choice and information disclosure condition, as well as to study how the composition and behavior of applicants was affected as a result.
+
+Within the cells where p/q choices were revealed, there was an additional variation in whether the {\em employer} learned ex post about whether their p/q choice was revealed.
+The intent of this design was to test whether employers knowledge about what the workers' knew affected employers' screening behavior, and ultimately how this knowledge affected match outcomes.
+
+The experimental intervention studied in this paper is novel on several important dimensions.
+First, it is the first experimental introduction of a signal for employers rather than workers. 
+Second, the signal was about vertical rather than horizontal differentiation. 
+Finally, because of the unique design of the ambiguous arm---namely the probabilistic revelation of the price/quality tier---the design allows characterization of how much sorting happens based on what is presently observable, and how much more sorting can be induced through signaling.
+As a consequence this experimental design gives insights that a simpler design would not have permitted. 
+
+Our main insights are as follows.
+\begin{enumerate}
+\item {\em Employers sort based on price-quality preference.}
+Given the choices, we might expect that if downsides of preference signaling dominated any applicant set compositional benefit, they would ``pool'' into the middle tier.
+However, this does not occur:
+the data reveals strong evidence of employer sorting into tiers, regardless of whether or not the applicants learned the employer's choice.
+\item {\em Applicants sort in response to tier choices of employers.}
+We find that when the signal of tier choice is disclosed to applicants, they sort into the different tiers accordingly.
+In particular, based on both the profile rate (the wage posted on the applicant's profile) as well as their earnings on past jobs, applicants sort into the different tiers based on the declaration of the client.
+\item {\em Applicants change their bidding behavior upon learning of the employers' choices of tier.}
+We might expect that employers sort because the fears they might hold about markups or adverse selection in response to information disclosure are unfounded; in fact, we find these fears are well justified.  We find that workers do adjust their bids in response to the tier choice of the client, with workers marking up their bids significantly in the high tier and down in the low tier.  
+\end{enumerate}
+
+It is worth noting that job postings already contain some signal about the employer's relative preference on price and quality.  In particular, empirically we find that even when information is not disclosed to workers, there is still partial sorting in the marketplace.  From our perspective, the interesting phenomenon is that the introduction of an explicit feature to enable signaling provides significant additional information (and hence sorting) in the marketplace.
+This suggests that such information disclosure mechanisms are powerful market design tools at the disposal of the platform operator.
+
+Taken together, these empirical observations pose an interesting puzzle: why is it that employers are endogenously choosing to sort, despite the fact that (if they are looking for more highly skilled workers) they face price markups?
+To help shed light on this issue, we build a simple model of the marketplace; for simplicity of presentation, we consider only two employer tiers (``high'' and ``low'') and two worker quality levels (``high'' and ``low'').
+Our analysis suggests three factors work together to yield the empirical results we observe.  First, similar to \cite{tadelis2011information}, employers are likely horizontally differentiated in their quality preferences over workers: in particular, for high type employers, it is unlikely that low type workers would be desirable, regardless of their wage bid.
+Second, relatively speaking, high type employers and high type workers are scarce in the market, compared to the low type employers and low type workers respectively.
+Finally, it is likely that focusing only on high type employers and workers, the high type workers are in short supply relatively to demand for them---a common feature of the high end of the labor market.
+
+In such an environment, without an explicit signal about an employer's price-quality tradeoff, high type workers are likely to find it desirable to make themselves attractive even to a potential low type employer (since these employers dominate the marketplace), by bidding down to compete with the low type workers.
+On the other hand, once we introduce the ability to signal a price-quality preference, in a fully separating equilibrium high type workers can in principle bid higher when they apply to high type employers.
+The only catch is that bidding higher will become unprofitable if competition from {\em other} high type workers is too strong;
+but this is mitigated if high type workers are in relative short supply compared to high type employers.
+Finally, high type employers find it preferable to truthfully declare their preference even despite the loss in wage negotiating power, because the applicant set is much higher quality:
+if they instead misdeclare their tier, they are unlikely to get any acceptable applicants.
+
+The remainder of the paper is organized as follows.
+In Section \ref{sec:empirical_context}, we provide context for the online labor market setting of the experiment we study.
+In Section \ref{sec:exp_design}, we outline the experimental design.
+
+Next, in Section \ref{sec:emp_pref}, we describe our first key finding: that employers sort using the ability to signal their preference over price and quality. 
+We find strong evidence that employers sort; this preference shows strong variation both within and across categories of work.
+Overall we find that employers do not alter their declaration when they know that their choice will be revealed to would-be applicants: 
+this suggests their declarations of price-quality preference are honest.
+When considering interactions with experience, we do find weak evidence that more experienced employers shade their choice of tier slightly to the middle tier (which might be reasonably considered the default ``pooling'' option).
+
+In Section \ref{sec:composition}, we study how the revelation of price-quality preferences shifts both the size and composition of the applicants received to a job posting.  
+Overall we find a 5\% reduction in the size of the applicant set; the data suggests this drop is largely accounted for by a significant drop in applicants to low tier openings.  
+More interesting is our second key finding: we find evidence of workers sorting, as described above: workers with lower (resp., higher) profile rates sort into the lower (resp., higher) tier, and the same holds when we consider workers' earnings on past jobs instead.
+
+In Section \ref{sec:bidding}, we elaborate on our third key finding; in particular, we study how workers adjust their bids in response to revelation of the price-quality preference of the employer.  
+We first study how wage bids respond to disclosure of the tier chosen by the employer; since wage bids closely track profile rates, we find as expected that wage bids fall (resp., rise) for applicants to the low (resp., high) tier.
+More interesting is that this directional change holds even if we consider the {\em markup} of the wage bid over the profile rate of the applicant.   
+In other words, we find that disclosure of the choice of tier leads to workers to bid up (or down) on the basis of the revealed information.
+
+Finally, in Section \ref{sec:outcomes}, we report on empirical analysis of outcomes on matches: number of matches formed, the total wage bill on a match, and the total number of hours worked on a match.
+We find that overall, the probability of forming a match on a given opening was not dramatically altered; and both the wage bill and hours worked increase in the medium and high tiers (though not significantly so in the latter), while falling in the low tier.  
+We also find that the wages of hired workers follow the same pattern as wage bids of applicants: namely, hired workers on low (resp., high) tier jobs have lower (resp., higher) wages.  We discuss open directions and conclude in Section \ref{sec:discussion}.  
+
+The appendices contain supplementary material to the main body of the paper.  Appendix \ref{sec:theory} presents a simple stylized model (along the lines discussed above) along with its analysis.  Several of the appendices investigate additional empirical questions that arose in the context of the analysis of our experiment, but did not yield significant results.
+In particular, we show that the distribution of employer p/q preferences is not materially impacted by experimental treatment (Appendix \ref{sec:pqreveal});
+that messaging to employers {\em ex post} about their p/q revelation status does not materially impact contract outcomes (Appendix \ref{sec:messaging});
+that employers do move towards higher-tier preferences with more experience, but the effect is quite small and does not appear to be affected by treatment group (Appendix \ref{sec:dynamics});
+and that treatment had no material impact on employers' propensity to recruit (Appendix \ref{sec:employer_recruiting}) or screen (Appendix \ref{sec:screening}) applicants.  Summary tables on our data analysis are in Appendix \ref{sec:tables}.
+
+
+%We find no evidence that this disclosure affected any of the primary contract outcomes we consider.
+
+%Although our analysis focused on the first job opening posted by an employer after the start of the experiment, employers can and do post additional job postings.
+%For these follow-on posts, the original experimental group assignment was maintained, which allows us to see if p/q preferences changed over time.
+%We analyze changes in preferences over time in Appendix~\ref{sec:dynamics}. 
+%We find strong evidence that 
+
+
+\section{Related work}
+
+Several notable recent papers have considered the effect of signaling in matching markets, in settings different to ours.
+For example, \cite{lee2011propose} and \cite{coles2010job} both consider the introduction of market interventions that make it easier for one side of the market to signal the other (participants in dating markets in the former, applicants in the academic job market in the latter).
+In this case the signaling is a matter of horizontal differentiation: the signals solve a coordination problem.
+A related example is that of \cite{Anand2011}, who study the role of advertising as a matching mechanism; again, the primary effect considered involves horizontal differentiation.
+By contrast, our paper focuses on signaling preferences over a vertically differentiated dimension (worker quality), which brings with it the attendant risks of price markups and adverse selection as noted above.  
+
+More broadly, our paper is closely connected to the literature on the role of signaling and information disclosure in a wide variety of applications
+(e.g., financial markets \cite{gilson1984, Diamond1991, Healy2001}, marketing \cite{Day1976}, product quality \cite{Jin2003}, and many others).
+We highlight two lines of research here that are relevant to our current work: signaling in matching markets, and information disclosure in auctions.
+
+Signaling and information disclosure in matching markets has a long history in the economics literature, dating back to the seminal work of \cite{spence1973job}.
+A range of recent papers study the role of information; a number study adverse effects of information revelation; see, e.g., \cite{ely2009hiring, ely2013adverse, kushnir2013harmful}, while \cite{Lewis2011} shows how information disclosure can mitigate adverse selection.
+%By contrast, \cite{Lewis2011} demonstrates a case where information disclosure mitigates the adverse selection effects that can arise in the benchmark model of Akerlof's ``market for lemons'' \citep{Akerlof1970}.
+Our work finds an intermediate result: employers signal and both sides of the market endogeneously sort; but at the same time employers do face an adverse selection risk in the pool of applicants they receive.
+
+The literature on information disclosure in auctions has a rich history, dating back to \cite{Milgrom1982}, who demonstrated the celebrated ``linkage principle'':
+namely, that (under certain conditions) information disclosure by the auctioneer raises revenues.
+This effect has since been investigated empirically and experimentally in a wide variety of papers;
+see, e.g., \cite{porter1995, levin1996, Silva2008, Cho2014} for a representative sample.
+An alternative explanation for why information disclosure may increase seller revenues is provided by \cite{board2009};
+essentially, information disclosure can cause more bidders to {\em sort} to items they value more (called the {\em allocation effect}).  
+
+The allocation effect manifests empirically in the recent work of \cite{tadelis2011information}, who consider information disclosure in the wholesale auction market for used cars.
+In their experimental setting, information about used cars is {\em exogenously} randomly disclosed to market participants, before they choose which used car auctions to join.
+This information disclosure induces a sorting effect that increases competition among similar-minded bidders for each type of car, and increases expected revenues---most strongly for cars at the extremes of the quality spectrum.
+On the other hand, as noted at the outset, in many markets honest information disclosure cannot be compelled (not least because the market operator may not possess the means or information to ensure it).
+We focus on a setting where employers must {\em endogenously} choose whether or not to honestly signal workers about their preferences, and we find honest disclosure as a strong empirical result.
+Our unique experimental design allows us to clearly identify how preference revelation influences employers' endogenous choices about truthful reporting.
+
+
+
+
+%Information disclosure in auctions
+%\cite{board2009}
+%\cite{Milgrom1982}
+%\cite{Cho2014}
+%\cite{Silva2008}
+%\cite{levin1996}
+%\cite{porter1995}
+
+
+
+%Signaling in matching markets and labor markets
+
+
+
+
+%Second, the results of \cite{tadelis2011information} suggest that we should uniformly see {\em lower} wage bids in the sorted marketplace; however, we see wage markups in high tier jobs. 
+%As noted above, this is because the relative balance of demand and supply in the marketplace shifts bargaining power in the high tier from employers to workers. 
+
+
+
+%\cite{budish2011}
+%\cite{day1976}
+%\cite{Genesove1993}
+%\cite{grossman1981}
+%\cite{johnson2006}
+%\cite{milgrom1981}
+%\cite{overby2009}
+%\cite{roberts2014}
+
+
+
+
+\section{Empirical context} 
+\label{sec:empirical_context}
+
+During the last ten years, a number of online labor markets have emerged. 
+In these markets, firms hire workers to perform tasks that can be done remotely, such as computer programming, graphic design, data entry, and writing. 
+Markets differ in their scope and focus, but common services provided by the platforms include maintaining job listings, hosting user profile pages, arbitrating disputes, certifying worker skills and maintaining feedback systems. 
+
+The experiment in this paper was conducted on oDesk, the largest of these online labor markets.  
+On oDesk, would-be employers write job descriptions, self-categorize the nature of the work and required skills and then post the vacancies to the oDesk website. 
+Workers learn about vacancies via electronic searches or email notifications. 
+ 
+Workers submit applications, which generally include a wage bid (for hourly jobs) or a total project bid (for fixed-price jobs) and a cover letter. 
+In addition to worker-initiated applications, employers can also search worker profiles and invite workers to apply. 
+After a worker submits an application, the employer can interview and hire the applicant on the terms proposed by the worker or make a counteroffer, which the worker can counter, and so on.
+The process is not an auction and neither the employer nor worker are bound to accept an offer. 
+
+To work on hourly oDesk contracts, workers must install custom tracking software on their computers. 
+The tracking software, or ``Work Diary,'' essentially serves as a digital punch clock that allows for remote monitoring of employees. 
+When the worker is working, the software logs the count of keystrokes and mouse movements; at random intervals, the software also captures an image of the worker's computer screen. 
+All of this captured data is sent to the oDesk servers and then made available to the employer for inspection. 
+This monitoring makes hourly contracts and hence employment relationships possible, which in turn makes the oDesk marketplace more like a traditional labor market than project-based online marketplaces where contracts are usually arm's-length and fixed price.  
+
+In the first quarter of 2012, \$78 million was spent on oDesk. 
+As of October 2012, more than 495,000 employers and 2.5 million workers have created profiles (though a considerably smaller fraction are active on the site). Approximately 790,000 vacancies were posted in the first half of 2012. 
+See \cite{agrawal2013digitization} for additional descriptive statistics on oDesk. 
+
+Each vacancy is labeled by the posting employer with some number of required skills. 
+Based on dollars spent, the top required skills in the marketplace are web programming, mobile applications development (e.g., iPhone and Android) and web design. 
+Based on hours worked, the top required skills are web programming, data entry, search engine optimization and web research. 
+
+The oDesk marketplace is not the only marketplace for online work (or IT work more generally). 
+As such, one might worry that every vacancy we see on oDesk is simultaneously posted on several other online labor market sites and in the traditional market. However, survey evidence suggests that online and offline hiring are only very weak substitutes and that multi-homing of vacancies is relatively rare. When asked what they would have done with their most recent project if oDesk were not available, only 15\% of employers responded that they would have made a local hire. Online employers report that they are generally deciding among (a) getting the work done online, (b) doing the work themselves and (c) not having the work done at all. The survey also found that 83\% of employers said that they listed their last job vacancy on oDesk alone. 
+
+There has been some research which focuses on the oDesk marketplace. 
+\cite{pallais2010inefficient} shows via a field experiment that past worker experience on oDesk is an excellent predictor of being hired for subsequent work on the platform. 
+\cite{stanton2011landing} use oDesk data to show that agencies (which act as quasi-firms) help workers find jobs and break into the marketplace. 
+\cite{agrawal2012online} investigate what factors matter to employers
+in making selections from an applicant pool and present some evidence of statistical discrimination, which can be ameliorated by better information.  
+
+\section{Experimental design and internal validity} 
+\label{sec:exp_design}
+Employers assigned to the experiment were randomized to one of five experimental groups. 
+In all cells, employers are asked for their preferences, using the interface shown in Figure~\ref{fig:tradeOff}.
+The choice was mutually exclusive and was mandatory for all employers in the experiment.
+Employers selecting ``Entry Level (\$)'' are referred to as the ``Low Tier (LT)'' throughout the paper;
+those selecting ``Intermediate (\$\$)'' as ``Medium Tier (MT)'' and those selecting ``Expert (\$\$\$)'' as ``High Tier (HT).''  
+
+\begin{figure} 
+\centering 
+\begin{minipage}{0.80 \linewidth}
+ \includegraphics[width = \linewidth]{./images/tradeOff.pdf} \\
+{\footnotesize
+  \emph{Notes:} This figure shows the price quality trade-off interface and language presented to employers when they post a job.
+  The choice was mutually exclusive and was mandatory for all employers in the experiment.
+  Employers selecting ``Entry Level (\$)'' are referred to as the ``Low Tier (LT)'' throughout the paper;
+  those selecting ``Intermediate (\$\$)'' as ``Medium Tier (MT)'' and those selecting ``Expert (\$\$\$)'' as ``High Tier (HT).''  
+}
+\end{minipage} 
+\caption{Price/Quality trade-off presented to employers when posting their openings\label{fig:tradeOff}} 
+\end{figure} 
+
+The two arms of the experiment and their component experimental cells are listed in Table~\ref{tab:cell_descriptions}. 
+In Appendix~\ref{sec:balance} we report pre-treatment summary statistics for employers and show that the randomization was effective. 
+
+There is a two-cell ``explicit arm,'' in which employers knew for certain that their choice would---$\mbox{ShownPref} = 1$---or would not be shown---$\mbox{ShownPref} = 0$---to job-seekers.
+This knowledge about revelation was given to employers ex ante, before their job opening was posted to the marketplace. 
+As employers could condition their p/q choice on their knowledge about
+revelation, we cannot regard the price/quality choice as exogenous in
+the explicit arm. 
+
+There is also a three-cell ``ambiguous arm'' to the experiment in which all employers were told that their choice \emph{might} be shown to job-seekers.
+For employers in these cells, tier selection can be regarded as exogenous.
+The actual preference was shown to workers in two of the cells but not in the third. 
+In these two revelation cells---which we indicated with $\mbox{Msgd} = 1$---the employer learned that applicants had seen their preference, whereas in $\mbox{Msgd} = 0$, they did not.
+
+\begin{table} 
+\tbl{Description of the experimental groups \label{tab:cell_descriptions}}{
+\centering 
+\begin{tabular}{llccc}
+\toprule
+&   & Allocation &  \parbox[t][][t]{3cm}{\centering P/Q Shown to Job-Seekers?} & \parbox[t][][t]{3cm}{\centering Employer learns about revelation:} \\ 
+\hline
+\multicolumn{3}{l}{\bf{Explicit Arm}} \\ 
+ & $\mbox{ShownPref} = 1$ & 32.6\%  & Yes & Ex Ante  \\
+ & $\mbox{ShownPref} = 0$ & 32.6\%  & No  & Ex Ante  \\
+\multicolumn{3}{l}{\bf{Ambiguous Arm}} \\ 
+ & $\mbox{ShownPref} = 0, \mbox{Msgd} = 0$ & 11.6\%  & No  & Never  \\
+ & $\mbox{ShownPref} = 1, \mbox{Msgd} = 1$ & 11.6\%  & Yes & Ex Post \\
+ & $\mbox{ShownPref} = 1, \mbox{Msgd} = 0$ & 11.6\%  & Yes & Never  \\
+\bottomrule
+\end{tabular} 
+}\smallskip
+\centering
+\begin{minipage}{0.90 \textwidth} 
+{\footnotesize 
+\emph{Notes:} This table lists the five cells of the experiment. 
+Employers made the Price/Quality (P/Q) choice when they posted their opening.
+See Figure~\ref{fig:tradeOff} for the actual interface.
+\ambigdef \explicitdef \shownprefdef
+} 
+\end{minipage}  
+\end{table} 
+
+Employers can and do post multiple job openings. 
+We can regard the first job opening after experimental assignment as exogenous but not the subsequent job postings; 
+the treatment assignment can affect the probability of posting a follow-on opening. 
+For this reason, we generally restrict our analysis to the first job opening by an employer after the start of the experiment. 
+
+\begin{figure} 
+\centering 
+\begin{minipage}{0.80 \linewidth}
+ \fbox{\includegraphics[width = \linewidth]{./images/job_desc.png}} \\
+{\footnotesize
+  \emph{Notes:} This image is a screen-shot of the interface shown to would-be job applicants.
+  Note that the p/q signal---when present---is in the upper left hand corner, under the job-title.
+  In this case, the p/q signal is ``Intermediate (\$\$)'' corresponding to the middle tier. 
+}
+\end{minipage} 
+\caption{Interface showing the employer's p/q signal choice to would-be applicants \label{show_signal}} 
+\end{figure} 
+
+\section{Employer preferences over price and quality} 
+\label{sec:emp_pref}
+For different kinds of tasks worker quality is presumably more or less important; 
+this presumed heterogeneity in preferences was the impetus for introducing the \hottowel.
+Figure~\ref{fig:tier_by_cat} plots the fraction of employers selecting each price/quality tier, by job opening type in the explicit arm of the experiment.
+(In Appendix~\ref{sec:pqreveal}, we show that knowledge of whether the p/q preference would be revealed did not significantly alter the declaration of employers.)
+The distributions are faceted by the category of work and the bars are shaded according to treatment assignment in the explicit arm. 
+
+\begin{figure} 
+\centering 
+\begin{minipage}{0.90 \linewidth}
+\includegraphics[width = \textwidth]{./plots/choices_by_cat.pdf}
+\\
+  {\footnotesize \emph{Notes:} This figure shows the fraction of employers in the explicit arm of the experiment selecting the various p/q tiers, by ShownPref.
+    \explicitdef
+    \shownprefdef
+    A 95\% confidence interval is shown for each point estimate. 
+    \tierdef
+    Table~\ref{tab:revelation} presents evidence on how ShownPref affected p/q tier selection, with all openings pooled together. 
+  }
+\end{minipage} 
+\caption{Employer p/q preferences by category of work and treatment assignment in the explicit arm of the experiment \label{fig:tier_by_cat}}
+\end{figure} 
+
+\important{We can see from the figure that p/q preferences vary both within and between categories of work.}
+With the exception of ``Administrative Support,'' the middle tier is the most common across all categories.
+In the ``Administrative Support'' category, the most common choice by far is the low-tier, with negligible numbers choosing the high tier.
+In contrast, in ``Network \& Info. Sys.'', ``Software Development'' and ``Web Development'', the medium tier is still the most common, but the second most common is the the high-tier.
+
+Perhaps not surprisingly, the general pattern of preferences matches the by-category wage distribution:
+the categories of work that tend to be low-paying have large numbers of employers choosing the lowest tier, while the highest paying categories---generally high-skilled programming jobs---have substantial fractions of employers choosing the highest tier.
+
+Employers actually classify their openings into more precise sub-categories and in Appendix~\ref{sec:employer_preferences} we present tier selections by these sub-categories that are nested within the categories shown in Figure~\ref{fig:tier_by_cat}. 
+
+\section{Effects of p/q revelation on applicant pool size and composition} \label{sec:composition}
+The platform introduced the p/q signaling mechanism in part to encourage workers to sort towards employers that were a better fit.
+If effective, we should see (a) an overall reduction in the number of applications and (b) shifts in applicant pool composition in the expected directions.
+For low-tier employers, we expect less experienced and lower-wage applicants and the oppose for the high-tier.
+The intermediate tier could have shifts in either direction depending upon how workers interpret the ``Intermediate'' signal compared to the status quo (no signal) case. 
+
+To test for sorting we use the ambiguous arm of the experiment. 
+Recall that in this arm, the employer was asked ex ante for their price/quality preference with the understanding that it might be revealed. 
+In two of the cells, the employer's p/q preference was shown, while in the other, it was not. 
+Because employers did not know ex ante whether their choice would be revealed, we can treat their price/quality preference as exogenous.
+One advantage of the ambiguous arm design---despite the unrealism as an actual platform feature---is that it allows us to measure the extent of sorting without the additional information offered by the p/q signaling mechanism. 
+
+\subsection{Knowledge about employer preferences and the number of applications per opening} 
+Revelation of a particular p/q preferences should deter some applicants and attract others, in accordance with the worker's ``type.'' 
+By letting workers know an employer's ``type'' they can more narrowly target their applications and send fewer overall.
+On the other hand, if workers can not apply to more jobs that they know they are a good fit for, they might send even more applications, responding to the higher win-rate.
+The aggregate effects are theoretically ambiguous. 
+
+To measure the effects of p/q revelation on application counts, in Table~\ref{tab:app_counts}, in Column~(1) we report the OLS regression 
+\begin{align} \label{eq:apps}
+\log A_i = \beta_0 + \beta_1 \mbox{ShownPref}_i + \epsilon. 
+\end{align} 
+where $A_i$ is the the number of applications (conditional upon positive) received by opening $i$.
+In Column~(1) the sample is all openings in the ambiguous arm, while in Column~(3) it is all openings in the explicit arm.
+In Column~(2) we report an estimate of 
+\begin{align} \label{eq:appsi}
+\log A_{i} & = \beta_0 + \beta_1 \mbox{MT} + \beta_2 \mbox{HT} + \beta_3 \mbox{ShownPref}_i + \nonumber\\  
+          & \beta_4 \left(\mbox{MT} \times \mbox{ShownPref}_i \right) + 
+            \beta_5 \left(\mbox{HT} \times \mbox{ShownPref}_i\right) + \epsilon.  
+\end{align}
+where MT and HT are indicators for the Medium and High Tier employers, respectively, and the sample is restricted to the ambiguous arm in which these p/q preference can be treated as exogenous.
+
+\quantclaim{In Column~(1) of Table~\ref{tab:app_counts}, we can see from the coefficient on ShownPref that showing preferences reduces the application count per opening by about 5\%.}
+This reduction in overall counts is consistent with the notion that given better information about employer preferences, there is a net reduction in applications.
+
+The fitted model in Column~(2) lets us pinpoint where the reductions in applications occurred.
+The large negative coefficient on the ShownPref indicator suggests that a large reduction occurred in the low tier openings.
+The high- and medium-tier level indicators are negative but the interactions are positive.
+Figure~\ref{fig:application_reg_viz} helps us visualize the Column~(2) regression results.
+\important{When preferences are shown, the number of applicants to low-tier job openings is reduced.  
+  High-tier and middle-tier jobs received about the same number of applications regardless of whether or not p/q preferences were shown to would-be applicants.
+} 
+
+In Column~(3) we report estimates of Equation~\ref{eq:apps}, but with the explicit arm sample.
+While the effect is negative, it is not significant and the reduction is much smaller in magnitude than what was found in Column~(1) in which the sample was the ambiguous arm.
+Although the reason for the difference is unclear, one speculation is that employers deciding whether to reveal or not might consider the likely effect on application-counts.
+Those employers that would likely see the biggest drop in application counts might choose to claim medium-tier preferences so as not to reduce the application counts too much. 
+
+\begin{figure}
+\centering
+\begin{minipage}{0.90 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/application_reg_viz.pdf}
+                {\footnotesize \emph{Notes:}
+                  This figure shows conditional means for the log application counts per job opening in the ambiguous arm of the experiment, by employer p/q selection and ShownPref assignment.
+                  \threefacetdesc 
+                  \tierdef \ambigdef \shownprefdef
+                  The error bars indicate the 95\% confidence interval for the conditional mean.
+                }
+\end{minipage} 
+\caption{Applicant pool size by employer p/q choice and whether that choice was revealed \label{fig:application_reg_viz}}
+\end{figure} 
+
+Appendix~\ref{sec:employer_recruiting} explores whether employers adjusted their recruiting intensity (i.e., explicit invitations to prospective candidates) because of the treatment; no strong evidence is found that recruiting changes. 
+
+\subsection{Composition by worker's self-set hourly rate}
+Each worker in the marketplace sets a ``profile rate''---a hourly wage---that is displayed publicly on their profiles. 
+This wage is aspirational and workers are free to set any rate they wish, but it is visible to employers and empirically tends to closely follow a worker's hourly wage bid and wage for hired contracts. 
+Worker profile rates are recorded at the time of application and are not affected by the treatment. 
+Although noisy---compared to say a worker's average past wage-- -it has the advantage of being available for all workers regardless of whether they have worked on the platform in a hourly capacity before the experiment. 
+To the extent that the marketplace is competitive, this profile rate is a proxy for a worker's marginal productivity. 
+
+For each job opening, we can compute various quantiles of the profile wages for applicants to that opening. 
+For example, if an opening received applicants with profile rates of \$10/hour, \$20/hour and \$30/hour, the median (50th percentile) profile wage would be \$20/hour. 
+We can then regress that opening-specific log wage quantile on the employer's choice of tier interacted with the revelation indicator 
+\begin{align} \label{eq:pr}
+  \log \bar{w}^{PR} = \beta_0 + \beta_1 \mbox{ShownPref} + \beta_2 \mbox{MT} + \beta_3 \mbox{HT} + \beta_4 \mbox{(HT $\times$ ShownPref)} + \beta_5 \mbox{(MT $\times$ ShownPref)} + \epsilon
+\end{align} 
+where $\bar{w}^{PR}$ is the $PR$th percentile of the profile rates of applicants to the job opening. 
+
+Table~\ref{tab:pr_rate_percentiles} reports estimates of Equation~\ref{eq:pr} for the 25th, 50th, 75th and 90th percentiles in Columns (1) through (4), respectively. 
+Note that across regressions, the coefficients on the tier indicators are highly significant and have the expected sign: 
+\quantclaim{the medium tier openings in the control group have quantiles that are universally about 40\% higher than the low-tier control group; the high tier is about 65\% higher.} 
+These differences in the composition of applicants happen without any revelation of the employer's price/quality preference. 
+\quantclaim{Workers sort substantially, even without the explicit signal provided by the price/quality preference revelation.}
+
+From Figure~\ref{fig:tier_by_cat}, we observed that employer tier preference depended strongly on the category of work that job-opening belonged to e.g., employers with administrative openings were far more likely to send the low-tier signal.
+As such, we might wonder if the sorting we observe even in the absence of the explicit p/q signal being revealed is simply capturing the fact that workers work primarily within single categories.
+We can partially test this by including a random effect for the category of work, which we do in Column~(4) of Table~\ref{tab:pr_rate_percentiles}. 
+Comparing Column~(4) to Column~(5)---which both have the median wage as their outcome---we can see that controlling for the work type does reduce the magnitude of the coefficients on the tier indicators, though the effects are still far from zero.
+\important{Even within fairly narrowly defined categories, employers can induce substantial worker sorting on the basis of other attributes of the job.}
+It is perhaps not surprising that some indication of the employer's preferences can come through within a category but absent an explicit signal.
+If we recall from Figure~\ref{show_signal}, employers can describe the job, choose an informative job title, include required skills and so on.
+
+\important{Despite the ability of employers to partially convey their preferences through means other than explicit signal, the regressions in Table~\ref{tab:pr_rate_percentiles} also unambiguously show the the explicit signal helps sorting.}
+The coefficient on $\mbox{ShownPref}$ shows that employers stating low-tier preferences received applicants with about 5\% lower profile rates on average when this low-tier signal was sent to the market. 
+Similarly, the coefficients on the high- and medium-tier indicator interaction terms are positive and of similar magnitude to each other: 
+\quantclaim{the revelation of the employer preferences raised the wage quantiles by about 5\% above those quantiles where the employer preferences were not revealed.}
+Interestingly, showing preferences in the medium tier was associated with an increase in profile rates, suggesting that workers take the label ``Intermediate'' as implying a greater taste for quality than the average.
+Given that across categories the low-tier usually attracted more employers than the high-tier, average preferences are more price sensitive than among those employers selecting the medium-tier p/q signal.  
+
+The regression results from Table~\ref{tab:pr_rate_percentiles} can be readily and usefully visualized.
+In Figure~\ref{fig:profile_rate_reg_viz}, each panel corresponds to a different p/q signal.
+Within each panel, the fitted 25th, 20th and 90th percentile regression lines are fitted, showing the point estimates for both values of $\mbox{ShownPref}$, as well as the percentage difference between the two (corresponding to the interaction term in the regression framework). 
+From the visualization, we can see both (a) the differences in profile rates that arise even without signaling and (b) the sorting effects, with the lines sloping down in the low-tier and up in the medium and high-tiers. 
+
+\begin{figure}
+  \centering
+\begin{minipage}{0.90 \linewidth} 
+  \includegraphics[width = \linewidth]{./plots/profile_rate_reg_viz.pdf}
+                {\footnotesize \emph{Notes:}
+                  This figure shows conditional means for 25th, 50th and 90th percentiles of the log profile wage in the ambiguous arm of the experiment, by employer p/q selection and ShownPref assignment.
+                  The visualization corresponds to the fitted estimates in Columns~(1) through Columns~(4) of Table~\ref{tab:pr_rate_percentiles}.
+                  \threefacetdesc
+                  \tierdef \ambigdef \shownprefdef
+                  The error bars indicate the 95\% confidence interval for the conditional mean.
+                }
+\end{minipage} 
+  \caption{Applicant profile rate percentiles by employer p/q choice and whether that choice was revealed \label{fig:profile_rate_reg_viz}} 
+\end{figure} 
+
+\subsection{Composition by worker experience} 
+On the platform, past earnings are a strong proxy for a worker's experience and success on the platform and it is used extensively by employers when making hiring decisions \citep{pallais2010inefficient}.
+Unlike a worker's profile rate, on-platform earnings are not self-reported and are measured more or less without error. 
+Although experience and wages are strongly positive correlated on oDesk, just as they are in traditional markets, a worker can certainly be a high-wage novice or low-wage veteran.
+We now examine whether the p/q signal affected the on-platform experience of applicants.
+One reason why we might expect stronger experience sorting is the actual message of the p/q signal:  
+although the text of the tier messaging is ``I am looking for freelancers with the lowest rates'' that signal was labeled as ``Entry level,'' which might be particularly salient to workers. 
+
+In Table~\ref{tab:past_earnings_percentiles} we regress the employer-level past earnings percentiles for the ambiguous arm employers on the indicator for whether the employer's preference was shown, interacted with tier selection.
+These regressions perfectly mirror those described by Equation~\ref{eq:pr}, with log prior experience substituting for log profile rate.\footnote{
+  Workers with no experience are counter-factually given \$1 in earnings to allow the log to be taken, but given we are looking at the 20th percentile (and the vast majority of applicants have some prior earnings), the results are not sensitive to this adjustment.}
+\quantclaim{As with profile rates, there is substantial sorting even in the absence of the p/q signal revelation:
+the coefficient on $\mbox{ShownPref}$ shows about a 20\% reduction in prior earnings.}
+This is a much larger percentage reduction than was found for wages, which could imply that workers took the ``Entry level'' label seriously. 
+The coefficients on the tier indicators also show experience-shifting in the predicted direction. 
+
+In Figure~\ref{fig:prior_earnings_reg_viz} visualizes the regression results.
+In the low-tier panel, we can see the large reduction in experience levels caused by the revelation of the low-tier p/q signal.
+In the the high-tier and medium tier, experience levels are higher even without the signal, but as with the profile rate, the introduction of the signal clearly raises the experience level of the applicant pool in both the medium- and high-tiers. 
+
+\begin{figure}
+\centering
+
+\begin{minipage}{0.90 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/prior_earnings_reg_viz.pdf}
+                  {\footnotesize \emph{Notes:}
+                  This figure shows conditional means for 25th, 50th and 90th percentiles of the log cumulative prior earnings in the ambiguous arm of the experiment, by employer p/q selection and ShownPref assignment.
+                  The visualization corresponds to the fitted estimates in Columns~(1) through Columns~(4) of Table~\ref{tab:past_earnings_percentiles}. 
+                  \threefacetdesc
+                  \tierdef \ambigdef \shownprefdef
+                  The error bars indicate the 95\% confidence interval for the conditional mean.
+                  The error bars indicate the 95\% CI for the conditional mean.
+                 }
+\end{minipage} 
+\caption{Applicant experience percentiles, as measured by cumulative prior earnings, by employer p/q choice and whether that choice was revealed \label{fig:prior_earnings_reg_viz}}
+\end{figure} 
+
+\section{Effects of p/q revelation on bidding} 
+\label{sec:bidding}
+Workers do not only choose what job openings to apply to---they also pick an hourly rate.
+Unlike many traditional labor markets (but like many other markets where sellers pursue buyers), worker's first propose a price. 
+This feature of the platform gives workers the opportunity to condition their bid on the attributes of the job or employer.
+A key concern of the platform was that workers could use their knowledge of the employer's p/q preferences to submit higher wage bids.
+Given that the platform makes money by ``taxing'' the wage bill, higher wage bids are not per se bad, so long as they do not cause more jobs to go unfilled or cause any nascent separating equilibrium to break down.
+
+To measure whether bids are higher, we can do the same analysis for wage bids as we did for profile rates, but this has the limitation of potentially just re-capitulating the profile rate results.
+As we noted earlier, wage bids are generally quite similar to profile rates, and since we know the p/q signal revelation induced sorting, showing that wage bids were altered by the signal revelation is not per se interesting.
+
+\subsection{Wage bidding \label{sec:wage_bidding}}
+To measure changes in bidding behavior, we again compare the per-opening percentiles.
+In Table~\ref{tab:wage_bid_percentiles}, we report regressions in which we regressed the employer-level wage bid percentiles for the ambiguous arm employers on the indicator for whether the employer's preference was shown, interacted with tier selection.
+
+Compared to the profile rate, the apparent sorting is more pronounced, with all coefficients larger in absolute value. 
+For example, whereas mid-tier quantiles in the control group where 40\% higher, in the wage regressions, they are 50\% higher---among high-tier employers, wage bids quantiles are also about 10\% lower. 
+Further, the ShownPref and mid-tier/high-tier interaction terms are nearly twice as large than they were in the profile rate regressions of Table~\ref{tab:pr_rate_percentiles}.  
+
+The pattern of results has two components. 
+First, as profile rates and wage bids are highly correlated---a substantial fraction of workers just bid their profile rate---we would expect the sorting effects identified by looking at profile rates would also appear when looking at wage bids. 
+However, we might also expect workers to alter their bid, as they condition on the knowledge about the employer's preferences as well as their beliefs about how other applicants will react to this information. 
+
+\begin{figure}
+\centering
+\begin{minipage}{0.90 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/wage_bid_reg_viz.pdf}
+                {\footnotesize \emph{Notes:} This figure shows the fitted regression lines for
+                  the median log wage bid of applicants, per job opening. The error bars indicate the 95\% CI
+                  for the conditional mean.}
+\end{minipage} 
+\caption{Mean quantiles of the per-opening log wage bid in the ambiguous arm by tier and revelation \label{fig:wage_bid_reg_viz}} 
+\end{figure} 
+
+
+The interaction effects between ShownPref and the tiers are also large is absolute value. 
+This is at least suggestive of the notion that workers bid more when they know explicitly that an employer is less price sensitive/has higher quality standards or lower when the employer is price sensitive/has low standards. 
+We can partially disentangle the sorting effects and behavioral response of the treatment by examining how wage bid markup---the percentage increase in the wage bid from the profile rate---is affected by revelation.  
+
+\subsection{Markups in wage bid versus the worker's profile rate} 
+\label{sec:markups}
+
+The change in wage bidding could simply reflect sorting. 
+What we really want is some measure of the changes in wage bid that already controls for the change in composition.
+Fortunately, workers---via their profile rate---come with a ready-made control.
+For each job application, we can compute that worker's wage bid markup: 
+\begin{align} \label{eq:markup}
+\mbox{Mark-up} = \frac{\mbox{Wage bid} - \mbox{Profile rate wage}}{\mbox{Profile rate wage}}.   
+\end{align} 
+We can then calculate by-opening quantiles for these markups and perform the same analysis we already performed for profile rates and past earnings. 
+
+Table~\ref{tab:markups} reports regressions of the 25th, 50th, 75th and 90th markup percentiles, with the same RHS as Equation~\ref{eq:pr}.
+First we note that the level indicators are much smaller than in the profile rate and wage bid regressions. 
+This is unsurprising, in that compositional and sorting affects are netted out, since the markup is calculated from the profile rate. 
+However, the coefficients are all positive and significant, with the high-tier magnitudes slightly larger than the mid-tier magnitudes. 
+
+The interesting results are the coefficients on the tier and $\mbox{ShownPref}$ interactions.
+Unlike in our previous analysis, effects differ both by percentile and tier.
+It is easier to interpret the results using Figure~\ref{fig:markup_reg_viz}. 
+First, we note that in the middle tier the revelation of the p/q signal has minimal effects on sorting.
+Although the coefficients on the interaction terms are positive and significant, the net effect is quite close to zero, regardless of the percentile.
+
+In the low-tier, the 90th percentile sees little decrease in markup, but at the 50th and 25th percentiles, the markup reduction is substantial.
+The results are transformed in the high-tier: we see increases in the markup, with the largest effects occurring at the 90th percentile.
+\important{When the workers know they are facing a high-tier, they bid more, and when facing a low-tier, they bid less.}
+The results also imply that in the low-tier, the movement in markups occurred by an increase in applicants choosing very low markups (negative in fact) whereas in the high-tier, the increase is by an increase in applicants choosing high markups.   
+
+\begin{figure}
+\centering
+\begin{minipage}{0.90 \linewidth} 
+\includegraphics[width = \linewidth]{./plots/markup_reg_viz.pdf}
+                  {\footnotesize \emph{Notes:}
+                  This figure shows conditional means for 25th, 50th and 90th percentiles of the wage bid markup in the ambiguous arm of the experiment, by employer p/q selection and ShownPref assignment.
+                  The visualization corresponds to the fitted estimates in Columns~(1) through Columns~(4) of Table~\ref{tab:markups}. 
+                  \threefacetdesc
+                  \tierdef \ambigdef \shownprefdef
+                  The error bars indicate the 95\% CI for the conditional mean.
+                 }
+\end{minipage} 
+\caption{Markups in applicant wage bids by employer p/q choice and whether that choice was revealed \label{fig:markup_reg_viz}}
+\end{figure} 
+
+\important{An important question is whether these bidding results could simply reflect workers adding a premium to bids where the employer is likely to have high standards (or offer a discount where they do not).
+We return to this question is our discussion.} 
+
+\section{Job opening outcomes} 
+\label{sec:outcomes}
+
+The platform introduced \hottowel~in part to get more applicants of the right type, with a view towards influencing match outcomes.
+In this section, we evaluate the impact of \hottowel on a variety of metrics related to match outcomes.\footnote{
+Before looking at match outcomes, we could also examine the employer screening process.
+In Appendix~\ref{sec:screening}, we report this analysis of screening.
+The main results are mostly negative and uninteresting:
+high- and medium-tier employers screen a larger fraction of their applicants and seem to take more care, but there is no evidence the the treatment altered screening across experimental groups.}  
+
+Appendix \ref{sec:outcomes_app} provides details on four metrics of interest: quantity of matches formed; the wage bill conditional on a match; the number of hours worked; and the wages of hired workers.
+Due to space constraints, we briefly summarize these results here; full details on our regression analysis are available in the Appendix.
+Of these metrics, the wages of hired workers behave as expected:
+in particular, revelation of the employer's p/q preference causes a relative increase in wages of hired workers in the high tier, and a relative decrease in wages of hired workers in the low tier.
+These changes exactly match our previous findings for markups of wage bids (cf. Section \ref{sec:markups}).
+
+Nevertheless, our results on opening outcomes present several interesting features that warrant further investigation.
+First, we find that showing p/q preferences had no apparent effect on the probability that a match is formed.
+This is an unusual finding, given the strong sorting behavior that is exhibited in the experiment; it suggests that to the extent that welfare benefits are generated by introducing the ability to endogenously sort, these benefits are in match {\em quality} rather than match {\em quantity}.
+Second, we find that the wage bill and hours worked are higher for the high and medium tiers, but fall for the low tier.
+These findings suggest that match quality did not unambiguously rise across the marketplace, despite the strong sorting effects found in the experiment.
+In particular, clients in the low tier appear to forming matches that they prefer less than those without sorting, despite the apparent improvement in matching the applicant pool to their preferences.
+Further empirical study is needed to fully disambiguate the impact of p/q preference revelation on match quality; this remains an important topic of ongoing research.
+
+\section{Empirical discussion}
+\label{sec:discussion}
+
+There are two main questions that we hope to address in future work.
+
+First, we want to address compensating differentials as an explanation for the markup results.
+%, namely, that they simply reflect a compensating differential.
+A worker knowing they face a high-type employer might reasonably infer that they are likely to be monitored and held to a higher standard, which the worker finds costly.
+The opposite would hold for a low-cost employer. 
+At least anecdotally, workers seem to have attitudes and preferences not like this:
+low-paying, cost-sensitive employers are colloquially referred to as ``peanut farmers'' (they pay peanuts) who want to dispute charges and keep costs down.
+The large reduction in pool size for employers stating low p/q preferences presumably reflects this bias.
+
+We can potentially test the ``compensating differentials'' story by seeing whether workers in the ambiguous arm paired with an unbeknownst-to-them high-type received worse feedback or were monitored more intensively.
+%However, this is problematic in that we might think employer standards are sliding with the wage.
+One approach would be to include both worker- and employer-specific controls and see how worker effort (as measured with the micro-productivity data of the oDesk time-tracker) responds to wage and/or employer preferences.
+If hired wage is not particularly predictive of either effort or ultimate feedback, it suggests that the compensating differential story is flawed.
+We believe this is the case: from other oDesk work, wage bids do not seem to reflect any risk premium from being paired with an employer more likely to give bad feedback.
+%We do not have excellent proxies for monitoring, though we do have some and could try to generate more. 
+
+Our second key question is to understand the behavior of outcomes.
+In particular, the wage bill fell in the low tier when the employer's preferences were revealed---we can see this clearly in Figure~\ref{fig:wage_bill}. 
+This is puzzling: if we think of wage bill as a proxy for match quality, then it says match quality went down when preferences were exposed. 
+%If just wages went down, we would expect hours to go up for two reasons: (1) hiring less efficient workers, i.e., a sorting effect; and (2) demand curves slope down. 
+%Instead, wage rates went down and hours went down. 
+One possibility is that the treatment tilted employers towards hiring inexperienced but good workers that offer their services at a discount, and have higher-than-expected productivity.
+A further examination of the of the follow-on experiences of these hired workers might allow us to test this hypothesis.  
+Another possibility is that hired workers endogenously quit, and quits are decreasing in the hired wage rate---in other words, workers that get hired among low-tier at a low rate suffer a kind of winner's curse. 
+Investigating these issues remains an important direction for future work.
+
+%% \section{Discussion} 
+
+%% In a labor context it is common to assume that within some market, differences in wages simply reflect differences in marginal productivity across workers.
+%% However, the clear preferences for ``types'' (as we will see) suggest that even within fairly narrowly defined categories or work, employers do not view workers as fungible.
+%% In other words, they are not just expressing preferences over productivity (which would, in a competitive market), not making any sense unless, say, firms had preferences over when a task is completed.
+%% See Appendix~\ref{sec:employer_preferences} for how time preferences (among other things) seem to affect employer preferences, using an employer fixed-effect analysis. 
+
+% Acknowledgments
+\bibliographystyle{acmsmall}
+\bibliography{../hot_towel}
+
+\appendix 
+
+\section*{APPENDIX}
+\setcounter{section}{0}
+
+\section{Sorting and p/q tradeoffs: theory} 
+\label{sec:theory}
+
+Informally, the main findings of the experiment are that both employers and workers sort across the tiers;
+further, this sorting leads workers to ``adjust'' their bids to the revealed preference of the employer. 
+Specifically, recall that:
+\begin{enumerate}
+\item Employers sort themselves across tiers, rather than ``defaulting'' into the middle tier (Section \ref{sec:emp_pref}).
+\item Worker sorting is increased when tier preferences of employers are revealed (Section \ref{sec:composition}).
+\item Workers bid up in the middle and high tiers, and down in the low tier, when tier preferences of employers are revealed (Section \ref{sec:bidding}).
+\end{enumerate}
+There are important features of our findings.
+First, in almost any game-theoretic model of the market, there would exist a nominal equilibrium where the tier selection provides no signal about employers' preferences at all.
+Of course this clearly does not occur in practice, and encourages us to seek alternative equilibria.
+Second, we find that employers are choosing to sort {\em despite} markups from workers (in the middle and high tiers).
+In a signaling setting where employers learn about worker quality only through their wage bids, employers cannot prevent workers of lower quality from ``masquerading'' as high quality workers (by submitting a higher bid).
+This potential adverse selection effect would lead employers away from revealing their true preference for higher quality workers.
+Instead, we find employers do in fact choose to reveal their preferences.
+
+In this section, we explore simple theoretical explanations for these key empirical findings.
+We start by casting the problem similarly to \cite{tadelis2011information}, who study information disclosure in an auction market for used cars.  
+They study an experiment where quality information  is randomly disclosed in wholesale used car auctions.
+A key finding in their paper is that this information disclosure increases revenues, with the largest gains for the best and worst quality cars.
+Informally, the main mechanism behind increased revenues is {\em sorting}: information disclosure leads to greater alignment in the types of bidders that choose to participate in auctions for cars of different quality, and this increases competition.
+The authors relate this to the {\em allocation effect} identified by \cite{board2009}, where information disclosure affects the type of bidder that wins an auction.  
+Even though Tadelis and Zettelmeyer do not consider sellers that can strategically choose to reveal information, we can extend their reasoning as follows:
+if the seller expects increased revenues due to information disclosure, then we should expect a rational seller to choose to reveal any information they possess about quality, because their expected revenue can only increase.
+
+What are the implications of the preceding analysis in our setting?  
+If we carry out a partial equilibrium analysis in the spirit of \cite{tadelis2011information} considering only worker bidding behavior,
+the allocation effect would suggest that information disclosure should lead to {\em lower} wages in each tier, due to increased competition; 
+and as a result of this expectation, buyers should be incentivized to always reveal their preferences.
+Indeed, to some extent, we do observe such an effect:
+as seen in Section \ref{sec:bidding}, workers applying to low tier openings do bid down when the employer preference is revealed.
+
+However, this explanation is far from complete, because of the countervailing effect that employers choosing the middle or high tiers receive applicants who have marked up their wage bids.
+This effect makes the strategic decision of an employer ambiguous.
+In particular, why do employers choose to declare a higher tier, despite the possibility that their preference revelation may leave them at a disadvantage against prospective hires?
+
+In the remainder of this section we present an alternative theoretical model that suggests employer sorting together with bid markups can be found in equilibrium.  
+Consider a model with two employer types ($\H$ and $\L$) and two worker types ($\H$ and $\L$).
+The economy consists of a unit mass of employers, of which a fraction $\mu$ are of type $\H$ (and a fraction $1-\mu$ are of type $\L$).
+The economy also consists of a mass of $R$ workers, of which a fraction $\gamma$ are of type $\H$ (and a fraction $1-\gamma$ are of type $\L$).  
+
+Each employer of type $t =\H, \L$ has a quality sensitivity $\theta_t > 0$ and reservation value $V_t$, while each worker of type $s = \H, \L$ has a quality $q_s > 0$; for normalization purposes we fix $V_\L  = 0$.  We assume that these parameters obey the following relationships: 
+\begin{enumerate}
+\item $\theta_\H q_\L - V_\H < 0 < \theta_\L q_\L$.
+\item $\theta_\H q_\H - V_\H > \theta_\L q_\H > 0$.
+\end{enumerate}
+Refer to Figure \ref{fig:params} for an illustration.
+These assumptions can be interpreted as follows.
+First, type $\H$ employers would not find a type $\L$ worker acceptable, even at a zero wage bid.
+Informally, this encodes the idea that high tier or ``expert'' work demands skills that are simply not available in the low tier.
+Second, type $\H$ employers value type $\H$ workers more than type $\L$ employers; in other words, sorting is {\em a priori} desirable.  In this sense our model induces a form of horizontal differentiation among employers, similar to \cite{tadelis2011information}.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=4in]{./images/model_graph.png}
+\end{center}
+\caption{Model parameters.}
+\label{fig:params}
+\end{figure}
+
+In the stylized model we consider, workers first apply, and then employers screen and possibly hire.
+Each worker can (costlessly) send one application to an employer; this application contains a bid.
+A worker with quality $q$ and bid $p$ is deemed {\em acceptable} to an employer of type $t=\H,\L$ if $\theta_t q - p \geq V_t$.
+We assume a mechanical hiring model for the employer:
+employers (costlessly) screen their applicants in random sequential order, and hire the first acceptable applicant, if any.
+\footnote{Such a model can be rationalized with a utility function for the employer that gives them a fixed, constant, finite utility if they hire an acceptable worker, and $-\infty$ otherwise.}  
+If an applicant is hired at a bid $p$, they earn a payoff of $p$.
+We assume that applicants only submit nonnegative bids.
+
+While somewhat artificially extreme, the main feature of our sequential screening model is that it captures the possibility that employers are not necessarily going to always hire only the lowest priced worker available.
+In particular, there is a chance that a worker might be hired by an employer {\em even} if she did not submit the lowest wage bid among other workers of the same type as her. 
+\footnote{In practice, this may occur because of an idiosyncratic, unobservable term in the quality of an applicant, as perceived by her target employer.}
+%This is what distinguishes our approach from \cite{board2009} and \cite{tadelis2011information};
+%in those models, the highest bidder always wins, and so increased competition leads to higher revenues to the auctioneer.
+Informally, we can view our preceding screening behavior as giving rise to a ``differentiated products'' demand model.  
+
+We consider a simplified version of the intervention studied in this paper.
+In particular, we consider two games: one without price-quality preference signaling (or \hottowel~for short), and one with \hottowel.  
+Without \hottowel, workers must apply to openings without receiving any signal about the employers price-quality tradeoff; so this choice is essentially random.
+(Note that empirically we observed some sorting even in the absence of \hottowel, but our model is deliberately stylized to simplify the presentation.)
+With \hottowel, workers receive a signal from the employer, and can use this in their application strategy.
+In the subsequent two sections, we analyze these two games.%  (All proofs can be found in Appendix \ref{sec:proofs}.)
+
+
+\subsection{No \hottowel}
+
+Without \hottowel, each employer cannot signal her type to the worker.
+Applicants thus apply at random to employers;
+a mean field approximation for this process suggests that each employer receives $\poiss(R)$ applicants.
+Applicants of type $\L$ can never be acceptable to a type $\H$ employer at a non-negative bid, and so they bid as much as possible while remaining acceptable to a type $\L$ employer;
+this amount is $p_\L = \theta_\L q_\L$.
+
+Now we consider the decision problem of a type $\H$ applicant.  We first require the following lemma, which is key to our analysis of this model.
+
+\begin{lemma}
+\label{lem:g}
+Suppose that an applicant is acceptable to a given employer, and that this employer receives $\poiss(m)$ other acceptable applicants.
+Then the probability the given applicant is hired is:
+\[ g(m) \triangleq \frac{1 - e^{-m}}{m}. \]
+Further, $g$ is strictly decreasing, with $g(m) \to 1$ as $m \to 0$.
+\end{lemma}
+
+\begin{proof}[of Lemma \ref{lem:g}.]
+We sum over the number of competing applicants.
+\begin{align*}
+\mathbb{P}(\textsf{hired}) &= \sum_{k \geq 0} e^{-m} \left( \frac{m^k}{k!} \right) \left( \frac{1}{k+1}\right) \\
+& = \frac{1}{m} \sum_{k \geq 1} e^{-m} \frac{m^k}{k!} \\
+& = \frac{1 - e^{-m}}{m}.
+\end{align*}
+The fact that $g$ is strictly decreasing follows by differentiating:
+\[ g'(m) = \frac{e^{-m}}{m} - \frac{1 - e^{-m}}{m^2} = \frac{m e^{-m} - 1 + e^{-m}}{m^2}. \]
+Observe that $1 + m < e^m$ for $m > 0$, so the result follows.
+The limit as $m \to 0$ follows by L'H\^{o}pital's rule.
+\end{proof}
+
+We show that under an appropriate assumption, there exists an equilibrium where each type $\H$ applicant submits the bid $p_\H = \theta_\L q_\H$.
+Informally, this applicant faces the following trade-off:
+if she bids higher, she can increase her profit from a potential match to a type $\H$ employer, but will go unmatched if she just happens to be unlucky and applies to a type $L$ employer.
+Without \hottowel, this distinction is impossible for the applicant to make {\em ex ante}.
+
+We have the following proposition.
+
+\begin{prop}
+\label{prop:lowbid}
+Suppose that:
+\begin{align}
+\label{eq:lowbideq}
+\left ( \frac{\theta_\H q_\H - V_\H}{\theta_\L q_\H} - 1 \right) < \left( \frac{g(R)}{g(R\gamma)}\right) \left( \frac{1}{\mu} - 1\right).
+\end{align}
+Then in equilibrium, type $\H$ workers bid $p_\H = \theta_\L q_\H$.
+\end{prop}
+
+\begin{proof}[of Proposition \ref{prop:lowbid}.]
+As with the type $\L$ workers, the goal of the type $\H$ worker is to bid as much as possible while remaining acceptable to a target employer.
+It is clear from this observation that we need only consider two feasible bids for this applicant: either $\theta_\L q_\H$ or $\theta_\H q_\H$.
+
+If the type $\H$ worker submits a bid of $p_\H$, she will be acceptable to every employer regardless of type.
+In this case her payoff is:
+\begin{align}
+\label{eq:htype1}
+\theta_\L q_\H \left ( \mu g(R \gamma) + (1 - \mu) g(R) \right).  
+\end{align}
+The first term in parentheses is the probability of being hired by a type $\H$ employer (since such an employer receives $\poiss(R\gamma)$ other acceptable applicants in the mean field model).
+The second term in parentheses is the probability of being hired by a type $\L$ employer (since every applicant received is acceptable to such an employer, and she receives $\poiss(R)$ other applicants).  
+
+On the other hand, if the type $\H$ worker submits a bid of $\theta_\H q_\H$, she will be acceptable only to the employers of type $\H$, and will earn an expected payoff as follows:
+\begin{align}
+\label{eq:htype2}
+(\theta_\H q_\H - V_\H)\mu g(R \gamma).  
+\end{align}
+
+Rearranging terms, \eqref{eq:lowbideq} implies \eqref{eq:htype1} is larger than \eqref{eq:htype2}.
+\end{proof}
+
+Equation \eqref{eq:lowbideq} formalizes the following intuition.
+The left hand side is the relative increase in utility of a type $\H$ worker for a type $\H$ employer, compared to a type $\L$ employer.
+The right hand side measures the ratio of the hiring probability of a type $\L$ employer compared to a type $\H$ employer, for a type $\H$ worker (ignoring wage bids).
+If the right hand side is large relative to the left hand side, then the potential increase in wages by extracting additional surplus from type $\H$ employers is not worth the reduction in hiring probability.
+\footnote{Note that by modeling employer behavior through the ``screen until acceptable'' model described above, we  decouple two aspects of the model that are important to analyze the workers' strategic incentives.
+In general, workers must take into account two sources of uncertainty in their decision of what to bid: (1) what their competitors will bid; and (2) their target employer's preferences.
+In principle, these two factors are strongly coupled: an employer's preferences on a given applicant may be highly dependent on what her competitors' have bid.
+This coupling leads, in general, to intractable equilibrium analysis.
+By contrast, the screening model described above significantly simplifies the process: a worker can reason about the bid necessary to make herself acceptable to a particular type of client {\em separately} from the number of acceptable applicants this client will receive.
+In general, when employers' preferences over a particular applicant also depend on the bids of other applicants, the best response computation is more complex.}
+
+We write \eqref{eq:lowbideq} slightly idiosyncratically to make the following observation: if we fix the parameters $\theta_\L, \theta_\H, V_\H, q_\H, R$, and consider a regime where $\gamma, \mu \to 0$ with $\gamma/\mu$ fixed, then \eqref{eq:lowbideq} holds asymptotically, because the right hand side approaches infinity.
+This is a relevant parameter regime, since we expect the fractions of the market consisting of type $\H$ employers and workers, respectively, to be relatively small.  (For example, the high tier is the one selected least by employers in the experiment.)
+
+
+\subsection{\hottowel}
+
+With \hottowel, employers first make a decision about whether to declare their type as $\H$ or $\L$.
+Subsequently the game proceeds as before, except that applicants can now choose whether to apply to the $\H$ pool of employers or the $\L$ pool of employers.
+
+We have the following proposition.
+
+\begin{prop}
+\label{prop:sorteq}
+Suppose that $\gamma < \mu$.
+Then there exists an equilibrium in which:
+\begin{enumerate}
+\item Type $t = \L,\H$ employers declare they are type $t$;
+\item Type $s = \L,\H$ applicants apply to the type $t$ pool of employers;
+\item Each type $\L$ applicant bids $p_\L = \theta_\L q_\L$; and
+\item Each type $H$ applicant bids $p_\H' = \theta_\H q_\H - V_\H$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}[of Proposition \ref{prop:sorteq}.]
+In the described equilibrium, type $\L$ applicants have no incentive to deviate: they can never be acceptable to a type $\H$ employer.
+Type $\L$ employers have no incentive to deviate: they would never want to hire a type $\H$ applicant who has bid $p_\H'$.
+And Type $\H$ employers have no incentive to deviate: they would never want to hire a type $\L$ applicant.
+
+So we are left to show that type $\H$ applicants have no incentive to deviate.
+We need to show that their expected payoff is higher by applying to the type $\H$ pool of employers.
+In the type $\H$ pool, each employer receives $\poiss(R \gamma/\mu)$ competing applicants;
+while in the type $\L$ pool, each employer receives $\poiss(R (1-\gamma)/(1-\mu))$ competing applicants.
+Further, in the type $\H$ employer pool, our applicant can submit a bid of $\theta_\H q_\H - V_\H$, while in the type $\L$ employer pool, she must submit a bid of $\theta_\L q_\L$ to be acceptable.
+
+The payoff to the given type $\H$ applicant will be higher in the type $\H$ employer pool if and only if:
+\[ (\theta_\H q_\H - V_\H) g\left( \frac{R\gamma}{\mu}\right) > ( \theta_\L q_\H) g\left( \frac{R(1-\gamma)}{1-\mu}\right). \]
+Since $\theta_\H q_\H - V_\H > \theta_\L q_\H$ by assumption and $g$ is decreasing, this result holds if and only if $\gamma/\mu  < (1-\gamma)/(1-\mu)$, or equivalently, $\gamma < \mu$.
+\end{proof}
+
+The preceding result shows that with \hottowel, we obtain an equilibrium where both sides sort, and where the type $\H$ applicants are able to use the declared type information from employers to bid significantly higher.
+The condition $\gamma < \mu$ requires applicants to be on the short side of the market.
+
+\subsection{Discussion}
+
+Taken literally, our results with the preceding simple model suggest that: in markets where the high types form a small fraction of the overall population, and where the high type workers are in short supply relative to the high type employers, we should expect \hottowel~to sort the market, and lead to bidding up by high type workers in equilibrium.
+
+Of course, a real market is more murky than the stylized model above, and indeed our opinion is that reality lives somewhere in between the demand model we describe, and a model where the competition effect dominates (similar to \cite{tadelis2011information}).
+For example, observe that if workers and employers perfectly sort, and workers engage in pure Bertrand competition with each other, then wages for each type would drop to zero and all the match surplus would be captured by employers.
+%Indeed, this is a stylized version of the phenomenon observed in the model of \cite{tadelis2011information}.
+By contrast, in the sorting equilibrium we find, all the match surplus is captured by workers.
+In reality, we expect that match surplus is shared between workers and employers, and this would be consistent with an interpolation between the model we study, and a model where the worker that generates the highest utility is hired.
+
+One way to interpolate between these models would be to make both worker and employer types continuous, and allow employers to choose the utility-maximizing applicant.
+As discussed above, this approach introduces significant technical complications that make exact equilibrium characterization challenging.
+However, we conjecture that with reasonable parameters, such a model can support findings that are exactly intermediate to Bertrand competition and our model:
+in particular, where sorting is an equilibrium, higher type workers are inclined to bid up, and lower type workers are inclined to bid down.
+Informally, we expect such a result would hold in settings where lower type workers feel stronger competitive pressures due to relative oversupply; while due to relative under-supply, higher type workers can confidently bid up without substantially affecting their match probability.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Outcomes}
+\label{sec:outcomes_app}
+
+In this section we collect together detailed empirical results on analysis of outcomes: quantity of matches formed; wage bill; hours worked; and wages of hired workers.
+
+\subsection{Quantity of matches formed} 
+If revealing preferences gave employers a collection of applicants whose preferences more closely matched their own, we might expect that the total number of matches would increase.
+Defining a match as any money being spent ``against'' that job opening $i$, we estimate 
+\begin{align} \label{eq:fill}
+\mathbf{1}\{y_i > 0\} = \beta_0 + \beta_1 \mbox{ShownPref}_i + \epsilon 
+\end{align} 
+where $y_i$ is the total amount spent by the employer against that opening.
+In Table~\ref{tab:fills}, we regress an indicator for whether or not a vacancy filled (i.e., total charges where greater than zero) on various treatment indicators. 
+In Column~(1), the sample is all openings in the explicit arm, whereas in Column~(2), it is all openings in the ambiguous arm. 
+In both regressions, the coefficient on $\mbox{ShownPref}$ is negative but close to zero and far from statistically significant. 
+\important{Overall, showing p/q preferences had no apparent effect on the probability that a match was formed.}
+
+In Column~(3), we report estimates for
+\begin{align} \label{eq:filli}
+\mathbf{1}\{y_i > 0\} & = \beta_0 + \beta_1 \mbox{MT} + \beta_2 \mbox{HT} + \beta_3 \mbox{ShownPref}_i + \nonumber\\  
+                      & \beta_4 \left(\mbox{MT} \times \mbox{ShownPref}_i \right) + \beta_5 \left(\mbox{HT} \times \mbox{ShownPref}_i\right) + \epsilon  
+\end{align} 
+with the sample restricted to the ambiguous arm (in which tier selections can be treated as exogenous).
+\important{We find that medium and high-tier employers are less likely to fill their jobs, with large negative coefficients on the high- and medium-tier indicators.}
+\important{However, showing p/q preferences does not appear to help improve match formation probability: the coefficients are very close to zero for all three tiers.}
+One possibility is offsetting effects:
+better applicant pools should increase hiring probability, but higher wage bids should decrease it.
+However, this would not explain the absence of effects in the Low Tier in the ambiguous arm, as these employers received both a better pool and lower wage bids. 
+
+\subsection{Total wage bill within matches} 
+For each vacancy, we can compute the total wage bill associated with that opening, conditional upon some money being spent.
+In a competitive market, the total wage bill would be the number of efficiency units of labor purchased times the market rate for those units.
+If we think of marginal productivity as being affected by a match-specific effect, then changes to the total wage bill would move in the same direction as changes in surplus:
+when a particularly good match is formed, the employer wants to buy more of that worker's hours and vice-versa when a poor match is created. 
+
+The distribution of wage bills per match---conditional upon positive---is well approximated by a log normal distribution conditional upon any money being spent. 
+However, a substantial fraction of openings are never filled.
+Although we found that there was no difference in the probability that an opening was filled by fill rate, looking at the sample of jobs that filled by experimental group is still potentially inducing selection:
+even if the quantity of matches was the same, the kinds of employers that fill their vacancies could differ.
+We can of course still look at spend, though this concern about selection must be kept in mind. 
+
+In Table~\ref{tab:spend}, Column~(1) we report an estimate of 
+\begin{align} \label{eq:spend} 
+  \log y_i = \beta_0 + \beta_1 \mbox{ShownPref}_i + \epsilon
+\end{align} 
+where the sample is restricted to the explicit arm.
+\quantclaim{The coefficient on the treatment indicator, $\mbox{ShownPref}$, is positive and marginally significant,
+  though in economic terms, the point estimate of more than 5\% is quite large.} 
+In Column~(2) of the same table, the sample is the ambiguous arm. 
+The point estimate is smaller and not significant, though the 95\% CI for the ambiguous arm point estimate would comfortably include the explicit arm point estimate. 
+In this same column, we can see the coefficients on employer tier indicators exhibit the expected pattern:
+spend is lowest among low-tier employers, higher among middle-tier employers and higher still among employers selecting the highest tier. 
+
+If sorting improved the quality of matches generally, then we should find positive wage bill effects across categories.
+This is not the case: 
+in Column~(3) of Table~\ref{tab:spend} we report estimates of 
+\begin{align} \label{eq:spendi}
+  \log y_i & =  \beta_0 + \beta_1 \mbox{MT} + \beta_2 \mbox{HT} + \beta_3 \mbox{ShownPref}_i + \nonumber\\  
+           & \beta_4 \left(\mbox{MT} \times \mbox{ShownPref}_i \right) + \beta_5 \left(\mbox{HT} \times \mbox{ShownPref}_i\right) + \epsilon
+\end{align}
+with the sample restricted the the ambiguous arm and we find that in the low-tier, the effect is negative.
+\important{Rather than showing an across-the-tier increase, the results indicate that the effects are concentrated in HT and LT.}
+This is not consistent with match quality improving everywhere---an issue we turn to in Section~\ref{sec:discussion}. 
+
+Figure~\ref{fig:wage_bill} displays the regression results from Column~(3), Table~\ref{tab:spend}.
+It makes clear the susbtantial reduction in the wage bill and the low-tier, the rise in meidum-tier and the and the absence of discernible effects in the high-tier. 
+
+\begin{figure} 
+\centering 
+\begin{minipage}{0.80 \linewidth}
+ \includegraphics[width = \linewidth]{./plots/wage_bill_reg_viz.pdf} \\
+                 {\footnotesize \emph{Notes:}
+                   This figure shows conditional means for the log wage bill per job opening in the ambiguous arm of the experiment, by employer p/q selection and ShownPref assignment.
+                   \threefacetdesc 
+                   \tierdef \ambigdef \shownprefdef
+                   The error bars indicate the 95\% confidence interval for the conditional mean.
+                }
+\end{minipage} 
+\caption{Log wage bill by p/q choice and revelation \label{fig:wage_bill}} 
+\end{figure} 
+
+\subsection{Hours worked} 
+
+As an outcome measure of match quality, the total wage bill is problematic because we know the treatment has both compositional/selection effects and affects the bidding of employers.
+Another measure is hours worked. 
+
+Table~\ref{tab:hours} reports regressions of log hours worked on the dependent variables. 
+The Column~(1) sample is restricted to explicit arm employers, while Columns~(2) and (3) are employers assigned to the ambiguous arms. 
+In the explicit arm, there is some evidence that the number of hours worked overall was raised. 
+\important{In Column~(3) we have some evidence that showing price/quality preferences reduced the amount of hours worked for low-tier; increased hours worked strongly for mid-tier; and increased hours worked but less strongly for high-tier.}
+The reduction in hours for low-tier revealed workers (the coefficient on ShownPref) is somewhat surprising, as the lower wage of hired workers should raise hours; further, if employers are also selecting lower productivity people, hours should go up. 
+
+\begin{figure} 
+\centering 
+\begin{minipage}{0.80 \linewidth}
+ \includegraphics[width = \linewidth]{./plots/hours_reg_viz.pdf} \\
+                  {\footnotesize \emph{Notes:}
+                  This figure shows the conditional mean of the log hours worked in the ambiguous arm of the experiment, by employer p/q selection and ShownPref assignment.  
+                  The visualization corresponds to the fitted estimates in Column~(3) of Table~\ref{tab:hours}. 
+                  \threefacetdesc
+                  \tierdef \ambigdef \shownprefdef
+                  The error bars indicate the 95\% CI for the conditional mean.
+                  }
+\end{minipage} 
+\caption{Log hours worked in the ambiguous arm, by tier and selection} 
+\end{figure} 
+
+\subsection{Wages of hired workers} 
+Over the course of a relationship, hired workers can receive wage increases or witness a reduction in wages. 
+We take the average wage (total earnings over hours worked) and then compare the mean log wage by experimental group. 
+Table~\ref{tab:hired_rate} reports regressions of log mean wage on ShownPref indicator in Columns~(1) and (2) and the ShownPref indicator interacted with p/q choice. 
+The sample for the Column~(1) regression is employers from the explicit arm, whereas the sample for Columns~(2) and (3) is employers from the ambiguous arm.  
+
+From Columns~(1) and (2), we see that there was no overall effect on the hired worker wage in either arm. 
+However, in Column~(3), when we decompose effects by p/q choice, we see a decrease in the low-tier and an increase in the high-tier from revealing the p/q preference. 
+Figure~\ref{fig:hourly_wage_reg_viz} illustrates the effect by p/q choice in the ambiguous arm:
+we see the decrease the low-tier and the increase in the high tier.  
+\important{The change in wages in the expected direction imply that employers do end up paying more or less in the direction implied by the sorting and bidding effects i.e., the employers are not able to wholly ``undo'' the sorting and bidding changes through their hiring choices.}
+
+\begin{figure} 
+\centering 
+\begin{minipage}{0.80 \linewidth}
+ \includegraphics[width = \linewidth]{./plots/hourly_wage_reg_viz.pdf}\\
+  {\footnotesize \emph{Notes:}
+   This figure shows the conditional mean of the log hours worked in the ambiguous arm of the experiment, by employer p/q selection and ShownPref assignment.  
+   The visualization corresponds to the fitted estimates in Column~(3) of Table~\ref{tab:hours}. 
+   \threefacetdesc
+   \tierdef \ambigdef \shownprefdef
+   The error bars indicate the 95\% CI for the conditional mean.
+}
+\end{minipage} 
+\caption{Mean log hourly wage in the ambiguous arm, by tier and selection \label{fig:hourly_wage_reg_viz}} 
+\end{figure} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Randomization} \label{sec:balance} 
+
+There appears to be no problem with the allocation---consistent fractions of users are allocated to the various cells each day.  
+The proportions nearly precisely match our planned allocations. 
+In Figure~\ref{fig:allocation_per_day}, we plot the count of applicants to each of the various treatment cells. 
+
+\begin{figure}
+\begin{center}
+ \includegraphics[scale = 0.35]{./plots/allocation_by_day.pdf} 
+\end{center}
+\caption{Allocation of users to the experiment, by day \label{fig:allocation_per_day}}   
+\end{figure} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Employer p/q preferences by type of work}\label{sec:employer_preferences}
+
+In addition to the strong cross-category patterns, there is also substantial within category variation: 
+In Figure~\ref{fig:tiers_by_sub_cat}, we plot the mean tier selection, along with a 95\% CI for that mean. 
+
+\begin{figure}
+\centering
+\begin{minipage}{0.90 \linewidth} 
+\includegraphics[width = 0.95\linewidth]{./plots/pref_by_level2.pdf}.R
+{\footnotesize \emph{Notes:} This figure shows the mean tier selection by Level 1 and Level 2 categories.}
+\end{minipage} 
+\caption{Preferences by category and sub-category \label{fig:tiers_by_sub_cat}} 
+\end{figure} 
+
+\subsection{Job complexity and preferences} 
+For each job vacancy employers must post a job description. 
+The more complex and the more special requirements, the longer the job description. 
+The complexity of a job might affect the employer's price/quality preferences, though in cross-sections alone, we might worry that employers that a tendency to write long or short job descriptions is correlated with general preference over price/quality. 
+Because we observe the same employers posting multiple jobs, we can address this by including an employer-specific effect. 
+In Table~\ref{tab:job_complexity}, Column~(1) we report the regression 
+\begin{align}
+\mbox{HighTier}_{it} = \beta_0 + \beta_1 \log \mbox{JobDescLength}_{it} + c_i + \epsilon_{ij}  
+\end{align} 
+where $\mbox{JobDescLength}$ is the job description length and $c_i$ is an employer-specific effect. 
+In Column~(3), rather than an indicator for high tier, we regress the tier choice as an integer, with $-1$ = low tier, $0$ as middle tier and $1$ as high-tier. 
+
+In both regressions, we can see that an increase in project complexity as measured by job description length, is associated with a greater preference for quality, even when controlling for the identify of the employer. 
+\important{One implication of this finding is that it is probably incorrect to conceive of employers has having a fixed preference or ``type'' but rather as having project-specific preferences.}  
+
+\subsection{Expected job duration and preferences} 
+When employers post a job they report how long they expect the position to last. 
+Table~\ref{tab:job_duration} shows that employers with shorter-duration projects have a preference for higher quality, 
+even when controlling for employer identity.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The effect of p/q preference revelation}
+\label{sec:pqreveal}
+
+From Figure~\ref{fig:tier_by_cat}, p/q preferences do not appear to depend on experimental group.
+It is useful to consider why we might expect a difference across groups:
+buyers with high-type preferences must decide whether the benefits of choosing the high-tier signal---more sellers of the right type---outweigh the cost---lower bargaining power and a higher price.  
+We address the extent to which sellers actually sort in Section \ref{sec:composition}; in this section we examine the buyer signaling choice in the explicit arm.
+In the explicit arm, buyers know that their choice will or will not be revealed to sellers.
+If buyers anticipated that they could raise their bid against a high-type seller---a non-obvious inference, as it depends upon how other buyers both sort and bid---then from the employer's perspective, it becomes ambiguous whether or not to send the signal: 
+if bargaining power effects (bad for the buyer) dominate the sorting effects (good for the seller), then we would expect buyers to give an uninformative signal, which likely means claiming ``average'' i.e., middle-tier preferences.
+
+There are several justifications for the middle-tier as signal choice of employers looking to ``pool.''
+Ex ante, the middle-tier choice seems a Schelling/focal point in the coordination game \citep{schelling1980strategy}, being in the middle and expressing a mix of attributes as opposed to ``extreme'' preferences.
+It is considered best practice in the software-as-a-service industry to put the most attractive option in the middle when choices are arranged horizontally. 
+Empirically, the middle tier is by far the most common choice, with the majority of buyers selecting the middle tier regardless of experimental group.
+An employer looking to claim average tastes would thus likely choose the middle tier. 
+
+Although we know what buyers with $\mbox{ShownPref} = 1$ believe---that their p/q preference will be shown to would-be sellers---it is less clear what buyers with $\mbox{ShownPref} = 0$ believe about the implications of their signal. 
+They might believe that the platform would use their signal to present them a different class of sellers using algorithmic means (falsely, at least at the time the choice was made).
+The only thing they knew for certain was that their preference would not be directly conveyed to workers, whereas in the $\mbox{ShownPref} = 1$ case, it would be shown. 
+
+We can first test for aggregate differences in tier-selection by experimental group by estimating
+\begin{align} \label{eq:tierz} 
+  \mbox{TierZscore} = \beta_0 + \beta_1 \mbox{ShownPref} + \epsilon, 
+\end{align}
+where $\mbox{TierZScore}$ is simply the z-score of the tier selection when the tiers are assumed to be one unit apart (i.e., 1, 2, 3). 
+Column~(1), Table~\ref{tab:revelation} presents an OLS estimate of this equation.
+The coefficient on $\mbox{ShownPref}$ is small in magnitude and far from statistically significant. 
+\important{Knowledge that p/q signal will or will not be revealed seems to have no effect on the average reported tier.}
+
+Despite no movement in aggregate scores, it could be the case that greater pooling in the $\mbox{ShownPref} = 1$ case would consist of more employers choosing the middle option, pulling weight away from the extremes and leaving the mean unchanged.
+For this reason, we can estimate the effects of $\mbox{ShownPref}$ on the the probability of choosing a particular tier by estimating three separate regressions.  
+As more experienced employers might have a better sense of the marketplace and worker-bidding, they might be more likely to pool.
+On the other hand, more experienced employers might also be better able to distinguish applicants and thus may perceive sending the high p/q signal as less risky. 
+As we conjecture that an employer's past on-platform experience could mediate any effects, we create an indicator $\mbox{AnyPriorSpend}$, for whether the employer had previous expenditures on the platform when they posted their opening.  
+
+In Columns~(2) through (4) of Table~\ref{tab:revelation}, we report estimates of 
+\begin{align} \label{eq:tieri}
+\mbox{S}_{ik} = \beta_0 + \beta_1 \mbox{ShownPref}_i + \beta_2 \left( \mbox{ShownPref}_i \times \mbox{AnyPriorSpend}_i \right ) + \beta_3 \mbox{AnyPriorSpend}_i + \epsilon_i
+\end{align} 
+where $S_{ik}$ is an indicator for the employer $i$ choosing to send signal $k$ where indexes the three tiers. 
+
+The coefficient on $\mbox{ShownPref}$ is close to zero and nowhere significant across Columns~(2) through (4), implying that \important{knowledge that price/quality preferences would be shown to applicants has no detectable effect on the fraction choosing that tier.}
+The coefficient on $\mbox{AnyPriorSpend}$ is strongly negative for the low-tier regression and strongly positive for the medium- and high-tier regressions. 
+\important{Employers with on-platform experience are systematically less likely to choose the low tier and more likely to choose the high and middle tiers.}
+It is unclear whether this is a compositional effect or whether past experiences push them towards using more experienced and higher-cost workers.
+However, Table~\ref{tab:employer_choice_fe}, Appendix~\ref{sec:employer_preferences} presents a within-employer analysis that suggests that with greater use, employers shift towards sending the high p/q signal. 
+
+The coefficient on the $\mbox{ShowPref} \times \mbox{AnyPriorSpend}$ regressor differs by tier:
+it is slightly negative in the middle- and high-tiers and slightly positive in the middle tier and close to significantly so.
+The magnitude is fairly small, but it is some evidence that \important{employers with more experience shift towards less extreme, middle tier signals when they believe that their p/q signal will be revealed.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Messaging about revelation}
+\label{sec:messaging} 
+In two cells of the three-cell ambiguous arm employer p/q preferences were revealed to would-be applicants.
+Within these two revealing cells, in one cell, the employer learned that their preference was revealed---$\mbox{Msgd} = 1$---while in the other, they did not---$\mbox{Msgd} = 0$.
+In the cell where employers where messaged, they knew they were facing a pool that conditioned both their applications and their wage bids on knowledge of the employer's preference.
+In the cell where they were not, they presumably had some belief about the probability that they were facing such a self-selected pool versus the status quo of applicants that could not condition.   
+
+The intent of this aspect of the experimental design was to test whether employers having perfect knowledge affected outcomes.
+While all employers observe prices perfectly, we might imagine that employers with more experience and/or with different p/q preferences might be better able to infer productivity.
+In Table~\ref{tab:ats} we check whether $\mbox{Msgd}$ had an effect on a host of outcomes:
+whether the job was filled, the log wage bill, the log mean wage of the hired worker, the log hours worked and the feedback given to the hired worker (in Columns~(1) through (5), respectively).
+Across the regressions, we find no evidence that messaging had a discernible effect on any of these outcomes.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Employer posting dynamics} 
+\label{sec:dynamics} 
+For the analysis so far, we restricted our attention to the first job post by an employer.
+However, as employers posted additional job openings, the same treatment assignments held.
+This allows us to explore how p/q preferences change with experience. 
+
+\subsection{Do the treatments affect the probability that an employer posts subsequent jobs?}
+
+Table~\ref{tab:employer_choice_fe} regresses tier selection on the opening rank ($\mbox{OpeningRank}$), with the inclusion of employer-specific fixed effects.
+The standard errors are clustered and the employer level and the sample is restricted to employers with more than one but less than 10 openings.
+
+In Column~(1) the dependent variable is selecting the low-tier, Column~(2) the middle tier and Column~(3) the high-tier.
+\important{There is a movement away from the middle-tier and towards the high-tier over time, with little change in the low-tier. However, the practical significance appears quite small.}
+In Column~(4), we interact the opening rank with $\mbox{ShownPref}$. 
+\important{Having p/q preferences revealed does not seemt to discernibly affect the trend towards requesting high-price/high-quality with greater employer experience.}
+
+
+%% Table~\ref{tab:interviewee_attributes} 
+%% \input{./tables/interviewee_attributes.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Employer recruiting}  \label{sec:employer_recruiting}
+Employers do not have to passively accept the pool of applicants that their listing draws: 
+they can---and do---go into the marketplace to recruit applicants. 
+In the parlance of oDesk, they ``invite'' applicants to apply for their openings. 
+Most employers do not recruit, and among those that do, a small number send a very large number of invitations. 
+As such, the count of invitations is badly scaled. 
+As an alternative measure, we can look at just an indicator for whether the employer sent any invitations. 
+We can further condition these invitations as occurring ``early'' (within the first hour of posting) and ``late'' (after this first hour, when some applicants arrive). 
+
+In Table~\ref{tab:invites}, we report regressions where the outcomes are indicators for whether the employer send any early, any late and any invites at all. 
+\important{We can see that high and middle tier employers are much more likely to recruit, but that the treatment had no effect on the propensity to recruit across tiers.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Employer screening} \label{sec:screening}
+Once an employer has an applicant pool to choose from, they must screen those applicants and decide whom to hire, if anyone.
+Generally, the micro-foundations of how employers screen applicants is poorly understood (TK - cite JJH work here).
+In this case, it is easy to imagine several different effects the p/q signaling mechanism could have on screening outcomes.
+
+The effect of having a ``better'' pool of applicants is theoretically ambiguous.
+A collection of applicants that more closely match the employer's preference might mean the employer needs to evaluate a smaller number to find a good candidate. 
+However, this seem virtuously selected pool of applicants might offer a higher return to screening and evaluation, and so we may see the employer spend more time on screening given their embarrassment of riches. 
+The increase in wage bids found in some cells makes the hiring decision potentially more consequential (and less so in the low-tier where employers were offered a discount). 
+
+As such, it is theoretically ambiguous---but empirically interesting---whether a ``better'' mix of applicants will increase or decrease the amount of evaluation and screening that occurs.
+
+\subsection{Viewing of applications by employers}
+
+On the platform it is possible to measure whether the employer opened up the ``thumbnail'' view of an application to investigate it further.
+This ``viewing'' is the online equivalent of pulling a paper resume out of the stack to give it a more comprehensive look.
+
+Table~\ref{tab:viewed} reports regressions relating to this measure of employer viewing:
+Column~(1) is whether the employer viewed any application at all and Column~(2) is the fraction viewed.
+In both regressions, the same is restricted to employers that received at least one application. 
+\important{While employers in high and medium tiers are more likely to view some number of candidates and view a higher fraction of their candidates, there is no evidence that revelation of that preference affected screening.} 
+
+\subsection{Interviewing} 
+In Table~\ref{tab:interviews}, we regress the number of interviews conducted by an employer of the treatment indicator interacted with the tier selection. 
+Recall that in oDesk, all invites are interviews. 
+We restrict the sample to employer sending 10 or fewer invitations. 
+The purpose of this restriction is to try to net out the ``mass inviters'' that inviting a large number of workers to apply to their vacancy. 
+As with viewing, we see no strong interviewing patterns.
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \section{Qualitative and subjective measures of contract outcomes}
+
+%% \subsection{Employer rated contract a success} 
+%% When an employer ends a contract, they report to oDesk whether the project was competed successfully. 
+%% If better matches were formed, we might expect a higher success rate when preferences are known---though the fact that revealing price/quality preferences also causes strategic increases in wage bids might have the opposite effect. 
+
+%% \input{./tables/success.tex} 
+
+%% Table~\ref{tab:success} reports regressions of the ``success'' indicator on various dependent variables. 
+%% In Column~(1), the dependent variable is simply an indicator for showing price/quality preferences, with the sample restricted to employers in the explicit arm. 
+%% In Column~(2), the ambiguous arm is used with the same regressors, while in Column~(3) the shown preference indicator is interacted with the employer's price/quality preference. 
+
+%% \important{There is some evidence that mid-tier and high-tier employers had a greater success rate, while low-tier employers had a lower rate when the preference was shown.}
+ 
+%% \subsection{Bi-lateral feedback} 
+%% On oDesk, feedback is given at the end of a contract. 
+%% It is bi-lateral, with employers rating workers and workers rating employers.  
+%% If employers received a better collection of applicants, they might rate them more highly over-all. 
+
+%% Table~\ref{tab:feedback} regresses both kinds of feedback on the independent variables. 
+
+%% \input{./tables/feedback.tex} 
+
+%% \input{./tables/feedback_ss.tex}
+
+%% \input{./tables/feedback_cond.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Tables} \label{sec:tables}
+
+In this section we gather together the regression and summary tables for our results.
+
+Table \ref{tab:app_counts} studies the effect of employer p/q preference revelation on the size of the applicant pool received.
+
+Table \ref{tab:pr_rate_percentiles} measures the effect of employer p/q preference revelation on the market wage of applicants, as measured by their profile rate.
+
+Table \ref{tab:past_earnings_percentiles} measures the compositional effect of employer p/q preference revelation on the level of past experience of applicants, as measured by cumulative prior earnings.
+
+Table \ref{tab:wage_bid_percentiles} gives summary statistics of the distribution of per-opening wage bids.
+
+Table \ref{tab:markups} gives results on the effect of employer p/q preference revelation on wage bid markups by applicants.
+
+Table \ref{tab:fills} gives results on the effect of employer p/q preference revelation on the quantity of matches formed.
+
+Table \ref{tab:spend} gives results on the effect of employer p/q preference revelation on the total wage bill (conditional on a job being filled).
+
+Table \ref{tab:hours} gives results on the effect of employer p/q preference revelation on the number of hours billed (conditional on more than one hour being worked).
+
+Table \ref{tab:hired_rate} gives results on the effect of employer p/q preference revelation on the wages of hired workers.
+
+Table \ref{tab:job_complexity} describes employer preferences over quality based on job complexity.
+
+Table \ref{tab:job_duration} describes employer preferences over quality based on job duration.
+
+Table \ref{tab:revelation} studies how treatment (in particular, telling the employer whether or not their signal will be revealed) influences the p/q signal of an employer.
+
+Table \ref{tab:ats} studies whether messaging the employer that their preference had been revealed to applicants influences outcomes.
+
+Table \ref{tab:employer_choice_fe} studies how tier selection varied over the sequence of openings posted by an employer (i.e., posting dynamics).
+
+Table \ref{tab:invites} investigates whether treatment affected the propensity of employers to invite applicants to their openings.
+
+Table \ref{tab:viewed} reports whether revelation of employers' p/q preference influenced their screening behavior, as measured by viewing of applicants.
+
+Table \ref{tab:interviews} reports whether revelation of employers' p/q preference influenced their screening behavior, as measured by interviews of applicants.
+
+
+
+\newpage
+\input{./tables/app_counts.tex} 
+
+\newpage
+\input{./tables/profile_rate_percentiles.tex}
+
+\newpage
+\input{./tables/past_earnings_percentiles.tex}
+
+\newpage
+\input{./tables/wage_bid_percentiles.tex}
+
+\newpage
+\input{./tables/markups.tex}
+
+\newpage
+\input{./tables/fills.tex}
+
+\newpage
+\input{./tables/spend.tex}
+
+\newpage
+\input{./tables/hours.tex} 
+
+\newpage
+\input{./tables/hired_rate.tex}
+
+\newpage
+\input{./tables/job_complexity.tex} 
+
+\newpage
+\input{./tables/job_duration.tex} 
+
+\newpage
+\input{./tables/knowledge_and_choice_past_exper.tex}
+
+\newpage
+{\tiny
+\input{./tables/ats_message.tex} 
+}
+
+\newpage
+\input{./tables/employer_choice_fe.tex}
+
+\newpage
+\input{./tables/invites} 
+
+\newpage
+\input{./tables/viewing.tex}
+
+\newpage
+\input{./tables/interviews.tex}
+
+\newpage 
+\begin{acks}
+  The authors would like to thank the oDesk Corporation for their support of our analysis---in particular, we would like to thank Shane Kinder for his expert product management, without which the feature described in this paper would not have been created and implemented.
+  We would also like to thank seminar participants at the INFORMS annual meeting and the AEA annual meeting for helpful comments and discussion of this work. 
+  Lastly, we would like to thank Steve Tadelis for generous and thoughtful comments on early drafts of this work. 
+\end{acks}
+
+
+\end{document} 
+

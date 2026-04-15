@@ -1,0 +1,48 @@
+
+% Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Jan 01, 2015 - 08:36:08 AM
+\begin{table}[!htbp] \centering 
+  \tbl{Effect of p/q revelation on the wage bid markups of applicants  \label{tab:markups} }{ 
+\begin{tabular}{@{\extracolsep{5pt}}lccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{5}{c}{Per-opening percentiles of applicant wage-bid markups:} \\ 
+\cline{2-6} 
+\\[-1.8ex] & 25th & 50th & 75th & 90th & 50th (with RE) \\ 
+\\[-1.8ex] & \textit{OLS} & \textit{OLS} & \textit{OLS} & \textit{OLS} & \textit{linear} \\ 
+ & \textit{} & \textit{} & \textit{} & \textit{} & \textit{mixed-effects} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5)\\ 
+\hline \\[-1.8ex] 
+ ShownPref & $-$0.077$^{***}$ & $-$0.051$^{***}$ & $-$0.012$^{***}$ & $-$0.016$^{***}$ & $-$0.051$^{***}$ \\ 
+  & (0.006) & (0.004) & (0.003) & (0.005) & (0.004) \\ 
+  & & & & & \\ 
+ Medium Tier (MT) & 0.094$^{***}$ & 0.041$^{***}$ & 0.014$^{***}$ & 0.017$^{***}$ & 0.030$^{***}$ \\ 
+  & (0.006) & (0.004) & (0.003) & (0.005) & (0.004) \\ 
+  & & & & & \\ 
+ High Tier (HT) & 0.124$^{***}$ & 0.047$^{***}$ & 0.021$^{***}$ & 0.028$^{***}$ & 0.034$^{***}$ \\ 
+  & (0.007) & (0.005) & (0.004) & (0.006) & (0.005) \\ 
+  & & & & & \\ 
+ MT $\times$ ShownPref & 0.084$^{***}$ & 0.052$^{***}$ & 0.012$^{**}$ & 0.018$^{**}$ & 0.052$^{***}$ \\ 
+  & (0.007) & (0.005) & (0.004) & (0.006) & (0.005) \\ 
+  & & & & & \\ 
+ HT $\times$ ShownPref & 0.125$^{***}$ & 0.069$^{***}$ & 0.025$^{***}$ & 0.060$^{***}$ & 0.069$^{***}$ \\ 
+  & (0.009) & (0.006) & (0.005) & (0.007) & (0.006) \\ 
+  & & & & & \\ 
+ Constant & $-$0.146$^{***}$ & 0.033$^{***}$ & 0.098$^{***}$ & 0.149$^{***}$ & 0.048$^{***}$ \\ 
+  & (0.005) & (0.003) & (0.003) & (0.004) & (0.005) \\ 
+  & & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 23,724 & 23,724 & 23,724 & 23,724 & 23,724 \\ 
+R$^{2}$ & 0.115 & 0.061 & 0.012 & 0.021 &  \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+}
+\centering
+\begin{minipage}{1\linewidth} 
+ \emph{Notes:} This table reports regressions of the various per-opening percentiles of the wage bid markup of applicants on ShownPref interacted with indicators for the employer's p/q tier selection. Wage bid markups are calculated using Equation~\ref{eq:markup}. 
+All regressions are OLS estimates of a variant of Equation~\ref{eq:pr} (with differing percentiles and markups substituted for profile wage) except in Column~(5), which reports a regression with a category-specific random-effect to control for the type of work asked for in the opening e.g., computer programming, graphic design etc. The sample for each regression consists of job openings assigned to the ambiguous arm of the experiment.
+Applicants with markups greater than than 100\% or zero profile rate are excluded from the sample. \ambigdef
+Standard errors are robust to heteroscedasticity. \starlanguage
+ \end{minipage}
+\end{table}

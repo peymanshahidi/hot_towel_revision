@@ -1,0 +1,54 @@
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Mon, May 10, 2021 - 09:25:07 AM
+% Requires LaTeX packages: dcolumn 
+\begin{table}[!htbp] \centering 
+  \caption{Effect of employer vertical preference revelation on the size of the applicant pool} 
+  \label{tab:app_counts} 
+\small 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{Log number of applications received} \\ 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)} & \multicolumn{1}{c}{(4)}\\ 
+\hline \\[-1.8ex] 
+ \textsc{ShownPref} & -0.019^{*} & -0.006 & -0.050^{**} & -0.149^{***} \\ 
+  & (0.010) & (0.012) & (0.017) & (0.036) \\ 
+  \textsc{MedTier} &  &  &  & -0.102^{**} \\ 
+  &  &  &  & (0.035) \\ 
+  \textsc{HighTier} &  &  &  & -0.121^{**} \\ 
+  &  &  &  & (0.042) \\ 
+  \textsc{MedTier} x \textsc{ShownPref} &  &  &  & 0.126^{**} \\ 
+  &  &  &  & (0.043) \\ 
+  \textsc{HighTier} x \textsc{ShownPref} &  &  &  & 0.137^{**} \\ 
+  &  &  &  & (0.052) \\ 
+  Constant & 2.900^{***} & 2.892^{***} & 2.924^{***} & 3.006^{***} \\ 
+  & (0.007) & (0.008) & (0.014) & (0.029) \\ 
+ \hline \\[-1.8ex] 
+{\footnotesize Includes Explicit Arm} & Y & Y & N & N \\ 
+{\footnotesize Includes Ambiguous Arm} & Y & N & Y & Y \\ 
+Observations & \multicolumn{1}{c}{48,771} & \multicolumn{1}{c}{31,778} & \multicolumn{1}{c}{16,993} & \multicolumn{1}{c}{16,993} \\ 
+R$^{2}$ & \multicolumn{1}{c}{0.0001} & \multicolumn{1}{c}{0.00001} & \multicolumn{1}{c}{0.0005} & \multicolumn{1}{c}{0.001} \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+\\ 
+\begin{minipage}{1.20 \textwidth}
+\begin{footnotesize}
+\begin{singlespace}
+\emph{Notes:}
+This table reports regressions where the outcome is the log number of applications received by that opening.
+The sample is restricted to job openings receiving at least one application.
+The same specification is used in Columns~(1) through (3), with only the sample differing.
+In Column~(4), the \textsc{ShownPref} is interacted with the employer's tier selection, which can be treated as exogenous in the ambiguous arm. 
+Standard errors are robust to heteroscedasticity.
+\signaldef{}.
+\ambigdef{}.
+\explicitdef{}. 
+\starlanguage
+\end{singlespace}
+\end{footnotesize}
+\end{minipage}
+\end{table}

@@ -1,0 +1,20 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Calls:
+% (1) HT sample:  lm(formula = mwb ~ contractor_shown, data = subset(df.openings, ambigious_arm & HT)) 
+% (2) LT sample:  lm(formula = mwb ~ contractor_shown, data = subset(df.openings, ambigious_arm & LT)) 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tabular}{lcD{.}{.}{7}cD{.}{.}{7}}
+\toprule
+&&\multicolumn{1}{c}{(1) HT sample} && \multicolumn{1}{c}{(2) LT sample}\\
+\midrule
+(Intercept)                         &  &  2.236^{***} &&  1.562^{***}\\
+                                    &  &  (0.120)     &&  (0.105)    \\
+Applicant shown employer preference &  &   0.051      &&  -0.081     \\
+                                    &  &  (0.150)     &&  (0.133)    \\
+\midrule
+R-squared                           &  &     0.001    &&     0.004   \\
+N                                   &  &    90        &&   102       \\
+\bottomrule
+\end{tabular}

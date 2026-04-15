@@ -1,0 +1,46 @@
+
+% Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Tue, Nov 29, 2016 - 06:04:56 PM
+\begin{table}[!htbp] \centering 
+  \caption{Effect of p/q revelation on the market wage of applicants, as measured by applicant profile rates} 
+  \label{tab:pr_rate_percentiles} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{5}{c}{Per-opening percentiles of applicant log profile wage by opening:} \\ 
+\cline{2-6} 
+\\[-1.8ex] & \multicolumn{5}{c}{25th} \\ 
+\\[-1.8ex] & \multicolumn{4}{c}{\textit{OLS}} & \textit{linear} \\ 
+ & \multicolumn{4}{c}{\textit{}} & \textit{mixed-effects} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5)\\ 
+\hline \\[-1.8ex] 
+ ShownPref & $-$0.108$^{***}$ & $-$0.111$^{***}$ & $-$0.116$^{***}$ & $-$0.126$^{***}$ & $-$0.111$^{***}$ \\ 
+  & (0.021) & (0.019) & (0.018) & (0.018) & (0.014) \\ 
+  & & & & & \\ 
+ Medium Tier (MT) & 0.485$^{***}$ & 0.459$^{***}$ & 0.421$^{***}$ & 0.384$^{***}$ & 0.228$^{***}$ \\ 
+  & (0.021) & (0.019) & (0.018) & (0.018) & (0.014) \\ 
+  & & & & & \\ 
+ High Tier (HT) & 0.714$^{***}$ & 0.686$^{***}$ & 0.656$^{***}$ & 0.613$^{***}$ & 0.357$^{***}$ \\ 
+  & (0.025) & (0.023) & (0.022) & (0.022) & (0.017) \\ 
+  & & & & & \\ 
+ MT $\times$ ShownPref & 0.150$^{***}$ & 0.148$^{***}$ & 0.152$^{***}$ & 0.161$^{***}$ & 0.134$^{***}$ \\ 
+  & (0.025) & (0.023) & (0.022) & (0.022) & (0.017) \\ 
+  & & & & & \\ 
+ HT $\times$ ShownPref & 0.181$^{***}$ & 0.193$^{***}$ & 0.206$^{***}$ & 0.226$^{***}$ & 0.195$^{***}$ \\ 
+  & (0.031) & (0.028) & (0.027) & (0.026) & (0.020) \\ 
+  & & & & & \\ 
+ Constant & 1.382$^{***}$ & 1.709$^{***}$ & 2.026$^{***}$ & 2.313$^{***}$ & 2.014$^{***}$ \\ 
+  & (0.017) & (0.016) & (0.015) & (0.015) & (0.055) \\ 
+  & & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 24,445 & 24,445 & 24,445 & 24,445 & 24,445 \\ 
+R$^{2}$ & 0.132 & 0.149 & 0.151 & 0.144 &  \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+\begin{minipage}{0.9\textwidth} 
+ \emph{Notes:} This table reports regressions of the various per-opening percentiles of the log profile rate of applicants on ShownPref interacted with indicators for the employer's p/q tier selection. All regressions are OLS estimates of Equation~\ref{eq:pr} (with differing percentiles) except in Column~(5), which reports a regression with a category-specific random-effect to control for the type of work asked for in the opening e.g., computer programming, graphic design etc.
+The sample for each regression consists of job openings assigned to the ambiguous arm of the experiment.
+\ambigdef  Standard errors are robust to heteroscedasticity.  \starlanguage
+ \end{minipage}
+\end{table}

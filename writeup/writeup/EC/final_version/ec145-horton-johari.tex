@@ -1,0 +1,166 @@
+%\documentclass[prodmode]{ec-acmsmall-mod}
+\documentclass[prodmode]{acmsmall-ec15}
+
+\doi{2764468.2764516}
+
+%\usepackage[small,compact]{titlesec}
+\usepackage{amsmath,amssymb,mathtools,dsfont,enumitem,appendix,comment,subfigure}
+
+% Package to generate and customize Algorithm as per ACM style
+\usepackage[ruled]{algorithm2e}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+
+% Metadata Information
+\acmVolume{X}
+\acmNumber{X}
+\acmArticle{X}
+\acmYear{2015}
+\acmMonth{2}
+\usepackage[numbers]{natbib}
+
+
+\DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+
+\newcommand{\M}{{M_0}}
+
+\newcommand{\eps}{{\epsilon}}
+\newcommand{\ind}{{\mathbbold{1}}}
+\newcommand{\Adv}{{\mathbf{Adv}}}       
+\newcommand{\p}{{\mathbf{P}}}
+\newcommand{\pb}{{\mathbf{p}}}           
+\newcommand{\vb}{{\mathbf{v}}}           
+\newcommand{\F}{{\mathbf{F}}}       
+\newcommand{\q}{{\mathbf{Q}}}       
+\newcommand{\x}{{\mathbf{x}}}       
+\newcommand{\R}{{\mathbb{R}}}       
+\newcommand{\opt}{{\mathbf{OPT}}}       
+\newcommand{\prp}{{\mathrm{prp}}}    
+\newcommand{\calK}{{\cal K}}
+\newcommand{\outputs}{{\Rightarrow}}                
+\newcommand{\getsr}{{\:\stackrel{{\scriptscriptstyle\hspace{0.2em}\$}}{\leftarrow}\:}}
+\newcommand{\andthen}{{\::\;\;}}    % \, \: \; for thinspace, medspace, thickspace
+\newcommand{\Rand}[1]{{\mathrm{Rand}[{#1}]}}       % A command with one argument
+\newcommand{\Perm}[1]{{\mathrm{Perm}[{#1}]}}       
+\newcommand{\Randd}[2]{{\mathrm{Rand}[{#1},{#2}]}} % and with two arguments
+\newcommand{\e}{\ensuremath{\mathbf{E}}}
+
+\newcommand{\diag}{\ensuremath{\operatorname{diag}}}
+\newcommand{\exit}{\ensuremath{\textsf{exit}}}
+
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{prop}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{definition}{Definition}
+%\newtheorem{exam}{Example}
+
+
+\def\EE{{\mathbb{E}}}
+\def\PP{{\mathbb{P}}}
+\def\BB{{\mathcal{B}}}
+\def\MI{{\mathcal{I}}}
+\def\setR{\mathbb{R}}
+\def\setZ{\mathbb{Z}}
+\def\setC{\mathbb{C}}
+\def\setN{\mathbb{N}}
+\def\bZ{\mathbf{Z}}
+\def\bz{\mathbf{z}}
+\def\FF{\mathcal{F}}
+\newcommand{\fall}{\,\forall\,}
+\def\vecV{\underbar{v}}
+
+\usepackage[colorlinks,
+            linkcolor=blue,
+            citecolor=blue,
+            urlcolor=magenta,
+            linktocpage,
+            plainpages=false,
+            hypertexnames=false,
+	    	pdfauthor={Siddhartha Banerjee},
+%            pagebackref=true,
+	    	pdftex]{hyperref}
+%\usepackage{nameref}
+%\usepackage{bookmark}
+
+\usepackage{color}
+\newcommand{\todo}{\color{red}}
+
+
+\clubpenalty=10000 
+\widowpenalty = 10000
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% Page heads
+\markboth{Horton, Johari}{Eliciting Buyer Preferences as a Market Design Problem}
+
+% Title portion
+%\title{A Ride Whenever you Need One: The Value of Dynamic Pricing in Ride-sharing Platforms}
+\title{At What Quality and What Price? Eliciting Buyer Preferences as a Market Design Problem}
+\author{JOHN J. HORTON
+\affil{Leonard N. Stern School of Business, New York University}
+RAMESH JOHARI
+\affil{Stanford University}
+}
+
+\begin{abstract}
+  \noindent  Buyers and sellers in markets often signal to inform the other side about their preferences.
+  Both have a mutual incentive to reveal information with respect to horizontal differentiation, but the case of vertical differentiation is more complex:
+  a buyer claiming they place a high value on quality may attract more sellers of the right ``type'' increasing efficiency, but they might also simply pay a higher price.
+  Although an efficiency-minded social planner may not care about higher prices, if this fear prevents a buyer from stating his of her true preferences, then desirable sorting caused by information-revelation may be unattainable.
+  In this paper, we consider the buyer's vertical differentiation disclosure problem through the lens of a large field experiment conducted in an online labor market. 
+  A new signaling mechanism was introduced into the market that allowed buyers to state their relative preferences over price and quality.
+  We find that the buyer signal improved seller-side sorting, with more sellers going to buyers of the right ``type''; the total number of applications also fell.
+  However, sellers also clearly tailored their wages bid to the type of buyer they faced.
+  Despite this markup, buyers chose to honestly disclose their preferences, suggesting they found the sorting effect to dominate the bargaining power effect.
+\end{abstract} 
+
+\category{J4}{Social and Behavioral Sciences}{Economics}
+
+% A category with the (minimum) three required fields
+%\category{H.4}{Information Systems Applications}{Miscellaneous}
+%\category{C.2.2}{Computer-Communication Networks}{Network Protocols}
+\terms{Economics; Experimentation} 
+
+\keywords{signaling, matching, market design}
+
+\begin{bottomstuff}
+Author contact information, data sets, code, and the current version of this draft are currently or will be available at \href{http://www.john-joseph-horton.com/}{http://www.john-joseph-horton.com/}.
+
+This work was carried out in part while the authors were employed by oDesk Corporation.
+\end{bottomstuff}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Extended Abstract}
+
+
+%\vspace{-0.35cm}
+%Acknowledgments
+%\begin{acks}
+%Part of this work was carried out when SB was a technical consultant at Lyft.
+%We would like to thank the data science team at Lyft, particularly Adam Greenhall, Chris Pouliot, and Chris Sholley; the formulation of our model greatly benefited from their inputs, and also from discussions with Lyft drivers.
+%We also thank Anilesh Krishnaswamy for several useful technical discussions.
+
+%We gratefully acknowledge support from the National Science Foundation via grants CMMI-1234955 and CNS-1343253, and the DARPA GRAPHS program.
+%\end{acks}
+
+
+%\bibliographystyle{acmsmall}
+%\bibliography{RideShare}
+
+% Electronic Appendix
+%\elecappendix
+%\input{Appendix.tex}
+
+\end{document}
+

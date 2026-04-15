@@ -1,0 +1,37 @@
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Mon, May 10, 2021 - 09:25:34 AM
+\begin{table}[!htbp] \centering 
+  \caption{Effects of employer vertical preference revelation on the mean and dispersion in reported signal of the applied-to job openings} 
+  \label{tab:worker_targeted_apps} 
+\small 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{2}{c}{Avg. Tier} & \multicolumn{2}{c}{Tier Variance} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ \textsc{ShownPref} & $-$0.092$^{***}$ & $-$0.019$^{***}$ & 0.009$^{***}$ & $-$0.011$^{***}$ \\ 
+  & (0.002) & (0.001) & (0.003) & (0.001) \\ 
+  Constant & 0.396$^{***}$ & 0.229$^{***}$ & 0.372$^{***}$ & 0.359$^{***}$ \\ 
+  & (0.002) & (0.001) & (0.002) & (0.001) \\ 
+ \hline \\[-1.8ex] 
+Same Num Apps? & N & Y & N & Y \\ 
+Observations & 111,284 & 78,598 & 7,756 & 78,598 \\ 
+R$^{2}$ & 0.017 & 0.003 & 0.001 & 0.002 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+\begin{minipage}{1\textwidth} 
+ \emph{Notes:} 
+This table reports regressions where the outcome is a measure of the worker's average tier and tier dispersion on whether the applications were sent to job openings where the vertical preference was revealed.
+The employer tier selection is transformed into a continuous outcome, with values of -1, 0, and 1 for low, medium, and high, respectively.
+The sample was constructed by taking all applications by all workers and then computing statistics on a per-worker and per-revelation level.
+Standard errors are clustered at the individual worker level. 
+In Columns~(2) and (4), the sample is restricted to only those workers that sent more than one application.
+In Column~(1) and (2), the sample is further restricted to workers that send the same number of applications to $\textsc{ShownPref}=1$ openings as $\textsc{ShownPref}=0$ openings.
+ \starlanguage
+ \end{minipage}
+\end{table}

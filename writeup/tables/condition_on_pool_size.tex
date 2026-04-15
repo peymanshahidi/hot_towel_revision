@@ -1,0 +1,40 @@
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Mon, May 10, 2021 - 09:25:39 AM
+\begin{table}[htbp!] \centering 
+  \caption{Effects of applicant pool size on individual wage bidding behavior} 
+  \label{tab:condition_on_pool_size} 
+\resizebox{0.65\textwidth}{!}{
+\small 
+\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & Wage Bid & Log Apps & Wage Bid \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
+\hline \\[-1.8ex] 
+ Log num apps & $-$0.036$^{***}$ &  &  \\ 
+  & (0.001) &  &  \\ 
+  IV &  & 0.780$^{***}$ &  \\ 
+  &  & (0.004) &  \\ 
+  Log num apps (instrumented) &  &  & $-$0.127$^{***}$ \\ 
+  &  &  & (0.003) \\ 
+ \hline \\[-1.8ex] 
+Worker FE & Y & Y &  \\ 
+Observations & 583,492 & 583,303 & 583,303 \\ 
+R$^{2}$ & 0.919 & 0.555 & 0.915 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\\
+\end{tabular}
+}
+\begin{minipage}{1.0\textwidth} 
+ \emph{Notes:} This table reports regressions that explore the relationship between applicant pool size and individual wage bidding.
+In Column~(1), the OLS estimate of log wage bids on log pool size is reported, with a worker-specific fixed effect.
+In Column~(2), the first stage of an IV regression regression is reported, where the IV is the mean log number of applications received by job openings posted the same day, and in the same work category, as the ``focal'' job opening (but not including that opening).
+In Column~(3), the second stage of the IV regression is reported.
+The sample consists of all applications to exeriment job openings that received at least two applications. 
+ \starlanguage
+ \end{minipage}
+\end{table}

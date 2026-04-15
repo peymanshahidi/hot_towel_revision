@@ -1,0 +1,42 @@
+
+% Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Jan 01, 2015 - 08:30:21 AM
+% Requires LaTeX packages: dcolumn 
+\begin{table}[!htbp]  \centering 
+  \tbl{Effect of employer p/q preference revelation on the size of the applicant pool  \label{tab:app_counts}}{ 
+
+\small 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{3}{c}{Log number of applications received} \\ 
+ & \multicolumn{1}{c}{Ambiguous Arm} & \multicolumn{1}{c}{Ambiguous Arm} & \multicolumn{1}{c}{Explicit Arm} \\ 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\ 
+\hline \\[-1.8ex] 
+ P/Q choice shown to applicants, ShownPref & -0.050^{**} & -0.149^{***} & -0.006 \\ 
+  & (0.017) & (0.036) & (0.012) \\ 
+  Medium Tier (MT) &  & -0.102^{**} &  \\ 
+  &  & (0.035) &  \\ 
+  High Tier (HT) &  & -0.121^{**} &  \\ 
+  &  & (0.042) &  \\ 
+  MT x ShownPref &  & 0.126^{**} &  \\ 
+  &  & (0.043) &  \\ 
+  HT x ShownPref &  & 0.137^{**} &  \\ 
+  &  & (0.052) &  \\ 
+  Constant & 2.924^{***} & 3.006^{***} & 2.892^{***} \\ 
+  & (0.014) & (0.029) & (0.008) \\ 
+ \hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{16,993} & \multicolumn{1}{c}{16,993} & \multicolumn{1}{c}{31,778} \\ 
+R$^{2}$ & \multicolumn{1}{c}{0.0005} & \multicolumn{1}{c}{0.001} & \multicolumn{1}{c}{0.00001} \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+}\centering
+\begin{minipage}{0.9875\linewidth} 
+ \emph{Notes:} This table reports OLS regressions of the log number of applications received by that opening, conditional upon receiving any.
+Columns~(1) and (3) report estimates of Equation~\ref{eq:apps}, whereas Column~(2) reports estimates of Equation~\ref{eq:appsi}. 
+In Columns~(1) and (2), the sample is restricted to employers allocated to the ambiguous arm, whereas in Column~(3) the sample is estimated with observations from the explicit arm. \ambigdef \explicitdef \shownprefdef \tierdef Standard errors are robust to heteroscedasticity.  \starlanguage 
+ \end{minipage}
+\end{table}

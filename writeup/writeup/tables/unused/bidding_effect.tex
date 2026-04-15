@@ -1,0 +1,43 @@
+
+% Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Fri, Mar 23, 2018 - 04:53:11 PM
+\begin{table}[!htbp] \centering 
+  \caption{Worker wage bid, profile rate and experience at time of application, by employer vertical preference and revelation status} 
+  \label{tab:bidding_effect} 
+\small 
+\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & Wage bid & Profile rate & Past hours \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
+\hline \\[-1.8ex] 
+ \textsc{ShownPref} & $-$0.098$^{***}$ & 0.001 & 0.004 \\ 
+  & (0.003) & (0.002) & (0.004) \\ 
+  \textsc{MedTier} & 0.062$^{***}$ & 0.008$^{***}$ & 0.023$^{***}$ \\ 
+  & (0.003) & (0.002) & (0.004) \\ 
+  \textsc{HighTier} & 0.082$^{***}$ & 0.008$^{***}$ & 0.018$^{***}$ \\ 
+  & (0.004) & (0.002) & (0.005) \\ 
+  \textsc{MedTier} x \textsc{ShownPref} & 0.110$^{***}$ & 0.001 & 0.008$^{*}$ \\ 
+  & (0.004) & (0.002) & (0.005) \\ 
+  \textsc{HighTier} x \textsc{ShownPref} & 0.171$^{***}$ & 0.004 & 0.010$^{*}$ \\ 
+  & (0.005) & (0.002) & (0.006) \\ 
+ \hline \\[-1.8ex] 
+Worker FE & Y & Y & Y \\ 
+Observations & 461,852 & 461,852 & 307,580 \\ 
+R$^{2}$ & 0.921 & 0.968 & 0.964 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular}
+\begin{minipage}{1\textwidth} 
+ \emph{Notes:} This table reports regressions of application characteristics on job opening characteristics. 
+ The sample consists of all applications sent to job openings in the ambiguous arm of the experiment.
+\signaldef{}.
+\ambigdef{}. 
+In each regression, a worker specific fixed effect is included.
+Standard errors are clustered at the level of the individual worker.
+The dependent variables are the worker's hourly wage bid, profile rate at time of application and past hours-worked at time of application, in Columns~(1), (2) and (3), respectively. 
+ \starlanguage
+ \end{minipage}
+\end{table}

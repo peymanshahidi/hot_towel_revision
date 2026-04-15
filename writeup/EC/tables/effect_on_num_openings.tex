@@ -1,0 +1,45 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Calls:
+% (1):  lm(formula = num.openings ~ grp, data = DT.openings[(is.first.opening)]) 
+% (2):  lm(formula = log(num.openings) ~ grp, data = DT.openings[(is.first.opening)]) 
+% (3):  lm(formula = log(num.openings) ~ contractor.shown, data = subset(DT.openings, is.first.opening)) 
+% (4):  lm(formula = log(num.openings) ~ grp, data = subset(DT.openings, ambigious.arm & is.first.opening)) 
+% (5):  lm(formula = log(num.openings) ~ contractor.shown, data = subset(DT.openings, ambigious.arm & is.first.opening)) 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tabular}{lcD{.}{.}{7}cD{.}{.}{7}cD{.}{.}{7}cD{.}{.}{7}cD{.}{.}{7}}
+\toprule
+&&\multicolumn{1}{c}{(1)} && \multicolumn{1}{c}{(2)} && \multicolumn{1}{c}{(3)} && \multicolumn{1}{c}{(4)} && \multicolumn{1}{c}{(5)}\\
+\midrule
+(Intercept)                               &  &  1.010^{***} &&  0.006^{**}  &&  0.005^{***} &&  0.004^{***} &&  0.004^{***}\\
+                                          &  &  (0.004)     &&   (0.002)    &&  (0.001)     &&  (0.001)     &&  (0.001)    \\
+grp: G2|SHWN/G1|Opt                       &  &  -0.004      &&   -0.002     &&              &&              &&             \\
+                                          &  &  (0.004)     &&   (0.002)    &&              &&              &&             \\
+grp: G3|NOT_SHWN/G1|Opt                   &  &  -0.002      &&   -0.001     &&              &&              &&             \\
+                                          &  &  (0.004)     &&   (0.002)    &&              &&              &&             \\
+grp: G4|AMBG_NOT-SHWN/G1|Opt              &  &  -0.004      &&   -0.002     &&              &&              &&             \\
+                                          &  &  (0.004)     &&   (0.002)    &&              &&              &&             \\
+grp: G5|AMBG_SHWN_MSG/G1|Opt              &  &  -0.002      &&   -0.002     &&              &&              &&             \\
+                                          &  &  (0.004)     &&   (0.002)    &&              &&              &&             \\
+grp: G6|AMBG_SHWN_NO-MSG/G1|Opt           &  &  -0.006      &&   -0.003     &&              &&              &&             \\
+                                          &  &  (0.004)     &&   (0.002)    &&              &&              &&             \\
+contractor.shown                          &  &              &&              &&  -0.001      &&              &&  -0.000     \\
+                                          &  &              &&              &&  (0.001)     &&              &&  (0.001)    \\
+grp: G5|AMBG_SHWN_MSG/G4|AMBG_NOT-SHWN    &  &              &&              &&              &&   0.000      &&             \\
+                                          &  &              &&              &&              &&  (0.002)     &&             \\
+grp: G6|AMBG_SHWN_NO-MSG/G4|AMBG_NOT-SHWN &  &              &&              &&              &&  -0.001      &&             \\
+                                          &  &              &&              &&              &&  (0.002)     &&             \\
+\midrule
+R-squared                                 &  &       0.000  &&       0.000  &&       0.000  &&       0.000  &&       0.000 \\
+adj. R-squared                            &  &      -0.000  &&      -0.000  &&       0.000  &&      -0.000  &&      -0.000 \\
+sigma                                     &  &       0.106  &&       0.060  &&       0.060  &&       0.057  &&       0.057 \\
+F                                         &  &       0.892  &&       0.700  &&       1.728  &&       0.445  &&       0.060 \\
+p                                         &  &       0.485  &&       0.623  &&       0.189  &&       0.641  &&       0.806 \\
+Log-likelihood                            &  &   18643.386  &&   31802.007  &&   31801.121  &&   11094.583  &&   11094.168 \\
+Deviance                                  &  &     256.849  &&      80.530  &&      80.536  &&      24.582  &&      24.584 \\
+AIC                                       &  &  -37272.772  &&  -63590.013  &&  -63596.241  &&  -22181.166  &&  -22182.336 \\
+BIC                                       &  &  -37216.564  &&  -63533.806  &&  -63572.152  &&  -22153.398  &&  -22161.510 \\
+N                                         &  &   22690      &&   22690      &&   22690      &&    7646      &&    7646     \\
+\bottomrule
+\end{tabular}
