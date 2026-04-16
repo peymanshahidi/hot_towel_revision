@@ -301,17 +301,7 @@ message space is without loss of generality given that we only have two
 types of firms. With probability $1-\rho $ the firm cannot send a message,
 which we denote by $m_{i}=\emptyset .$ For notational convenience let $%
 M=\{\emptyset ,L,H\}$, which accounts for the case where the firm cannot
-send a signal. Each firm also generates two signals: $s_{1,i}$ and $s_{2,i},$
-each of which is drawn from set $\{L,H\}.$ We assume that signals are i.i.d.
-conditional on the true firm type $T_{i}.$ The signal coincides with the
-true type with probability $\psi _{1}$ and $\psi _{2},$ respectively, with
-the obvious requirement that these probability exceed one-half. The first
-signal can be easily observed by workers but may be noisy, while the second
-is observed only after careful reading and evaluation of the job description
-and is extremely precise ($\psi _{2}$ close to 1). It turns out that under
-truthful cheap-talk these messages play no role, but they in particular
-allow workers some way of conditioning their search and their bids even if
-cheap-talk is uninformative or absent.
+send a signal. Each firm also generates two signals $s_{1,i},s_{2,i}\in\{L,H\}$, drawn i.i.d. conditional on the true firm type $T_{i}$, matching that type with probabilities $\psi_{1}$ and $\psi_{2}$ respectively (both exceeding one-half). Workers observe the first signal easily but it is noisy; the second is obtained only after careful reading of the job description and is extremely precise ($\psi_{2}$ close to 1). Under truthful cheap talk these signals play no role, but they let workers condition their search and bids when cheap talk is absent or uninformative. The formal way in which $s_{2}$ enters the workers' bidding problem — and the reason we can often take $\psi_{2}\to 1$ as a simplifying limit — is deferred to Appendix~\ref{online_app:formal-equilibrium} and discussed further in Appendix~\ref{online_app:robustness}.
 
 Workers decide to enter. Those who enter observe the joint distribution of
 messages and first signals, and choose a job announcement with desired
@@ -346,71 +336,7 @@ the joint probability $\Psi (s_{2},T|m,s_{1})$ of the second signal and
 type, and a conditional belief $\Psi (T|m,s_{1},s_{2})$ after observing all
 signals.
 
-The easiest way to sum up the workers behavior is through the ratio $\Lambda
-(a,b_{L},b_{H}|m,s_{1})$ of workers with ability weakly above $a$ who will
-bid weakly above $b_{L}$ after a low second signal and above $b_{H}$ after a
-high second signal, per job with initial observable $(m,s_{1}).$ This is
-also called the queue length of workers. Sometimes it is useful to focus on
-the marginal $\Lambda _{a}(a|m,s_{1})$ of workers with ability above $a$ per
-firm with observable $(m,s_{1}),$ or on the conditional $\Lambda
-(a,b|m,s_{1},s_{2})$ that provides the ratio of workers with ability-bid
-above $(a,b)$ to firms with observables $(m,s_{1},s_{2}).$
-
-From the perspective of a firm with type $T$ and observables $%
-(m,s_{1},s_{2}) $ this generates a queue of workers bidding weakly more than 
-$\pi $ according to 
-\begin{equation*}
-\Gamma (\pi |m,s_{1},s_{2},T)=\int_{\{a,b|\pi (a,b|T)\geq \pi \}}d\Lambda
-(\cdot |m,s_{1},s_{2}).
-\end{equation*}%
-We denote by $\Gamma _{+}(\pi |.)$ the queue of workers that bid strictly
-more than $\pi ,$ and the difference $\bigtriangleup (\pi |m,s_{1},s_{2},T)$
-describes the mass of workers who offer exactly the same profit.$\footnote{%
-The definition is $\Gamma _{+}(\pi |m,s_{1},s_{2},T)=\int_{\{a,b|\pi
-(a,b|T)>\pi }d\Lambda (\cdot |m,s_{1},s_{2}).$}$\ We will later rule out the
-existence of such mass points in equilibrium. The chance that no worker
-offers a profit weakly above $\pi $ under a Poisson distribution has
-probability $\exp (-\Gamma (\pi |.)),$ so the chance of having at least one
-worker who offers such profit is the complement. So a firm $T$'s profit from
-sending signal $m$ is 
-\begin{equation}
-\Pi (m|T)=\sum_{s_{1},s_{2}}\left[ \psi (s_{1},s_{2}|T)\int_{\pi \geq
-0,s_{1},s_{2}}\pi d(1-e^{-\Gamma (\pi |m,s_{1},s_{2},T)})\right] ,
-\label{profits}
-\end{equation}%
-where $\psi (s_{1},s_{2}|T)$ denotes the probability of signals given the
-firm type. For a worker of type $a$ who considers a job with observation $%
-(m,s_{1})$ intending to bid $b_{L}$ and $b_{H}$ after observing the second
-signal obtains expected utility%
-\begin{equation}
-V(m,s_{1},a,b_{L},b_{H})=\sum_{s_{2},T}\Psi (s_{2},T|m,s_{1})e^{-\Gamma
-_{+}(\pi (a,b|T)|m,s_{1},s_{2},T)}M(\bigtriangleup (\pi
-(a,b|T)|m,s_{1},s_{2},T))b_{s_{2}}\boldsymbol{1}[\pi (a,b|T)\geq 0].
-\label{value}
-\end{equation}%
-The first term in the summation on the right is the probability of facing
-signal $s_{2}$ and firm type $T.$ The second term in the square bracket
-ensures that no worker offering strictly higher profits is present at this
-firm. The third term $M(\bigtriangleup )$ accounts for a mass other workers
-with exactly the same offer, and is strictly below 1 if there is a mass of
-competitors ($\bigtriangleup >0$) and is exactly 1 otherwise.\footnote{%
-The probability that the worker is hired conditional on no other worker with
-strictly higher profit being present consists of several elements:
-probability $e^{-\bigtriangleup }$ that no worker with equal profit is
-present, the probability $\bigtriangleup e^{-\bigtriangleup }\frac{1}{2}$
-that exactly one other worker with equal profit is present but the other
-worker is not chosen, the probability $\frac{\bigtriangleup
-^{2}e^{-\bigtriangleup }}{2}\frac{1}{3}$ that two other workers with equal
-profit is present but the other workers are not chosen, and so forth. The probability
-of being hired (conditional on no strictly more profitable bidders) is then
-the infinite sum $M(\bigtriangleup )=\sum_{k=0}^{\infty }\frac{\bigtriangleup
-^{k}e^{-\bigtriangleup }}{k!}\frac{1}{k+1}=\frac{1-e^{-\bigtriangleup }}{%
-\bigtriangleup }.$
-See \cite{burdett_etal2001} and \cite{wright_etal2021} for further references.} The forth term $b_{s_{2}}\in
-\{b_{L},b_{H}\}$ captures the payoff of the worker if he is hired, which is
-equal his wage bid. Finally, firms only accept offers that generate
-non-negative profits, which is captured by the indicator function which
-takes the value 1 if its argument is true and is zero otherwise.
+Worker behavior can be summarized by a queue $\Lambda$ that records the mass of workers with given ability and bid arriving at a firm with given observables; firm profit $\Pi(m|T)$ takes an expectation over the Poisson queue it faces; and worker value $V$ takes an expectation over the second signal $s_{2}$ (since workers decide their application under $(m,s_{1})$ but their bid can depend on $s_{2}$). The explicit formal definitions of $\Lambda$, the firm-side profit function $\Pi(m|T)$, and the worker-side value function $V(m,s_1,a,b_L,b_H)$ — including how each is summed over the second-signal realizations — are deferred to Appendix~\ref{online_app:formal-equilibrium}.
 
 \begin{definition*}[Equilibrium Definition]
 An equilibrium is consists of firm behavior, worker behavior and beliefs ($%
@@ -634,14 +560,7 @@ be in a different market where cheap-talk is impossible (i.e., $\rho =0)$,
 or they could be in the same market as the firms that can send messages
 (i.e., $0<\rho <1).$ Workers can only rely on the signals about these firms
 when they decide which firm to approach and which wage bid to place. For
-ease of analysis and to be able to leverage previous derivations, assume
-that the second signal is so informative as to eliminate uncertainty about
-the firm type (i.e., $\psi _{2}=1)$. One can show by continuity that the
-insights in this section also holds when the second message is not fully
-revealing, as long as it is sufficiently precise. Assuming perfect precision
-of the first signal allows us to consider the consequences of the first
-message, and enables us to draw heavily on the insights already developed
-earlier.
+ease of analysis, we assume that the second signal is perfectly revealing ($\psi_{2}=1$), which lets us leverage the derivations developed under truthful cheap talk. This assumption can be relaxed: by continuity, the insights of this section hold when the second signal is sufficiently but not perfectly precise, and we discuss the role of this assumption in more detail in Appendix~\ref{online_app:robustness}.
 
 Now consider workers who see signal $s_{1}$ and believe that the fraction of
 low firms at this signal is $\Psi (L|s_{1})$ where we suppressed the message
@@ -1577,6 +1496,78 @@ Essentially any feature of the economic relationship for which buyers and seller
 
 
 \section{Proofs and Analytic Derivations} \label{online_app:analysis}
+
+\subsection{Formal Equilibrium Objects}\label{online_app:formal-equilibrium}
+
+This subsection provides the formal definitions of the queue, the firm profit function, and the worker value function, all of which depend on the second signal $s_2$ and were deferred from the Setup in the main text.
+
+The easiest way to sum up the workers' behavior is through the ratio $\Lambda
+(a,b_{L},b_{H}|m,s_{1})$ of workers with ability weakly above $a$ who will
+bid weakly above $b_{L}$ after a low second signal and above $b_{H}$ after a
+high second signal, per job with initial observable $(m,s_{1}).$ This is
+also called the queue length of workers. Sometimes it is useful to focus on
+the marginal $\Lambda _{a}(a|m,s_{1})$ of workers with ability above $a$ per
+firm with observable $(m,s_{1}),$ or on the conditional $\Lambda
+(a,b|m,s_{1},s_{2})$ that provides the ratio of workers with ability-bid
+above $(a,b)$ to firms with observables $(m,s_{1},s_{2}).$
+
+From the perspective of a firm with type $T$ and observables $%
+(m,s_{1},s_{2}) $ this generates a queue of workers bidding weakly more than
+$\pi $ according to
+\begin{equation*}
+\Gamma (\pi |m,s_{1},s_{2},T)=\int_{\{a,b|\pi (a,b|T)\geq \pi \}}d\Lambda
+(\cdot |m,s_{1},s_{2}).
+\end{equation*}%
+We denote by $\Gamma _{+}(\pi |.)$ the queue of workers that bid strictly
+more than $\pi ,$ and the difference $\bigtriangleup (\pi |m,s_{1},s_{2},T)$
+describes the mass of workers who offer exactly the same profit.$\footnote{%
+The definition is $\Gamma _{+}(\pi |m,s_{1},s_{2},T)=\int_{\{a,b|\pi
+(a,b|T)>\pi }d\Lambda (\cdot |m,s_{1},s_{2}).$}$\ We will later rule out the
+existence of such mass points in equilibrium. The chance that no worker
+offers a profit weakly above $\pi $ under a Poisson distribution has
+probability $\exp (-\Gamma (\pi |.)),$ so the chance of having at least one
+worker who offers such profit is the complement. So a firm $T$'s profit from
+sending signal $m$ is
+\begin{equation}
+\Pi (m|T)=\sum_{s_{1},s_{2}}\left[ \psi (s_{1},s_{2}|T)\int_{\pi \geq
+0,s_{1},s_{2}}\pi d(1-e^{-\Gamma (\pi |m,s_{1},s_{2},T)})\right] ,
+\label{profits}
+\end{equation}%
+where $\psi (s_{1},s_{2}|T)$ denotes the probability of signals given the
+firm type. For a worker of type $a$ who considers a job with observation $%
+(m,s_{1})$ intending to bid $b_{L}$ and $b_{H}$ after observing the second
+signal obtains expected utility%
+\begin{equation}
+V(m,s_{1},a,b_{L},b_{H})=\sum_{s_{2},T}\Psi (s_{2},T|m,s_{1})e^{-\Gamma
+_{+}(\pi (a,b|T)|m,s_{1},s_{2},T)}M(\bigtriangleup (\pi
+(a,b|T)|m,s_{1},s_{2},T))b_{s_{2}}\boldsymbol{1}[\pi (a,b|T)\geq 0].
+\label{value}
+\end{equation}%
+The first term in the summation on the right is the probability of facing
+signal $s_{2}$ and firm type $T.$ The second term in the square bracket
+ensures that no worker offering strictly higher profits is present at this
+firm. The third term $M(\bigtriangleup )$ accounts for a mass other workers
+with exactly the same offer, and is strictly below 1 if there is a mass of
+competitors ($\bigtriangleup >0$) and is exactly 1 otherwise.\footnote{%
+The probability that the worker is hired conditional on no other worker with
+strictly higher profit being present consists of several elements:
+probability $e^{-\bigtriangleup }$ that no worker with equal profit is
+present, the probability $\bigtriangleup e^{-\bigtriangleup }\frac{1}{2}$
+that exactly one other worker with equal profit is present but the other
+worker is not chosen, the probability $\frac{\bigtriangleup
+^{2}e^{-\bigtriangleup }}{2}\frac{1}{3}$ that two other workers with equal
+profit is present but the other workers are not chosen, and so forth. The probability
+of being hired (conditional on no strictly more profitable bidders) is then
+the infinite sum $M(\bigtriangleup )=\sum_{k=0}^{\infty }\frac{\bigtriangleup
+^{k}e^{-\bigtriangleup }}{k!}\frac{1}{k+1}=\frac{1-e^{-\bigtriangleup }}{%
+\bigtriangleup }.$
+See \cite{burdett_etal2001} and \cite{wright_etal2021} for further references.} The forth term $b_{s_{2}}\in
+\{b_{L},b_{H}\}$ captures the payoff of the worker if he is hired, which is
+equal his wage bid. Finally, firms only accept offers that generate
+non-negative profits, which is captured by the indicator function which
+takes the value 1 if its argument is true and is zero otherwise.
+
+\subsection{Proof of the No Mass Points Lemma}
 
 \textit{Proof of Lemma%\ref{no-mass-point-lemma}
 :} Assume to the contrary
