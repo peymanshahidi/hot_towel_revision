@@ -1,0 +1,1492 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\usepackage{amsfonts}
+\usepackage{bbm}
+\usepackage{booktabs}
+\usepackage{commath} 
+\usepackage{dcolumn}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{setspace} 
+\usepackage{subcaption}
+\usepackage{dsfont}
+
+\usepackage[margin=1.5in]{geometry}
+
+\topmargin -35pt
+\textheight 650pt
+\textwidth 490pt
+\oddsidemargin -10pt
+\evensidemargin 0pt
+\baselineskip=23pt
+\renewcommand{\baselinestretch}{1.3}
+
+\usepackage{adjustbox}
+\usepackage{rotating}
+
+\hypersetup{
+  colorlinks = TRUE,
+  citecolor=blue,
+  linkcolor=red,
+  urlcolor=black
+}
+
+\input{params_chi_square.tex} 
+\input{params_choices_by_cat.tex}
+\input{params_signal_effects_wage_bidding.tex}
+\input{params_signal_effects_experience.tex}
+
+\input{params_reg_experience.tex}
+\input{params_reg_wb_pr_apps.tex}
+\input{params_welfare.tex}
+
+\input{params_bidding_effect.tex}
+\input{params_app_counts.tex}
+\input{params_worker_targeted_apps.tex}
+\input{params_condition_on_pool_size.tex}
+\input{params_trt_effects.tex}
+\input{params_exp_details.tex}
+
+\renewcommand{\H}{\ensuremath{\mathsf{H}}}
+\renewcommand{\L}{\ensuremath{\mathsf{L}}}
+\newcommand{\poiss}{\ensuremath{\mathsf{Poisson}}}
+
+\newtheorem{theorem}{Theorem}
+
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{definition*}{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{prop}{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+
+\newcommand{\hottowel}{vertical preference signaling}
+\newcommand{\starlanguage}{Significance indicators: $\dagger$:$p < 0.10$, $*$:$p < 0.05$, $**$:$p < 0.01$, $***$:$p \le 0.001$.}
+\newcommand{\tierdef}{See Figure~\ref{fig:tradeOff} for vertical preference tier definitions.\,} 
+
+\newcommand{\signaldef}{When posting a job opening, employers had to select from one of three ``tiers'' to describe the kinds of applicants they were most interested in:
+(1) Entry level: ``I am looking for [workers] with the lowest rates.'';
+(2) Intermediate: ``I am looking for a mix of experience and value.'';
+(3) Expert: ``I am willing to pay higher rates for the most experienced [workers].''
+We refer to these tiers as ``low,'' ``medium,'' and ``high,'' respectively}
+
+\newcommand{\shownprefdef}{If $\textsc{ShownPref} = 1$, would-be applicants could observe the employer's vertical preference before applying, otherwise they could not, \mbox{$\textsc{ShownPref}=0$}}
+\newcommand{\ambigdef}{Employers in the ambiguous arm were told that the platform \emph{might} reveal their preferences to workers; whether workers were shown employer vertical preferences was randomly determined \emph{ex post}}
+\newcommand{\explicitdef}{Employers in the two-cell explicit arm were told \emph{ex ante} that the platform would reveal or would not reveal their vertical preferences to workers}
+\newcommand{\threefacetdesc}{\textsc{ShownPref} is on the x-axis, the outcome is on the y-axis and vertical preference signal selection determines the facets. Each facet contains a label with the percentage change in the outcome variable caused by preference revelation.\,}
+\newtheorem{hyp}{Hypotheses}
+
+\newcommand{\newrj}[1]{{\color{blue} #1}}
+
+\begin{document} 
+
+\section{Theory}
+
+\subsection{\textbf{Setup}}
+
+\textit{Players and Production}: There is an endogeneous mass of workers
+with heterogeneous abilities $a\in \mathbb{R}_{++}.$ Worker ability is known
+and publicly observable. There exists a unit mass of jobs that differ in
+their valuation $v_{T}$ of workers' ability: Each job can hire at most one
+worker, and a match between job type $T$ and worker ability $a$ produces
+output $v_{T}(a-c_{T}),$ where $c_{T}$ allows higher value jobs to have
+higher ability requirements (i.e., costs) to achieve positive output. For
+simplicity we focus on two types of jobs: $T\in \{H,L\}.$ High types value
+ability more: $v_{H}>v_{L}>0,$ and their jobs may have higher requirements: $%
+c_{H}>c_{L}>0$. There is a fraction $\delta _{T}$ of each type of job. The
+type of the job is \textit{private} information of the firm that posts the
+job. We will throughout use the words "job" and "firm" interchangeably.
+
+\textit{Payoffs for market participants:} Both workers and jobs are risk
+neutral. If a worker is hired for a job, the firm's profit is the output
+minus the wage it pays to the worker. Therefore, a worker of type $a$ who
+gets paid wage $b$ at job $T$ generates firm profits:%
+\begin{equation}
+\pi (a,b|T)=v_{T}(a-c_{T})-b.  \label{firm-profit}
+\end{equation}%
+A worker who get hired has utility equal to his wage. The utility of jobs
+and workers who remain unmatched is normalized to zero.
+
+\textit{Market entry:} Workers have non-negative outside option $u(a)$,
+which we assume to be increasing and strictly convex, with Inada conditions $%
+u^{\prime }(0)=0$ and $u^{\prime }(a)$ unbounded. For some proofs it will be
+convienient to assume that the elasticity of $u^{\prime }$ is bounded away
+from zero and infinity. If workers participate in the market they forgo this
+outside option and obtain their market payoff instead. There is free entry
+such that worker types who enter obtain expected payoff $u(a)$ in the
+market, and those who cannot obtain this utility do not enter the market. We
+further assume that for each job type $T$ there is at least one worker type $%
+a$ for which surplus of entering is strictly positive $%
+(i.e.,v_{T}(a-c_{T})-u\left( a\right) >0).$ It will also be convenient to
+assume that the difference in requirements between the types of firms is not
+too large, and in particular that $c_{H}-c_{L}<u(c_{H})/u^{\prime }(c_{H}).$
+
+%\bigskip
+
+\textit{Market Interaction and Timing}: With\ i.i.d. probability $\rho $
+each firm $i$ is asked to choose a message $m_{i}\in \{L,H\},$ where the
+message space is without loss of generality given that we only have two
+types of firms. With probability $1-\rho $ the firm cannot send a message,
+which we denote by $m_{i}=\emptyset .$ For notational convenience let $%
+M=\{\emptyset ,L,H\}$, which accounts for the case where the firm cannot
+send a signal. Each firm also generates two signals: $s_{1,i}$ and $s_{2,i},$
+each of which is drawn from set $\{L,H\}.$ We assume that signals are i.i.d.
+conditional on the true firm type $T_{i}.$ The signal coincides with the
+true type with probability $\psi _{1}$ and $\psi _{2},$ respectively, with
+the obvious requirement that these probability exceed one-half. The first
+signal can be easily observed by workers but may be noisy, while the second
+is observed only after careful reading and evaluation of the job description
+and is extremely precise ($\psi _{2}$ close to 1). It turns out that under
+truthful cheap-talk these messages play no role, but they in particular
+allow workers some way of conditioning their search and their bids even if
+cheap-talk is uninformative or absent.
+
+Workers decide to enter. Those who enter observe the joint distribution of
+messages and first signals, and choose a job announcement with desired
+message and first signal $(m,s_{1})\in M\times \{L,H\}$. Since they lack
+further information at this point, they choose some firm $i$ from the firms
+with obserable $(m,s_{1})$ at random. In a large market this randomness
+leads to a Poisson distribution of workers at a given firm, with Poisson
+parameter equal to ratio of workers to firms at a given $(m,s_{1})$
+combination.\footnote{%
+This way of introducing search underlies most of the micro-founded work on
+directed search, and careful derivations that start with a finite population
+and takes limits are presented in \cite{peters_1991}, \cite{peters_1997}, \cite{burdett_etal2001} or the summary in \cite{wright_etal2021}.} The worker then prepares a bid for
+this job, and learns its second signal $s_{2,i}.$ At that point the worker
+already sunk his preparation time, and cannot choose another firm. S/he
+submits a bid $b$ to this job that can condition on the message and both
+signals, or chooses to remain unmatched. We assume that workers only submit
+a bid if he believes that his bid has strictly positive probability of being
+accepted.
+
+Each firm observes all its bids and the ability of the associated worker,
+hires the most profitable among these workers and pays a wage equal to this
+worker's bid. It can choose to reject all bidders.
+
+\textit{Equilibrium: }Let $\mu (m,T)$ denote the equilibrium probability
+that firms of type $T$ send message $m\in \{H,L\}$ conditional on being
+selected to send a message. This uniquely determines the probability $\Psi
+(T|m,s_{1})$ of facing firm $T$ after observation $(m,s_{1})$ whenever $m$
+is played with positive probability. If $m$ is not played with positive
+probability, $\Psi (.)$ is a belief that agents hold in case a firm sends
+such a message off-equilibrium. Given such beliefs, Bayes' rule generates
+the joint probability $\Psi (s_{2},T|m,s_{1})$ of the second signal and
+type, and a conditional belief $\Psi (T|m,s_{1},s_{2})$ after observing all
+signals.
+
+The easiest way to sum up the workers behavior is through the ratio $\Lambda
+(a,b_{L},b_{H}|m,s_{1})$ of workers with ability weakly above $a$ who will
+bid weakly above $b_{L}$ after a low second signal and above $b_{H}$ after a
+high second signal, per job with initial observable $(m,s_{1}).$ This is
+also called the queue length of workers. Sometimes it is useful to focus on
+the marginal $\Lambda _{a}(a|m,s_{1})$ of workers with ability above $a$ per
+firm with observable $(m,s_{1}),$ or on the conditional $\Lambda
+(a,b|m,s_{1},s_{2})$ that provides the ratio of workers with ability-bid
+above $(a,b)$ to firms with observables $(m,s_{1},s_{2}).$
+
+From the perspective of a firm with type $T$ and observables $%
+(m,s_{1},s_{2}) $ this generates a queue of workers bidding weakly more than 
+$\pi $ according to 
+\begin{equation*}
+\Gamma (\pi |m,s_{1},s_{2},T)=\int_{\{a,b|\pi (a,b|T)\geq \pi \}}d\Lambda
+(\cdot |m,s_{1},s_{2}).
+\end{equation*}%
+We denote by $\Gamma _{+}(\pi |.)$ the queue of workers that bid strictly
+more than $\pi ,$ and the difference $\bigtriangleup (\pi |m,s_{1},s_{2},T)$
+describes the mass of workers who offer exactly the same profit.$\footnote{%
+The definition is $\Gamma _{+}(\pi |m,s_{1},s_{2},T)=\int_{\{a,b|\pi
+(a,b|T)>\pi }d\Lambda (\cdot |m,s_{1},s_{2}).$}$\ We will later rule out the
+existence of such mass points in equilibrium. The chance that no worker
+offers a profit weakly above $\pi $ under a Poisson distribution has
+probability $\exp (-\Gamma (\pi |.)),$ so the chance of having at least one
+worker who offers such profit is the complement. So a firm $T$'s profit from
+sending signal $m$ is 
+\begin{equation}
+\Pi (m|T)=\sum_{s_{1},s_{2}}\left[ \psi (s_{1},s_{2}|T)\int_{\pi \geq
+0,s_{1},s_{2}}\pi d(1-e^{-\Gamma (\pi |m,s_{1},s_{2},T)})\right] ,
+\label{profits}
+\end{equation}%
+where $\psi (s_{1},s_{2}|T)$ denotes the probability of signals given the
+firm type. For a worker of type $a$ who considers a job with observation $%
+(m,s_{1})$ intending to bid $b_{L}$ and $b_{H}$ after observing the second
+signal obtains expected utility%
+\begin{equation}
+V(m,s_{1},a,b_{L},b_{H})=\sum_{s_{2},T}\Psi (s_{2},T|m,s_{1})e^{-\Gamma
+_{+}(\pi (a,b|T)|m,s_{1},s_{2},T)}M(\bigtriangleup (\pi
+(a,b|T)|m,s_{1},s_{2},T))b_{s_{2}}\boldsymbol{1}[\pi (a,b|T)\geq 0].
+\label{value}
+\end{equation}%
+The first term in the summation on the right is the probability of facing
+signal $s_{2}$ and firm type $T.$ The second term in the square bracket
+ensures that no worker offering strictly higher profits is present at this
+firm. The third term $M(\bigtriangleup )$ accounts for a mass other workers
+with exactly the same offer, and is strictly below 1 if there is a mass of
+competitors ($\bigtriangleup >0$) and is exactly 1 otherwise.\footnote{%
+The probability that the worker is hired conditional on no other worker with
+strictly higher profit being present consists of several elements:
+probability $e^{-\bigtriangleup }$ that no worker with equal profit is
+present, the probability $\bigtriangleup e^{-\bigtriangleup }\frac{1}{2}$
+that exactly one other worker with equal profit is present but the other
+worker is not chosen, the probability $\frac{\bigtriangleup
+^{2}e^{-\bigtriangleup }}{2}\frac{1}{3}$ that two other workers with equal
+profit is present but the other workers are not chosen, and so forth. The probability
+of being hired (conditional on no strictly more profitable bidders) is then
+the infinite sum $M(\bigtriangleup )=\sum_{k=0}^{\infty }\frac{\bigtriangleup
+^{k}e^{-\bigtriangleup }}{k!}\frac{1}{k+1}=\frac{1-e^{-\bigtriangleup }}{%
+\bigtriangleup }.$
+See \cite{burdett_etal2001} and \cite{wright_etal2021} for further references.} The forth term $b_{s_{2}}\in
+\{b_{L},b_{H}\}$ captures the payoff of the worker if he is hired, which is
+equal his wage bid. Finally, firms only accept offers that generate
+non-negative profits, which is captured by the indicator function which
+takes the value 1 if its argument is true and is zero otherwise.
+
+\begin{definition*}[Equilibrium Definition]
+An equilibrium is consists of firm behavior, worker behavior and beliefs ($%
+\mu (\cdot ),\Lambda (\cdot ),\Psi (\cdot ))$ such that
+
+(1) beliefs $\Psi (\cdot )$ are consistent with from Bayes' rule according
+to firm behavior $\mu (\cdot ),$
+
+(2) firms maximize profits such that $\Pi (m|T)=\max_{m^{\prime }}\Pi
+(m^{\prime },T)$ when $\mu (m,T)>0,$ and
+
+(3) workers' decisions to enter and bid are optimal such that $%
+V(m,s_{1},a,b_{L},b_{H})\leq u(a)$ for all $(m,s_{1},a,b_{L},b_{H}),$ and
+this holds with equality if $(a,b_{L},b_{H})$ is in the support of $\Lambda
+(\cdot |m,s_{1}).$
+\end{definition*}
+
+The last condition ensures that there are no jobs that offer strictly higher
+returns to workers than their outside option, and those that do enter obtain
+exactly their outside option.
+
+We conclude with the immediate obseration that there cannot be meaningful
+mass points in equilibrium, i.e., mass points at firm types that have
+non-zero probability. Workers at the mass point have strictly positive
+probability that another worker with exactly the same profit will be hired
+instead of them. A marginally lower wage bid (i.e., a marginally higher
+profit for the firm) would have ensured to be hired, inducing a profitable
+upward jump in the hiring probability. This rules out that mass points can
+be optimal for workers, which simplifies the notation going forward.
+
+\begin{lemma*}
+\label{no-mass-point-lemma}There are no meaningful mass points in
+equilibrium, i.e., $\bigtriangleup (\pi |m,s_{1},s_{2},T)=0$ for all $\pi
+\geq 0$ and all $(m,s_{1},s_{2},T)$ with $\Psi (s_{2},T|m,s_{1})>0$.
+\end{lemma*}
+
+Proof: See Appendix \ref{sec:proofs}.
+
+\bigskip
+
+\subsection{Analysis and Empirical Predictions\label{sec:analysis}}
+
+\textit{Firms with messages:} To understand this market, consider first the
+firms that can send a cheap-talk message. Their message space is $\{L,H\}.$
+As we will see, the following analysis is valid whether these firms
+constitute the entire market (i.e., $\rho =1$) or just a part of the market
+(i.e., $0<\rho <1).$ Recall that firms that are chosen for a message have to
+declare a type. Assume for now that these firms declare their type
+truthfully in equilibrium. To investigate the market outcome for these
+firms, we assume truthful messages ($\mu (T|T)=1)$ and impose equilibrium
+conditions (1) and (3). After characterizing this, we additionally impose
+equilibrium condition (2) on firm optimality to study the conditions under
+which firms would be willing to report truthfully. In the subsequent
+subsection we study the firms that cannot send a cheap-talk message.
+
+Under the assumption that firms report truthfully, workers do not rely on
+signals to infer the firm type. That is, $\Psi (T|T,s_{1},s_{2})=1$ for all $%
+s_{1}$ and $s_{2},$ and it is easy to show that there is no benefit from
+conditioning the visit strategies or the bids on the signal. In the
+following we will suppress reference to the signals, i.e., $b=b_{H}=b_{L}$
+and we write $\Lambda (a,b|m)$ instead of $\Lambda (a,b,b|m,s_{1}).$ We can
+now express the value for a worker of ability $a$ who bids $b$ at a job with
+message $m\in \{L,H\}$ (no matter what the signals are) by 
+\begin{equation}
+V(m,a,b)=e^{-\Gamma (\pi (a,b|m)|m)}b\boldsymbol{1}[\pi (a,b|m)\geq 0].
+\label{value-truth}
+\end{equation}%
+Since the worker infers perfectly which firm it is facing, instead of
+bidding wage $b$ we can reformulate the problem as one of leaving profit $%
+\pi \geq 0$ to the firm and keeping the output minus this profit as pay. For
+worker-firm pairs that have strictly positive output so that $%
+v_{m}(a-c_{m})\geq \pi \geq 0$ this delivers expected utility 
+\begin{equation}
+W(m,a,\pi )=e^{-\Gamma (\pi |m)}\left[ v_{m}(a-c_{m})-\pi \right] .
+\label{value-profit-truth}
+\end{equation}%
+Clearly $V(m,a,b)=W(m,a,\pi (a,b|m)).$ By equilibrium condition (3), if
+workers with ability $a$ and bid $b$ enter at message $m$ - i.e. if $(a,b)$
+is in the support of $\Lambda (\cdot |m)$ - then $b$ and must maximize (\ref%
+{value-truth}). But then $\pi (a,b|m)$ must be weakly positive and maximizes
+(\ref{value-profit-truth}).
+
+We can therefore study the problem where the worker's choice variable is $%
+\pi ,$ which is chooses to maximize (\ref{value-profit-truth}). This
+objective is supermodular in $(a,\pi )$, indicating that it is less costly
+for high ability types to offer high profits to firms. It implies that
+higher ability workers at a given message leave higher profits in
+equilibrium. And since there are no mass points, this means that they leave
+strictly higher profits almost everywhere.
+
+For ease of notation, let 
+\begin{equation}
+U(a|m):=\arg \max_{\pi }W(m,a,\pi )  \label{value-profit-truth2}
+\end{equation}%
+denote the equilibrium utility for worker type $a$ that approaches message $%
+m,$ and free entry then requires that $U(a|m)\leq u(a),$ with equality if $a$
+is in the support of $\lambda (a|m).$
+
+We can use this together with the definition of (\ref{value-profit-truth})
+to prove that at a given message $m$ the worker abilities that enter in
+equilibrium form a non-empty interval $[\underline{a}_{m},\bar{a}_{m}],$ and
+no single type enters with positive mass (see proof in Appendix \ref{sec:proofs}). The
+reason is that there is no mass point in terms of profits that are offered
+(see earlier Lemma) and for each profit level there is a
+different ability type that finds it optimal to enter.
+
+So the task is to characterize the non-empty interval $[\underline{a}_{m},%
+\bar{a}_{m}].$ Within this interval, consider a worker with ability $a$ that
+leaves profit $\pi $ at message $m$ in equilibrium.\footnote{%
+Formally this means that there exists $(a,b)$ in the support of $\Lambda
+(a,b|m)$ such that $\pi =\pi (a,b|m).$} Then the marginal increase in
+equilibrium utility with respect to ability is%
+\begin{equation}
+e^{-\Lambda (a|m)}v_{m}=u^{\prime }(a).  \label{first derivative}
+\end{equation}%
+The right side follows from differentiation of (\ref{value-profit-truth})
+with respect to ability, where any change in profits can be neglected by the
+envelope condition, and then subsituting $\Lambda (a|m)$ for $\Gamma (\pi
+|m) $ which follows since higher types leave higher profits. The right hand
+side has to hold because the equilibrium utility equals the forgone entry
+cost. Differentiating with respect to ability leads to 
+\begin{equation}
+\lambda (a|m)e^{-\Lambda (a|m)}v_{m}=u^{\prime \prime }(a)
+\label{second derivative}
+\end{equation}%
+where $\lambda (a|m)=-d\Lambda (a|m)/da$ is akin to a "density" of type $a$
+workers queueing at this message. Dividing this by (\ref{first derivative})
+yields 
+\begin{equation}
+\lambda (a|m)=\frac{u^{\prime \prime }(a)}{u^{\prime }(a)},
+\label{equilibrium density}
+\end{equation}%
+which ties down the type density at any ability level. The key question
+concerns the end-points of the interval. Clearly at the highest type (\ref%
+{first derivative}) reduces to the end-point condition%
+\begin{equation}
+v_{m}=u^{\prime }(\bar{a}_{m}),  \label{equilibrium highest type}
+\end{equation}%
+which uniquely determines $\bar{a}_{m}.$ One can then recover the lowest
+ability type that approaches message $m$ since at any candidate $\underline{a%
+}_{m}$ the queue length $\Lambda (\underline{a}_{m}|m)=\int_{a^{\prime }}^{%
+\bar{a}_{m}}\lambda (a|m)da\,\ $is uniquely determined by (\ref{equilibrium
+density}) and (\ref{equilibrium highest type}). Moreover, the lowest ability
+type also leaves the lowest profits, which implies that he leaves zero
+profits (assume not, then this type could lower his bid so he leaves zero
+profits and still win with the same probability). Then it has to hold that 
+\begin{equation}
+e^{-\Lambda (\underline{a}_{m}|m)}v_{m}(\underline{a}_{m}-c_{m})=u(%
+\underline{a}_{m}),  \label{equilibrium lowest type}
+\end{equation}%
+which uniquely ties down $\underline{a}_{m}.$
+
+Finally, we briefly consider how wage bids $b_{m}(a)$ are determined for
+worker $a\in \lbrack \underline{a}_{m},\bar{a}_{m}]$. In equilibrium, the
+utility of such a worker is $e^{-\Lambda (a|m)}b_{m}(a)$. We can totally
+differentiate this with respect to the worker type, and set it equal to $%
+u^{\prime }(a)$ which needs to hold due to free entry. Using (\ref{first
+derivative}) this reduces after cancellation to the following differential
+equation: 
+\begin{eqnarray}
+b_{m}^{\prime }(a) &=&v_{m}-b_{m}(a)\lambda (a|m)  \notag \\
+&=&v_{m}-b_{m}(a)u^{\prime \prime }(a)/u^{\prime }(a)  \label{wages}
+\end{eqnarray}%
+which together with end-point condition that the lowest type extracts all
+suprlus: 
+\begin{equation}
+b_{m}(\underline{a}_{m})=v_{m}[\underline{a}_{m}-c_{m}]
+\label{wages boundary}
+\end{equation}%
+determines the wage bids uniquely. To sum up:
+
+\begin{prop}
+\label{equilibrium-characterization}Under truthful cheap talk, the interval
+of worker types $[\underline{a}_{m},\bar{a}_{m}]$ that approach message $%
+m\in \{L,H\}$ and the queue $\Lambda (a|m)$ are fully determined by $(\ref%
+{equilibrium density})-(\ref{equilibrium lowest type}),$ and the wages they
+ask for are fully determined by (\ref{wages}) and (\ref{wages boundary}). On 
+$[\underline{a}_{m},\bar{a}_{m}]$ the wages for such a firm with abritrary $%
+v_{m}$ and $c_{m}$ can be expressed relative to the wages $b_{1}(.)$ of a
+"normalized" firm with valuation=0 of cost=lowest-type=0 according to 
+\begin{equation}
+b_{m}(a)=v_{m}[b_{1}(a)-b_{1}(\underline{a}_{m})+\underline{a}_{m}-c_{m}].
+\label{bidding1}
+\end{equation}
+\end{prop}
+
+\bigskip
+
+It is worth noting that Proposition (\ref{equilibrium-characterization})
+fully characterizes the application and bidding behavior that firms face
+when they send messages, and that hold irrespective of whether all firms
+send such messages ($\rho =1)$ or only some fraction of the firms sends such
+messages ($\rho <1).$ The characterization makes no reference to the number
+of firms that have the ability to message, nor to the behavior at firms that
+do not. This property of directed search models with entry is known in the
+literature as "block-recursiveness", and comes about since workers trade-off
+how to much to enter according to the number of firms that are present in
+the market. Since workers can choose which firms to approach, for those who
+approach firms that send messgages it is not important what happens at firms
+that do not send messages. We will now turn to those firms.
+
+\bigskip
+
+\textit{Firms without messages:} The firms that cannot send a message could
+be in a different market where cheap-talk is impossible (i.e., $\rho =0)$,
+or they could be in the same market as the firms that can send messages
+(i.e., $0<\rho <1).$ Workers can only rely on the signals about these firms
+when they decide which firm to approach and which wage bid to place. For
+ease of analysis and to be able to leverage previous derivations, assume
+that the second signal is so informative as to eliminate uncertainty about
+the firm type (i.e., $\psi _{2}=1)$. One can show by continuity that the
+insights in this section also holds when the second message is not fully
+revealing, as long as it is sufficiently precise. Assuming perfect precision
+of the first signal allows us to consider the consequences of the first
+message, and enables us to draw heavily on the insights already developed
+earlier.
+
+Now consider workers who see signal $s_{1}$ and believe that the fraction of
+low firms at this signal is $\Psi (L|s_{1})$ where we suppressed the message
+because it is absent ($m=\emptyset ).$ The fraction with high type is
+evidently the complement. Note that these fractions are exogeneously given;
+for example, $\Psi (L|L)=\psi _{1}\delta _{L}/(\psi _{1}\delta _{L}+(1-\psi
+_{1})\delta _{H}),$ and do not depend on the equilibrium interaction.
+
+It turns out that workers approach these firms similar to firms whose type
+is the average valuation given their believes. That is, they approach firms
+as if they know that their productivity is averaged according to 
+\begin{equation*}
+v_{\Psi }=\Psi v_{L}+(1-\Psi )v_{H},
+\end{equation*}%
+where $\Psi =\Psi (L|s_{1})$ represents the belief that the firm is of low
+type given its signal. Workers also approach firms as if they had the
+average cost, though the exact expression for this requires some
+re-arranging. We used to write production as $v(a-c),$ which evidently
+equals $va-vc.$ So in this new setting worker expect the average of $vc$ as
+the second term. If we want to write production in expectation as $v_{\Psi
+}(a-c_{\Psi }),$ we have to define%
+\begin{equation*}
+c_{\Psi }=\frac{\Psi v_{L}c_{L}+(1-\Psi )v_{H}c_{H}}{\Psi v_{L}+(1-\Psi
+)v_{H}},
+\end{equation*}%
+where $c_{\Psi }$ is in $[c_{L},c_{H}]$ and monotonically increases from $%
+c_{L}$ to $c_{H}$ when $\Psi $ decreases from one to zero. Workers with
+types in $[\underline{a}_{\Psi },\bar{a}_{\Psi }]$ then approach such firms,
+and their bids can are then conditional on the second signals that reveals
+whether the firm is of low or high type. Bids are still driven by (\ref%
+{bidding1}), except that the lowest ability type that extracts all surplus
+is determined by the first signal and not the second$.$ We therefore have:
+
+\begin{prop}
+\label{equilibrium-notalk}Firms with $m=\emptyset $ and signal $s_{1}$
+induce belief $\Psi =\Psi (L|s_{1}).$ The interval of worker types $[%
+\underline{a}_{s_{1}},\bar{a}_{s_{1}}]$ that approach them and the queue $%
+\Lambda (a|s_{1})$ are fully determined by $(\ref{equilibrium density})-(\ref%
+{equilibrium lowest type})$ when using for the valuation the average given
+by $v_{\Psi }$ and for the cost one uses $c_{\Psi }.$ After the second
+signal $s_{2}$ these workers bid according to%
+\begin{equation}
+b_{s_{2}}(a)=v_{s_{2}}[b_{1}(a)-b_{1}(\underline{a}_{s_{1}})+\underline{a}%
+_{s_{1}}-c_{s_{2}}].  \label{wages-general}
+\end{equation}
+\end{prop}
+
+Proof idea: The key challenge is to prove that workers who approach a firm
+will actually always end up bidding there, which is not obvious as they
+approach a firm under uncertainty and learn additional information from the
+second signal. Under our assumptions this turns out to be true. The
+averaging then obtain exactly because the second signal is so precise, and
+does not obtain otherwise, as we elaborate in the discussion section. For
+the full proof see Appendix \ref{sec:proofs}.$\square $\bigskip
+
+For the wage equation it is worth noting that the wage conditions on the
+true valuation and costs $(v_{s_{2}},c_{s_{2}})$ revealed through the second
+signal, but the lowest type $\underline{a}_{\Psi }$ who extracts all surplus
+remains the one that expects average quality. This is because the decision
+which firms add to read in detail is made when the worker has less
+information.
+
+\bigskip
+
+\textit{Comparing firms with and without messages:} In order to understand
+the empirical implication of the results, we will now compare firms. For
+this, we assume that the empiricist has elicited the true firm type both for
+the firms that send messages and those that do not. There are many ways of
+achieving this, and in reality the message can take many forms. For example,
+one could ask firms a fictitious question: Do you prefer ("rookie", \$) or
+("expert", \$\$\$)? Firms might interpret this as choosing between two
+combinations of ability and wage-bid: $(a_{1},b_{1})$ or $(a_{2},b_{2})$
+with $a_{1}<a_{2}$ and $b_{1}<b_{2}.$ If there are no consequences to the
+question, firms might simply select the option that would generate more
+profits, and if two firms choose differently, then the $L$ type chooses the
+first and the $H$ type the second. So the answer to this question would
+reveal the type. In the empirical implementation we carefully discuss how we
+make firms comparable.
+
+To compare firms, it is useful to study the comparative statics on the types
+of workers who approach these firms, and their bidding. The worker types are
+governed by the valuation $v$ and costs $c,$ which are equal to the true
+type for firms with truthful messages and equal to the average (interim)
+type given after workers have observed the first signal for firms without
+messages.
+
+\begin{corollary}
+\label{corollary}Consider a firm with interim expected valuation $v$ and cost 
+$c.$
+
+\begin{itemize}
+\item The maximal worker type $\bar{a}$ strictly increases in valuation $v$
+(but does not depend on $c$).
+
+\item The minimal worker type $\underline{a}$ strictly increases in the
+threshold $c$ (but does not depend on $v$).
+
+\item For interior worker types in $(\underline{a}, \bar{a})$ the density $\lambda (a|.)$ is independent of $v$ or $c$.
+\end{itemize}
+\end{corollary}
+
+Proof: The first point follows directly from (\ref{equilibrium highest type}%
+), which depends on the firm's valuation but not its threshold for ability.
+The third point follows from (\ref{equilibrium density}), which depends on
+neither valuation nor threshold. The second point states that the lowest type $\underline{a}_{m}$ is only a
+function of the threshold, but not of the valuation. This is not directly
+obvious from (\ref{equilibrium lowest type}), but in Appendix \ref{sec:proofs} we show
+that for a given $\underline{a}_{m}$ the utility at this ability stays
+constant when $v_{m}$ changes when one adjusts for the associated changes in
+the queue $\Lambda (\underline{a}_{m}|m):$ When the valuation increases more
+higher types are added to leave the utility at the low end exactly
+unchanged. Because of this feature one can find a different way of
+constructing the lowest type. First, define as $\underline{v}%
+_{m}(a)=u(a)/[a-c_{m}].$ This is the lowest valuation at which type $a$
+workers could enter and break even. Then let $\underline{a}_{m}=\arg \min 
+\underline{v}_{m}(a),$ i.e., it is the ability level that needs the lowest
+valuation to make entry possible. Using the first order condition for this
+minimization reveals that the lowest type can be solved for as the unique
+solution to%
+\begin{equation}\label{cutoff-type}
+\underline{a}_{m}=c_{m}+\frac{u(\underline{a}_{m})}{u^{\prime }(\underline{a}%
+_{m})}.
+\end{equation}%
+This type always enters when $v_{m}>\underline{v}_{m}(\underline{a}_{m}),$
+but the higher $v_{m}$ the more other types enter. The lowest type $%
+\underline{a}_{m}$ is increasing in $c_{m},$ which follows by implicitly
+differentiating (\ref{cutoff-type}).$\square $
+
+\bigskip
+
+One can directly apply these comparative statics noting that $v$ and $c$ are
+lowest for firms with a truthful low message, higher for firms without
+message but a low first signal, even higher for firms without a message but
+a high first signal, and highest for firms with a truthful high message.
+That means that both the lower and the upper bound of the interval $[%
+\underline{a},\bar{a}]$ of workers who approach these firms is increasing in
+this order. Whenever these interval overlap across firms with different
+messages/signals, those workers type that overlap generate the same queue at
+different firms according to (\ref{equilibrium density}). This means that
+they can implement this queue length by choosing among these firms at
+random. An individual worker might not choose at random, but the outcome is
+indistinguishable from one where they do.
+
+Figure \ref{messages} illustrates graphically how workers choose between
+firms. It is easiest to explain by thinking about two separate markets.
+Panel A illustrates a market where firms can send messages, and do so
+truthfully. In this market, the lowest type workers only approach low
+message firms because the ability threshold $c_{H}$ at high firms is too
+high. Workers with intermediate ability choose "as if" at random between
+firms at both messages. Here $a^{\prime }=\bar{a}_{m=L}$ and $a^{\prime
+\prime }=\underline{a}_{m=H},$ so that the interval between indicates the
+overlap between $[\underline{a}_{m=L},\bar{a}_{m=L}]$ and $[\underline{a}%
+_{m=H},\bar{a}_{m=H}]$. High worker types again are fully directed, this
+time towards high message firms which have sufficiently high valuation to
+warrant their entry cost. Whether high or low-message firms attract more
+applicants overall depends on parameters, but it is clear that the
+distribution of worker abilities at high message firms first order
+stochastically dominates that at low message firms.
+
+Panel B consider a market where firms cannot send messages, and workers rely
+on the first signal to determine where to go. At the high signal there are
+mostly high type firms, but some low type firms also send this signal.
+Similarly, at the low signal there are mostly low firms, but some high firms
+also send this signal. Between the high and low signal firms, the workers
+choose in a similar fashion as in Panel A. But relative to Panel A, in Panel
+B the lowest and highest worker types stay out of the market, as the average
+costs are too high at the low end and the average valuation is too low at
+the upper end. Moreover, the range of worker types that act as if they
+choose randomly expands both at the upper and lower end. So in Panel B the
+types that are directed are a strict subset of the types in Panel A, while
+the types that visit at random are a strict superset.
+
+As mentioned earlier, the same insight carry over even if firms without
+messages interact in the same market as the firms with messages. Note here
+that workers with ability types that approach multiple messages/signals
+continue to do so at random, even though that is not visible from Figure \ref%
+{messages}. For example, workers slight above $a^{\prime }$ apply to high
+message, as well as to no-message but low and high first signal firms. Their
+queue length is the same at all of them, so they can choose between them at
+random to implement this. They do not apply to low message firms, though.
+
+If one conditions on high firms in the right picture, most of them get
+applicants according to the high signal but some get applicants according to
+the low signal. Both are first order stochastically dominated by the
+distribution of worker abilities that high message firms obtain. For low
+type firms the opposite holds.
+
+%\FRAME{ftbpFU}{13.0327in}{4.0248in}{0pt}{\Qcb{Panel A shows the application
+%behavior per worker-ability type $a$ to firms that truthfully send a high or
+%low message. Panel B: shows the application behavior per worker-ability type 
+%$a$ to firms that have a high or low first signal and no message. Note that
+%in Panel B the types that are directed are more compressed while the types
+%that apply at random expand, relative to Panel A. }}{\Qlb{messages}}{Figure}{%
+%\special{language "Scientific Word";type "GRAPHIC";maintain-aspect-ratio
+%TRUE;display "USEDEF";valid_file "T";width 13.0327in;height 4.0248in;depth
+%0pt;original-width 17.5868in;original-height 5.4129in;cropleft "0";croptop
+%"1";cropright "1";cropbottom "0";tempfilename
+%'RPQ7RX00.bmp';tempfile-properties "XPR";}}\bigskip
+
+\begin{figure} 
+\caption{Illustration how workers approach firms with and without messages. \label{messages}}
+\centering 
+\begin{minipage}{1 \linewidth}
+\includegraphics[width = \textwidth]{./images/figure-equilibrium.pdf}
+\\
+  {\footnotesize
+    \begin{singlespace}
+      \emph{Notes:} Panel A of this figures shows the application behavior per worker-ability type $a$ to firms that truthfully send a high or low message. Panel B: shows the application behavior per worker-ability type $a$ to firms that have a high or low first signal and no message. Note that in Panel B the set of worker types that are directed are more compressed while the set of types that apply at random expand, relative to Panel A.
+    \end{singlespace}
+  }
+\end{minipage} 
+\end{figure} 
+
+What is the cost of attracting higher worker types? Since they are producing
+more output, they are generally more attractive. Without a counteracting
+force all firms who can send messages might pretend to be high types (we
+will discuss the exact incentives for truth-telling at the end of this
+chapter). It turns out that wage demands go up. Not only because workers
+with higher ability tend to ask for higher wages, but - more importantly -
+because the same worker tends to ask for more. This is shown in the
+following comparative statics.
+
+\begin{corollary}
+\label{corollary 2}Consider a firm with type $T$ and associated valuation $%
+v_{T}$ and cost $c_{T}$ that attracts workers with abilities in $[\underline{%
+a},\bar{a}].$ For a given worker with ability $a,$ his wage bid at this firm
+increases in $v$, decreases in $c,$ and increases in $\underline{a}.$
+\end{corollary}
+
+Proof: Follows directly from (\ref{wages-general}).$\square $
+
+\bigskip
+
+For a given firm type, the identity of the lowest worker type matters. This
+worker type extracts all surplus. Workers slightly above this type still
+extract nearly all surplus. So firms only retain surplus and thus face low
+wages if the worker in question is sufficiently far from the lowest worker.
+The further that distance, the lower the wage. In our context this means
+that a given firm faces lower wages the lower $\underline{a}_{s_{1}}.$ This
+is lowest for low message firms, increases for low signal firms, increases
+further for high signal firms, and it highest for high message firms. So if
+one compares a high type firm that sends a truthful message with a high type
+firm that cannot send a message, for any given worker his/her wage demand is
+slightly lower in the no-message firm in the event of a high first signal
+and substantially lower in the event of a low first signal. On the contrary,
+if one compares a low type firm that can send a truthful message with a high
+type firm that cannot, for any given worker his/her wage demand is slightly
+higher in the no-message firm in the event of a low first signal and
+substantially higher in the event of a high first signal. So for high types
+wages increase if they can send a message, while they decrease at low type
+firms.
+
+The next proposition collects these insights:
+
+\begin{prop}
+\label{comparison1} The following compares firms that engage in truthful
+cheap-talk with otherwise identical counterparts that cannot.
+
+\begin{enumerate}
+\item Ability sorting: Truthful cheap talk induces more assortative
+matching, in the sense that the distribution of ability for a randomly
+selected applicant increases (decreasing) in first order stochastic
+dominance for high (low) firm types.
+
+\item Number of applications: In general the effect on the number of
+applications is theoretically ambigous. For given $v_{L},c_{L},c_{H}$ and $%
+u(.),$ if $v_{H}$ is sufficiently large than truthful cheap talk reduces the
+applications at low-type firms relative to their "no-message" counterparts.
+Across all firms, applications are lower for firms with messages than for
+firms without. For $v_{H}$ is close to $v_{L},$ cheap-talk increases the
+number of applications at low message-firms, without clear implications for
+applications across all firms with messages relative to those without.
+
+\item Wage bidding: Any given worker type bids less at low firm types under
+truthful cheap talk compared to the absence of cheap talk. The average wage
+demand at such firms and the average wage of the selected worker fall under
+truthful cheap talk. The opposite holds for high firm types.
+
+\item Efficiency: Social surplus per firm is higher at firms who send
+truthful messages than at their counterparts who cannot send messages.
+\end{enumerate}
+\end{prop}
+
+Proof: Part 1 and 3 follow directly from Corollary \ref{corollary} and \ref%
+{corollary 2}. For parts 2 and 4 see Appendix \ref{sec:proofs}. Intuitively, the number
+of applicants is ambigous as cheap-talk moves both the upper and lower bound
+of the types that approach a firm, and it depends which shift is more
+significant. For the surplus, note that the equilibrium implements the
+planner's allocation given the information frictions, but a planner can
+assign worker types in a more targeted way if he has more information about
+the firm type.$\square $
+
+\bigskip
+
+This central proposition provides the predictions which will guide our
+investigation in the empirical exercise which follows. 
+
+To conclude the theoretical section, it is worth noting
+that our entire exposition was built around the notion that firms send truthful messages. If low firm types would pretend to be high types, they would attract better workers, but each of these workers would also raise their wage. We show in Proposition \ref{prop: incentive-combat} in Appendix \ref{sec:proofs} that sufficient differences in valuations indeed imply the
+existence of an equilibrium with truthful cheap talk. As in
+many cheap-talk games, this is generally not the case when payoffs of high
+and low types are very close together, as we also show in Proposition \ref{prop: incentive-combat}. Comfortingly, we can not only investigate proxies for truth-telling in the empirical exercise, but part 2 of Proposition \ref{comparison1} also entails distinct testable implications for low vs high differences in valuations that can be confronted with data. We relegate to Appendix \ref{sec:app-discussion} a further discuss of robustness of our theory along three dimensions: (1) Also in partially revealing equilibria firms with messages inherit the same comparative statics outlined in Proposition \ref{comparison1} relative firms without messages. (2) Despite the precision-assumption of the second signal it is intended to approximate environments where some noise remains after seeing all signals. (3) Our environment extends to other production functions, including those that are strictly log-supermodular between $a$ and $v$, where differences in costs between firms are not needed to induce workers with low abilities to avoid high value firms. 
+
+
+
+\bigskip
+
+\bibliographystyle{aer}
+\bibliography{hot_towel}
+
+\newpage
+
+\appendix
+
+\bigskip
+
+\section{Proofs} \label{sec:proofs}
+
+\textit{Proof of Lemma%\ref{no-mass-point-lemma}
+:} Assume to the contrary
+that $\bigtriangleup (\pi |m,s_{1},s_{2},T)>0$ at a point where $\Psi
+(s_{2},T|m,s_{1})>0$ and $\pi \geq 0$. Then there must exist $%
+(a,b_{L},b_{H}) $ in the support of $\Lambda (\cdot |m,s_{1})$ with $\pi
+(a,b_{s_{2}}|T)=\pi .$ In fact, there must exist such combination with $%
+b_{s_{2}}>0:$ Clearly $b_{s_{2}}\geq 0$ as otherwise the worker would make a
+loss when hired and would improve his utility by raising the wage demand at
+least to zero. It is not possible to have a mass of workers offering the
+same $\pi $ and all offering $b_{s_{2}}=0,$ as in this case only a single
+worker type solves (\ref{firm-profit}), and a single worker type does not
+create a mass point.
+
+Now that we know that $b_{s_{2}}>0,$ it is easy to see that this is not
+optimal for the worker to demand this wage. If the worker chooses this
+demand, the fact that $\bigtriangleup (\pi )>0$ implies that $%
+M(\bigtriangleup (\pi ))<1$, where for ease of readability we suppressed
+that this all conditions on $(m,s_{1},s_{2},T).$ Alternatively, we can find
+for any $\varepsilon >0$ a bid $b_{s_{2}}^{\prime }\in
+(b_{s_{2}}-\varepsilon ,b_{s_{2}})$ slightly below the original one with
+associated profit $\pi ^{\prime }>\pi $ such that $\bigtriangleup (\pi
+^{\prime })=0.$ This is due to the fact that only a countable number of
+points can have a positive mass. This implies $M(\bigtriangleup (\pi
+^{\prime }))=1,$ and the hiring probability captured by the third term in (%
+\ref{value}) jumps up discretely relative to the original wage demand$.$ The
+second term in (\ref{value}) weakly increases because $\pi ^{\prime }>\pi ,$
+and the first and fifth term do not change. So the only negative comes from
+the forth term that captures the wage conditional on getting hired. Since $%
+b_{s_{2}}^{\prime }$ can be made arbitrarily close to $b_{s_{2}},$ the loss
+in the wage can be made arbitrarily small and, thus, less than the gain from
+the discrete jump in the hiring probability. $\square $
+
+\bigskip \bigskip
+
+\noindent \textit{Subsection \ref{sec:analysis} entailed the following claim that we
+prove here in the appendix: Consider firms that can send message }$m\in
+\{L,H\}$\textit{\ in a truthful equilibrium. At a given message }$m$\textit{%
+\ the worker abilities that enter in equilibrium form a non-empty interval }$%
+[\underline{a}_{m},\bar{a}_{m}],$\textit{\ and no single worker type enters
+with positive mass.}
+
+Proof: We will first show that there is a positive mass of workers that
+enter and approach message $m.$ Assume not, and consider worker type $a$
+with $v_{T}(a-c_{T})-u\left( a\right) >0.$ This worker could enter, approach
+firms with message $m,$ and bid $b=v_{m}(a-c_{m}).$ Since he would be hired
+for sure as no better workers are present at any firm with such message, he
+obtains $V(m,a,b)>u(a),$ contradicting the third equilibrium condition.
+
+Next, we rule out that only a single type $a$ with mass $\delta >0$
+approaches firms with messages $m$. Assume this were true. Since we have
+proven that the distribution of profits that is offered has no mass point,
+they have to offer different profits in equilibrium. Let $\pi _{l}$ be the
+infimum and $\pi _{h}$ the supremum of such profits. We know by free entry
+that $u(a)=e^{-\Gamma (\pi _{l}|m)}\left[ v_{m}(a-c_{m})-\pi _{l}\right]
+=e^{-\Gamma (\pi _{h}|m)}\left[ v_{m}(a-c_{m})-\pi _{h}\right] =:U(a|m),$
+where the last term denotes the utility conditional on entering and
+approaching firms with message $m.$ Let $U_{-}(a|m)$ be the left derivative
+and $U_{-}(a|m)$ be the right derivative of $U(a|m)$ with respect to $a.$ We
+can apply the envelop theorem to obtain:%
+\begin{eqnarray*}
+U_{-}^{\prime }(a|m) &=&e^{-\Gamma (\pi _{l}|m)}v_{m} \\
+U_{+}^{\prime }(a|m) &=&e^{-\Gamma (\pi _{h}|m)}v_{m}
+\end{eqnarray*}%
+We also know that $u^{\prime }(a)\leq U_{-}^{\prime }(a|m),$ since types $%
+a^{\prime }$ below $a$ have $u(a^{\prime })\geq U(a^{\prime }|m)$ as
+required by the third equilibrium condition and in order to reach $%
+u(a)=U(a|m)$ the utility after entering has to rise at least as fast as the
+utility of the outside option. But since $U_{-}^{\prime }(a|m)<U_{+}^{\prime
+}(a|m),$ we obtain $U(a^{\prime \prime }|m)>u(a^{\prime \prime })$ for types 
+$a^{\prime \prime }$ that are larger but close to $a.$ This yields a
+contradiction to the third equilibrium condition.
+
+Finally we will show that the set of abilities that approach message $m$ is
+an interval. Assume not. Then there exist $a_{l}$ and $a_{h}>a_{l}$ that
+approach firms with message $m$ but no firms inbetween (i.e., $a_{l}$ and $%
+a_{h}$ are in the support of $\Lambda (a|m)$ but no $a\in (a_{l},a_{h})$ is
+in the support). Let $\pi _{h}$ be the (supremum of) profits offered by type 
+$a_{l},$ and $\pi _{h}$ the (infimum of) profits offered by $a_{h}$ to firms
+with message $m.$ Since profits are rising in ability, we have $\pi _{l}\leq
+\pi _{h}.$ Free entry implies $u(a_{l})=e^{-\Gamma (\pi _{l}|m)}\left[
+v_{m}(a_{l}-c_{m})-\pi _{l}\right] $ and $u(a_{h})=e^{-\Gamma (\pi _{h}|m)}%
+\left[ v_{m}(a_{h}-c_{m})-\pi _{h}\right] .$
+
+Free entry also means for types $a\in (a_{l},a_{h})$ that their utility from
+entering and approaching message $m$ needs to be weakly lower than the
+outside option: $U(a^{\prime }|m)\leq u(a).$ Together with the previous
+equalities this requires $U^{\prime }(a_{l}|m)=e^{-\Gamma (\pi
+_{l}|m)}v_{m}\leq u^{\prime }(a_{l})$ and $U^{\prime }(a_{h}|m)=e^{-\Gamma
+(\pi _{h}|m)}v_{m}\geq u^{\prime }(a_{h}).$ Since the outside option is
+strictly concave, this implies $e^{-\Gamma (\pi _{h}|m)}>e^{-\Gamma (\pi
+_{l}|m)}.$ But since the distribution of profits has no mass points and
+there are no bids between $\pi _{h}$ and $\pi _{l},$ it holds that $\Gamma
+(\pi _{h}|m)=\Gamma (\pi _{l}|m),$ yielding a contradiction. $\square $
+
+\bigskip \bigskip
+
+\noindent \textit{Proof of Proposition \ref{equilibrium-notalk}:} Consider firms that
+cannot send a cheap-talk message. Given that we assumed precise second
+signals, we can treat $s_{2}$ and the true type $T$ interchangeably, and for
+easy of exposition we will only use the type $T$ here. Since we only have
+one other signal left, we can simply write $s$ instead of $s_{1}.$ As long
+as we consistently refer to the same signal, we might also omit the signal
+from the notation. Now consider workers who see signal $s$ and believe that
+the fraction of low (high) firms at this signal is $\Psi (L|s)$ ($\Psi
+(H|s)) $ where we suppressed the message because it is absent ($m=\emptyset
+).$ Note that these fractions are exogeneously given; for example, $\Psi
+(L|L)=\psi _{1}\delta _{L}/(\psi _{1}\delta _{L}+(1-\psi _{1})\delta _{H})$
+and does not depend on the equilibrium interaction.
+
+Similar to (\ref{value-profit-truth}) and (\ref{value-profit-truth2}) we can
+now write the utility of a worker with ability $a$ as%
+\begin{equation}
+W(a|s)=\max_{\pi _{L},\pi _{H}}\sum_{T}\Psi (T|s)e^{-\Gamma (\pi _{T}|T,s)} 
+\left[ v_{T}(a-c_{T})-\pi _{T}\right] \boldsymbol{1}[a\geq c_{T}],
+\label{objective-babbling}
+\end{equation}%
+where $\pi _{L}$ and $\pi _{H}$ are the profits that the worker offers to
+the low and high type firm respectively, and $\Gamma (\pi _{T}|T,s)$ denotes
+the queue of workers who offers higher profits to these firms at this
+message. Workers can only submit profit bids larger than zero if their type
+exceeds the threshold, and therefore $\boldsymbol{1[\cdot ]}$ is an
+indicator that takes the value of one if the ability is higher than the work
+requirement, and zero otherwise.
+
+Due to the same supermodularity between $a$ and $\pi _{T},$ higher ability
+workers leave higher profits. Again there cannot be any mass points nor
+holes in the distribution of offers $\Gamma (\pi _{T}|T,s).$ We focus for
+now on workers with ability larger than requirement $c_{H},$ and will later
+show that this is the relevant range. This allows us to drop the indicator
+function in (\ref{objective-babbling}). For such workers, utility increases
+in ability according to%
+\begin{equation*}
+W^{\prime }(a|s)=e^{-\Lambda (a|s)}\hat{v},
+\end{equation*}%
+where $\Lambda (a|s)$ is the queue of workers at message $s$ with type $a$
+or higher and $\hat{v}$ is the average valuation for their work 
+\begin{equation*}
+\widehat{v}=\sum_{T}\Psi (T|s)v_{T}\boldsymbol{.}
+\end{equation*}%
+Clearly the average valuation is increasing in the belief that the firm is
+of high type. We can now apply the same steps as in the Section \ref%
+{sec:analysis}, just with this replaced term for the value. As in (\ref%
+{first derivative}) the increase in value has to equal the increase in
+outside option to make free entry feasible, so 
+\begin{equation*}
+e^{-\Lambda (a|s)}\widehat{v}=u^{\prime }(a),
+\end{equation*}%
+and the second derivative yields in analogy to (\ref{second derivative}) 
+\begin{equation*}
+\lambda (a|s)e^{-\Lambda (a|s)}\widehat{v}=u^{\prime \prime }(a)
+\end{equation*}%
+so that in analogy to we obtain 
+\begin{equation*}
+\lambda (a|s)=u^{\prime \prime }(a)/u^{\prime }(a).
+\end{equation*}%
+So tightness-density is completely governed by the outside option, exactly
+as in the previous section. So in terms of types that approach a given
+initial signal, the allocation remains random where the types between $s=L$
+and $s=H$ overlap, and it is identical to the types that queue in the fully
+revealing equilibrium we already studied. Wage bids are also relatively
+straightforward. At a given first signal $s$ and a second signal that
+reveals type $T,$ the wages are given by a differential equation identical
+to (\ref{wages})%
+\begin{equation}
+b_{T}^{\prime }(a|T,s)=v_{T}b_{1}^{\prime }(a).  \label{wages2}
+\end{equation}
+
+The lowest worker type $\underline{a}_{s}$ that approaches message $s$ can
+again only win if no other worker is present, no matter whether the second
+signal indicates that it is a high or a low type. So at either firm type
+this worker extracts all output conditional on matching, and in this case
+obtains 
+\begin{eqnarray*}
+&&\sum_{T}\Psi (T|s)v_{T}(\underline{a}_{s}-c_{T}) \\
+&=&\widehat{v}[\underline{a}_{s}-\widehat{c}]\text{ with }\widehat{c}%
+:=\sum_{T}\Psi (T|s)[v_{T}c_{T}]/\sum_{T}\Psi (T|s)v_{T}.
+\end{eqnarray*}%
+where the second line simply re-orders the terms. The term $\widehat{c}$
+equals $c_{L}$ when workers think they face a low type for sure (i.e., $\Psi
+(L|s)=1$), $\widehat{c}$ is monotonically increasing in the probability that
+the firm is a high type, and it equals $c_{H}$ when workers think they face
+a high type for sure. For the same reasons as in Section \ref{sec:analysis}
+the lowest type is solely determined by the costs via implicit function 
+\begin{equation}
+\underline{a}_{s}=\widehat{c}+u(\underline{a}_{s})/u^{\prime }(\underline{a}%
+_{s}).  \label{cutoff-general}
+\end{equation}%
+The lowest type $\underline{a}_{s}$ is increasing in $\widehat{c},$ and
+therefore increasing in the probability of facing a high type firm.
+
+This fully characterizes the interaction at jobs that do not have cheap-talk
+available to them, except that we dropped the indicator function after
+equation (\ref{objective-babbling}). We first note that $\underline{a}_{s}$
+is always above $c_{H},$ because even $\underline{a}_{T=L}$ is above because
+of our restriction on the difference between $c_{L}$ and $c_{H}.$\footnote{%
+Equation (\ref{cutoff-general}) applied to $\widehat{c}=c_{L}$ implies that
+we are looking for $\underline{a}_{T=L}=c_{L}+u(\underline{a}%
+_{T=L})/u^{\prime }(\underline{a}_{T=L}).$ We assumed that $%
+c_{H}-c_{L}<u(c_{H})/u^{\prime }(c_{H})$ or equivalently that $%
+c_{H}<c_{L}+u(c_{H})/u^{\prime }(c_{H}).$ Therefore, $\underline{a}%
+_{T=L}>c_{H}.$ Since the cutoff at any other $\widehat{c}$ is higher, it
+will also be above $c_{H}.$} So the worker with lowest ability according to
+our derivations so far would bid for jobs both at high and low firms in a
+way that leaves non-negative profits for the firms, and this worker would
+just recover his/her outside option. We also know from our previous analysis
+that no worker with ability below $\underline{a}_{s}$ can recover their
+outside option if this worker makes offers to both firms that leave
+non-negative profits to these firms. Workers with abilities below $c_{H}$
+would choose not to be hired by high firm types. They would never be able to
+recover their outside option, though, either, as we now show in the final
+step:
+
+Type $\underline{a}_{T=L}$ has 
+\begin{eqnarray}
+&&e^{-\Lambda (\underline{a}_{s}|s)}\sum_{T}\Psi (T|s)v_{T}(\underline{a}%
+_{T=L}-c_{T})=U(\underline{a}_{s})  \notag \\
+&\Rightarrow &e^{-\Lambda (\underline{a}_{s}|s)}\Psi (L|s)v_{L}(\underline{a}%
+_{T=L}-c_{L})<U(\underline{a}_{T=L})  \notag \\
+&\Rightarrow &e^{-\Lambda (\underline{a}_{s}|s)}\Psi (L|s)v_{L}<\underline{v}%
+_{T=L}(\underline{a}_{T=L}),  \label{x}
+\end{eqnarray}%
+where $\underline{v}_{T=L}(a)=U(a)/(a-c_{l})$ as defined in Section \ref%
+{sec:analysis}. Any type $a<\underline{a}_{T=L}$ who only bids for the low
+job obtains $e^{-\Lambda (\underline{a}_{s}|s)}\Psi (L|s)v_{L}(\underline{a}%
+-c_{L})$ but has outside option $U(a)=\underline{v}_{T=L}(a)(a-c_{L}).$ For
+this to justify entry we have to have $e^{-\Lambda (\underline{a}%
+_{s}|s)}\Psi (L|s)\geq \underline{v}_{T=L}(a),$ but this is contradicted by (%
+\ref{x}) and the fact that $\underline{v}_{T=L}(\underline{a}_{T=L})$ is the
+global minimum of $\underline{v}_{T=L}(\underline{a}).\square $
+
+\bigskip \bigskip
+
+\noindent \textit{The proof of Corollary \ref{corollary} entailed the claim that
+holding the lowest worker type }$\underline{a}_{m}$\textit{\ at truthful
+message }$m$\textit{\ fixed but changing }$v_{m}$\textit{\ does not alter
+the expected utility at the lowest type, and we prove this here: }The
+expected utility at $\underline{a}_{m}$ is according to (\ref%
+{equilibrium lowest type}) given by $e^{-\Lambda (\underline{a}_{m}|m)}v_{m}(%
+\underline{a}_{m}-c_{m}).$ We will see that the equilibrium utility at the
+lowest type does not change, and therefore the lowest type remains unchanged
+when the valuation is altered. To do this, we will take comparative statics
+with respect to $v_{m},$ holding $\underline{a}_{m}$ fixed, but allowing $%
+\Lambda (\underline{a}_{m}|m)$ to change. The derivative is given by 
+\begin{eqnarray*}
+&&e^{-\Lambda (\underline{a}_{m}|m)}(\underline{a}_{m}-c_{m})+e^{-\Lambda (%
+\underline{a}_{m}|m)}\left[ -\frac{d\Lambda (\underline{a}_{m}|m)}{dv_{m}}%
+\right] v_{m}(\underline{a}_{m}-c_{m}) \\
+&=&e^{-\Lambda (\underline{a}_{m}|m)}(\underline{a}_{m}-c_{m})\left[
+1-v_{m}\lambda (\bar{a}_{m}|m)\frac{d\bar{a}_{m}}{dv_{m}}\right] \\
+&=&e^{-\Lambda (\underline{a}_{m}|m)}(\underline{a}_{m}-c_{m})\left[
+1-v_{m}\lambda (\bar{a}_{m}|m)u^{\prime \prime }(\bar{a}_{m})\right] \\
+&=&e^{-\Lambda (\underline{a}_{m}|m)}(\underline{a}_{m}-c_{m})\left[ 1-\frac{%
+v_{m}}{u^{\prime }(\bar{a}_{m})}\right] \\
+&=&0
+\end{eqnarray*}
+
+The second line is obtained simply by rewrites the change in the queue of
+workers, the third line by implicitly differentiating (\ref{equilibrium
+highest type}), the forth line uses (\ref{equilibrium density}) to
+substitute out $\lambda (.),$ and the last line again uses (\ref{equilibrium
+highest type}).$\square $
+
+\bigskip \bigskip
+
+\noindent \textit{Proof of Proposition \ref{comparison1}:} Part 1 and 3 follow
+directly from Lemma \ref{corollary} and \ref{corollary 2}. For Part 2, note
+that effects on the number of applications are ambiguous since low firm
+types who send signals attract additional low types but loose high types.
+How this affects applications depends on the queue of such workers, which by
+(\ref{equilibrium density}) depends on $u^{\prime \prime }(a)/u^{\prime }(a)$
+in these various ability regions, on which we do not have clear
+restrictions. For $v_{H}\approx v_{L}$ the second effect vanishes, and
+truthful cheap-talk attract more workers to low-message firms. The opposite
+is the case for high-message firms, and the total can go either way
+depending on entry costs. For $v_{H}$ large, the second effect obviously
+dominates and low-type firms loose applicants when they send truthful
+messages relative to low-type firms who cannot send a message. High type
+firms with a message gain high ability workers but loose low-ability
+workers, relative to counterparts that cannot send messages. But since the
+elasticity of $u^{\prime }()$ is bounded by some number, say $B,$ the queue
+at worker types $a$ is bounded by $B/a.$ So the additional worker types that
+are added for high type firms have very little extra weight, which implies
+for large enough $v_{H}$ that the effect on low type firms dominates.
+
+For Part 4, note that efficiency per firm with a message is given by 
+\begin{equation}
+\max_{\lambda _{m=L}^{P}(.),\lambda _{m=H}^{P}(.)}\delta
+_{L}S(v_{L},c_{L}|\lambda _{s=L}^{P}(.))+\delta _{H}S(v_{H},c_{H}|\lambda
+_{m=H}^{P}(.))  \label{max1}
+\end{equation}%
+where 
+\begin{eqnarray*}
+S(v,c|\lambda (.)) &=&\int \left( v(a-c)\right) d\left(
+1-e^{-\int_{a}^{\infty }\lambda (a^{\prime })da^{\prime }}\right) -\int
+\lambda (a)u(a)da \\
+&&\int v(a-c)\lambda (a)e^{-\int_{a}^{\infty }\lambda (a^{\prime
+})da^{\prime }}da-\int \lambda (a)u(a)da
+\end{eqnarray*}%
+represents the output of the firm minus the forgone outside option of all
+the workers who queue at this firm. Let 
+\begin{equation}
+\mathcal{S}(v,c)=\max_{\lambda (.)}S(v,c|\lambda (.)).  \label{max-by-type}
+\end{equation}%
+The optimality conditions for this problem coincide nearly everywhere with
+the equilibrium conditions (\ref{first derivative}) for a given firm type,
+and it shares the same boundary conditions. This establishes that the
+equilibrium decentralizes the planner's solution. Evidently the value of
+program (\ref{max1}) is given by $\delta _{L}\mathcal{S}(v_{L},c_{L})+\delta
+_{H}\mathcal{S}(v_{H},c_{H}).$
+
+For firms who cannot send a message the maximal efficiency per firm is
+attainable through queue of 
+\begin{eqnarray}
+\max_{\lambda _{s=L}^{P}(.),\lambda _{s=H}^{P}(.)} &&\delta _{L}\left[ \psi
+_{1}S(v_{L},c_{L}|\lambda _{s=L}^{P}(.))+(1-\psi _{1})S(v_{L},c_{L}|\lambda
+_{s=H}^{P}(.))\right]  \label{max2} \\
+&&+\delta _{H}\left[ \psi _{1}S(v_{H},c_{H}|\lambda _{s=H}^{P}(.))+(1-\psi
+_{1})S(v_{H},c_{H}|\lambda _{s=L}^{P}(.))\right] ,  \notag
+\end{eqnarray}%
+where $S(.)$ still denotes the output minus the forgone outside option of
+workers, but which queue a firm obtains now depends on which signal it
+sends. The optimality conditions for this problem again coincide with
+conditions for the decentralzied equilibrium, and thus the decentralized
+equilibrium obtains the highest surplus given the information frictions.
+Nevertheless, evidently value of maximization problem (\ref{max1}) is higher
+than that of maximization problem (\ref{max2}) since the queue length in the
+former can be chosen to maximize the surplus for each firm while in the
+latter it has to partially cater to both firm types. Formally, note that
+both $S(v_{L},c_{L}|\lambda _{s=L}^{\ast }(.))$ and $S(v_{L},c_{L}|\lambda
+_{s=H}^{\ast }(.))$ are bounded above by $\mathcal{S}(v_{L},c_{L}),$ and $%
+S(v_{H},c_{H}|\lambda _{s=H}^{P}(.))$ and $S(v_{H},c_{H}|\lambda
+_{s=L}^{P}(.))$ are bounded above by $\mathcal{S}(v_{L},c_{L}).$ Therefore
+the value of problem (\ref{max2}) is bounded from above by $\delta _{L}%
+\mathcal{S}(v_{L},c_{L})+\delta _{H}\mathcal{S}(v_{H},c_{H}),$ which
+coincides with the value of problem (\ref{max1}).
+
+In fact, one can prove that value of problem (\ref{max2}) is strictly below
+that of (\ref{max1}): the maximizer $\lambda ^{\ast P}(a|v,c)$ of problem (%
+\ref{max-by-type}) is unique for given $(v,c)$ and strictly different for
+different values of $(v,c)$ as it inhits the same properties as the
+equilibrium queue length under truthful cheap talk. Equal value of the two
+problems above would require that that $\lambda ^{\ast
+P}(.|v_{L},c_{L})=\lambda _{s=L}^{P}(.)=\lambda _{s=H}^{P}(.)\,\ $and $%
+\lambda ^{\ast P}(a|v_{H},c_{H})=\lambda _{s=L}^{P}(.)=\lambda
+_{s=H}^{P}(.), $ which yields a contradiction to $\lambda ^{\ast
+P}(.|v_{L},c_{L})\neq \lambda ^{\ast P}(a|v_{H},c_{H}).\square $
+
+\bigskip \bigskip
+
+\noindent \textit{The main body claimed that truth-telling is an equilibrium when
+valuations are far apart, while generally this is not the case when
+valuations are close together. Formally, we prove the following proposition: 
+}
+
+\begin{prop}
+\label{prop: incentive-combat} For given $u(a)$, $v_{L}$ and $c_{H}$,
+thruthtelling is incentive compatible if $v_{H}$ is sufficiently large. For $%
+c_{H}=0,$ when $v_{H}$ approaches $v_{L},$ incentive compatability for
+thruth-telling generically fails.
+\end{prop}
+
+\noindent Proof of Proposition \ref{prop: incentive-combat}: Note first that the probability
+that a firm at message $m$ has no applicant with qualification above $a$ is $%
+e^{-\Lambda (a|m)}.$ That means that the density that the best applicant is
+of type $a$ is
+
+$\lambda (a|m)e^{-\Lambda (a|m)}$. So the expected profit at message $m$ for
+firm type $t$ is at least%
+\begin{eqnarray}
+\Pi (m|t) &\geq &\int_{\underline{a}_{m}}^{\bar{a}_{m}}\max
+\{v_{t}(a-c_{t})-b_{m}(a),0\}\lambda (a|m)e^{-\Lambda (a|m)}da.  \notag \\
+&=&\int_{\underline{a}_{m}}^{\bar{a}_{m}}\max \left\{ \frac{%
+v_{t}(a-c_{t})-b_{m}(a)}{v_{m}},0\right\} u^{\prime \prime }(a)da.
+\label{truth-start} \\
+&=&\int_{\underline{a}_{m}}^{\bar{a}_{m}}\max \left\{ \frac{v_{t}(a-c_{t})-%
+\frac{v_{m}}{v_{L}}b_{L}(a)}{v_{m}},0\right\} u^{\prime \prime }(a)da. 
+\notag \\
+&=&\int_{\underline{a}_{m}}^{\bar{a}_{m}}\max \left\{ \frac{v_{t}}{v_{m}}%
+(a-c_{t})-\frac{b_{L}(a)}{v_{L}},0\right\} u^{\prime \prime }(a)da,  \notag
+\end{eqnarray}%
+where it is suppressed that $\bar{a}_{m}$ is a function of $v_{m}$ and $%
+\underline{a}_{m}$ is a function of $c_{t}.$ The first line holds exactly
+with equality if workers with higher ability offer more profits. In this
+case the highest $a$ is always selected, and leaves profits $%
+v_{t}(a-c_{t})-b_{m}(a)$ to the firm whenever this is positive. The second
+line simply substitutes (\ref{second derivative}), and the third line uses $%
+b_{H}(a)=\frac{v_{H}}{v_{L}}b_{L}(a)$ which follows directly from Corollary %
+\ref{corollary}.
+
+On the equilibrium path we have proven that higher types indeed offer more
+profits, so the first line holds with equality when $m=t=L$ or $m=t=H.$ It
+also holds with equality when high types contemplate to send a low message $%
+(t=H$ but $m=L)$: since $v_{L}(a-c_{L})-b_{L}(a)$ is increasing in $a$ in
+equilibrium, also $v_{L}(a-c_{L})-b_{L}(a)$ is increasing for all $a\geq
+c_{H},$ and worker types that have a lower $a$ are always rejected as taken
+into account in the max operator. This makes it easy to analyze these three
+cases. It may not hold in the case of low firm types sending a high message $%
+(t=L$ and $m=H)$ which makes its analysis more challenging.
+
+Truth-telling requires that $\Pi (H|H)\geq \Pi (L|H)$ and $\Pi (L|L)\geq \Pi
+(H|L).$
+
+\textit{We will first consider the truth-telling condition for high types }$%
+(T=H)$\textit{:}
+
+\begin{eqnarray}
+\Pi (H|H) &\geq &\Pi (L|H)  \label{truth1} \\
+&\Leftrightarrow &\int_{\underline{a}_{H}}^{\bar{a}_{H}}\left[ a-c_{t}-\frac{%
+b_{L}(a)}{v_{L}}\right] u^{\prime \prime }(a)da\geq \int_{\underline{a}%
+_{L}}^{\bar{a}_{L}}\max \left\{ \frac{v_{H}}{v_{L}}(a-c_{t})-\frac{b_{L}(a)}{%
+v_{L}},0\right\} u^{\prime \prime }(a)da  \label{truth2}
+\end{eqnarray}
+
+For $0=c_{L}=c_{H},$ it holds that $\underline{a}_{H}=\underline{a}_{L}=0.$
+Fix $v_{L},$ and vary $v_{H}.$ The derivatives are%
+\begin{eqnarray}
+\frac{d\Pi (H|H)}{dv_{H}} &=&\left[ \bar{a}_{H}-\frac{b_{L}(\bar{a}_{H})}{%
+v_{L}}\right] u^{\prime \prime }(\bar{a}_{H})\frac{d\bar{a}_{H}}{dv_{H}}=%
+\bar{a}_{H}-\frac{b_{L}(\bar{a}_{H})}{v_{L}},  \label{truth3} \\
+\frac{d\Pi (L|H)}{dv_{H}} &=&\int_{\underline{a}_{L}}^{\bar{a}_{L}}\frac{a}{%
+v_{L}}u^{\prime \prime }(a)da,  \label{truth4}
+\end{eqnarray}%
+where the second equality in the first line follows from implicitly
+differentiating (\ref{equilibrium highest type}). The first line goes to
+infinity since $b_{L}(a)$ is bounded away from $v_{L}a$ for all $a>%
+\underline{a}_{H}+\varepsilon $ for some $\varepsilon ,$ which follows from (%
+\ref{wages}) and the assumption that $au^{\prime \prime }(a)/u^{\prime }(a)$
+is bounded away from zero. The second line is simply a constant. So
+truthtelling is incentive compatible for high types when $v_{H}$ is
+sufficiently large.
+
+When $v_{H}\approx v_{L}$ and $c_{H}=0,$ truthtelling requires 
+\begin{equation}
+\bar{a}_{L}-\frac{b_{L}(\bar{a}_{L})}{v_{L}}\geq \int_{\underline{a}_{L}}^{%
+\bar{a}_{L}}\frac{a}{v_{L}}u^{\prime \prime }(a)da,  \label{truth-local}
+\end{equation}%
+which follows since $\bar{a}_{H}\approx \bar{a}_{L}.$
+
+\textit{Now consider truth-telling for low types }$(T=L):$
+
+We will first consider truthtelling when valuations of high and low type
+firms are roughly similar, and will show that incentive compatibility
+generically fails when $v_{H}$ approaches $v_{L}$ and $c_{H}=0.$ In this
+case, it has to hold that%
+\begin{equation*}
+\int_{\underline{a}_{L}}^{\bar{a}_{L}}\left[ a-\frac{b_{L}(a)}{v_{L}}\right]
+u^{\prime \prime }(a)da\geq \int_{\underline{a}_{H}}^{\bar{a}_{H}}\max
+\left\{ \frac{v_{L}}{v_{H}}a-\frac{b_{L}(a)}{v_{L}},0\right\} u^{\prime
+\prime }(a)da.
+\end{equation*}%
+Taking the derivative with respect to $v_{H}$ and evaluating it around $%
+v_{H}\approx v_{L}$ (and $\bar{a}_{H}\approx \bar{a}_{L}$ as well as $%
+\underline{a}_{H}=\underline{a}_{L}=0)$ yields%
+\begin{equation}
+0\geq -\int_{\underline{a}_{H}}^{\bar{a}_{H}}\frac{a}{v_{L}}u^{\prime \prime
+}(a)da+\left[ \bar{a}_{H}-\frac{b_{L}(\bar{a}_{H})}{v_{L}}\right] .
+\label{truth-local2}
+\end{equation}%
+Inequality (\ref{truth-local2}) is the opposite of inequality (\ref%
+{truth-local}), and generically in the space of permissable $u(.)$ and $%
+v_{L} $ they do not both hold simultaneously.
+
+Next, we consider truth-telling of low types when $v_{H}$ is large (for
+fixed $v_{L})$ and will show that it is incentive compatible. We will first
+build intuition under the case where firms are willing to hire all workers,
+so that $0=c_{L}=c_{H}.$ It will then be easy to expand to the general case
+afterwards. For this part of the proof it is convenient to denote by $\check{%
+a}$ the ability type with $u^{\prime }(v)=1\,$or ability type $\bar{a}_{L},$
+whichever one is larger. Let $\check{v}\geq v_{L}$ be such that $\bar{a}_{H}=%
+\check{a}$ if $v_{H}=\check{v}.$ Note that if the low firm type could only
+match with workers of abilities $a\in \lbrack 0.\check{a}],$ it is easy to
+show that deviating and sending a high message is not profitable:
+
+- For abilities $a\in \lbrack \underline{a}_{H},\bar{a}_{L}]$ the queue does
+not change but the wage becomes $b_{H}(a)=b_{L}(a)v_{H}/v_{L},$ so the firm
+pays more for these workers but does not attract more of them.
+
+- For abilities $a\in \lbrack 0,\underline{a}_{H}]$ workers cese to approach
+the firm if it sends the high signal.
+
+- For abilities $a\in \lbrack \bar{a}_{L},\check{a}]$, let $\bar{g}%
+=\sup_{a\in \lbrack \bar{a}_{L},\check{a}]}g(a)>0$ so that the wage $%
+b_{H}(a)\geq \bar{g}v_{H}/v_{L},$ which exceeds $v_{L}\check{a}$ for $v_{H}$
+sufficiently large. So the low type firm would make a loss hiring these
+workers, and would refuse to do so. So their presence does not constitute a
+profitable deviation.
+
+Now consider also abilities beyond $\check{a}.$ In general, by raising $%
+v_{H} $ from $\check{v}$ to higher values, from the perspective of a
+low-type firm that contemplates to send message $H$ this has two effects:
+For all ability types $a\in \lbrack 0,\bar{a}_{H}]$ the wage $%
+b_{H}(a)=v_{H}g(a)$ increases when $v_{H}$ is marginally increased, which is
+a negative outcome from the firm's perspective. But one also raises the
+upper end of workers willing to match. We will show that even for the second
+effect, the additional wage will outweigh the benefit in matching. We know
+that $u^{\prime }(\bar{a}_{H})=v_{H}.$ So $d\bar{a}_{H}/dv_{H}=1/u^{\prime
+\prime }(\bar{a}_{H}).$ So the wage at the higest type increase by 
+\begin{eqnarray*}
+db_{H}(\bar{a}_{H})/dv_{H} &=&d(v_{H}g\left( \bar{a}_{H}\right) )/dv_{H} \\
+&=&g\left( \bar{a}_{H}\right) +v_{H}g^{\prime }(\bar{a}_{H})d\bar{a}%
+_{H}/dv_{H} \\
+&=&g\left( \bar{a}_{H}\right) +v_{H}g^{\prime }(\bar{a}_{H})d\bar{a}%
+_{H}/dv_{H} \\
+&=&g\left( \bar{a}_{H}\right) +v_{H}[1-g(\bar{a}_{H})u^{\prime \prime }(\bar{%
+a}_{H})/u^{\prime }(\bar{a}_{H})]/u^{\prime \prime }(\bar{a}_{H}) \\
+&=&g\left( \bar{a}_{H}\right) +v_{H}/u^{\prime \prime }(\bar{a}_{H})-g(\bar{a%
+}_{H})/u^{\prime }(\bar{a}_{H})
+\end{eqnarray*}%
+For the low firm type who considers sending message $H,$ a higher value $%
+v_{H}$ implies the following change in profits when matching with the
+highest type at message $H:$ $v_{L}\bar{a}_{H}-b_{H}(\bar{a}_{H}).$ So this
+changes in $v_{H}$ according to 
+\begin{eqnarray*}
+&&v_{L}d\bar{a}_{H}/dv_{H}-db_{H}(\bar{a}_{H})/dv_{H} \\
+&=&v_{L}/u^{\prime \prime }(\bar{a}_{H})-g\left( \bar{a}_{H}\right)
+-v_{H}/u^{\prime \prime }(\bar{a}_{H})+g(\bar{a}_{H})/u^{\prime }(\bar{a}%
+_{H})
+\end{eqnarray*}%
+which is definitely negative as $\bar{a}_{H}\geq \check{a},$ which implies $%
+u^{\prime }(\bar{a}_{H})\geq 1.$ This establishes that for high enough $%
+v_{H} $ low types strictly prefer to send message $m=L$ to message $m=H$ in
+a truthtelling equilibrium. Since high types also prefer to tell the truth,
+this establishes that truth-telling is an equilibrium outcome when $%
+c_{L}=c_{H}=0.$
+
+We finally have to establish that truth-telling is incentive compatible for
+low firm types when $v_{H}$ is sufficiently large even in the more general
+setting where $0=c_{L}<c_{H}:$ We have already established that low firm
+types would not pretend to be high firm types if costs are zero. In the
+candidate equilibrium with truth-telling, note that strictly positive costs
+at high types do not change the workers who approach low types or their
+bids. On the other hand, at high types the set of worker types shrinks,
+those who do approach high messages do so with exactly the same queue $%
+\lambda (a|H)$ by (\ref{equilibrium density})$,$ and their bids increase. So
+if low types do not want to deviate and pretend to be high types under $%
+c_{H}=0,$ they will not want to do so when $c_{H}>0.$ For high types we had
+already established incentive compatibility in the general case, which
+concludes the proof. $\square $
+
+\bigskip \bigskip
+
+\begin{prop}
+\label{extension} For more general production functions $\phi (a,v_{T})$
+with constant semi-elasticity of $\phi _{a}$ with respect to worker ability for given firm type,
+strict log-supermodularity (log-submodularity) of $\phi $ ensures that the
+lowest ability type $\underline{a}$ that approaches such firms under
+perfectly-revealing cheap-talk is increasing (decreasing).
+\end{prop}
+
+Proof of Proposition \ref{extension}: Note that the highest worker type that
+approaches such firms is increasing in $v$, due to the boundary condition $%
+\phi _{a}(\bar{a}_{m},v)=u^{\prime }(\bar{a})$ and strict concavity of $\phi 
+$ in worker ability. The queue length is given by $\lambda _{m}(a)=u^{\prime
+\prime }(a)/u^{\prime }(a)-\phi _{aa}(a,m)/\phi _{a}(a,m),$ with lower
+end-point conditions $\phi _{a}(\bar{a},v)=u^{\prime }(\bar{a}_{m})$ and $%
+e^{-\Lambda (\underline{a}_{m}|m)}\phi _{v}(\underline{a},v)=u(\underline{a}%
+).$ The latter implies $\partial \underline{a}/\partial v$ equals
+
+\begin{eqnarray*}
+&&e^{-\Lambda (\underline{a}_{m}|m)}\phi _{v}(\underline{a}%
+_{m},v)+e^{-\Lambda (\underline{a}_{m}|m)}\left[ -\frac{d\Lambda (\underline{%
+a}_{m}|m)}{dv_{m}}\right] \phi (\underline{a}_{m},v) \\
+&=&e^{-\Lambda (\underline{a}_{m}|m)}\phi (\underline{a}_{m},v)\left[ \frac{%
+\phi _{v}(\underline{a}_{m},v)}{\phi (\underline{a}_{m},v)}-\lambda (\bar{a}%
+_{m}|m)\frac{d\bar{a}_{m}}{dv_{m}}\right] \\
+&=&e^{-\Lambda (\underline{a}_{m}|m)}\phi (\underline{a}_{m},v)\left[ \frac{%
+\phi _{v}(\underline{a}_{m},v)}{\phi (\underline{a}_{m},v)}-\lambda (\bar{a}%
+_{m}|m)\left[ -\frac{\phi _{av}(\bar{a}_{m},v)}{\phi _{aa}(\bar{a}%
+_{m},m)-u^{\prime \prime }(\bar{a}_{m})}\right] \right] \\
+&=&e^{-\Lambda (\underline{a}_{m}|m)}\phi (\underline{a}_{m},v)\left[ \frac{%
+\phi _{v}(\underline{a}_{m},v)}{\phi (\underline{a}_{m},v)}-\frac{u^{\prime
+\prime }(\bar{a}_{m})-\phi _{aa}(\bar{a}_{m},v)}{\phi _{a}(\bar{a}_{m},v)}%
+\left[ --\frac{\phi _{av}(\bar{a}_{m},v)}{\phi _{aa}(\bar{a}%
+_{m},v)-u^{\prime \prime }(\bar{a}_{m})}\right] \right] \\
+&=&e^{-\Lambda (\underline{a}_{m}|m)}\phi (\underline{a}_{m},v)\left[ \frac{%
+\phi _{v}(\underline{a}_{m},v)}{\phi (\underline{a}_{m},v)}-\frac{\phi _{av}(%
+\bar{a}_{m},v)}{\phi _{a}(\bar{a}_{m},v)}\right]
+\end{eqnarray*}%
+A sufficient condition for this to be strictly negative is that $\phi $ is
+strictly log-supermodular. In that case 
+\begin{equation*}
+\frac{\phi _{v}(\underline{a}_{m},v)}{\phi (\underline{a}_{m},v)}-\frac{\phi
+_{av}(\bar{a}_{m},v)}{\phi _{a}(\bar{a}_{m},v)}<\frac{\phi _{v}(\bar{a}%
+_{m},v)}{\phi (\bar{a}_{m},v)}-\frac{\phi _{av}(\bar{a}_{m},v)}{\phi _{a}(%
+\bar{a}_{m},v)}<0,
+\end{equation*}%
+where both the first and the second inequality are immediate implications of
+strict log-supermodularity. The opposite holds for strict log-submodularity.$%
+\square $
+
+\bigskip
+
+\section{Short discussion of model features and robustness}\label{sec:app-discussion}
+
+This appendix section briefly discusses the three robustness points mentioned at the end of Subsection \ref{sec:analysis} in the main body. \bigskip
+
+\textit{Partially revealing equilibria: }Truthful cheap talk is not the only
+equilibrium in cheap-talk games, even if such equilibria exists. It is
+well-known that there always exists a babbling equilibrium where receivers
+disregard the messages because senders have choosen them at random. Whether
+parameters admit a truthful equilibrium or not, there also often exist
+partially revealing equilibrium where some additional information is
+transmitted, but not all types are perfectly revealed. Here we briefly point
+out that if a cheap-talk intervention displays any effect, it must be linked
+to some information transmission. We show here that all equilibria where
+cheap-talk reveals some additional information inherit the same broad
+empirical implications: Proposition \ref{comparison1} and the Corollaries \ref%
+{corollary} and \ref{corollary 2} that lead up to it are based around
+comparative statics. Less information essentially acts to average the
+valuation and the costs. The base model does it for the extreme case of
+starting with perfect information revelation. But the comparative statics
+hold similarly when messages are only partially informative.\footnote{%
+Parts 1, 3 and 4 of Proposition Proposition \ref{comparison1} rely on
+comparative statics and carry over to partially informative equilibria. In
+contrast, Part 2 of Proposition \ref{comparison1} uses a limit argument for
+the the size of the high valuation, holding the amount of information that
+is conveyed constant. The approach to the proof extends if there is a lower
+bound on the information that a partially informative equilibrium conveys
+about firms, but the technique of the proof does not extend if the amount of
+information goes to zero as the valuation of the high type firm becomes
+large.}
+
+\bigskip
+
+\textit{The role of the second signal:} The second signal captures that
+workers can target their bidding to more information after having read the
+details of the job description. Taking the limiting case where this signal
+is arbitrarily precise simplifies the mathematical representation of the
+problem substantially as the bid is determined simply as the weighted
+average of bids from two different differential equations.. Consider instead
+a setting where workers remain unsure about the firm type at the point of
+bidding, and assign probability $\Psi (T)$ to it being type $T$. It is easy
+to show that their bids would follow differential equation $b(a)/\left(
+\tsum\nolimits_{T}\lambda (a)\Psi (T)/(v_{T}-b^{\prime }(a))\right) =1.%
+\footnote{%
+See our previous working paper Horton, Johari and Kircher (2021) that
+derives this and solves the related model, but at the expense of assuming
+that workers do not receive any first signal. This entails the very strong
+implication that workers select among firms at random in the absence of
+messages. The formulation in this paper allows clear and tractable insights
+that allows for selection based on some information even without signals.}$
+This convergest to the differential equation in (\ref{wages}) when $\Psi
+(T)\longrightarrow 1$, as do the associated endpoint conditions. Working in
+the limit is easier as the expected bid of a worker after the first signal
+is simply the weighted average of the bids after the second signal, while
+the aggregation is much more cumbersome if uncertainty remains even after
+the second signal. This begs the question how workers interpret the signal
+after a truthful message. We assume here that they do not rely on the second
+signal if they believe the second signal to be truthful. This does matter
+for the incentives of firms to mis-represente their types. In particular,
+for low type firms who pretend to be high types this induces high wage
+demands. If workers were to learn the actual firm type, low type firms that
+mis-represented their type could attract more applicants, but these would
+learn their type and then bid low. One can show that truth-telling in this
+setting would not be sustained. So our formulation is best viewed as an
+approximation to the setting where signals are not fully revealing. It also
+highlights the value of our empirical setting: it is not obvious that
+allowing for cheap-talk will increase market information, as this would fail
+under different informational assumptions, and off course under different
+equilibria such as the well-known "babbling" equilibrium where no
+information is transmitted.
+
+\bigskip
+
+\textit{More general production functions}: Our production function is
+special case of concave production function $\phi (a,T)$ that describes the
+output of a worker of type $a$ at a firm of type $T.$ Similar steps as in
+the main body yield in analogy to (\ref{equilibrium density}) that $\lambda
+_{m}(a)=u^{\prime \prime }(a)/u^{\prime }(a)-\phi _{aa}(a,m)/\phi _{a}(a,m),$
+with upper and lower end-point conditions $\phi _{a}(\bar{a}%
+_{m},m)=u^{\prime }(\bar{a}_{m})$ and $e^{-\Lambda (\underline{a}%
+_{m}|m)}\phi _{v}(\underline{a}_{m},v)=u(\underline{a}_{m}).$ The upper
+endpoint continues to be higher for higher firm types if $\phi $ is
+supermodular in $a$ and $T,$ which was assured in our baseline
+specification. The queue length $\lambda _{m}(a)$ was independent of $m$ in
+our baseline specification, which made the setup particularly tractable as
+it implied that workers choose among firms "as if" at random. From the
+earlier equation it is apparent that this only continues to apply more
+generally if the semi-elasticity of $\phi _{a}$ with respect to worker
+ability is independent of $m,$ as is the case for example for production $%
+\ln (v_{T}(a-c))+d$ or $f(v_{T})g(a-c)+h(v_{t})$ where $c$ and $d$ are
+positive constants and $f(.)$, $g(.)$ and $h()$ are non-negative and
+increasing functions. We note that in our base theory we introduced
+differences in costs $c$ across firm types to capture that fact that higher
+firm types might need higher worker types. Without this, the lowest worker
+types would be the same across firms, and simply more high types are added
+for higher firm types. With the more general production functions just
+mentioned, low types endogeneously drop out as the firm valuation $v$
+increases even with a common cost $c$ because of additional comptition from
+higher worker types, iff the production is strictly log-supermodular in $a$
+and $v$ as proven in Proposition \ref{extension} in Appendix Section \ref{sec:proofs}. This is
+the case in the examples before if $f(.)$ is more elastic than $h(.).$
+Things become substantially more involved when the semi-elasticity of $\phi
+_{a}$ depends on the firm type, which exceeds the bounds of this paper.
+
+\end{document}
