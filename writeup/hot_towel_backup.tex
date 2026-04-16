@@ -402,9 +402,10 @@ and we write $\Lambda (a,b|m)$ instead of $\Lambda (a,b,b|m,s_{1}).$ We can
 now express the value for a worker of ability $a$ who bids $b$ at a job with
 message $m\in \{L,H\}$ (no matter what the signals are) by 
 \begin{equation}
-V(m,a,b)=e^{-\Gamma (\pi (a,b|m)|m)}b\boldsymbol{1}[\pi (a,b|m)\geq 0].
+V(m,a,b)=e^{-\Gamma (\pi (a,b|m)|m)}b,
 \label{value-truth}
 \end{equation}%
+as long as the worker generates weakly positive profits $\pi (a,b|m)\geq 0$.
 Since the worker infers perfectly which firm it is facing, instead of
 bidding wage $b$ we can reformulate the problem as one of leaving profit $%
 \pi \geq 0$ to the firm and keeping the output minus this profit as pay. For
@@ -1665,6 +1666,185 @@ there are no bids between $\pi _{h}$ and $\pi _{l},$ it holds that $\Gamma
 
 \bigskip \bigskip
 
+\noindent \textit{Proof of Proposition \ref{prop:incentive_compat}:} Note first that the probability
+that a firm at message $m$ has no applicant with qualification above $a$ is $%
+e^{-\Lambda (a|m)}.$ That means that the density that the best applicant is
+of type $a$ is
+
+$\lambda (a|m)e^{-\Lambda (a|m)}$. So the expected profit at message $m$ for
+firm type $t$ is at least%
+\begin{eqnarray}
+\Pi (m|t) &\geq &\int_{\underline{a}_{m}}^{\bar{a}_{m}}\max
+\{v_{t}(a-c_{t})-b_{m}(a),0\}\lambda (a|m)e^{-\Lambda (a|m)}da.  \notag \\
+&=&\int_{\underline{a}_{m}}^{\bar{a}_{m}}\max \left\{ \frac{%
+v_{t}(a-c_{t})-b_{m}(a)}{v_{m}},0\right\} u^{\prime \prime }(a)da.
+\label{truth-start} \\
+&=&\int_{\underline{a}_{m}}^{\bar{a}_{m}}\max \left\{ \frac{v_{t}(a-c_{t})-%
+\frac{v_{m}}{v_{L}}b_{L}(a)}{v_{m}},0\right\} u^{\prime \prime }(a)da. 
+\notag \\
+&=&\int_{\underline{a}_{m}}^{\bar{a}_{m}}\max \left\{ \frac{v_{t}}{v_{m}}%
+(a-c_{t})-\frac{b_{L}(a)}{v_{L}},0\right\} u^{\prime \prime }(a)da,  \notag
+\end{eqnarray}%
+where it is suppressed that $\bar{a}_{m}$ is a function of $v_{m}$ and $%
+\underline{a}_{m}$ is a function of $c_{t}.$ The first line holds exactly
+with equality if workers with higher ability offer more profits. In this
+case the highest $a$ is always selected, and leaves profits $%
+v_{t}(a-c_{t})-b_{m}(a)$ to the firm whenever this is positive. The second
+line simply substitutes (\ref{second derivative}), and the third line uses $%
+b_{H}(a)=\frac{v_{H}}{v_{L}}b_{L}(a)$ which follows directly from Corollary %
+\ref{corollary}.
+
+On the equilibrium path we have proven that higher types indeed offer more
+profits, so the first line holds with equality when $m=t=L$ or $m=t=H.$ It
+also holds with equality when high types contemplate to send a low message $%
+(t=H$ but $m=L)$: since $v_{L}(a-c_{L})-b_{L}(a)$ is increasing in $a$ in
+equilibrium, also $v_{L}(a-c_{L})-b_{L}(a)$ is increasing for all $a\geq
+c_{H},$ and worker types that have a lower $a$ are always rejected as taken
+into account in the max operator. This makes it easy to analyze these three
+cases. It may not hold in the case of low firm types sending a high message $%
+(t=L$ and $m=H)$ which makes its analysis more challenging.
+
+Truth-telling requires that $\Pi (H|H)\geq \Pi (L|H)$ and $\Pi (L|L)\geq \Pi
+(H|L).$
+
+\textit{We will first consider the truth-telling condition for high types }$%
+(T=H)$\textit{:}
+
+\begin{eqnarray}
+\Pi (H|H) &\geq &\Pi (L|H)  \label{truth1} \\
+&\Leftrightarrow &\int_{\underline{a}_{H}}^{\bar{a}_{H}}\left[ a-c_{t}-\frac{%
+b_{L}(a)}{v_{L}}\right] u^{\prime \prime }(a)da\geq \int_{\underline{a}%
+_{L}}^{\bar{a}_{L}}\max \left\{ \frac{v_{H}}{v_{L}}(a-c_{t})-\frac{b_{L}(a)}{%
+v_{L}},0\right\} u^{\prime \prime }(a)da  \label{truth2}
+\end{eqnarray}
+
+For $0=c_{L}=c_{H},$ it holds that $\underline{a}_{H}=\underline{a}_{L}=0.$
+Fix $v_{L},$ and vary $v_{H}.$ The derivatives are%
+\begin{eqnarray}
+\frac{d\Pi (H|H)}{dv_{H}} &=&\left[ \bar{a}_{H}-\frac{b_{L}(\bar{a}_{H})}{%
+v_{L}}\right] u^{\prime \prime }(\bar{a}_{H})\frac{d\bar{a}_{H}}{dv_{H}}=%
+\bar{a}_{H}-\frac{b_{L}(\bar{a}_{H})}{v_{L}},  \label{truth3} \\
+\frac{d\Pi (L|H)}{dv_{H}} &=&\int_{\underline{a}_{L}}^{\bar{a}_{L}}\frac{a}{%
+v_{L}}u^{\prime \prime }(a)da,  \label{truth4}
+\end{eqnarray}%
+where the second equality in the first line follows from implicitly
+differentiating (\ref{equilibrium highest type}). The first line goes to
+infinity since $b_{L}(a)$ is bounded away from $v_{L}a$ for all $a>%
+\underline{a}_{H}+\varepsilon $ for some $\varepsilon ,$ which follows from (%
+\ref{wages}) and the assumption that $au^{\prime \prime }(a)/u^{\prime }(a)$
+is bounded away from zero. The second line is simply a constant. So
+truthtelling is incentive compatible for high types when $v_{H}$ is
+sufficiently large.
+
+When $v_{H}\approx v_{L}$ and $c_{H}=0,$ truthtelling requires 
+\begin{equation}
+\bar{a}_{L}-\frac{b_{L}(\bar{a}_{L})}{v_{L}}\geq \int_{\underline{a}_{L}}^{%
+\bar{a}_{L}}\frac{a}{v_{L}}u^{\prime \prime }(a)da,  \label{truth-local}
+\end{equation}%
+which follows since $\bar{a}_{H}\approx \bar{a}_{L}.$
+
+\textit{Now consider truth-telling for low types }$(T=L):$
+
+We will first consider truthtelling when valuations of high and low type
+firms are roughly similar, and will show that incentive compatibility
+generically fails when $v_{H}$ approaches $v_{L}$ and $c_{H}=0.$ In this
+case, it has to hold that%
+\begin{equation*}
+\int_{\underline{a}_{L}}^{\bar{a}_{L}}\left[ a-\frac{b_{L}(a)}{v_{L}}\right]
+u^{\prime \prime }(a)da\geq \int_{\underline{a}_{H}}^{\bar{a}_{H}}\max
+\left\{ \frac{v_{L}}{v_{H}}a-\frac{b_{L}(a)}{v_{L}},0\right\} u^{\prime
+\prime }(a)da.
+\end{equation*}%
+Taking the derivative with respect to $v_{H}$ and evaluating it around $%
+v_{H}\approx v_{L}$ (and $\bar{a}_{H}\approx \bar{a}_{L}$ as well as $%
+\underline{a}_{H}=\underline{a}_{L}=0)$ yields%
+\begin{equation}
+0\geq -\int_{\underline{a}_{H}}^{\bar{a}_{H}}\frac{a}{v_{L}}u^{\prime \prime
+}(a)da+\left[ \bar{a}_{H}-\frac{b_{L}(\bar{a}_{H})}{v_{L}}\right] .
+\label{truth-local2}
+\end{equation}%
+Inequality (\ref{truth-local2}) is the opposite of inequality (\ref%
+{truth-local}), and generically in the space of permissable $u(.)$ and $%
+v_{L} $ they do not both hold simultaneously.
+
+Next, we consider truth-telling of low types when $v_{H}$ is large (for
+fixed $v_{L})$ and will show that it is incentive compatible. We will first
+build intuition under the case where firms are willing to hire all workers,
+so that $0=c_{L}=c_{H}.$ It will then be easy to expand to the general case
+afterwards. For this part of the proof it is convenient to denote by $\check{%
+a}$ the ability type with $u^{\prime }(v)=1\,$or ability type $\bar{a}_{L},$
+whichever one is larger. Let $\check{v}\geq v_{L}$ be such that $\bar{a}_{H}=%
+\check{a}$ if $v_{H}=\check{v}.$ Note that if the low firm type could only
+match with workers of abilities $a\in \lbrack 0.\check{a}],$ it is easy to
+show that deviating and sending a high message is not profitable:
+
+- For abilities $a\in \lbrack \underline{a}_{H},\bar{a}_{L}]$ the queue does
+not change but the wage becomes $b_{H}(a)=b_{L}(a)v_{H}/v_{L},$ so the firm
+pays more for these workers but does not attract more of them.
+
+- For abilities $a\in \lbrack 0,\underline{a}_{H}]$ workers cese to approach
+the firm if it sends the high signal.
+
+- For abilities $a\in \lbrack \bar{a}_{L},\check{a}]$, let $\bar{g}%
+=\sup_{a\in \lbrack \bar{a}_{L},\check{a}]}g(a)>0$ so that the wage $%
+b_{H}(a)\geq \bar{g}v_{H}/v_{L},$ which exceeds $v_{L}\check{a}$ for $v_{H}$
+sufficiently large. So the low type firm would make a loss hiring these
+workers, and would refuse to do so. So their presence does not constitute a
+profitable deviation.
+
+Now consider also abilities beyond $\check{a}.$ In general, by raising $%
+v_{H} $ from $\check{v}$ to higher values, from the perspective of a
+low-type firm that contemplates to send message $H$ this has two effects:
+For all ability types $a\in \lbrack 0,\bar{a}_{H}]$ the wage $%
+b_{H}(a)=v_{H}g(a)$ increases when $v_{H}$ is marginally increased, which is
+a negative outcome from the firm's perspective. But one also raises the
+upper end of workers willing to match. We will show that even for the second
+effect, the additional wage will outweigh the benefit in matching. We know
+that $u^{\prime }(\bar{a}_{H})=v_{H}.$ So $d\bar{a}_{H}/dv_{H}=1/u^{\prime
+\prime }(\bar{a}_{H}).$ So the wage at the higest type increase by 
+\begin{eqnarray*}
+db_{H}(\bar{a}_{H})/dv_{H} &=&d(v_{H}g\left( \bar{a}_{H}\right) )/dv_{H} \\
+&=&g\left( \bar{a}_{H}\right) +v_{H}g^{\prime }(\bar{a}_{H})d\bar{a}%
+_{H}/dv_{H} \\
+&=&g\left( \bar{a}_{H}\right) +v_{H}g^{\prime }(\bar{a}_{H})d\bar{a}%
+_{H}/dv_{H} \\
+&=&g\left( \bar{a}_{H}\right) +v_{H}[1-g(\bar{a}_{H})u^{\prime \prime }(\bar{%
+a}_{H})/u^{\prime }(\bar{a}_{H})]/u^{\prime \prime }(\bar{a}_{H}) \\
+&=&g\left( \bar{a}_{H}\right) +v_{H}/u^{\prime \prime }(\bar{a}_{H})-g(\bar{a%
+}_{H})/u^{\prime }(\bar{a}_{H})
+\end{eqnarray*}%
+For the low firm type who considers sending message $H,$ a higher value $%
+v_{H}$ implies the following change in profits when matching with the
+highest type at message $H:$ $v_{L}\bar{a}_{H}-b_{H}(\bar{a}_{H}).$ So this
+changes in $v_{H}$ according to 
+\begin{eqnarray*}
+&&v_{L}d\bar{a}_{H}/dv_{H}-db_{H}(\bar{a}_{H})/dv_{H} \\
+&=&v_{L}/u^{\prime \prime }(\bar{a}_{H})-g\left( \bar{a}_{H}\right)
+-v_{H}/u^{\prime \prime }(\bar{a}_{H})+g(\bar{a}_{H})/u^{\prime }(\bar{a}%
+_{H})
+\end{eqnarray*}%
+which is definitely negative as $\bar{a}_{H}\geq \check{a},$ which implies $%
+u^{\prime }(\bar{a}_{H})\geq 1.$ This establishes that for high enough $%
+v_{H} $ low types strictly prefer to send message $m=L$ to message $m=H$ in
+a truthtelling equilibrium. Since high types also prefer to tell the truth,
+this establishes that truth-telling is an equilibrium outcome when $%
+c_{L}=c_{H}=0.$
+
+We finally have to establish that truth-telling is incentive compatible for
+low firm types when $v_{H}$ is sufficiently large even in the more general
+setting where $0=c_{L}<c_{H}:$ We have already established that low firm
+types would not pretend to be high firm types if costs are zero. In the
+candidate equilibrium with truth-telling, note that strictly positive costs
+at high types do not change the workers who approach low types or their
+bids. On the other hand, at high types the set of worker types shrinks,
+those who do approach high messages do so with exactly the same queue $%
+\lambda (a|H)$ by (\ref{equilibrium density})$,$ and their bids increase. So
+if low types do not want to deviate and pretend to be high types under $%
+c_{H}=0,$ they will not want to do so when $c_{H}>0.$ For high types we had
+already established incentive compatibility in the general case, which
+concludes the proof. $\square $
+
+\bigskip \bigskip
 \noindent \textit{Proof of Proposition \ref{equilibrium-notalk}:} Consider firms that
 cannot send a cheap-talk message. Given that we assumed precise second
 signals, we can treat $s_{2}$ and the true type $T$ interchangeably, and for
@@ -1916,185 +2096,6 @@ P}(.|v_{L},c_{L})\neq \lambda ^{\ast P}(a|v_{H},c_{H}).\square $
 
 \bigskip \bigskip
 
-\noindent \textit{Proof of Proposition \ref{prop:incentive_compat}:} Note first that the probability
-that a firm at message $m$ has no applicant with qualification above $a$ is $%
-e^{-\Lambda (a|m)}.$ That means that the density that the best applicant is
-of type $a$ is
-
-$\lambda (a|m)e^{-\Lambda (a|m)}$. So the expected profit at message $m$ for
-firm type $t$ is at least%
-\begin{eqnarray}
-\Pi (m|t) &\geq &\int_{\underline{a}_{m}}^{\bar{a}_{m}}\max
-\{v_{t}(a-c_{t})-b_{m}(a),0\}\lambda (a|m)e^{-\Lambda (a|m)}da.  \notag \\
-&=&\int_{\underline{a}_{m}}^{\bar{a}_{m}}\max \left\{ \frac{%
-v_{t}(a-c_{t})-b_{m}(a)}{v_{m}},0\right\} u^{\prime \prime }(a)da.
-\label{truth-start} \\
-&=&\int_{\underline{a}_{m}}^{\bar{a}_{m}}\max \left\{ \frac{v_{t}(a-c_{t})-%
-\frac{v_{m}}{v_{L}}b_{L}(a)}{v_{m}},0\right\} u^{\prime \prime }(a)da. 
-\notag \\
-&=&\int_{\underline{a}_{m}}^{\bar{a}_{m}}\max \left\{ \frac{v_{t}}{v_{m}}%
-(a-c_{t})-\frac{b_{L}(a)}{v_{L}},0\right\} u^{\prime \prime }(a)da,  \notag
-\end{eqnarray}%
-where it is suppressed that $\bar{a}_{m}$ is a function of $v_{m}$ and $%
-\underline{a}_{m}$ is a function of $c_{t}.$ The first line holds exactly
-with equality if workers with higher ability offer more profits. In this
-case the highest $a$ is always selected, and leaves profits $%
-v_{t}(a-c_{t})-b_{m}(a)$ to the firm whenever this is positive. The second
-line simply substitutes (\ref{second derivative}), and the third line uses $%
-b_{H}(a)=\frac{v_{H}}{v_{L}}b_{L}(a)$ which follows directly from Corollary %
-\ref{corollary}.
-
-On the equilibrium path we have proven that higher types indeed offer more
-profits, so the first line holds with equality when $m=t=L$ or $m=t=H.$ It
-also holds with equality when high types contemplate to send a low message $%
-(t=H$ but $m=L)$: since $v_{L}(a-c_{L})-b_{L}(a)$ is increasing in $a$ in
-equilibrium, also $v_{L}(a-c_{L})-b_{L}(a)$ is increasing for all $a\geq
-c_{H},$ and worker types that have a lower $a$ are always rejected as taken
-into account in the max operator. This makes it easy to analyze these three
-cases. It may not hold in the case of low firm types sending a high message $%
-(t=L$ and $m=H)$ which makes its analysis more challenging.
-
-Truth-telling requires that $\Pi (H|H)\geq \Pi (L|H)$ and $\Pi (L|L)\geq \Pi
-(H|L).$
-
-\textit{We will first consider the truth-telling condition for high types }$%
-(T=H)$\textit{:}
-
-\begin{eqnarray}
-\Pi (H|H) &\geq &\Pi (L|H)  \label{truth1} \\
-&\Leftrightarrow &\int_{\underline{a}_{H}}^{\bar{a}_{H}}\left[ a-c_{t}-\frac{%
-b_{L}(a)}{v_{L}}\right] u^{\prime \prime }(a)da\geq \int_{\underline{a}%
-_{L}}^{\bar{a}_{L}}\max \left\{ \frac{v_{H}}{v_{L}}(a-c_{t})-\frac{b_{L}(a)}{%
-v_{L}},0\right\} u^{\prime \prime }(a)da  \label{truth2}
-\end{eqnarray}
-
-For $0=c_{L}=c_{H},$ it holds that $\underline{a}_{H}=\underline{a}_{L}=0.$
-Fix $v_{L},$ and vary $v_{H}.$ The derivatives are%
-\begin{eqnarray}
-\frac{d\Pi (H|H)}{dv_{H}} &=&\left[ \bar{a}_{H}-\frac{b_{L}(\bar{a}_{H})}{%
-v_{L}}\right] u^{\prime \prime }(\bar{a}_{H})\frac{d\bar{a}_{H}}{dv_{H}}=%
-\bar{a}_{H}-\frac{b_{L}(\bar{a}_{H})}{v_{L}},  \label{truth3} \\
-\frac{d\Pi (L|H)}{dv_{H}} &=&\int_{\underline{a}_{L}}^{\bar{a}_{L}}\frac{a}{%
-v_{L}}u^{\prime \prime }(a)da,  \label{truth4}
-\end{eqnarray}%
-where the second equality in the first line follows from implicitly
-differentiating (\ref{equilibrium highest type}). The first line goes to
-infinity since $b_{L}(a)$ is bounded away from $v_{L}a$ for all $a>%
-\underline{a}_{H}+\varepsilon $ for some $\varepsilon ,$ which follows from (%
-\ref{wages}) and the assumption that $au^{\prime \prime }(a)/u^{\prime }(a)$
-is bounded away from zero. The second line is simply a constant. So
-truthtelling is incentive compatible for high types when $v_{H}$ is
-sufficiently large.
-
-When $v_{H}\approx v_{L}$ and $c_{H}=0,$ truthtelling requires 
-\begin{equation}
-\bar{a}_{L}-\frac{b_{L}(\bar{a}_{L})}{v_{L}}\geq \int_{\underline{a}_{L}}^{%
-\bar{a}_{L}}\frac{a}{v_{L}}u^{\prime \prime }(a)da,  \label{truth-local}
-\end{equation}%
-which follows since $\bar{a}_{H}\approx \bar{a}_{L}.$
-
-\textit{Now consider truth-telling for low types }$(T=L):$
-
-We will first consider truthtelling when valuations of high and low type
-firms are roughly similar, and will show that incentive compatibility
-generically fails when $v_{H}$ approaches $v_{L}$ and $c_{H}=0.$ In this
-case, it has to hold that%
-\begin{equation*}
-\int_{\underline{a}_{L}}^{\bar{a}_{L}}\left[ a-\frac{b_{L}(a)}{v_{L}}\right]
-u^{\prime \prime }(a)da\geq \int_{\underline{a}_{H}}^{\bar{a}_{H}}\max
-\left\{ \frac{v_{L}}{v_{H}}a-\frac{b_{L}(a)}{v_{L}},0\right\} u^{\prime
-\prime }(a)da.
-\end{equation*}%
-Taking the derivative with respect to $v_{H}$ and evaluating it around $%
-v_{H}\approx v_{L}$ (and $\bar{a}_{H}\approx \bar{a}_{L}$ as well as $%
-\underline{a}_{H}=\underline{a}_{L}=0)$ yields%
-\begin{equation}
-0\geq -\int_{\underline{a}_{H}}^{\bar{a}_{H}}\frac{a}{v_{L}}u^{\prime \prime
-}(a)da+\left[ \bar{a}_{H}-\frac{b_{L}(\bar{a}_{H})}{v_{L}}\right] .
-\label{truth-local2}
-\end{equation}%
-Inequality (\ref{truth-local2}) is the opposite of inequality (\ref%
-{truth-local}), and generically in the space of permissable $u(.)$ and $%
-v_{L} $ they do not both hold simultaneously.
-
-Next, we consider truth-telling of low types when $v_{H}$ is large (for
-fixed $v_{L})$ and will show that it is incentive compatible. We will first
-build intuition under the case where firms are willing to hire all workers,
-so that $0=c_{L}=c_{H}.$ It will then be easy to expand to the general case
-afterwards. For this part of the proof it is convenient to denote by $\check{%
-a}$ the ability type with $u^{\prime }(v)=1\,$or ability type $\bar{a}_{L},$
-whichever one is larger. Let $\check{v}\geq v_{L}$ be such that $\bar{a}_{H}=%
-\check{a}$ if $v_{H}=\check{v}.$ Note that if the low firm type could only
-match with workers of abilities $a\in \lbrack 0.\check{a}],$ it is easy to
-show that deviating and sending a high message is not profitable:
-
-- For abilities $a\in \lbrack \underline{a}_{H},\bar{a}_{L}]$ the queue does
-not change but the wage becomes $b_{H}(a)=b_{L}(a)v_{H}/v_{L},$ so the firm
-pays more for these workers but does not attract more of them.
-
-- For abilities $a\in \lbrack 0,\underline{a}_{H}]$ workers cese to approach
-the firm if it sends the high signal.
-
-- For abilities $a\in \lbrack \bar{a}_{L},\check{a}]$, let $\bar{g}%
-=\sup_{a\in \lbrack \bar{a}_{L},\check{a}]}g(a)>0$ so that the wage $%
-b_{H}(a)\geq \bar{g}v_{H}/v_{L},$ which exceeds $v_{L}\check{a}$ for $v_{H}$
-sufficiently large. So the low type firm would make a loss hiring these
-workers, and would refuse to do so. So their presence does not constitute a
-profitable deviation.
-
-Now consider also abilities beyond $\check{a}.$ In general, by raising $%
-v_{H} $ from $\check{v}$ to higher values, from the perspective of a
-low-type firm that contemplates to send message $H$ this has two effects:
-For all ability types $a\in \lbrack 0,\bar{a}_{H}]$ the wage $%
-b_{H}(a)=v_{H}g(a)$ increases when $v_{H}$ is marginally increased, which is
-a negative outcome from the firm's perspective. But one also raises the
-upper end of workers willing to match. We will show that even for the second
-effect, the additional wage will outweigh the benefit in matching. We know
-that $u^{\prime }(\bar{a}_{H})=v_{H}.$ So $d\bar{a}_{H}/dv_{H}=1/u^{\prime
-\prime }(\bar{a}_{H}).$ So the wage at the higest type increase by 
-\begin{eqnarray*}
-db_{H}(\bar{a}_{H})/dv_{H} &=&d(v_{H}g\left( \bar{a}_{H}\right) )/dv_{H} \\
-&=&g\left( \bar{a}_{H}\right) +v_{H}g^{\prime }(\bar{a}_{H})d\bar{a}%
-_{H}/dv_{H} \\
-&=&g\left( \bar{a}_{H}\right) +v_{H}g^{\prime }(\bar{a}_{H})d\bar{a}%
-_{H}/dv_{H} \\
-&=&g\left( \bar{a}_{H}\right) +v_{H}[1-g(\bar{a}_{H})u^{\prime \prime }(\bar{%
-a}_{H})/u^{\prime }(\bar{a}_{H})]/u^{\prime \prime }(\bar{a}_{H}) \\
-&=&g\left( \bar{a}_{H}\right) +v_{H}/u^{\prime \prime }(\bar{a}_{H})-g(\bar{a%
-}_{H})/u^{\prime }(\bar{a}_{H})
-\end{eqnarray*}%
-For the low firm type who considers sending message $H,$ a higher value $%
-v_{H}$ implies the following change in profits when matching with the
-highest type at message $H:$ $v_{L}\bar{a}_{H}-b_{H}(\bar{a}_{H}).$ So this
-changes in $v_{H}$ according to 
-\begin{eqnarray*}
-&&v_{L}d\bar{a}_{H}/dv_{H}-db_{H}(\bar{a}_{H})/dv_{H} \\
-&=&v_{L}/u^{\prime \prime }(\bar{a}_{H})-g\left( \bar{a}_{H}\right)
--v_{H}/u^{\prime \prime }(\bar{a}_{H})+g(\bar{a}_{H})/u^{\prime }(\bar{a}%
-_{H})
-\end{eqnarray*}%
-which is definitely negative as $\bar{a}_{H}\geq \check{a},$ which implies $%
-u^{\prime }(\bar{a}_{H})\geq 1.$ This establishes that for high enough $%
-v_{H} $ low types strictly prefer to send message $m=L$ to message $m=H$ in
-a truthtelling equilibrium. Since high types also prefer to tell the truth,
-this establishes that truth-telling is an equilibrium outcome when $%
-c_{L}=c_{H}=0.$
-
-We finally have to establish that truth-telling is incentive compatible for
-low firm types when $v_{H}$ is sufficiently large even in the more general
-setting where $0=c_{L}<c_{H}:$ We have already established that low firm
-types would not pretend to be high firm types if costs are zero. In the
-candidate equilibrium with truth-telling, note that strictly positive costs
-at high types do not change the workers who approach low types or their
-bids. On the other hand, at high types the set of worker types shrinks,
-those who do approach high messages do so with exactly the same queue $%
-\lambda (a|H)$ by (\ref{equilibrium density})$,$ and their bids increase. So
-if low types do not want to deviate and pretend to be high types under $%
-c_{H}=0,$ they will not want to do so when $c_{H}>0.$ For high types we had
-already established incentive compatibility in the general case, which
-concludes the proof. $\square $
-
-\bigskip \bigskip
 
 \begin{prop}
 \label{extension} For more general production functions $\phi (a,v_{T})$
