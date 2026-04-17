@@ -582,7 +582,11 @@ stochastically dominates that at low message firms.
 
 Panel B considers a market where firms cannot send messages and workers rely on the first signal to determine where to go. At the high signal, there are mostly high-type firms, but some low-type firms also emit this signal. Similarly, at the low signal there are mostly low-type firms, but some high-type firms also emit it. Between high- and low-signal firms, workers choose in a similar fashion as in Panel A. But relative to Panel A, in Panel B the lowest and highest worker types stay out of the market, as the average cost is too high at the low end and the average valuation is too low at the high end. Moreover, the range of worker types who act as if they choose randomly expands at both ends. So in Panel B the types that are directed form a strict subset of the types in Panel A, while the types that visit at random form a strict superset.
 
+Which side of Panel B's vertical axis is active determines the sign of the application effect. If firms differ only in valuations ($v_H > v_L$, $c_H = c_L$), then only the upper arrows in Panel B are active, narrowing the set of high-ability workers that fully direct their search; the low-ability types that fully direct their search do not change across panels (and are in fact absent in both). In this case, applications shift away from low toward high firms when cheap talk becomes possible (i.e., moving from Panel B to Panel A). If costs are the main source of difference among firms ($c_H > c_L$, $v_H \approx v_L$), then mainly the lower arrows in Panel B are active and the fully directed set among high-ability workers is essentially absent. In that case the consequences of cheap talk on applications are reversed.
+
 As mentioned earlier, the same insights carry over even if firms without messages interact in the same market as firms with messages. Note that workers whose ability types lead them to approach multiple messages/signals continue to do so at random, even though this is not visible from Figure~\ref{messages}. For example, workers slightly above $a'$ apply to high-message firms as well as to no-message firms with either a low or high first signal. Their queue length is the same at all of them, so they can implement this queue by choosing between them at random. They do not apply to low-message firms, however.
+
+More generally, the results in this section do not depend on the fraction $\rho$ of firms that can send messages (Part 5 of Proposition~\ref{comparison1}). The comparison holds whether we compare a market in which all firms can send messages with another market in which no firm can, or whether we compare a fraction of firms that can send messages with another fraction that cannot within the same larger market. The reason is that workers can direct their search, which effectively separates the market even when firms with and without messages coexist in the same overall setting.
 
 If one conditions on high firms in the right picture, most of them get
 applicants according to the high signal but some get applicants according to
@@ -622,11 +626,11 @@ What is the cost of attracting higher worker types? Since they produce more outp
 \label{corollary 2}Consider a firm with type $T$ and associated valuation $v_{T}$ and cost $c_{T}$ that attracts workers with abilities in $[\underline{a},\bar{a}]$. For a given worker with ability $a$, her wage bid at this firm increases in $v$, decreases in $c$, and increases in $\underline{a}$.
 \end{corollary}
 
-Proof: From (\ref{wages-general}), the equilibrium bid at a worker of ability $a$ is $b_{s_{2}}(a)=v_{s_{2}}[B(a)-B(\underline{a})+\underline{a}-c_{s_{2}}]$, where we have written $\underline{a}$ for $\underline{a}_{s_{1}}$. The wage bid is strictly increasing in $v_{s_{2}}$ and strictly decreasing in $c_{s_{2}}$ by inspection, since the bracketed term is positive (the worker is hired and generates non-negative profits only if $a\geq\underline{a}$ and $\underline{a}\geq c_{s_{2}}$). For the dependence on $\underline{a}$, differentiating with respect to $\underline{a}$ gives
+Proof: From~(\ref{wages-general}), the equilibrium bid at a worker of ability $a$ is $b_{s_{2}}(a)=v_{s_{2}}[B(a)-B(\underline{a})+\underline{a}-c_{s_{2}}]$, where we have written $\underline{a}$ for $\underline{a}_{s_{1}}$ and $B(\cdot)$ is the normalized wage function of Proposition~\ref{equilibrium-characterization}. The wage bid is strictly increasing in $v_{s_{2}}$ and strictly decreasing in $c_{s_{2}}$ by inspection, since the bracketed term is positive (the worker is hired and generates non-negative profits only if $a\geq\underline{a}\geq c_{s_{2}}$). For the dependence on $\underline{a}$, differentiating~(\ref{wages-general}) with respect to $\underline{a}$ gives
 \[
 \frac{\partial b_{s_{2}}(a)}{\partial \underline{a}} = v_{s_{2}}\bigl[1 - B'(\underline{a})\bigr].
 \]
-The wage ODE (\ref{wages}) with the boundary condition (\ref{wages boundary}) implies $B'(\underline{a}) = 1 - B(\underline{a})\cdot u''(\underline{a})/u'(\underline{a})$. Since $B(\underline{a})\geq 0$ and $u'',u'>0$, we have $B'(\underline{a}) < 1$, so $\partial b_{s_{2}}(a)/\partial \underline{a} > 0$.$\square$
+The wage ODE~(\ref{wages}), applied to the normalized firm (valuation $v=1$ and cost $c=0$), reduces to $B'(a) = 1 - B(a)\cdot u''(a)/u'(a)$. Since $B(\underline{a}) > 0$ for any $\underline{a}$ strictly above the normalized lowest type, and $u'',u' > 0$, we have $B'(\underline{a}) < 1$, and therefore $\partial b_{s_{2}}(a)/\partial \underline{a} > 0$.$\square$
 
 \bigskip
 
@@ -1097,7 +1101,7 @@ The pattern of wage bidding results are consistent with workers directly conditi
 However, there are alternatives explanations.
 For example, perhaps workers perceive the message as indicating the worker's likely costs.
 However, we view these alternative explanations as implausible. 
-We show in Online Appendix~\ref{online_appendix:compensating_differentials}, there is no evidence that high tier employers were harsher reviewers when giving feedback even when preferences were not revealed.
+We show in Online Appendix~\ref{online_app:compensating_differentials}, there is no evidence that high tier employers were harsher reviewers when giving feedback even when preferences were not revealed.
 This suggests that high tier employers did not have costlier expectations for workers that would require a compensating differential. 
 It is also unlikely that some firms are viewed as more attractive.
 The relatively impersonal nature of these online interactions, along with their short-duration and lack of brand-name firms all make it unlikely workers have strong non-monetary preference over firms \emph{\`{a} la} \cite{sorkin2018ranking}. 
@@ -1680,7 +1684,7 @@ Finally, Part 5 is a direct consequence of block-recursivity. The characterizati
 \section{Information Revelation}
 \label{online_app:info_revelation}
 
-This appendix collects results and discussion related to the revelation of firm types to workers: the role and precision of the second signal, the proof of incentive compatibility in the truthful cheap-talk equilibrium (Proposition~\ref{prop:incentive_compat}), and the robustness of our main comparison to partially revealing equilibria.
+The comparison in Subsection~\ref{sec:comparing} rests on the property that workers who approach both messages — or both first-signal realizations — behave as if they were choosing among firms at random, so only the boundary abilities that approach each message/signal matter for sorting. This appendix discusses the features underpinning this property and the related content on how much information is revealed to workers. Appendix~\ref{online_app:second_signal} lays out the role of the second signal and the convergence argument that justifies taking $\psi_{2}\to 1$ as a tractable limit; Appendix~\ref{online_app:ic_proof} uses that limit to prove incentive compatibility of the truthful-messaging equilibrium (Proposition~\ref{prop:incentive_compat}); Appendix~\ref{online_app:imprecise_second_signal} discusses why we conceptually view the second signal as imprecise rather than literally precise; and Appendix~\ref{online_app:partially_revealing_eq} shows that the main comparison results extend to partially revealing equilibria.
 
 \subsection{Role of the Second Signal and Convergence}
 \label{online_app:second_signal}
@@ -1693,7 +1697,7 @@ average of bids from two different differential equations.. Consider instead
 a setting where workers remain unsure about the firm type at the point of
 bidding, and assign probability $\Psi (T)$ to it being type $T$. It is easy
 to show that their bids would follow differential equation\footnote{
-See our previous working paper Horton, Johari and Kircher (2021) that
+See our previous working paper \citep{horton2021sorting} that
 derives this and solves the related model, but at the expense of assuming
 that workers do not receive any first signal. This entails the very strong
 implication that workers select among firms at random in the absence of
@@ -2104,7 +2108,7 @@ The far right column also reports the percentage change in the $\textsc{ShownPre
 
 
 
-\subsection{Additional Empirical Results}
+\subsection{Additional Empirical Results}\label{online_app:additional_empirical}
 
 
 
@@ -2170,7 +2174,7 @@ The effect of revelation on the markup shows us that compositional changes do no
 \end{minipage} 
 \end{figure} 
 
-\subsubsection{Do Wage Bids Reflect Compensating Differentials?} \label{online_appendix:compensating_differentials}
+\subsubsection{Do Wage Bids Reflect Compensating Differentials?} \label{online_app:compensating_differentials}
 A high type employer might also be a more demanding employer, expecting greater effort from their hires.
 Anticipating these great expectations, workers might bid more, as they know their costs will higher, either from greater effort or perhaps the greater probability of receiving bad feedback.
 As such, part of the higher wage bid observed in the high tier could reflect this anticipated greater, costly effort.
@@ -2372,7 +2376,7 @@ The far right column also reports the percentage change in the $\textsc{ShownPre
 
 
 
-\subsection{Subjective Match Quality} 
+\subsection{Subjective Match Quality} \label{supp_app:subjective_quality}
 % not referred in the main text
 
 If buyers are less satisfied, they might leave worse feedback for the worker or the platform.
