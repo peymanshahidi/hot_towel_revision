@@ -663,7 +663,7 @@ The basic trade-off is the following. A low-type firm that deviates from the can
 \label{prop:incentive_compat} For given $u(a)$, $v_{L}$, and $c_{H}$, truth-telling is incentive compatible if $v_{H}$ is sufficiently large. For $c_{H}=c_{L}=0$, when $v_{H}$ approaches $v_{L}$, incentive compatibility for truth-telling generically fails.
 \end{prop}
 
-\noindent Proof: See Appendix~\ref{online_app:analysis}.$\square$\bigskip
+\noindent Proof: See Appendix~\ref{online_app:ic_proof}.$\square$\bigskip
 
 Proposition~\ref{prop:incentive_compat} shows that incentives for truth-telling are present in some situations, but they are not guaranteed in all situations. Beyond sufficient differences in firm types, incentives for truth-telling also rely on the presence of the second signal; we discuss the role of the second signal for incentive compatibility in Appendix~\ref{online_app:imprecise_second_signal}, and the extension to a broader class of production functions in Appendix~\ref{online_app:robustness}. Reassuringly, we do not have to speculate on truth-telling: the empirical exercise directly investigates proxies for it, and part 2 of Proposition~\ref{comparison1} delivers testable implications that distinguish truth-telling from alternatives by exploiting differences in valuations between high- and low-type firms.
 
@@ -1677,8 +1677,13 @@ Finally, Part 5 is a direct consequence of block-recursivity. The characterizati
 
 
 
-\subsection{Role of the Second Signal, and Proof of Proposition \ref{prop:incentive_compat}}
-\label{online_app:second_signal} 
+\section{Information Revelation}
+\label{online_app:info_revelation}
+
+This appendix collects results and discussion related to the revelation of firm types to workers: the role and precision of the second signal, the proof of incentive compatibility in the truthful cheap-talk equilibrium, and the robustness of our main comparison to partially revealing equilibria.
+
+\subsection{Role of the Second Signal and Convergence}
+\label{online_app:second_signal}
 
 The second signal captures that workers can target their bidding to more information after having read the
 details of the job description. Taking the limiting case where this signal
@@ -1701,13 +1706,12 @@ that allows for selection based on some information even without signals.}
 
 This converges to the differential equation in (\ref{wages}) when $\Psi(T)\longrightarrow 1$, as do the associated endpoint conditions. Working in the limit is easier as the expected bid of a worker after the first signal is simply the weighted average of the bids after the second signal, while the aggregation is much more cumbersome if uncertainty remains even after the second signal. For this reason, we carry out the incentive compatibility proof below in the $\psi_{2}\to 1$ limit; by the convergence just established, the conclusion carries over to settings where the second signal is imprecise but sufficiently precise. We return to the conceptual question of how to interpret the second signal — in particular, why we think of it as imprecise rather than literally precise — in Appendix~\ref{online_app:imprecise_second_signal}.
 
-\bigskip
+\subsection{Proof of Proposition \ref{prop:incentive_compat}}
+\label{online_app:ic_proof}
 
+\noindent \textit{Proof of Proposition \ref{prop:incentive_compat}:}
 
-
-\noindent \textit{Proof of Proposition \ref{prop:incentive_compat}:} 
-
-Consider first the limiting case where the second signal has very high precision. 
+Consider first the limiting case where the second signal has very high precision.
 
 Note first that the probability
 that a firm at message $m$ has no applicant with qualification above $a$ is $%
