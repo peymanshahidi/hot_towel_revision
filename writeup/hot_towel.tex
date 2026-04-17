@@ -372,20 +372,8 @@ $\Lambda(\cdot|m,s_{1})$.
 \end{definition*}
 
 The last condition ensures that workers obtain their outside option, or else the queue length is zero as no worker would want to join the platform. 
-We conclude with the immediate observation that there cannot be meaningful
-mass points in equilibrium, i.e., mass points at firm types to which workers assign a non-zero probability. 
-Workers at the mass point have strictly positive probability that another worker that generates the same profit for the firm gets hired instead of them. 
-A marginally lower wage bid (i.e., a marginally higher profit for the firm) would have ensured being hired, inducing a profitable upward jump in the hiring probability. This rules out that mass points can be optimal for workers, simplifying the notation going forward.
-
-\begin{lemma*}
-\label{no-mass-point-lemma}
-There are no meaningful mass points in equilibrium, i.e.,
-$\bigtriangleup(\pi|m,s_1,s_2,T)=0$ for all $\pi\geq 0$ and all
-$(m,s_1,s_2,T)$ with $\Psi(s_2,T|m,s_1)>0$.
-\end{lemma*}
-
-\noindent Proof: See Online Appendix~\ref{online_app:value_and_lemma}.
-
+We conclude by noting that meaningful mass points cannot exist in equilibrium. 
+We formally state and prove this result in Appendix~\ref{online_app:value_and_lemma}.
 
 
 
@@ -534,7 +522,7 @@ _{s_{1}}-c_{s_{2}}].  \label{wages-general}
 \end{equation}
 \end{prop}
 
-Proof idea: The key challenge is to prove that workers who approach a firm will actually always bid there, which is not obvious: they approach under uncertainty and learn additional information from the second signal. Under our assumptions, this turns out to hold. The averaging then obtains exactly because the second signal is so precise, and it does not obtain otherwise, as we elaborate in the discussion section. For the full proof see Appendix~\ref{online_app:proof_notalk}.$\square$\bigskip
+\noindent Proof idea: The key challenge is to prove that workers who approach a firm will actually always bid there, which is not obvious: they approach under uncertainty and learn additional information from the second signal. Under our assumptions, this turns out to hold. The averaging then obtains exactly because the second signal is so precise, and it does not obtain otherwise, as we elaborate in the discussion section. For the full proof see Appendix~\ref{online_app:proof_notalk}.$\square$\bigskip
 
 Regarding the wage equation, it is worth noting that the wage conditions on the true valuation and cost $(v_{s_{2}},c_{s_{2}})$ revealed through the second signal, but the lowest type $\underline{a}_{\Psi}$ who extracts all surplus remains the one that expects average quality. This is because the decision of which firms to study in detail is made when the worker has less information.
 
@@ -560,7 +548,7 @@ threshold $c$ (but does not depend on $v$).
 \end{itemize}
 \end{corollary}
 
-Proof: See Online Appendix~\ref{online_app:proof_corollary}.
+\noindent Proof: See Online Appendix~\ref{online_app:proof_corollary}.
 
 We can directly apply these comparative statics, noting that $v$ and $c$ are lowest for firms with a truthful low message, higher for firms without a message but with a low first signal, even higher for firms without a message but with a high first signal, and highest for firms with a truthful high message. Both the lower and the upper bound of the interval $[\underline{a},\bar{a}]$ of workers who approach these firms therefore increase in this order. Whenever these intervals overlap across firms with different messages or signals, the worker types in the overlap generate the same queue at each firm according to (\ref{equilibrium density}). This means workers can implement this queue length by choosing among these firms at random. An individual worker might not choose at random, but the aggregate outcome is indistinguishable from one in which they do.
 
@@ -626,13 +614,7 @@ What is the cost of attracting higher worker types? Since they produce more outp
 \label{corollary 2}Consider a firm with type $T$ and associated valuation $v_{T}$ and cost $c_{T}$ that attracts workers with abilities in $[\underline{a},\bar{a}]$. For a given worker with ability $a$, her wage bid at this firm increases in $v$, decreases in $c$, and increases in $\underline{a}$.
 \end{corollary}
 
-Proof: From~(\ref{wages-general}), the equilibrium bid at a worker of ability $a$ is $b_{s_{2}}(a)=v_{s_{2}}[B(a)-B(\underline{a})+\underline{a}-c_{s_{2}}]$, where we have written $\underline{a}$ for $\underline{a}_{s_{1}}$ and $B(\cdot)$ is the normalized wage function of Proposition~\ref{equilibrium-characterization}. The wage bid is strictly increasing in $v_{s_{2}}$ and strictly decreasing in $c_{s_{2}}$ by inspection, since the bracketed term is positive (the worker is hired and generates non-negative profits only if $a\geq\underline{a}\geq c_{s_{2}}$). For the dependence on $\underline{a}$, differentiating~(\ref{wages-general}) with respect to $\underline{a}$ gives
-\[
-\frac{\partial b_{s_{2}}(a)}{\partial \underline{a}} = v_{s_{2}}\bigl[1 - B'(\underline{a})\bigr].
-\]
-The wage ODE~(\ref{wages}), applied to the normalized firm (valuation $v=1$ and cost $c=0$), reduces to $B'(a) = 1 - B(a)\cdot u''(a)/u'(a)$. Since $B(\underline{a}) > 0$ for any $\underline{a}$ strictly above the normalized lowest type, and $u'',u' > 0$, we have $B'(\underline{a}) < 1$, and therefore $\partial b_{s_{2}}(a)/\partial \underline{a} > 0$.$\square$
-
-\bigskip
+\noindent Proof: See Appendix~\ref{online_app:proof_corollary_2}.$\square$\bigskip
 
 For a given firm type, the identity of the lowest worker type matters. This worker type extracts all surplus, and workers slightly above the lowest type still extract nearly all surplus. Firms therefore retain surplus, and thus face low wages, only for workers sufficiently far above the lowest worker, with wages falling in this distance. In our context this means that a given firm faces lower wages the lower $\underline{a}_{s_{1}}$. This is lowest for low-message firms, higher for low-signal firms, higher still for high-signal firms, and highest for high-message firms. So, comparing a high-type firm that sends a truthful message with a high-type firm that cannot send a message, for any given worker the wage demand is slightly lower at the no-message firm in the event of a high first signal, and substantially lower in the event of a low first signal. Conversely, comparing a low-type firm that can send a truthful message with a low-type firm that cannot, for any given worker the wage demand is slightly higher at the no-message firm in the event of a low first signal, and substantially higher in the event of a high first signal. Thus wages rise at high-type firms when they can send a message and fall at low-type firms.
 
@@ -655,7 +637,7 @@ cheap-talk with otherwise identical counterparts that cannot.
 \end{enumerate}
 \end{prop}
 
-Proof: Parts 1 and 3 follow directly from Corollaries~\ref{corollary} and~\ref{corollary 2}. For parts 2 and 4 see Appendix~\ref{online_app:proof_comparison}. Intuitively, the effect on the number of applicants is ambiguous because cheap talk shifts both the upper and lower bounds of the types that approach a firm, and which shift is larger depends on parameters. For the surplus result, note that the equilibrium implements the planner's allocation given the information frictions, but the planner can assign worker types in a more targeted way when he has more information about the firm type. Part 5 follows directly from the ``block-recursivity'' property established in Subsection~\ref{sec:truthful}.$\square$
+\noindent Proof: Parts 1 and 3 follow directly from Corollaries~\ref{corollary} and~\ref{corollary 2}. For parts 2 and 4 see Appendix~\ref{online_app:proof_comparison}. Intuitively, the effect on the number of applicants is ambiguous because cheap talk shifts both the upper and lower bounds of the types that approach a firm, and which shift is larger depends on parameters. For the surplus result, note that the equilibrium implements the planner's allocation given the information frictions, but the planner can assign worker types in a more targeted way when he has more information about the firm type. Part 5 follows directly from the ``block-recursivity'' property established in Subsection~\ref{sec:truthful}.$\square$
 
 \subsection{Truth-telling}\label{sec:truth-telling}
 
@@ -1305,7 +1287,8 @@ Essentially any feature of the economic relationship for which buyers and seller
 \section{Proofs and Analytic Derivations} \label{online_app:analysis}
 
 
-\subsection{General Expression for the Worker Value Function and Proof of Lemma in Subsection~\ref{no-mass-point-lemma}}\label{online_app:value_and_lemma}
+\subsection{General Expression for the Worker Value Function and Proof of No Mass Points Lemma}
+\label{online_app:value_and_lemma}
 
 Expression~(\ref{value}) in the main text assumes that the worker generates
 weakly positive profits and that there is no mass point in the distribution
@@ -1330,12 +1313,25 @@ of being hired (conditional on no strictly more profitable bidders) is then
 the infinite sum $M(\bigtriangleup )=\sum_{k=0}^{\infty }\frac{\bigtriangleup
 ^{k}e^{-\bigtriangleup }}{k!}\frac{1}{k+1}=\frac{1-e^{-\bigtriangleup }}{%
 \bigtriangleup }.$
-See \cite{burdett_etal2001} and \cite{wright_etal2021} for further references. \\
+See \cite{burdett_etal2001} and \cite{wright_etal2021} for further references.
 
+\bigskip
 
-\textit{Proof of Lemma in Subsection~\ref{no-mass-point-lemma}:} 
-Assume to the contrary
-that $\bigtriangleup (\pi |m,s_{1},s_{2},T)>0$ at a point where $\Psi
+Next we address the claim introduced at the end of Section~\ref{sec:setup} that meaningful mass points cannot arise in equilibrium.
+Mass points refer to situations where multiple workers offer identical profits to firms with strictly positive probability.
+At these mass points, any given worker faces a strictly positive probability of losing to a competitor who offers the same profit.
+However, such a worker could slightly reduce their wage bid (thereby marginally increasing the firm's profit) and thus guarantee being hired, creating a discrete jump in their hiring probability.
+This incentive rules out the existence of mass points in equilibrium, simplifying subsequent notation and analysis.
+The following lemma formally states this result.
+
+\begin{lemma*}
+\label{no-mass-point-lemma}There are no meaningful mass points in
+equilibrium, i.e., $\bigtriangleup (\pi |m,s_{1},s_{2},T)=0$ for all $\pi
+\geq 0$ and all $(m,s_{1},s_{2},T)$ with $\Psi (s_{2},T|m,s_{1})>0$.
+\end{lemma*}
+
+\textit{Proof of Lemma:} 
+Assume to the contrary that $\bigtriangleup (\pi |m,s_{1},s_{2},T)>0$ at a point where $\Psi
 (s_{2},T|m,s_{1})>0$ and $\pi \geq 0$. Then there must exist $%
 (a,b_{L},b_{H}) $ in the support of $\Lambda (\cdot |m,s_{1})$ with $\pi
 (a,b_{s_{2}}|T)=\pi .$ In fact, there must exist such combination with $%
@@ -1363,7 +1359,7 @@ and the first and fifth term do not change. So the only negative comes from
 the forth term that captures the wage conditional on getting hired. Since $%
 b_{s_{2}}^{\prime }$ can be made arbitrarily close to $b_{s_{2}},$ the loss
 in the wage can be made arbitrarily small and, thus, less than the gain from
-the discrete jump in the hiring probability. $\square $
+the discrete jump in the hiring probability.$\square $
 
 
 
@@ -1424,7 +1420,7 @@ _{l}|m)}v_{m}\leq u^{\prime }(a_{l})$ and $U^{\prime }(a_{h}|m)=e^{-\Gamma
 strictly concave, this implies $e^{-\Gamma (\pi _{h}|m)}>e^{-\Gamma (\pi
 _{l}|m)}.$ But since the distribution of profits has no mass points and
 there are no bids between $\pi _{h}$ and $\pi _{l},$ it holds that $\Gamma
-(\pi _{h}|m)=\Gamma (\pi _{l}|m),$ yielding a contradiction. $\square $
+(\pi _{h}|m)=\Gamma (\pi _{l}|m),$ yielding a contradiction.$\square $
 
 
 
@@ -1601,6 +1597,16 @@ Equipped with this claim, we can now complete the proof of the second point. The
 This type always enters when $v_{m}>\underline{v}_{m}(\underline{a}_{m})$, and the higher $v_{m}$, the more other types enter. The lowest type $\underline{a}_{m}$ is increasing in $c_{m}$, which follows by implicitly differentiating (\ref{cutoff-type}).$\square$
 
 
+
+\subsection{Proof of Corollary~\ref{corollary 2}}\label{online_app:proof_corollary_2}
+
+\noindent \textit{Proof of Corollary~\ref{corollary 2}:} From~(\ref{wages-general}), the equilibrium bid at a worker of ability $a$ is $b_{s_{2}}(a)=v_{s_{2}}[B(a)-B(\underline{a})+\underline{a}-c_{s_{2}}]$, where we have written $\underline{a}$ for $\underline{a}_{s_{1}}$ and $B(\cdot)$ is the normalized wage function of Proposition~\ref{equilibrium-characterization}. The wage bid is strictly increasing in $v_{s_{2}}$ and strictly decreasing in $c_{s_{2}}$ by inspection, since the bracketed term is positive (the worker is hired and generates non-negative profits only if $a\geq\underline{a}\geq c_{s_{2}}$). For the dependence on $\underline{a}$, differentiating~(\ref{wages-general}) with respect to $\underline{a}$ gives
+\[
+\frac{\partial b_{s_{2}}(a)}{\partial \underline{a}} = v_{s_{2}}\bigl[1 - B'(\underline{a})\bigr].
+\]
+The wage ODE~(\ref{wages}), applied to the normalized firm (valuation $v=1$ and cost $c=0$), reduces to $B'(a) = 1 - B(a)\cdot u''(a)/u'(a)$. Since $B(\underline{a}) > 0$ for any $\underline{a}$ strictly above the normalized lowest type, and $u'',u' > 0$, we have $B'(\underline{a}) < 1$, and therefore $\partial b_{s_{2}}(a)/\partial \underline{a} > 0$.$\square$
+
+\bigskip
 
 \subsection{Proof of Proposition \ref{comparison1}}\label{online_app:proof_comparison}
 
