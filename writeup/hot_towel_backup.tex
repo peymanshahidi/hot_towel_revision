@@ -622,7 +622,11 @@ What is the cost of attracting higher worker types? Since they produce more outp
 \label{corollary 2}Consider a firm with type $T$ and associated valuation $v_{T}$ and cost $c_{T}$ that attracts workers with abilities in $[\underline{a},\bar{a}]$. For a given worker with ability $a$, her wage bid at this firm increases in $v$, decreases in $c$, and increases in $\underline{a}$.
 \end{corollary}
 
-Proof: Follows directly from (\ref{wages-general}).$\square $
+Proof: From (\ref{wages-general}), the equilibrium bid at a worker of ability $a$ is $b_{s_{2}}(a)=v_{s_{2}}[B(a)-B(\underline{a})+\underline{a}-c_{s_{2}}]$, where we have written $\underline{a}$ for $\underline{a}_{s_{1}}$. The wage bid is strictly increasing in $v_{s_{2}}$ and strictly decreasing in $c_{s_{2}}$ by inspection, since the bracketed term is positive (the worker is hired and generates non-negative profits only if $a\geq\underline{a}$ and $\underline{a}\geq c_{s_{2}}$). For the dependence on $\underline{a}$, differentiating with respect to $\underline{a}$ gives
+\[
+\frac{\partial b_{s_{2}}(a)}{\partial \underline{a}} = v_{s_{2}}\bigl[1 - B'(\underline{a})\bigr].
+\]
+The wage ODE (\ref{wages}) with the boundary condition (\ref{wages boundary}) implies $B'(\underline{a}) = 1 - B(\underline{a})\cdot u''(\underline{a})/u'(\underline{a})$. Since $B(\underline{a})\geq 0$ and $u'',u'>0$, we have $B'(\underline{a}) < 1$, so $\partial b_{s_{2}}(a)/\partial \underline{a} > 0$.$\square$
 
 \bigskip
 
@@ -642,10 +646,12 @@ cheap-talk with otherwise identical counterparts that cannot.
 \item Wage bidding: Any given worker type bids less at low-type firms under truthful cheap talk than in its absence. The average wage demand at such firms and the average wage of the selected worker fall under truthful cheap talk. The opposite holds for high-type firms.
 
 \item Efficiency: Social surplus per firm is higher at firms that send truthful messages than at their counterparts that cannot send messages.
+
+\item Market-wide rollout: Incentives to use different messages do not depend on the fraction of firms that use cheap talk, since equilibrium wage bids and queue lengths conditional on $(m,s_{1},s_{2})$ do not depend on the fraction $\rho$ of firms that can message.
 \end{enumerate}
 \end{prop}
 
-Proof: Parts 1 and 3 follow directly from Corollaries~\ref{corollary} and~\ref{corollary 2}. For parts 2 and 4 see Appendix~\ref{online_app:analysis}. Intuitively, the effect on the number of applicants is ambiguous because cheap talk shifts both the upper and lower bounds of the types that approach a firm, and which shift is larger depends on parameters. For the surplus result, note that the equilibrium implements the planner's allocation given the information frictions, but the planner can assign worker types in a more targeted way when he has more information about the firm type.$\square$
+Proof: Parts 1 and 3 follow directly from Corollaries~\ref{corollary} and~\ref{corollary 2}. For parts 2 and 4 see Appendix~\ref{online_app:analysis}. Intuitively, the effect on the number of applicants is ambiguous because cheap talk shifts both the upper and lower bounds of the types that approach a firm, and which shift is larger depends on parameters. For the surplus result, note that the equilibrium implements the planner's allocation given the information frictions, but the planner can assign worker types in a more targeted way when he has more information about the firm type. Part 5 follows directly from the ``block-recursivity'' property established in Subsection~\ref{sec:truthful}.$\square$
 
 \subsection{Truth-telling}\label{sec:truth-telling}
 
@@ -664,10 +670,10 @@ Proposition~\ref{prop:incentive_compat} shows that incentives for truth-telling 
 Moreover, our main comparison insights do not rely on perfect type revelation; they apply even to partially revealing equilibria:
 
 \begin{corollary}
-\label{cor:partially_revealing}For any partially revealing equilibrium in which messages carry some information (i.e., $\Psi(T|L,s_{1}) \neq \Psi(T|H,s_{1})$), the comparison of firms with and without messages is characterized by parts (1)--(4) of Proposition~\ref{comparison1}.
+\label{cor:partially_revealing}For any partially revealing equilibrium in which messages carry some information (i.e., $\Psi(T|L,s_{1}) \neq \Psi(T|H,s_{1})$), the comparison of firms with and without messages is characterized by parts (1)--(5) of Proposition~\ref{comparison1}.
 \end{corollary}
 
-\noindent Proof: Parts 1--3 of Proposition~\ref{comparison1} rest on comparative statics that apply just as well to averaged valuations and costs, so they continue to hold — see Appendix~\ref{online_app:robustness}. Part 4 remains valid because workers continue to direct their search and equate market payoffs to their outside option, so the efficiency argument proceeds in analogous steps as in the fully revealing case.$\square$\bigskip
+\noindent Proof: Parts 1--3 of Proposition~\ref{comparison1} rest on comparative statics that apply just as well to averaged valuations and costs, so they continue to hold — see Appendix~\ref{online_app:robustness}. Part 4 remains valid because workers continue to direct their search and equate market payoffs to their outside option, so the efficiency argument proceeds in analogous steps as in the fully revealing case. Part 5 likewise carries over because block-recursivity only relies on workers directing their search and equating their market payoff to their outside option at each $(m,s_{1})$, which does not depend on whether messages fully or partially reveal type.$\square$\bigskip
 
 Any equilibrium in which messages transmit some information therefore shares the same qualitative empirical implications as the fully revealing equilibrium discussed in Proposition~\ref{comparison1}. This arises because these implications depend primarily on comparative statics involving averaged valuations and costs.
 
@@ -1465,7 +1471,7 @@ or higher and $\hat{v}$ is the average valuation for their work
 \widehat{v}=\sum_{T}\Psi (T|s)v_{T}\boldsymbol{.}
 \end{equation*}%
 Clearly the average valuation is increasing in the belief that the firm is
-of high type. We can now apply the same steps as in Section \ref{sec:truthful}, just with this replaced term for the value. As in (\ref%
+of high type. We can now apply the same steps as in Subsection \ref{sec:truthful}, just with this replaced term for the value. As in (\ref%
 {first derivative}) the increase in value has to equal the increase in
 outside option to make free entry feasible, so 
 \begin{equation*}
@@ -1505,7 +1511,7 @@ where the second line simply re-orders the terms. The term $\widehat{c}$
 equals $c_{L}$ when workers think they face a low type for sure (i.e., $\Psi
 (L|s)=1$), $\widehat{c}$ is monotonically increasing in the probability that
 the firm is a high type, and it equals $c_{H}$ when workers think they face
-a high type for sure. For the same reasons as in Section \ref{sec:truthful}
+a high type for sure. For the same reasons as in Subsection \ref{sec:truthful}
 the lowest type is solely determined by the costs via implicit function 
 \begin{equation}
 \underline{a}_{s}=\widehat{c}+u(\underline{a}_{s})/u^{\prime }(\underline{a}%
@@ -1545,7 +1551,7 @@ _{T=L}-c_{L})<U(\underline{a}_{T=L})  \notag \\
 &\Rightarrow &e^{-\Lambda (\underline{a}_{s}|s)}\Psi (L|s)v_{L}<\underline{v}%
 _{T=L}(\underline{a}_{T=L}),  \label{x}
 \end{eqnarray}%
-where $\underline{v}_{T=L}(a)=U(a)/(a-c_{l})$ as defined in Section \ref{sec:truthful}. Any type $a<\underline{a}_{T=L}$ who only bids for the low
+where $\underline{v}_{T=L}(a)=U(a)/(a-c_{l})$ as defined in Subsection \ref{sec:truthful}. Any type $a<\underline{a}_{T=L}$ who only bids for the low
 job obtains $e^{-\Lambda (\underline{a}_{s}|s)}\Psi (L|s)v_{L}(\underline{a}%
 -c_{L})$ but has outside option $U(a)=\underline{v}_{T=L}(a)(a-c_{L}).$ For
 this to justify entry we have to have $e^{-\Lambda (\underline{a}%
@@ -1559,17 +1565,15 @@ global minimum of $\underline{v}_{T=L}(\underline{a}).\square $
 \subsection{Proof of Corollary~\ref{corollary}}
 
 \textit{Proof of Corollary~\ref{corollary}:}
-The first point follows directly from (\ref{equilibrium highest type}), which depends on the firm's valuation but not its ability threshold. The third point follows from (\ref{equilibrium density}), which depends on neither valuation nor threshold.
-
-The second point states that the lowest type $\underline{a}_{m}$ is a function of the threshold but not of the valuation. This is not directly obvious from (\ref{equilibrium lowest type}). We establish it via the following auxiliary claim:
+The first point follows directly from (\ref{equilibrium highest type}), which depends on the firm's valuation but not its ability threshold. The third point follows from (\ref{equilibrium density}), which depends on neither valuation nor threshold. The second point states that the lowest type $\underline{a}_{m}$ is a function of the threshold but not of the valuation. This is not directly obvious from (\ref{equilibrium lowest type}). We establish it via the following auxiliary claim:
 
 \bigskip
 
-\noindent \textit{Claim:} Holding the lowest worker type $\underline{a}_{m}$ at truthful message $m$ fixed but changing $v_{m}$ does not alter the expected utility at the lowest type.
+\noindent \textit{Claim: Holding the lowest worker type $\underline{a}_{m}$ at truthful message $m$ fixed but changing $v_{m}$ does not alter the expected utility at the lowest type.}
 
 \bigskip
 
-\noindent \textit{Proof of Claim:} The expected utility at $\underline{a}_{m}$ is, according to (\ref{equilibrium lowest type}), given by $e^{-\Lambda(\underline{a}_{m}|m)}v_{m}(\underline{a}_{m}-c_{m})$. We take comparative statics of this expression with respect to $v_{m}$, holding $\underline{a}_{m}$ fixed but allowing $\Lambda(\underline{a}_{m}|m)$ to change. The derivative is
+\textit{Proof of Claim:} The expected utility at $\underline{a}_{m}$ is, according to (\ref{equilibrium lowest type}), given by $e^{-\Lambda(\underline{a}_{m}|m)}v_{m}(\underline{a}_{m}-c_{m})$. We take comparative statics of this expression with respect to $v_{m}$, holding $\underline{a}_{m}$ fixed but allowing $\Lambda(\underline{a}_{m}|m)$ to change. The derivative is
 \begin{eqnarray*}
 &&e^{-\Lambda (\underline{a}_{m}|m)}(\underline{a}_{m}-c_{m})+e^{-\Lambda (%
 \underline{a}_{m}|m)}\left[ -\frac{d\Lambda (\underline{a}_{m}|m)}{dv_{m}}%
@@ -1591,6 +1595,82 @@ Equipped with this claim, we can now complete the proof of the second point. The
 \underline{a}_{m}=c_{m}+\frac{u(\underline{a}_{m})}{u^{\prime}(\underline{a}_{m})}.
 \end{equation}%
 This type always enters when $v_{m}>\underline{v}_{m}(\underline{a}_{m})$, and the higher $v_{m}$, the more other types enter. The lowest type $\underline{a}_{m}$ is increasing in $c_{m}$, which follows by implicitly differentiating (\ref{cutoff-type}).$\square$
+
+
+
+\subsection{Proof of Proposition \ref{comparison1}}
+
+\noindent \textit{Proof of Proposition \ref{comparison1}:} Part 1 and 3 follow
+directly from Corollary \ref{corollary} and \ref{corollary 2}. For Part 2, note
+that effects on the number of applications are ambiguous since low firm
+types who send a truthful message attract additional low ability workers but loose high ability workers relative to their no-message counterparts.
+How this affects applications depends on the number of workers that they add at low abilities and the number of workers they loose at high abilities. This in turn depends on two things: how many additional ability types are added or lost, and the queue of workers at each ability level (conditional on applying at all) which by
+(\ref{equilibrium density}) equals $u^{\prime \prime }(a)/u^{\prime }(a)$. For $v_{H}\approx v_{L}$ the size of the high-ability segment that is lost shrinks to zero, and
+truthful cheap-talk attracts more workers to low-message firms. The opposite
+is the case for high-message firms. In the case of $v_{H}> v_L$ but $c_H \approx c_L$, the size of the low ability segment that is lost or added shrinks to zero, and truthful messages at low type firms induces a sizeable loss of high-ability workers without an offsetting gain at low-ability workers. For high type firm truthful cheap talk induces a gain in high ability workers with an offset of low ability workers. For Part 4, note that efficiency per firm with a message is given by 
+\begin{equation}
+\max_{\lambda _{m=L}^{P}(.),\lambda _{m=H}^{P}(.)}\delta
+_{L}S(v_{L},c_{L}|\lambda _{s=L}^{P}(.))+\delta _{H}S(v_{H},c_{H}|\lambda
+_{m=H}^{P}(.))  \label{max1}
+\end{equation}%
+where 
+\begin{eqnarray*}
+S(v,c|\lambda (.)) &=&\int \left( v(a-c)\right) d\left(
+1-e^{-\int_{a}^{\infty }\lambda (a^{\prime })da^{\prime }}\right) -\int
+\lambda (a)u(a)da \\
+&&\int v(a-c)\lambda (a)e^{-\int_{a}^{\infty }\lambda (a^{\prime
+})da^{\prime }}da-\int \lambda (a)u(a)da
+\end{eqnarray*}%
+represents the output of the firm minus the forgone outside option of all
+the workers who queue at this firm. Let 
+\begin{equation}
+\mathcal{S}(v,c)=\max_{\lambda (.)}S(v,c|\lambda (.)).  \label{max-by-type}
+\end{equation}%
+The optimality conditions for this problem coincide nearly everywhere with
+the equilibrium conditions (\ref{first derivative}) for a given firm type,
+and it shares the same boundary conditions. This establishes that the
+equilibrium decentralizes the planner's solution. Evidently the value of
+program (\ref{max1}) is given by $\delta _{L}\mathcal{S}(v_{L},c_{L})+\delta
+_{H}\mathcal{S}(v_{H},c_{H}).$
+
+For firms who cannot send a message the maximal efficiency per firm is
+attainable through queue of 
+\begin{eqnarray}
+\max_{\lambda _{s=L}^{P}(.),\lambda _{s=H}^{P}(.)} &&\delta _{L}\left[ \psi
+_{1}S(v_{L},c_{L}|\lambda _{s=L}^{P}(.))+(1-\psi _{1})S(v_{L},c_{L}|\lambda
+_{s=H}^{P}(.))\right]  \label{max2} \\
+&&+\delta _{H}\left[ \psi _{1}S(v_{H},c_{H}|\lambda _{s=H}^{P}(.))+(1-\psi
+_{1})S(v_{H},c_{H}|\lambda _{s=L}^{P}(.))\right] ,  \notag
+\end{eqnarray}%
+where $S(.)$ still denotes the output minus the forgone outside option of
+workers, but which queue a firm obtains now depends on which signal it
+sends. The optimality conditions for this problem again coincide with
+conditions for the decentralzied equilibrium, and thus the decentralized
+equilibrium obtains the highest surplus given the information frictions.
+Nevertheless, evidently value of maximization problem (\ref{max1}) is higher
+than that of maximization problem (\ref{max2}) since the queue length in the
+former can be chosen to maximize the surplus for each firm while in the
+latter it has to partially cater to both firm types. Formally, note that
+both $S(v_{L},c_{L}|\lambda _{s=L}^{\ast }(.))$ and $S(v_{L},c_{L}|\lambda
+_{s=H}^{\ast }(.))$ are bounded above by $\mathcal{S}(v_{L},c_{L}),$ and $%
+S(v_{H},c_{H}|\lambda _{s=H}^{P}(.))$ and $S(v_{H},c_{H}|\lambda
+_{s=L}^{P}(.))$ are bounded above by $\mathcal{S}(v_{L},c_{L}).$ Therefore
+the value of problem (\ref{max2}) is bounded from above by $\delta _{L}%
+\mathcal{S}(v_{L},c_{L})+\delta _{H}\mathcal{S}(v_{H},c_{H}),$ which
+coincides with the value of problem (\ref{max1}).
+
+In fact, one can prove that value of problem (\ref{max2}) is strictly below
+that of (\ref{max1}): the maximizer $\lambda ^{\ast P}(a|v,c)$ of problem (%
+\ref{max-by-type}) is unique for given $(v,c)$ and strictly different for
+different values of $(v,c)$ as it inherits the same properties as the
+equilibrium queue length under truthful cheap talk. Equal value of the two
+problems above would require that $\lambda ^{\ast
+P}(.|v_{L},c_{L})=\lambda _{s=L}^{P}(.)=\lambda _{s=H}^{P}(.)$ and $%
+\lambda ^{\ast P}(a|v_{H},c_{H})=\lambda _{s=L}^{P}(.)=\lambda
+_{s=H}^{P}(.), $ which yields a contradiction to $\lambda ^{\ast
+P}(.|v_{L},c_{L})\neq \lambda ^{\ast P}(a|v_{H},c_{H}).$
+
+Finally, Part 5 is a direct consequence of block-recursivity. The characterization in Proposition~\ref{equilibrium-characterization} of the interval $[\underline{a}_{m},\bar{a}_{m}]$, the queue $\Lambda(a|m)$, and the wages $b_{m}(a)$ for firms that send message $m$ is pinned down by equations (\ref{equilibrium density})--(\ref{equilibrium lowest type}), (\ref{wages}), and (\ref{wages boundary}). None of these equations reference the mass of firms without messages. The same is true for the corresponding objects at firms without messages, characterized in Proposition~\ref{equilibrium-notalk}: they depend on the averaged valuation $v_{\Psi}$ and cost $c_{\Psi}$ at the given first signal, but not on the mass of firms that can send messages. Hence equilibrium outcomes conditional on $(m,s_{1},s_{2})$ are invariant to the fraction $\rho$ of firms that are asked to message, so firms' incentives to choose different messages do not depend on $\rho$.$\square$
 
 
 
@@ -1831,83 +1911,6 @@ Finally, consider the case where there remains some imprecision in the second si
 \bigskip
 
 We omit the generic failure of truth-telling when types are very close together as this is a standard result that appears in much of the literature. In Online Appendix~\ref{online_app:ic_general_prod} we prove incentive compatibility for more general production functions.
-
-
-
-
-\subsection{Proof of Proposition \ref{comparison1}}
-
-\noindent \textit{Proof of Proposition \ref{comparison1}:} Part 1 and 3 follow
-directly from Corollary \ref{corollary} and \ref{corollary 2}. For Part 2, note
-that effects on the number of applications are ambiguous since low firm
-types who send a truthful message attract additional low ability workers but loose high ability workers relative to their no-message counterparts.
-How this affects applications depends on the number of workers that they add at low abilities and the number of workers they loose at high abilities. This in turn depends on two things: how many additional ability types are added or lost, and the queue of workers at each ability level (conditional on applying at all) which by
-(\ref{equilibrium density}) equals $u^{\prime \prime }(a)/u^{\prime }(a)$. For $v_{H}\approx v_{L}$ the size of the high-ability segment that is lost shrinks to zero, and
-truthful cheap-talk attracts more workers to low-message firms. The opposite
-is the case for high-message firms. In the case of $v_{H}> v_L$ but $c_H \approx c_L$, the size of the low ability segment that is lost or added shrinks to zero, and truthful messages at low type firms induces a sizeable loss of high-ability workers without an offsetting gain at low-ability workers. For high type firm truthful cheap talk induces a gain in high ability workers with an offset of low ability workers. For Part 4, note that efficiency per firm with a message is given by 
-\begin{equation}
-\max_{\lambda _{m=L}^{P}(.),\lambda _{m=H}^{P}(.)}\delta
-_{L}S(v_{L},c_{L}|\lambda _{s=L}^{P}(.))+\delta _{H}S(v_{H},c_{H}|\lambda
-_{m=H}^{P}(.))  \label{max1}
-\end{equation}%
-where 
-\begin{eqnarray*}
-S(v,c|\lambda (.)) &=&\int \left( v(a-c)\right) d\left(
-1-e^{-\int_{a}^{\infty }\lambda (a^{\prime })da^{\prime }}\right) -\int
-\lambda (a)u(a)da \\
-&&\int v(a-c)\lambda (a)e^{-\int_{a}^{\infty }\lambda (a^{\prime
-})da^{\prime }}da-\int \lambda (a)u(a)da
-\end{eqnarray*}%
-represents the output of the firm minus the forgone outside option of all
-the workers who queue at this firm. Let 
-\begin{equation}
-\mathcal{S}(v,c)=\max_{\lambda (.)}S(v,c|\lambda (.)).  \label{max-by-type}
-\end{equation}%
-The optimality conditions for this problem coincide nearly everywhere with
-the equilibrium conditions (\ref{first derivative}) for a given firm type,
-and it shares the same boundary conditions. This establishes that the
-equilibrium decentralizes the planner's solution. Evidently the value of
-program (\ref{max1}) is given by $\delta _{L}\mathcal{S}(v_{L},c_{L})+\delta
-_{H}\mathcal{S}(v_{H},c_{H}).$
-
-For firms who cannot send a message the maximal efficiency per firm is
-attainable through queue of 
-\begin{eqnarray}
-\max_{\lambda _{s=L}^{P}(.),\lambda _{s=H}^{P}(.)} &&\delta _{L}\left[ \psi
-_{1}S(v_{L},c_{L}|\lambda _{s=L}^{P}(.))+(1-\psi _{1})S(v_{L},c_{L}|\lambda
-_{s=H}^{P}(.))\right]  \label{max2} \\
-&&+\delta _{H}\left[ \psi _{1}S(v_{H},c_{H}|\lambda _{s=H}^{P}(.))+(1-\psi
-_{1})S(v_{H},c_{H}|\lambda _{s=L}^{P}(.))\right] ,  \notag
-\end{eqnarray}%
-where $S(.)$ still denotes the output minus the forgone outside option of
-workers, but which queue a firm obtains now depends on which signal it
-sends. The optimality conditions for this problem again coincide with
-conditions for the decentralzied equilibrium, and thus the decentralized
-equilibrium obtains the highest surplus given the information frictions.
-Nevertheless, evidently value of maximization problem (\ref{max1}) is higher
-than that of maximization problem (\ref{max2}) since the queue length in the
-former can be chosen to maximize the surplus for each firm while in the
-latter it has to partially cater to both firm types. Formally, note that
-both $S(v_{L},c_{L}|\lambda _{s=L}^{\ast }(.))$ and $S(v_{L},c_{L}|\lambda
-_{s=H}^{\ast }(.))$ are bounded above by $\mathcal{S}(v_{L},c_{L}),$ and $%
-S(v_{H},c_{H}|\lambda _{s=H}^{P}(.))$ and $S(v_{H},c_{H}|\lambda
-_{s=L}^{P}(.))$ are bounded above by $\mathcal{S}(v_{L},c_{L}).$ Therefore
-the value of problem (\ref{max2}) is bounded from above by $\delta _{L}%
-\mathcal{S}(v_{L},c_{L})+\delta _{H}\mathcal{S}(v_{H},c_{H}),$ which
-coincides with the value of problem (\ref{max1}).
-
-In fact, one can prove that value of problem (\ref{max2}) is strictly below
-that of (\ref{max1}): the maximizer $\lambda ^{\ast P}(a|v,c)$ of problem (%
-\ref{max-by-type}) is unique for given $(v,c)$ and strictly different for
-different values of $(v,c)$ as it inhits the same properties as the
-equilibrium queue length under truthful cheap talk. Equal value of the two
-problems above would require that that $\lambda ^{\ast
-P}(.|v_{L},c_{L})=\lambda _{s=L}^{P}(.)=\lambda _{s=H}^{P}(.)\,\ $and $%
-\lambda ^{\ast P}(a|v_{H},c_{H})=\lambda _{s=L}^{P}(.)=\lambda
-_{s=H}^{P}(.), $ which yields a contradiction to $\lambda ^{\ast
-P}(.|v_{L},c_{L})\neq \lambda ^{\ast P}(a|v_{H},c_{H}).\square $
-
-
 
 
 
