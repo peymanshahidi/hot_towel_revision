@@ -254,17 +254,36 @@ Although the sorting between workers and jobs that can both be ordered along one
 
 \section{A Model of Cheap Talk in a Directed Search Labor Market} \label{sec:theory}
 
+[Intro needs a rewrite.]
+
 \subsection{Setup}\label{sec:setup}
 
-\textit{Players and Production}: There is an endogenous mass of workers with heterogeneous abilities $a\in\mathbb{R}_{++}$. Worker ability is known and publicly observable. There is a unit mass of jobs that differ in their valuation $v_{T}$ of workers' ability: each job can hire at most one worker, and a match between job type $T$ and worker ability $a$ produces output $v_{T}(a-c_{T})$, where $c_{T}$ lets higher-value jobs have higher ability requirements (i.e., costs) to achieve positive output. For simplicity we focus on two types of jobs, $T\in\{H,L\}$. High-type jobs value ability more ($v_{H}>v_{L}>0$) and may have higher requirements ($c_{H}>c_{L}\geq 0$). A fraction $\delta_{T}$ of jobs is of each type. The type of the job is \textit{private} information of the firm that posts it. We use the words ``job'' and ``firm'' interchangeably throughout.
+\textit{Players and Production}: There is an endogenous mass $W(a)$ of workers
+with heterogeneous abilities weakly below $a$. Each worker knows his/her ability and is looking for one job. Firms post jobs openings. Sometimes a given job involves tasks that rely on high worker ability, sometimes less so. We capture this through differences in the marginal valuation $v_{T}$ of workers' ability: Each job can hire at most one
+worker, and a match between job type $T$ and worker ability $a$ produces
+output $v_{T}(a-c_{T}),$ where $c_{T}$ allows more complex jobs to have higher ability requirements (i.e., ``costs'') to achieve positive output.\footnote{This production function seems natural and allows for easy comparative statics later on. Online Appendix~\ref{online_app:general_production} lays out a more general production function $\phi(a,T)$ that is increasing and concave in ability. When the elasticity of $\phi_a$ is constant in $T$, our comparative statics continues to apply if $\phi$ is strictly supermodular and log-supermodular. Incentive compatibility for truth-telling continues to apply if the valuation of high types and low types are sufficiently far apart.}
+For simplicity we focus on two types of jobs: $T\in \{H,L\}.$ High types value
+ability more: $v_{H}>v_{L}>0,$ and their jobs might have higher requirements: $%
+c_{H}\geq c_{L}\geq 0$. The probability of a high job type is $\delta _{H}$, and $\delta_L = 1-\delta_H$ is the fraction of low type jobs. The firm knows the job type when it posts it. Workers have to learn about it as we explain below. For ease of description we will associate each firm with a single job, and use the word ``job'' and ``firm'' interchangeably, though in principle firms could have multiple jobs of which some are more sensitive to ability than others.
 
-\textit{Payoffs for market participants:} Both workers and jobs are risk-neutral. If a worker of type $a$ is hired at wage $b$ by a job of type $T$, the firm's profit is output minus the wage paid:
+\textit{Payoffs for market participants:} If a worker is hired for a job, the firm's profit is the output
+minus the wage it pays to the worker. Therefore, a worker of type $a$ who
+gets paid wage $b$ at job $T$ generates firm profits:%
 \begin{equation}
-\pi(a,b|T)=v_{T}(a-c_{T})-b.  \label{firm-profit}
+\pi (a,b|T)=v_{T}(a-c_{T})-b.  \label{firm-profit}
 \end{equation}%
-The worker's utility equals her wage. The utility of unmatched jobs and workers is normalized to zero.
+A worker who gets hired has utility equal to his wage $b$. The payoff of jobs
+and workers who remain unmatched is normalized to zero.
 
-\textit{Market entry:} Workers have a non-negative outside option $u(a)$, which we assume to be increasing and strictly convex, with Inada conditions $u'(0)=0$ and $u'(a)$ unbounded. For some proofs it will be convenient to assume that the elasticity of $u'$ is bounded away from zero and infinity. Workers who participate in the market forgo this outside option and obtain their market payoff instead. Entry is free, so worker types who enter obtain expected payoff $u(a)$ in the market, and types that cannot attain this utility do not enter. We further assume that for each job type $T$ there is at least one worker type $a$ for whom the surplus from entering is strictly positive (i.e., $v_{T}(a-c_{T})-u(a)>0$). It will also be convenient to assume that the difference in requirements between the firm types is not too large — specifically, $c_{H}-c_{L}<u(c_{H})/u'(c_{H})$.
+\textit{Market entry:} Workers can look for jobs on the platform that we analyze, but alternatively they can look for work in other marketplaces on- and off-line. Denote the expected utility they can generate in other markets be $u(a)$. Therefore, the platform attracts workers only if the resulting utility from the market interaction delivers their non-negative outside option $u(a)$,
+which we assume to be increasing and strictly convex, with Inada conditions $%
+u^{\prime }(0)=0$ and $u^{\prime }(a)$ unbounded. For some proofs, it will be
+convenient to assume that the elasticity of $u^{\prime }$ is bounded away
+from zero and infinity. We further assume that for each job type $T$ there is at least one worker type $%
+a$ for which surplus of entering is strictly positive $%
+(i.e.,v_{T}(a-c_{T})-u\left( a\right) >0).$ It will also be convenient to
+assume that the difference in requirements between the types of firms is not
+too large, and in particular that $c_{H}-c_{L}<u(c_{H})/u^{\prime }(c_{H}).$
 
 %\bigskip
 
@@ -292,7 +311,16 @@ Each firm observes all its bids and the ability of the associated workers,
 hires the most profitable among these workers, and pays a wage equal to this
 worker's bid. It can choose to reject all bidders.
 
-\textit{Equilibrium:} Let $\mu(m,T)$ denote the equilibrium probability that firms of type $T$ send message $m\in\{H,L\}$ conditional on being selected to send a message. This uniquely determines the probability $\Psi(T|m,s_{1})$ of facing firm type $T$ after observing $(m,s_{1})$, whenever $m$ is played with positive probability. If $m$ is not played with positive probability, $\Psi(\cdot)$ is the off-equilibrium belief that agents hold when a firm sends such a message. Given these beliefs, Bayes' rule generates the joint probability $\Psi(s_{2},T|m,s_{1})$ of the second signal and type, and the conditional belief $\Psi(T|m,s_{1},s_{2})$ after observing all signals.
+\textit{Equilibrium Concept:} Our equilibrium concept follows the literature on large games where each individual's payoff depends on his own actions and the distribution of actions across all other players (e.g., \cite{mas1984theorem} and its applications to directed search in \cite{eeckhout2010sorting} and \cite{peters2010noncontractible}). To summarize the distribution of actions by firms, let $\mu (m,T)$ denote the equilibrium probability
+that firms of type $T$ send message $m\in \{H,L\}$ conditional on being
+selected to send a message. This uniquely determines the probability $\Psi
+(T|m,s_{1})$ of facing firm $T$ after observation $(m,s_{1})$ whenever $m$
+is played with positive probability. If $m$ is not played with positive
+probability, $\Psi (.)$ is a belief that agents hold in case a firm sends
+such a message off-equilibrium. Given such beliefs, Bayes' rule generates
+the joint probability $\Psi (s_{2},T|m,s_{1})$ of the second signal and
+type, and a conditional belief $\Psi (T|m,s_{1},s_{2})$ after observing all
+signals.
 
 The easiest way to sum up the workers' behavior is through the ratio $\Lambda(a,b_{L},b_{H}|m,s_{1})$ of workers with ability weakly above $a$ who will bid weakly above $b_{L}$ after a low second signal and above $b_{H}$ after a high second signal, per job with initial observables $(m,s_{1})$. This is also called the queue length of workers. Sometimes it is useful to focus on the marginal $\Lambda_{a}(a|m,s_{1})$ of workers with ability above $a$ per firm with observable $(m,s_{1}),$ or on the conditional $\Lambda(a,b|m,s_{1},s_{2})$ that provides the ratio of workers with ability-bid above $(a,b)$ to firms with observables $(m,s_{1},s_{2}).$
 
@@ -302,37 +330,58 @@ From the perspective of a firm with type $T$ and observables $(m,s_{1},s_{2})$, 
 \end{equation*}%
 We denote by $\Gamma_{+}(\pi|\cdot)$ the queue of workers that bid strictly more than $\pi$, and by $\bigtriangleup(\pi|m,s_{1},s_{2},T)$ the mass of workers who offer exactly the same profit.\footnote{Formally, $\Gamma_{+}(\pi|m,s_{1},s_{2},T)=\int_{\{a,b|\pi(a,b|T)>\pi\}}d\Lambda(\cdot|m,s_{1},s_{2})$.} We will later rule out the existence of such mass points in equilibrium. The chance that no worker offers a profit weakly above $\pi$ under a Poisson distribution is $\exp(-\Gamma(\pi|\cdot))$, so the chance of having at least one worker who offers such profit is the complement. A firm of type $T$ that sends message $m$ therefore earns expected profit
 \begin{equation}
-\Pi(m|T)=\sum_{s_{1},s_{2}}\psi(s_{1},s_{2}|T)\int_{\pi\geq 0}\pi\,d\left(1-e^{-\Gamma(\pi|m,s_{1},s_{2},T)}\right),
+\Pi (m|T)=\sum_{s_{1},s_{2}}\left[ \psi (s_{1},s_{2}|T)\int_{\pi \geq 
+0,s_{1},s_{2}}\pi d(1-e^{-\Gamma (\pi |m,s_{1},s_{2},T)})\right] ,
 \label{profits}
 \end{equation}%
-where $\psi(s_{1},s_{2}|T)$ denotes the probability of the signal pair given the firm type. Correspondingly, a worker of type $a$ who considers applying to a job with observables $(m,s_{1})$ and plans to bid $b_{L}$ and $b_{H}$ after observing a low or high second signal, respectively, obtains expected utility
+where $\psi(s_{1},s_{2}|T)$ denotes the probability of the signal pair given the firm type. 
+From the perspective of a worker who applies to a job with observables $(m,s_1)$
+and plans to bid $b_L$ and $b_H$ after observing a low or high second signal,
+respectively, the expected utility is
 \begin{equation}
-V(m,s_{1},a,b_{L},b_{H})=\sum_{s_{2},T}\Psi(s_{2},T|m,s_{1})\,e^{-\Gamma_{+}(\pi(a,b_{s_{2}}|T)|m,s_{1},s_{2},T)}M\!\left(\bigtriangleup(\pi(a,b_{s_{2}}|T)|m,s_{1},s_{2},T)\right)b_{s_{2}}\mathbf{1}[\pi(a,b_{s_{2}}|T)\geq 0].
+V(m,s_{1},a,b_{L},b_{H})=\sum_{s_{2},T}\Psi(s_{2},T|m,s_{1})\,b_{s_{2}} \left(
+  e^{-\Gamma_{+}(\pi(a,b_{s_{2}}|T)|m,s_{1},s_{2},T)} \right) .
 \label{value}
-\end{equation}%
-The first factor is the probability of facing signal $s_{2}$ and firm type $T$. The second factor is the probability that no worker offering strictly higher profits is present at this firm. The third factor $M(\bigtriangleup)$ accounts for a mass of other workers with exactly the same offer; it equals $1$ when there are no competing mass points ($\bigtriangleup=0$) and is strictly below $1$ otherwise.\footnote{Conditional on no strictly more profitable bidders being present, the worker is hired with probability $M(\bigtriangleup)=\sum_{k=0}^{\infty}\frac{\bigtriangleup^{k}e^{-\bigtriangleup}}{k!}\cdot\frac{1}{k+1}=\frac{1-e^{-\bigtriangleup}}{\bigtriangleup}$, where the $k$-th term is the probability that $k$ other workers with identical profit are also present ($\frac{\bigtriangleup^{k}e^{-\bigtriangleup}}{k!}$, by Poisson) times the probability that the firm selects this worker from the $k+1$ tied applicants ($\frac{1}{k+1}$). See \cite{burdett_etal2001} and \cite{wright_etal2021} for further references.} The fourth factor $b_{s_{2}}\in\{b_{L},b_{H}\}$ is the wage the worker receives if hired, and the indicator ensures that firms only accept offers generating non-negative profit.
+\end{equation}
+as long as the worker generates weakly positive profits (i.e., $\pi (a,b_{s_2}|T)\geq 0$) and there are no mass points of workers that generate the same profit (i.e., $\bigtriangleup (.|m,s_{1},s_{2},T)=0$).\footnote{
+If the worker generates negative profits firms of type $T$ would not hire this worker. If there is a mass point of workers that generate exactly the same profit (i.e., $\bigtriangleup (\pi
+(a,b_{s_2}|T)|m,s_{1},s_{2},T)=0$ for some $s_2$ and $T$) profits would be strictly lower than in (\ref{value}) because the firm would randomize its hiring among these equally-attractive workers. Online Appendix~\ref{online_app:analysis} gives the exact expression that captures these cases.}
+The first factor is the probability of facing signal $s_{2}$ and firm type $T$;
+the second is the wage the worker collects if hired; the third is the Poisson
+probability that no other worker at the firm generates a strictly higher profit.
+We can now define an equilibrium.
 
 \begin{definition*}[Equilibrium Definition]
-An equilibrium consists of firm behavior, worker behavior, and beliefs $(\mu(\cdot),\Lambda(\cdot),\Psi(\cdot))$ such that
-
-(1) beliefs $\Psi(\cdot)$ are consistent with Bayes' rule given firm behavior $\mu(\cdot)$,
-
-(2) firms maximize profits, so $\Pi(m|T)=\max_{m'}\Pi(m',T)$ whenever $\mu(m,T)>0$, and
-
-(3) workers' decisions to enter and bid are optimal, so $V(m,s_{1},a,b_{L},b_{H})\leq u(a)$ for all $(m,s_{1},a,b_{L},b_{H})$, with equality whenever $(a,b_{L},b_{H})$ is in the support of $\Lambda(\cdot|m,s_{1})$.
+An equilibrium consists of firm behavior, worker behavior, and beliefs
+$(\mu(\cdot),\Lambda(\cdot),\Psi(\cdot))$ such that
+\begin{enumerate}[label={[\arabic*]}]
+\item beliefs $\Psi(\cdot)$ are consistent with Bayes' rule given firm
+behavior $\mu(\cdot)$;
+\item firms maximize profits, so $\Pi(m|T)=\max_{m'}\Pi(m',T)$ whenever
+$\mu(m,T)>0$; and
+\item workers' decisions to enter and bid are optimal, so
+$V(m,s_{1},a,b_{L},b_{H})\leq u(a)$ for all $(m,s_{1},a,b_{L},b_{H})$, with
+equality whenever $(a,b_{L},b_{H})$ is in the support of
+$\Lambda(\cdot|m,s_{1})$.
+\end{enumerate}
 \end{definition*}
 
-The last condition ensures that no job offers returns to workers strictly above their outside option, and that workers who do enter obtain exactly their outside option.
-
-We conclude with the immediate observation that there cannot be meaningful mass points in equilibrium, i.e., mass points in the profits offered to firm types that workers face with non-zero probability. Workers at a mass point face a strictly positive probability that another worker offering the same profit will be hired instead of them. A marginally lower wage bid (i.e., a marginally higher profit for the firm) would have ensured being hired, generating a profitable upward jump in the hiring probability. This rules out mass points as optimal choices for workers and simplifies the notation going forward.
+The last condition ensures that workers obtain their outside option, or else the queue length is zero as no worker would want to join the platform. 
+We conclude with the immediate observation that there cannot be meaningful
+mass points in equilibrium, i.e., mass points at firm types to which workers assign a non-zero probability. 
+Workers at the mass point have strictly positive probability that another worker that generates the same profit for the firm gets hired instead of them. 
+A marginally lower wage bid (i.e., a marginally higher profit for the firm) would have ensured being hired, inducing a profitable upward jump in the hiring probability. This rules out that mass points can be optimal for workers, simplifying the notation going forward.
 
 \begin{lemma*}
-\label{no-mass-point-lemma}There are no meaningful mass points in
-equilibrium, i.e., $\bigtriangleup (\pi |m,s_{1},s_{2},T)=0$ for all $\pi
-\geq 0$ and all $(m,s_{1},s_{2},T)$ with $\Psi (s_{2},T|m,s_{1})>0$.
+\label{no-mass-point-lemma}
+There are no meaningful mass points in equilibrium, i.e.,
+$\bigtriangleup(\pi|m,s_1,s_2,T)=0$ for all $\pi\geq 0$ and all
+$(m,s_1,s_2,T)$ with $\Psi(s_2,T|m,s_1)>0$.
 \end{lemma*}
 
-Proof: See Appendix \ref{online_app:analysis}.
+\noindent Proof: See Online Appendix~\ref{online_app:analysis}.
+
+
 
 \bigskip
 
@@ -592,7 +641,7 @@ Proof: Follows directly from (\ref{wages-general}).$\square $
 
 For a given firm type, the identity of the lowest worker type matters. This worker type extracts all surplus, and workers slightly above the lowest type still extract nearly all surplus. Firms therefore retain surplus — and thus face low wages — only for workers sufficiently far above the lowest worker, with wages falling in this distance. In our context this means that a given firm faces lower wages the lower $\underline{a}_{s_{1}}$. This is lowest for low-message firms, higher for low-signal firms, higher still for high-signal firms, and highest for high-message firms. So, comparing a high-type firm that sends a truthful message with a high-type firm that cannot send a message, for any given worker the wage demand is slightly lower at the no-message firm in the event of a high first signal, and substantially lower in the event of a low first signal. Conversely, comparing a low-type firm that can send a truthful message with a low-type firm that cannot, for any given worker the wage demand is slightly higher at the no-message firm in the event of a low first signal, and substantially higher in the event of a high first signal. Thus wages rise at high-type firms when they can send a message and fall at low-type firms.
 
-The next proposition collects these insights:
+The next proposition collects these insights, and provides the predictions which will guide our investigation in the empirical exercise which follows:
 
 \begin{prop}
 \label{comparison1} The following compares firms that engage in truthful
@@ -612,9 +661,6 @@ cheap-talk with otherwise identical counterparts that cannot.
 Proof: Parts 1 and 3 follow directly from Corollaries~\ref{corollary} and~\ref{corollary 2}. For parts 2 and 4 see Appendix~\ref{online_app:analysis}. Intuitively, the effect on the number of applicants is ambiguous because cheap talk shifts both the upper and lower bounds of the types that approach a firm, and which shift is larger depends on parameters. For the surplus result, note that the equilibrium implements the planner's allocation given the information frictions, but the planner can assign worker types in a more targeted way when he has more information about the firm type.$\square$
 
 \bigskip
-
-This central proposition provides the predictions which will guide our
-investigation in the empirical exercise which follows. 
 
 To conclude the theoretical section, it is worth noting
 that our entire exposition was built around the notion that firms send truthful messages. If low firm types would pretend to be high types, they would attract better workers, but each of these workers would also raise their wage. We show in Proposition \ref{prop:incentive_compat} in Appendix \ref{online_app:analysis} that sufficient differences in valuations indeed imply the
@@ -1251,6 +1297,34 @@ Essentially any feature of the economic relationship for which buyers and seller
 
 
 \section{Proofs and Analytic Derivations} \label{online_app:analysis}
+
+
+\subsection{General expression for the worker value function}
+
+Expression~(\ref{value}) in the main text assumes that the worker generates
+weakly positive profits and that there is no mass point in the distribution
+of profits. In general,
+\begin{align}
+&V(m,s_{1},a,b_{L},b_{H}) \label{value1} \\   &=\sum_{s_{2},T}\Psi (s_{2},T|m,s_{1})b_{s_{2}}\left( e^{-\Gamma
+_{+}(\pi (a,b_{s_2}|T)|m,s_{1},s_{2},T)} \right) \mathbf{1}[\pi (a,b_{s_2})|T)\geq 0] \, M(\bigtriangleup (\pi
+(a,b|T)|m,s_{1},s_{2},T)). \notag 
+\end{align}
+The first three factors inside the summation are unchanged with respect to (\ref{value}). The forth factor comprises an indicator function that takes the value of one if the argument is true and zero otherwise, capturing the fact that the worker only gets hires and generates non-zero expected payoff if his bid generates non-negative profits (otherwise the worker would not be hired). In the presence of mass points the worker not only has to worry about other workers who generate strictly higher profits for the firm, but also about workers who generate exactly the same profits. If such workers are present, then one of them gets selected at random. The final factor $M(\bigtriangleup )$ captures the probability that this worker is hired rather than any worker generating exactly the same profit. It is
+strictly below 1 if there is a mass of competitors ($\bigtriangleup >0$) and is exactly 1 otherwise, and is constructed as follows.
+
+
+The probability $M(\bigtriangleup )$ consists of several elements:
+probability $e^{-\bigtriangleup }$ that no worker with equal profit is
+present, the probability $\bigtriangleup e^{-\bigtriangleup }\frac{1}{2}$
+that exactly one other worker with equal profit is present, but the other
+worker is not chosen, the probability $\frac{\bigtriangleup
+^{2}e^{-\bigtriangleup }}{2}\frac{1}{3}$ that two other workers with equal
+profit is present, but the other workers are not chosen, and so forth. The probability
+of being hired (conditional on no strictly more profitable bidders) is then
+the infinite sum $M(\bigtriangleup )=\sum_{k=0}^{\infty }\frac{\bigtriangleup
+^{k}e^{-\bigtriangleup }}{k!}\frac{1}{k+1}=\frac{1-e^{-\bigtriangleup }}{%
+\bigtriangleup }.$
+See \cite{burdett_etal2001} and \cite{wright_etal2021} for further references. \\
 
 
 \textit{Proof of Lemma%\ref{no-mass-point-lemma}
@@ -1902,7 +1976,7 @@ information is transmitted.
 
 \bigskip
 
-\textit{More general production functions}: Our production function is
+\textit{More general production functions}:\label{online_app:general_production} Our production function is
 special case of concave production function $\phi (a,T)$ that describes the
 output of a worker of type $a$ at a firm of type $T.$ Similar steps as in
 the main body yield in analogy to (\ref{equilibrium density}) that $\lambda
