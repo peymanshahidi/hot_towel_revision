@@ -254,7 +254,12 @@ Although the sorting between workers and jobs that can both be ordered along one
 
 \section{A Model of Cheap Talk in a Directed Search Labor Market} \label{sec:theory}
 
-[Intro needs a rewrite.]
+We first present a stylized model of a labor market that captures some of the salient features in our experimental setting. The salient features we have in mind are: (1) workers can see a large number of employment options on an online platform; they have to select a small number (in the model, just one) to apply for work and include a wage demand. The feature that those who supply labor make a wage demand is a pervasive feature of the gig economy (common to the biggest platforms like Taskrabbit, Upwork, Fiverr, Freelancer, etc.), maybe because this is easier than for the employer to post a skill-dependent wage schedule.\footnote{In markets where skills are important the wage possibly become a possibly non-linear function of ability---as in the wage-schedule-posting model of \cite{shimer_2005}. If a skill-dependent wage schedule is too complicated, employers might resort to posting a rather broad wage interval as is common to many traditional labor markets, but does not allow a quick wage resolution that is desired in the gig economy.} (2) For a platform to attract workers it has to offer expected benefits that at least meet the expected utility that workers can obtain elsewhere off- or on-line. (3) Employers on the platform select the applicant they like best and pay the wage demanded.
+Worker differ in ability and associated wage demands, and jobs differ in how much they benefit from a more able worker.
+(4) Job openings have text that entails a signal about the job and how much it relies on high ability, but this information is not codified and is hard to search. Cheap talk is explicitly introduced by asking employers to choose one from a discrete set of options in the spirit of ``looking for the highest ability even at high wages'' or ``looking to pay lowest wages, with less concern for ability'', which are codified and easy for workers to search over. 
+
+The theory is intended to capture these features in a simple way but does not attempt to provide the largest theoretical generality.
+Rather, we aim for tractability to help organize our thoughts regarding the kind of analysis and results we might expect to find in the experimental setting where cheap talk is or is not facilitated. The key insights are collected in our main proposition (Proposition \ref{comparison1}). For our derivations, we assume that the researcher can observe the true type of the firm, even though in the model this is the firms' private information that workers need to infer through cheap talk or signals. The subsequent experimental setting uses several treatment arms to achieve this. We next lay out the market environment in full detail, followed by our main proposition and an intuitive discussion of the driving forces behind it. The deeper mathematical details are provided in the Online Appendix.
 
 \subsection{Setup}\label{sec:setup}
 
@@ -437,7 +442,7 @@ The left-hand side follows from differentiating (\ref{value-profit-truth}) with 
 \lambda (a|m)e^{-\Lambda (a|m)}v_{m}=u^{\prime \prime }(a)
 \label{second derivative}
 \end{equation}%
-where $\lambda (a|m)=-d\Lambda (a|m)/da$ is akin to a "density" of type $a$
+where $\lambda (a|m)=-d\Lambda (a|m)/da$ is akin to a ``density'' of type $a$
 workers queueing at this message. Dividing this by (\ref{first derivative})
 yields 
 \begin{equation}
@@ -477,9 +482,9 @@ b_{m}(\underline{a}_{m})=v_{m}[\underline{a}_{m}-c_{m}]
 determines the wage bids uniquely. To sum up:
 
 \begin{prop}
-\label{equilibrium-characterization}\label{workers}Under truthful cheap talk, the interval of worker types $[\underline{a}_{m},\bar{a}_{m}]$ that approach message $m\in\{L,H\}$ and the queue $\Lambda(a|m)$ are fully determined by (\ref{equilibrium density})--(\ref{equilibrium lowest type}), and the wages they ask for are fully determined by (\ref{wages}) and (\ref{wages boundary}). On $[\underline{a}_{m},\bar{a}_{m}]$, the wages for such a firm with arbitrary $v_{m}$ and $c_{m}$ can be expressed relative to the wages $b_{1}(\cdot)$ of a ``normalized'' firm with valuation $v=1$ and cost $c=0$ (so that the lowest-type ability equals $0$) according to
+\label{equilibrium-characterization}\label{workers}Under truthful cheap talk, the interval of worker types $[\underline{a}_{m},\bar{a}_{m}]$ that approach message $m\in\{L,H\}$ and the queue $\Lambda(a|m)$ are fully determined by (\ref{equilibrium density})--(\ref{equilibrium lowest type}), and the wages they ask for are fully determined by (\ref{wages}) and (\ref{wages boundary}). On $[\underline{a}_{m},\bar{a}_{m}]$, the wages for such a firm with arbitrary $v_{m}$ and $c_{m}$ can be expressed relative to the wages $B(\cdot)$ of a ``normalized'' firm with valuation $v=1$ and cost $c=0$ (so that the lowest-type ability equals $0$) according to
 \begin{equation}
-b_{m}(a)=v_{m}[b_{1}(a)-b_{1}(\underline{a}_{m})+\underline{a}_{m}-c_{m}].
+b_{m}(a)=v_{m}[B(a)-B(\underline{a}_{m})+\underline{a}_{m}-c_{m}].
 \label{bidding1}
 \end{equation}
 \end{prop}
@@ -534,7 +539,7 @@ induce belief $\Psi =\Psi (L|s_{1}).$ The interval of worker types $[%
 by $v_{\Psi }$ and for the cost one uses $c_{\Psi }.$ After the second
 signal $s_{2}$ these workers bid according to%
 \begin{equation}
-b_{s_{2}}(a)=v_{s_{2}}[b_{1}(a)-b_{1}(\underline{a}_{s_{1}})+\underline{a}%
+b_{s_{2}}(a)=v_{s_{2}}[B(a)-B(\underline{a}_{s_{1}})+\underline{a}%
 _{s_{1}}-c_{s_{2}}].  \label{wages-general}
 \end{equation}
 \end{prop}
@@ -544,11 +549,11 @@ Proof idea: The key challenge is to prove that workers who approach a firm will 
 Regarding the wage equation, it is worth noting that the wage conditions on the true valuation and cost $(v_{s_{2}},c_{s_{2}})$ revealed through the second signal, but the lowest type $\underline{a}_{\Psi}$ who extracts all surplus remains the one that expects average quality. This is because the decision of which firms to study in detail is made when the worker has less information.
 
 
-\subsection{Comparing Markets With and Without Cheap Talk}
+\subsection{Comparing Firms With and Without Messages}
 
 \bigskip
 
-\textit{Comparing firms with and without messages:} To understand the empirical implications of the results, we now compare firms. For this, we assume that the empiricist has elicited the true firm type for both the firms that send messages and those that do not. There are many ways to achieve this, and in reality the message can take many forms. For example, one could ask firms a fictitious question: Do you prefer (``rookie'', \$) or (``expert'', \$\$\$)? Firms might interpret this as a choice between two combinations of ability and wage bid, $(a_{1},b_{1})$ or $(a_{2},b_{2})$ with $a_{1}<a_{2}$ and $b_{1}<b_{2}$. If there are no consequences to the question, firms might simply pick the option that would generate more profit; if two firms choose differently, then the $L$ type chooses the first and the $H$ type the second, so the answer to the question reveals the type. In the empirical implementation we carefully discuss how we make firms comparable.
+To understand the empirical implications of the results, we now compare firms. For this, we assume that the empiricist has elicited the true firm type for both the firms that send messages and those that do not. There are many ways to achieve this, and in reality the message can take many forms. For example, one could ask firms a fictitious question: Do you prefer (``rookie'', \$) or (``expert'', \$\$\$)? Firms might interpret this as a choice between two combinations of ability and wage bid, $(a_{1},b_{1})$ or $(a_{2},b_{2})$ with $a_{1}<a_{2}$ and $b_{1}<b_{2}$. If there are no consequences to the question, firms might simply pick the option that would generate more profit; if two firms choose differently, then the $L$ type chooses the first and the $H$ type the second, so the answer to the question reveals the type. In the empirical implementation we carefully discuss how we make firms comparable.
 
 To compare firms, it is useful to study the comparative statics on the types of workers who approach these firms and on their bidding. The worker types are governed by the valuation $v$ and cost $c$, which equal the true type for firms with truthful messages and equal the average (interim) type after workers have observed the first signal for firms without messages.
 
@@ -582,7 +587,7 @@ firms. It is easiest to explain by thinking about two separate markets.
 Panel A illustrates a market where firms can send messages, and do so
 truthfully. In this market, the lowest type workers only approach low
 message firms because the ability threshold $c_{H}$ at high firms is too
-high. Workers with intermediate ability choose "as if" at random between
+high. Workers with intermediate ability choose ``as if'' at random between
 firms at both messages. Here $a^{\prime }=\bar{a}_{m=L}$ and $a^{\prime
 \prime }=\underline{a}_{m=H},$ so that the interval between indicates the
 overlap between $[\underline{a}_{m=L},\bar{a}_{m=L}]$ and $[\underline{a}%
@@ -668,13 +673,6 @@ existence of an equilibrium with truthful cheap talk. As in
 many cheap-talk games, this is generally not the case when payoffs of high
 and low types are very close together, as we also show in Proposition \ref{prop:incentive_compat}. Comfortingly, we can not only investigate proxies for truth-telling in the empirical exercise, but part 2 of Proposition \ref{comparison1} also entails distinct testable implications for low vs high differences in valuations that can be confronted with data. We relegate to Appendix \ref{online_app:robustness} a further discuss of robustness of our theory along three dimensions: (1) Also in partially revealing equilibria firms with messages inherit the same comparative statics outlined in Proposition \ref{comparison1} relative firms without messages. (2) Despite the precision-assumption of the second signal it is intended to approximate environments where some noise remains after seeing all signals. (3) Our environment extends to other production functions, including those that are strictly log-supermodular between $a$ and $v$, where differences in costs between firms are not needed to induce workers with low abilities to avoid high value firms. 
 
-
-
-\bigskip
-
-\newpage
-
-\appendix
 
 \section{Empirical Context} \label{sec:empirical_context}
 
@@ -1669,7 +1667,7 @@ straightforward. At a given first signal $s$ and a second signal that
 reveals type $T,$ the wages are given by a differential equation identical
 to (\ref{wages})%
 \begin{equation}
-b_{T}^{\prime }(a|T,s)=v_{T}b_{1}^{\prime }(a).  \label{wages2}
+b_{T}^{\prime }(a|T,s)=v_{T}B^{\prime }(a).  \label{wages2}
 \end{equation}
 
 The lowest worker type $\underline{a}_{s}$ that approaches message $s$ can
@@ -1971,7 +1969,7 @@ approximation to the setting where signals are not fully revealing. It also
 highlights the value of our empirical setting: it is not obvious that
 allowing for cheap-talk will increase market information, as this would fail
 under different informational assumptions, and off course under different
-equilibria such as the well-known "babbling" equilibrium where no
+equilibria such as the well-known ``babbling'' equilibrium where no
 information is transmitted.
 
 \bigskip
@@ -1988,7 +1986,7 @@ endpoint continues to be higher for higher firm types if $\phi $ is
 supermodular in $a$ and $T,$ which was assured in our baseline
 specification. The queue length $\lambda _{m}(a)$ was independent of $m$ in
 our baseline specification, which made the setup particularly tractable as
-it implied that workers choose among firms "as if" at random. From the
+it implied that workers choose among firms ``as if'' at random. From the
 earlier equation it is apparent that this only continues to apply more
 generally if the semi-elasticity of $\phi _{a}$ with respect to worker
 ability is independent of $m,$ as is the case for example for production $%
