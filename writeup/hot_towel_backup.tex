@@ -292,7 +292,7 @@ too large, and in particular that $c_{H}-c_{L}<u(c_{H})/u^{\prime }(c_{H}).$
 
 %\bigskip
 
-\textit{Market Interaction and Timing}: With i.i.d.\ probability $\rho$, each firm $i$ is asked to choose a message $m_{i}\in\{L,H\}$, where the binary message space is without loss of generality given that there are only two types of firms. With probability $1-\rho$ the firm cannot send a message, which we denote by $m_{i}=\emptyset$. For notational convenience let $M=\{\emptyset,L,H\}$. Each firm also generates two signals $s_{1,i},s_{2,i}\in\{L,H\}$, drawn i.i.d.\ conditional on the true firm type $T_{i}$, matching that type with probabilities $\psi_{1}$ and $\psi_{2}$ respectively (both exceeding one-half). Workers observe the first signal easily, but it is noisy; the second is obtained only after careful reading of the job description and is extremely precise ($\psi_{2}$ close to $1$). Under truthful cheap talk these signals play no role, but they let workers condition their search and bids when cheap talk is absent or uninformative. The role of the second signal — and the reason we can often take $\psi_{2}\to 1$ as a simplifying limit — is discussed in more detail in Appendix~\ref{online_app:robustness}.
+\textit{Market Interaction and Timing}: With i.i.d.\ probability $\rho$, each firm $i$ is asked to choose a message $m_{i}\in\{L,H\}$, where the binary message space is without loss of generality given that there are only two types of firms. With probability $1-\rho$ the firm cannot send a message, which we denote by $m_{i}=\emptyset$. For notational convenience let $M=\{\emptyset,L,H\}$. Each firm also generates two signals $s_{1,i},s_{2,i}\in\{L,H\}$, drawn i.i.d.\ conditional on the true firm type $T_{i}$, matching that type with probabilities $\psi_{1}$ and $\psi_{2}$ respectively (both exceeding one-half). Workers observe the first signal easily, but it is noisy; the second is obtained only after careful reading of the job description and is extremely precise ($\psi_{2}$ close to $1$). Under truthful cheap talk these signals play no role, but they let workers condition their search and bids when cheap talk is absent or uninformative. The role of the second signal — and the reason we can often take $\psi_{2}\to 1$ as a simplifying limit — is discussed in more detail in Appendix~\ref{online_app:imprecise_second_signal}.
 
 Workers decide whether to enter. Those who enter observe the joint distribution of
 messages and first signals, and choose a job announcement with desired
@@ -501,7 +501,7 @@ be in a different market where cheap-talk is impossible (i.e., $\rho =0)$,
 or they could be in the same market as the firms that can send messages
 (i.e., $0<\rho <1).$ Workers can only rely on the signals about these firms
 when they decide which firm to approach and which wage bid to place. For
-ease of analysis, we assume that the second signal is perfectly revealing ($\psi_{2}=1$), which lets us leverage the derivations developed under truthful cheap talk. This assumption can be relaxed: by continuity, the insights of this section hold when the second signal is sufficiently but not perfectly precise, and we discuss the role of this assumption in more detail in Appendix~\ref{online_app:robustness}.
+ease of analysis, we assume that the second signal is perfectly revealing ($\psi_{2}=1$), which lets us leverage the derivations developed under truthful cheap talk. This assumption can be relaxed: by continuity, the insights of this section hold when the second signal is sufficiently but not perfectly precise, and we discuss the role of this assumption in more detail in Appendix~\ref{online_app:imprecise_second_signal}.
 
 Now consider workers who see signal $s_{1}$ and believe that the fraction of
 low firms at this signal is $\Psi (L|s_{1})$ where we suppressed the message
@@ -665,7 +665,7 @@ The basic trade-off is the following. A low-type firm that deviates from the can
 
 \noindent Proof: See Appendix~\ref{online_app:analysis}.$\square$\bigskip
 
-Proposition~\ref{prop:incentive_compat} shows that incentives for truth-telling are present in some situations, but they are not guaranteed in all situations. Beyond sufficient differences in firm types, incentives for truth-telling also rely on the presence of the second signal. We discuss both the extension to a broader class of production functions and the role of the second signal for incentive compatibility in Appendix~\ref{online_app:robustness}. Reassuringly, we do not have to speculate on truth-telling: the empirical exercise directly investigates proxies for it, and part 2 of Proposition~\ref{comparison1} delivers testable implications that distinguish truth-telling from alternatives by exploiting differences in valuations between high- and low-type firms.
+Proposition~\ref{prop:incentive_compat} shows that incentives for truth-telling are present in some situations, but they are not guaranteed in all situations. Beyond sufficient differences in firm types, incentives for truth-telling also rely on the presence of the second signal; we discuss the role of the second signal for incentive compatibility in Appendix~\ref{online_app:imprecise_second_signal}, and the extension to a broader class of production functions in Appendix~\ref{online_app:robustness}. Reassuringly, we do not have to speculate on truth-telling: the empirical exercise directly investigates proxies for it, and part 2 of Proposition~\ref{comparison1} delivers testable implications that distinguish truth-telling from alternatives by exploiting differences in valuations between high- and low-type firms.
 
 Moreover, our main comparison insights do not rely on perfect type revelation; they apply even to partially revealing equilibria:
 
@@ -673,7 +673,7 @@ Moreover, our main comparison insights do not rely on perfect type revelation; t
 \label{cor:partially_revealing}For any partially revealing equilibrium in which messages carry some information (i.e., $\Psi(T|L,s_{1}) \neq \Psi(T|H,s_{1})$), the comparison of firms with and without messages is characterized by parts (1)--(5) of Proposition~\ref{comparison1}.
 \end{corollary}
 
-\noindent Proof: Parts 1--3 of Proposition~\ref{comparison1} rest on comparative statics that apply just as well to averaged valuations and costs, so they continue to hold — see Appendix~\ref{online_app:robustness}. Part 4 remains valid because workers continue to direct their search and equate market payoffs to their outside option, so the efficiency argument proceeds in analogous steps as in the fully revealing case. Part 5 likewise carries over because block-recursivity only relies on workers directing their search and equating their market payoff to their outside option at each $(m,s_{1})$, which does not depend on whether messages fully or partially reveal type.$\square$\bigskip
+\noindent Proof: Parts 1--3 of Proposition~\ref{comparison1} rest on comparative statics that apply just as well to averaged valuations and costs, so they continue to hold — see Appendix~\ref{online_app:partially_revealing_eq}. Part 4 remains valid because workers continue to direct their search and equate market payoffs to their outside option, so the efficiency argument proceeds in analogous steps as in the fully revealing case. Part 5 likewise carries over because block-recursivity only relies on workers directing their search and equating their market payoff to their outside option at each $(m,s_{1})$, which does not depend on whether messages fully or partially reveal type.$\square$\bigskip
 
 Any equilibrium in which messages transmit some information therefore shares the same qualitative empirical implications as the fully revealing equilibrium discussed in Proposition~\ref{comparison1}. This arises because these implications depend primarily on comparative statics involving averaged valuations and costs.
 
@@ -1917,7 +1917,60 @@ We omit the generic failure of truth-telling when types are very close together 
 
 
 
-\section{Short Discussion of Model Features and Robustness}
+\subsection{Discussion of the Role of Imprecise Second Signals}
+\label{online_app:imprecise_second_signal} 
+
+When we establish incentive compatibility in Proposition \ref{prop:incentive_compat} we use the limit formulation with perfect second signals, but establish that incentives for truth-telling are strict when valuations are far enough apart, and because of convergence (as shown in Online Appendix \ref{online_app:second_signal}) this carries over to settings with imprecise second signals as long as the second signal is sufficiently precise. The limit results are useful because they allow us to take averages, which makes the derivations under signals (which are imperfect initially) and truthful messages (which reveal types perfectly right away) comparable and allows for relatively simple comparative statics. 
+
+While our results carry over when signals are sufficiently precise, it is worth discussing why we rather think of them as being imprecise and use the limit only for mathematical convenience. The reason becomes apparent when one considers what happens if there is no second signal and workers simply know the true firm type at that point. This does change incentive compatibility for the following reason: our current setup studies truthful cheap talk, and if an $L$-firm deviated and sends message $m=H$ then workers believe that this is an $H$-firm (as only these send such messages in equilibrium) and approach and bid at such firms as if it is an $H$-firm. The deviant firm would attract better workers but these would demand higher wages. If workers were to learn the actual firm type through the second message, low type firm that
+mis-represents its type could attract more applicants, but these would
+learn the firm's type and then bid low. One can show that truth-telling in this
+setting would not be sustained. So our formulation is best viewed as an
+approximation to the setting where signals are not fully revealing. It also
+highlights the value of our empirical setting: it is not obvious that
+allowing for cheap-talk will increase market information, as this would fail
+under different informational assumptions, and off course under different
+equilibria such as the well-known ``babbling'' equilibrium where no
+information is transmitted.
+
+
+
+
+
+\subsection{Partially Revealing Equilibria}
+\label{online_app:partially_revealing_eq}
+
+Truthful cheap talk is not the only
+equilibrium in cheap-talk games, even if such equilibria exists. It is
+well-known that there always exists a babbling equilibrium where receivers
+disregard the messages because senders have chosen them at random. Whether
+parameters admit a truthful equilibrium or not, there also often exist
+partially revealing equilibrium where some additional information is
+transmitted, but not all types are perfectly revealed. Here we briefly point
+out that if a cheap-talk intervention displays any effect, it must be linked
+to some information transmission. We show here that all equilibria where
+cheap-talk reveals some additional information inherit the same broad
+empirical implications: Part 1, 2 and 4 of Proposition \ref{comparison1} and the Corollaries \ref%
+{corollary} and \ref{corollary 2} that lead up to it are based around
+comparative statics. Less information essentially acts to average the
+valuation and the costs. The base model does it for the extreme case of
+starting with perfect information revelation, but the comparative statics
+hold similarly when messages are only partially informative.\footnote{%
+Parts 1, 3 and 4 of Proposition Proposition \ref{comparison1} rely on
+comparative statics and carry over to partially informative equilibria. In
+contrast, Part 2 of Proposition \ref{comparison1} uses a limit argument for
+the the size of the high valuation, holding the amount of information that
+is conveyed constant. The approach to the proof extends if there is a lower
+bound on the information that a partially informative equilibrium conveys
+about firms, but the technique of the proof does not extend if the amount of
+information goes to zero as the valuation of the high type firm becomes
+large.}
+
+
+
+
+
+\section{Model Extensions: General Production Functions}
 \label{online_app:robustness}
 
 This section briefly discusses an extension from Online Appendix~\ref{online_app:analysis} to more general production functions. We outline conditions under which comparative statics and incentive compatibility results similar to those in the main paper still hold.
@@ -2028,59 +2081,6 @@ Since the bid-equation at the high message becomes increasingly steep with highe
 For high type firms, the benefit of sending a high message is that  of trading with an ever-expanding set of trading partners (as $H$ increases the upper bounded increases to infinity and the set of active abilities has to increase to infinity as well as otherwise the lower end-point condition could not be satisfied). Trading with ever-larger set of types become eventually more profitable than deviating and trading with the fixed set $\left[\underline{a}_L,\bar{a}_L\right]$. This establishes incentive compatibility for both types when $H$ is sufficiently large. 
 
 \bigskip
-
-
-\subsection{Discussion of the Role of Imprecise Second Signals}
-\label{online_app:imprecise_second_signal} 
-
-When we establish incentive compatibility in Proposition \ref{prop:incentive_compat} we use the limit formulation with perfect second signals, but establish that incentives for truth-telling are strict when valuations are far enough apart, and because of convergence (as shown in Online Appendix \ref{online_app:second_signal}) this carries over to settings with imprecise second signals as long as the second signal is sufficiently precise. The limit results are useful because they allow us to take averages, which makes the derivations under signals (which are imperfect initially) and truthful messages (which reveal types perfectly right away) comparable and allows for relatively simple comparative statics. 
-
-While our results carry over when signals are sufficiently precise, it is worth discussing why we rather think of them as being imprecise and use the limit only for mathematical convenience. The reason becomes apparent when one considers what happens if there is no second signal and workers simply know the true firm type at that point. This does change incentive compatibility for the following reason: our current setup studies truthful cheap talk, and if an $L$-firm deviated and sends message $m=H$ then workers believe that this is an $H$-firm (as only these send such messages in equilibrium) and approach and bid at such firms as if it is an $H$-firm. The deviant firm would attract better workers but these would demand higher wages. If workers were to learn the actual firm type through the second message, low type firm that
-mis-represents its type could attract more applicants, but these would
-learn the firm's type and then bid low. One can show that truth-telling in this
-setting would not be sustained. So our formulation is best viewed as an
-approximation to the setting where signals are not fully revealing. It also
-highlights the value of our empirical setting: it is not obvious that
-allowing for cheap-talk will increase market information, as this would fail
-under different informational assumptions, and off course under different
-equilibria such as the well-known ``babbling'' equilibrium where no
-information is transmitted.
-
-
-
-
-
-\subsection{Partially Revealing Equilibria}
-\label{online_app:partially_revealing_eq}
-
-Truthful cheap talk is not the only
-equilibrium in cheap-talk games, even if such equilibria exists. It is
-well-known that there always exists a babbling equilibrium where receivers
-disregard the messages because senders have chosen them at random. Whether
-parameters admit a truthful equilibrium or not, there also often exist
-partially revealing equilibrium where some additional information is
-transmitted, but not all types are perfectly revealed. Here we briefly point
-out that if a cheap-talk intervention displays any effect, it must be linked
-to some information transmission. We show here that all equilibria where
-cheap-talk reveals some additional information inherit the same broad
-empirical implications: Part 1, 2 and 4 of Proposition \ref{comparison1} and the Corollaries \ref%
-{corollary} and \ref{corollary 2} that lead up to it are based around
-comparative statics. Less information essentially acts to average the
-valuation and the costs. The base model does it for the extreme case of
-starting with perfect information revelation, but the comparative statics
-hold similarly when messages are only partially informative.\footnote{%
-Parts 1, 3 and 4 of Proposition Proposition \ref{comparison1} rely on
-comparative statics and carry over to partially informative equilibria. In
-contrast, Part 2 of Proposition \ref{comparison1} uses a limit argument for
-the the size of the high valuation, holding the amount of information that
-is conveyed constant. The approach to the proof extends if there is a lower
-bound on the information that a partially informative equilibrium conveys
-about firms, but the technique of the proof does not extend if the amount of
-information goes to zero as the valuation of the high type firm becomes
-large.}
-
-
-
 
 
 \section{Empirical Appendix}
