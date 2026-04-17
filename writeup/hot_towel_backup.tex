@@ -1699,26 +1699,7 @@ that allows for selection based on some information even without signals.}
 \frac{b(a)}{\sum\nolimits_{T}\lambda (a)\Psi (T)/(v_{T}-b^{\prime }(a))} =1.
 \]
 
-This converges to the differential equation in (\ref{wages}) when $\Psi
-(T)\longrightarrow 1$, as do the associated endpoint conditions. Working in
-the limit is easier as the expected bid of a worker after the first signal
-is simply the weighted average of the bids after the second signal, while
-the aggregation is much more cumbersome if uncertainty remains even after
-the second signal. This begs the question how workers interpret the signal
-after a truthful message. We assume here that they do not rely on the second
-signal if they believe the second signal to be truthful. This does matter
-for the incentives of firms to mis-represente their types. In particular,
-for low type firms who pretend to be high types this induces high wage
-demands. If workers were to learn the actual firm type, low type firms that
-mis-represented their type could attract more applicants, but these would
-learn their type and then bid low. One can show that truth-telling in this
-setting would not be sustained. So our formulation is best viewed as an
-approximation to the setting where signals are not fully revealing. It also
-highlights the value of our empirical setting: it is not obvious that
-allowing for cheap-talk will increase market information, as this would fail
-under different informational assumptions, and off course under different
-equilibria such as the well-known ``babbling'' equilibrium where no
-information is transmitted.
+This converges to the differential equation in (\ref{wages}) when $\Psi(T)\longrightarrow 1$, as do the associated endpoint conditions. Working in the limit is easier as the expected bid of a worker after the first signal is simply the weighted average of the bids after the second signal, while the aggregation is much more cumbersome if uncertainty remains even after the second signal. For this reason, we carry out the incentive compatibility proof below in the $\psi_{2}\to 1$ limit; by the convergence just established, the conclusion carries over to settings where the second signal is imprecise but sufficiently precise. We return to the conceptual question of how to interpret the second signal — in particular, why we think of it as imprecise rather than literally precise — in Appendix~\ref{online_app:imprecise_second_signal}.
 
 \bigskip
 
@@ -1918,20 +1899,11 @@ We omit the generic failure of truth-telling when types are very close together 
 
 
 \subsection{Discussion of the Role of Imprecise Second Signals}
-\label{online_app:imprecise_second_signal} 
+\label{online_app:imprecise_second_signal}
 
-When we establish incentive compatibility in Proposition \ref{prop:incentive_compat} we use the limit formulation with perfect second signals, but establish that incentives for truth-telling are strict when valuations are far enough apart, and because of convergence (as shown in Online Appendix \ref{online_app:second_signal}) this carries over to settings with imprecise second signals as long as the second signal is sufficiently precise. The limit results are useful because they allow us to take averages, which makes the derivations under signals (which are imperfect initially) and truthful messages (which reveal types perfectly right away) comparable and allows for relatively simple comparative statics. 
+As shown in Appendix~\ref{online_app:second_signal}, the incentive-compatibility result in Proposition~\ref{prop:incentive_compat} is derived in the $\psi_{2}\to 1$ limit, and the convergence argument there extends the conclusion to sufficiently precise but imprecise second signals. Here we explain why, conceptually, we view the second signal as imprecise rather than literally precise, even though the precise limit is what we use for computation.
 
-While our results carry over when signals are sufficiently precise, it is worth discussing why we rather think of them as being imprecise and use the limit only for mathematical convenience. The reason becomes apparent when one considers what happens if there is no second signal and workers simply know the true firm type at that point. This does change incentive compatibility for the following reason: our current setup studies truthful cheap talk, and if an $L$-firm deviated and sends message $m=H$ then workers believe that this is an $H$-firm (as only these send such messages in equilibrium) and approach and bid at such firms as if it is an $H$-firm. The deviant firm would attract better workers but these would demand higher wages. If workers were to learn the actual firm type through the second message, low type firm that
-mis-represents its type could attract more applicants, but these would
-learn the firm's type and then bid low. One can show that truth-telling in this
-setting would not be sustained. So our formulation is best viewed as an
-approximation to the setting where signals are not fully revealing. It also
-highlights the value of our empirical setting: it is not obvious that
-allowing for cheap-talk will increase market information, as this would fail
-under different informational assumptions, and off course under different
-equilibria such as the well-known ``babbling'' equilibrium where no
-information is transmitted.
+The reason becomes apparent when one considers what would happen if there were no second signal and workers simply knew the true firm type at the bidding stage. This changes incentive compatibility for the following reason: our setup studies truthful cheap talk, so if an $L$-firm deviates and sends message $m=H$, workers believe they face an $H$-firm (only $H$-types send that message on the equilibrium path) and approach and bid at such firms accordingly. The deviant firm would attract better workers, but these workers would demand higher wages. If workers could instead learn the actual firm type at the bidding stage, the deviating low-type firm could still attract more applicants but these workers would then bid low — and truth-telling in this setting would not be sustained. So our formulation with a near-perfect second signal is best viewed as an approximation to the setting where signals are not fully revealing. This also highlights the value of our empirical setting: it is not obvious that allowing for cheap talk will increase market information, since it fails under different informational assumptions — and, of course, under different equilibria, such as the well-known ``babbling'' equilibrium in which no information is transmitted.
 
 
 
