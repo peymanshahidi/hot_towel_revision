@@ -1297,7 +1297,7 @@ Essentially any feature of the economic relationship for which buyers and seller
 \section{Proofs and Analytic Derivations} \label{online_app:analysis}
 
 
-\subsection{General expression for the worker value function}
+\subsection{General Expression for the Worker Value Function and Proof of Lemma~\ref{no-mass-point-lemma}}
 
 Expression~(\ref{value}) in the main text assumes that the worker generates
 weakly positive profits and that there is no mass point in the distribution
@@ -1325,8 +1325,8 @@ the infinite sum $M(\bigtriangleup )=\sum_{k=0}^{\infty }\frac{\bigtriangleup
 See \cite{burdett_etal2001} and \cite{wright_etal2021} for further references. \\
 
 
-\textit{Proof of Lemma%\ref{no-mass-point-lemma}
-:} Assume to the contrary
+\textit{Proof of Lemma~\ref{no-mass-point-lemma}:} 
+Assume to the contrary
 that $\bigtriangleup (\pi |m,s_{1},s_{2},T)>0$ at a point where $\Psi
 (s_{2},T|m,s_{1})>0$ and $\pi \geq 0$. Then there must exist $%
 (a,b_{L},b_{H}) $ in the support of $\Lambda (\cdot |m,s_{1})$ with $\pi
@@ -1357,16 +1357,19 @@ b_{s_{2}}^{\prime }$ can be made arbitrarily close to $b_{s_{2}},$ the loss
 in the wage can be made arbitrarily small and, thus, less than the gain from
 the discrete jump in the hiring probability. $\square $
 
-\bigskip \bigskip
+\bigskip
 
-\noindent \textit{Subsection \ref{sec:truthful} entailed the following claim that we
-prove here in the appendix: Consider firms that can send message }$m\in
+
+\subsection{Proof of Claim in Subsection~\ref{sec:truthful}}
+
+\noindent Subsection~\ref{sec:truthful} entailed the following claim that we
+prove here in the appendix: \textit{Consider firms that can send message }$m\in
 \{L,H\}$\textit{\ in a truthful equilibrium. At a given message }$m$\textit{%
 \ the worker abilities that enter in equilibrium form a non-empty interval }$%
 [\underline{a}_{m},\bar{a}_{m}],$\textit{\ and no single worker type enters
 with positive mass.}
 
-Proof: We will first show that there is a positive mass of workers that
+\textit{Proof}: We will first show that there is a positive mass of workers that
 enter and approach message $m.$ Assume not, and consider worker type $a$
 with $v_{T}(a-c_{T})-u\left( a\right) >0.$ This worker could enter, approach
 firms with message $m,$ and bid $b=v_{m}(a-c_{m}).$ Since he would be hired
@@ -1421,7 +1424,62 @@ there are no bids between $\pi _{h}$ and $\pi _{l},$ it holds that $\Gamma
 
 \bigskip \bigskip
 
-\noindent \textit{Proof of Proposition \ref{prop:incentive_compat}:} Note first that the probability
+
+
+
+
+\subsection{Role of the Second Signal, and Proof of Proposition \ref{prop:incentive_compat}}
+\label{online_app:second_signal} 
+
+The second signal captures that workers can target their bidding to more information after having read the
+details of the job description. Taking the limiting case where this signal
+is arbitrarily precise simplifies the mathematical representation of the
+problem substantially as the bid is determined simply as the weighted
+average of bids from two different differential equations.. Consider instead
+a setting where workers remain unsure about the firm type at the point of
+bidding, and assign probability $\Psi (T)$ to it being type $T$. It is easy
+to show that their bids would follow differential equation\footnote{
+See our previous working paper Horton, Johari and Kircher (2021) that
+derives this and solves the related model, but at the expense of assuming
+that workers do not receive any first signal. This entails the very strong
+implication that workers select among firms at random in the absence of
+messages. The formulation in this paper allows clear and tractable insights
+that allows for selection based on some information even without signals.}
+
+\[
+\frac{b(a)}{\sum\nolimits_{T}\lambda (a)\Psi (T)/(v_{T}-b^{\prime }(a))} =1.
+\]
+
+This converges to the differential equation in (\ref{wages}) when $\Psi
+(T)\longrightarrow 1$, as do the associated endpoint conditions. Working in
+the limit is easier as the expected bid of a worker after the first signal
+is simply the weighted average of the bids after the second signal, while
+the aggregation is much more cumbersome if uncertainty remains even after
+the second signal. This begs the question how workers interpret the signal
+after a truthful message. We assume here that they do not rely on the second
+signal if they believe the second signal to be truthful. This does matter
+for the incentives of firms to mis-represente their types. In particular,
+for low type firms who pretend to be high types this induces high wage
+demands. If workers were to learn the actual firm type, low type firms that
+mis-represented their type could attract more applicants, but these would
+learn their type and then bid low. One can show that truth-telling in this
+setting would not be sustained. So our formulation is best viewed as an
+approximation to the setting where signals are not fully revealing. It also
+highlights the value of our empirical setting: it is not obvious that
+allowing for cheap-talk will increase market information, as this would fail
+under different informational assumptions, and off course under different
+equilibria such as the well-known ``babbling'' equilibrium where no
+information is transmitted.
+
+\bigskip
+
+
+
+\noindent \textit{Proof of Proposition \ref{prop:incentive_compat}:} 
+
+Consider first the limiting case where the second signal has very high precision. 
+
+Note first that the probability
 that a firm at message $m$ has no applicant with qualification above $a$ is $%
 e^{-\Lambda (a|m)}.$ That means that the density that the best applicant is
 of type $a$ is
@@ -1491,7 +1549,7 @@ is bounded away from zero. The second line is simply a constant. So
 truthtelling is incentive compatible for high types when $v_{H}$ is
 sufficiently large.
 
-When $v_{H}\approx v_{L}$ and $c_{H}=0,$ truthtelling requires 
+When $v_{H}\approx v_{L}$ and $c_{H}=0,$ truth-telling requires 
 \begin{equation}
 \bar{a}_{L}-\frac{b_{L}(\bar{a}_{L})}{v_{L}}\geq \int_{\underline{a}_{L}}^{%
 \bar{a}_{L}}\frac{a}{v_{L}}u^{\prime \prime }(a)da,  \label{truth-local}
@@ -1597,9 +1655,19 @@ those who do approach high messages do so with exactly the same queue $%
 if low types do not want to deviate and pretend to be high types under $%
 c_{H}=0,$ they will not want to do so when $c_{H}>0.$ For high types we had
 already established incentive compatibility in the general case, which
-concludes the proof. $\square $
+concludes the proof for the case when the second signal has limit precision of $\psi_2=1$. 
 
-\bigskip \bigskip
+Finally, consider the case where there remains some imprecision in the second signal ($\psi_2 <1$), but precision is sufficiently high. We established earlier that under the assumption of truth-telling equilibria converge to the limit equilibrium when the precision $\psi_2$ of the second signal increases to 1. So payoffs from truth-telling and lying converge to the limit arguments. Since we have shown above that for sufficient differences in valuations both firm types strictly prefer truth-telling in a candidate equilibrium with full type revelation, this continues to hold when the signal is sufficiently precise. Furthermore, the proof above establishes that for equal costs and valuations that are very close only a vanishingly small set of parameter values induces truth-telling, while for all others at least one type has strict incentives to pretend to be the other type. For a given set of parameters where there are strict incentives to ``lie'' (i.e., strict incentives to send the message that does not correspond to the own type) when the second signal has limit precision, a sufficiently high second signals will again also induce incentives to lie.$\square $ 
+
+
+We omit the generic failure of truth-telling when types are very close together as this is a standard result that appears in much of the literature. In Online Appendix~\ref{online_app:ic_general_prod} we prove incentive compatibility for more general production functions.
+
+
+\bigskip
+
+
+\subsection{Proof of Proposition \ref{equilibrium-notalk} and Corollary \ref{corollary}}
+
 \noindent \textit{Proof of Proposition \ref{equilibrium-notalk}:} Consider firms that
 cannot send a cheap-talk message. Given that we assumed precise second
 signals, we can treat $s_{2}$ and the true type $T$ interchangeably, and for
@@ -1764,7 +1832,10 @@ highest type}), the forth line uses (\ref{equilibrium density}) to
 substitute out $\lambda (.),$ and the last line again uses (\ref{equilibrium
 highest type}).$\square $
 
-\bigskip \bigskip
+\bigskip
+
+
+\subsection{Proof of Proposition \ref{comparison1}}
 
 \noindent \textit{Proof of Proposition \ref{comparison1}:} Part 1 and 3 follow
 directly from Lemma \ref{corollary} and \ref{corollary 2}. For Part 2, note
@@ -1849,78 +1920,163 @@ P}(.|v_{L},c_{L})=\lambda _{s=L}^{P}(.)=\lambda _{s=H}^{P}(.)\,\ $and $%
 _{s=H}^{P}(.), $ which yields a contradiction to $\lambda ^{\ast
 P}(.|v_{L},c_{L})\neq \lambda ^{\ast P}(a|v_{H},c_{H}).\square $
 
-\bigskip \bigskip
+
+
+
+
+
+
+\section{Short Discussion of Model Features and Robustness}
+\label{online_app:robustness}
+
+This appendix section briefly discusses the three robustness points mentioned at the end of Subsection \ref{sec:truthful} in the main body. \bigskip
+
+\subsection{More General Production Functions}
+\label{online_app:general_production}
+
+Our production function is a
+special case of increasing and concave production function $\phi (a,T)$ that describes the
+output of a worker of type $a$ at a firm of type $T.$ Assume that this function is increasing in its arguments. Assume that it is concave in $a$. Similar steps as in
+the main body yield under fully revealing messages in analogy to (\ref{equilibrium density}) that 
+\begin{equation}\label{generalized-queue-length}
+\lambda
+_{m}(a)=u^{\prime \prime }(a)/u^{\prime }(a)-\phi _{aa}(a,m)/\phi _{a}(a,m),
+\end{equation}
+with upper and lower end-point conditions $\phi _{a}(\bar{a}%
+_{m},m)=u^{\prime }(\bar{a}_{m})$ and $e^{-\Lambda (\underline{a}
+_{m}|m)} \phi_{T}(\underline{a}_{m},m) = u(\underline{a}_{m}).$ The upper
+endpoint continues to be strictly higher for higher firm types if $\phi $ is
+strictly supermodular in $a$ and $T,$ which was assured in our baseline
+specification. The queue length $\lambda _{T}(a)$ was independent of $T$ in
+our baseline specification, which made the setup particularly tractable as
+it implied that workers choose among firms ``as if'' at random. From the
+earlier equation it is apparent that this only continues to apply more
+generally if the semi-elasticity of $\phi _{a}$ with respect to worker
+ability is independent of $T,$ as is the case for example for productions $ 
+\phi(a,T)=\ln (T(a-d_1))+d_2$ or $
+\phi(a,T)=f(T)g(a-d_3)+h(T),$
+where $d_j$ are
+positive constants and $f(.)$, $g(.)$ and $h()$ are non-negative and
+increasing functions (and, to preserve concavity in ability, $g(.)$ needs to be concave). We assume this for the rest of this section (things become substantially more involved when the semi-elasticity of $\phi
+_{a}$ depends on the firm type, which exceeds the bounds of this paper.) 
+
+It remains to be clarifies when the lower bound on ability $\underline{a}_T$ is higher under for high than for low firm types. To study this, it is easiest to think of $L$ and $H$ as real numbers and to define our production function for all $T' \in [L,H]$ in a way that is twice continuously differentiable, preserves the assumptions we had placed on $\phi(a,T)$ for all $T$, and preserves the true functions $\phi(a,L)$ and $\phi(a,T)$ at the boundaries. For our example, this is for example achieved by setting $\phi(a,T)=\left(v_L + (v_H - v_L) \frac{T-L}{H-L}\right) \left( a - c_L -  (c_H - c_L) \frac{T-L}{H-L} \right)$ so that valuations and costs rise linearly. The advantage of this extension is that we can use calculus to study the question at hand. We show that the lower bound weakly increases in $T$ whenever it is possible to such a function that is weakly increasing, as is the case in the example above.
+
+
 
 
 \begin{prop}
-\label{extension} For more general production functions $\phi (a,v_{T})$
-with constant semi-elasticity of $\phi _{a}$ with respect to worker ability for given firm type,
-strict log-supermodularity (log-submodularity) of $\phi $ ensures that the
-lowest ability type $\underline{a}$ that approaches such firms under
-perfectly-revealing cheap-talk is increasing (decreasing).
+\label{extension} Consider more general production functions $\phi (a,T)$ with a semi-elasticity of $\phi_a$ in $a$ that is independent of firm type. Strict supermodularity (submodularity) of $\phi$ ensures that the highest ability $\bar{a}_T$ is increasing (decreasing) in $T$. Strict log-supermodularity (log-submodularity) of $\phi $ ensures that the
+lowest ability type $\underline{a}_T$ is increasing (decreasing) in $T$.
 \end{prop}
 
-Proof of Proposition \ref{extension}: Note that the highest worker type that
-approaches such firms is increasing in $v$, due to the boundary condition $%
-\phi _{a}(\bar{a}_{m},v)=u^{\prime }(\bar{a})$ and strict concavity of $\phi 
-$ in worker ability. The queue length is given by $\lambda _{m}(a)=u^{\prime
-\prime }(a)/u^{\prime }(a)-\phi _{aa}(a,m)/\phi _{a}(a,m),$ with lower
-end-point conditions $\phi _{a}(\bar{a},v)=u^{\prime }(\bar{a}_{m})$ and $%
-e^{-\Lambda (\underline{a}_{m}|m)}\phi _{v}(\underline{a},v)=u(\underline{a}%
-).$ The latter implies $\partial \underline{a}/\partial v$ equals
+\noindent Proof of Proposition \ref{extension}: Consider truthful cheap talk. Recall that the the queue length is given by $\lambda(a|T)=u^{\prime
+\prime }(a)/u^{\prime }(a)-\phi _{aa}(a,T)/\phi _{a}(a,T),$ with
+end-point conditions $\phi _{a}(\bar{a}_T,T)=u^{\prime }(\bar{a}_{T})$ and $%
+e^{-\Lambda (\underline{a}_{T}|T)}\phi(\underline{a}_T,T)=u(\underline{a}%
+).$ 
+
+Applying the implicit function theorem to the first endpoint condition and noting that $\phi_aa(a,T)-U''(a)<0$ establishes the comparative statics on $\bar{a}_T$.
+
+
+Applying the implicit function theorem to the latter and noticing that the denominator is negative (otherwise the types above $\underline{a}_T$ would not have positive surplus and would not enter) implies that the sign of $- \partial \underline{a}_T/\partial T$ equals the sign of
 
 \begin{eqnarray*}
-&&e^{-\Lambda (\underline{a}_{m}|m)}\phi _{v}(\underline{a}%
-_{m},v)+e^{-\Lambda (\underline{a}_{m}|m)}\left[ -\frac{d\Lambda (\underline{%
-a}_{m}|m)}{dv_{m}}\right] \phi (\underline{a}_{m},v) \\
-&=&e^{-\Lambda (\underline{a}_{m}|m)}\phi (\underline{a}_{m},v)\left[ \frac{%
-\phi _{v}(\underline{a}_{m},v)}{\phi (\underline{a}_{m},v)}-\lambda (\bar{a}%
-_{m}|m)\frac{d\bar{a}_{m}}{dv_{m}}\right] \\
-&=&e^{-\Lambda (\underline{a}_{m}|m)}\phi (\underline{a}_{m},v)\left[ \frac{%
-\phi _{v}(\underline{a}_{m},v)}{\phi (\underline{a}_{m},v)}-\lambda (\bar{a}%
-_{m}|m)\left[ -\frac{\phi _{av}(\bar{a}_{m},v)}{\phi _{aa}(\bar{a}%
-_{m},m)-u^{\prime \prime }(\bar{a}_{m})}\right] \right] \\
-&=&e^{-\Lambda (\underline{a}_{m}|m)}\phi (\underline{a}_{m},v)\left[ \frac{%
-\phi _{v}(\underline{a}_{m},v)}{\phi (\underline{a}_{m},v)}-\frac{u^{\prime
-\prime }(\bar{a}_{m})-\phi _{aa}(\bar{a}_{m},v)}{\phi _{a}(\bar{a}_{m},v)}%
-\left[ --\frac{\phi _{av}(\bar{a}_{m},v)}{\phi _{aa}(\bar{a}%
-_{m},v)-u^{\prime \prime }(\bar{a}_{m})}\right] \right] \\
-&=&e^{-\Lambda (\underline{a}_{m}|m)}\phi (\underline{a}_{m},v)\left[ \frac{%
-\phi _{v}(\underline{a}_{m},v)}{\phi (\underline{a}_{m},v)}-\frac{\phi _{av}(%
-\bar{a}_{m},v)}{\phi _{a}(\bar{a}_{m},v)}\right]
+&&e^{-\Lambda (\underline{a}_{T}|T)}\phi _{T}(\underline{a}%
+_{T},T)+e^{-\Lambda (\underline{a}_{T}|T)}\left[ -\frac{d\Lambda (\underline{%
+a}_{T}|T)}{dT}\right] \phi (\underline{a}_{T},T) \\
+&=&e^{-\Lambda (\underline{a}_{T}|T)}\phi (\underline{a}_{T},T)\left[ \frac{%
+\phi _{T}(\underline{a}_{T},T)}{\phi (\underline{a}_{T},T)}-\lambda (\bar{a}%
+_{T}|T)\frac{d\bar{a}_{T}}{dT}\right] \\
+&=&e^{-\Lambda (\underline{a}_{T}|T)}\phi (\underline{a}_{T},T)\left[ \frac{%
+\phi _{T}(\underline{a}_{T},T)}{\phi (\underline{a}_{T},T)}-\lambda (\bar{a}%
+_{T}|T)\left[ -\frac{\phi _{aT}(\bar{a}_{T},T)}{\phi _{aa}(\bar{a}%
+_{T},T)-u^{\prime \prime }(\bar{a}_{T})}\right] \right] \\
+&=&e^{-\Lambda (\underline{a}_{T}|T)}\phi (\underline{a}_{T},T)\left[ \frac{%
+\phi _{T}(\underline{a}_{T},T)}{\phi (\underline{a}_{T},T)}-\frac{u^{\prime
+\prime }(\bar{a}_{T})-\phi _{aa}(\bar{a}_{T},T)}{\phi _{a}(\bar{a}_{T},T)}%
+\left[ \frac{\phi _{aT}(\bar{a}_{T},T)}{ u^{\prime \prime }(\bar{a}_{T}) - \phi _{aa}(\bar{a}%
+_{T},T)}\right] \right] \\
+&=&e^{-\Lambda (\underline{a}_{T}|T)}\phi (\underline{a}_{T},T)\left[ \frac{%
+\phi _{T}(\underline{a}_{T},T)}{\phi (\underline{a}_{T},T)}-\frac{\phi _{aT}(%
+\bar{a}_{T},T)}{\phi _{a}(\bar{a}_{T},T)}\right]
 \end{eqnarray*}%
-A sufficient condition for this to be strictly negative is that $\phi $ is
-strictly log-supermodular. In that case 
+A sufficient condition for this to be weakly (strictly) negative is that $\phi $ is
+weakly (strictly) log-supermodular. In that case 
 \begin{equation*}
-\frac{\phi _{v}(\underline{a}_{m},v)}{\phi (\underline{a}_{m},v)}-\frac{\phi
-_{av}(\bar{a}_{m},v)}{\phi _{a}(\bar{a}_{m},v)}<\frac{\phi _{v}(\bar{a}%
-_{m},v)}{\phi (\bar{a}_{m},v)}-\frac{\phi _{av}(\bar{a}_{m},v)}{\phi _{a}(%
-\bar{a}_{m},v)}<0,
+\frac{\phi _{T}(\underline{a}_{T},T)}{\phi (\underline{a}_{T},T)}-\frac{\phi
+_{aT}(\bar{a}_{T},T)}{\phi _{a}(\bar{a}_{T},T)} \leq \frac{\phi _{T}(\bar{a}%
+_{T},T)}{\phi (\bar{a}_{T},T)}-\frac{\phi _{aT}(\bar{a}_{T},T)}{\phi _{a}(%
+\bar{a}_{T},T)} \leq 0,
 \end{equation*}%
 where both the first and the second inequality are immediate implications of
 strict log-supermodularity. The opposite holds for strict log-submodularity.$%
 \square $
 
 
-\section{Short discussion of model features and robustness}\label{online_app:robustness}
+\bigskip
 
-This appendix section briefly discusses the three robustness points mentioned at the end of Subsection \ref{sec:truthful} in the main body. \bigskip
 
-\textit{Partially revealing equilibria: }Truthful cheap talk is not the only
+\subsection{Incentive Compatibility for More General Production Functions}
+\label{online_app:ic_general_prod}
+
+Proposition \ref{prop:incentive_compat} proves that in a candidate equilibrium with truth-telling each type has incentives to reveal the truth when valuations between high and low type firms are sufficiently far apart. This was done for the specific production function $v_T (a-c_t)$.
+This also holds for the somewhat broader class of production functions studied in Online Appendix~\ref{online_app:general_production}. To see this, consider again a production function $\phi(a,T)$ on $\mathbb{R}^2_{+}$ that is increasing in both arguments, convex in $a$, and where the semi-elasticity of $\phi_a(a,T)$ with respect to $a$ is constant in $T$. Again assume that for each $T>\underline{T}$ at least some ability has positive surplus, and assume that the lowest firm type for which this arises remains bounded (i.e., for each $T>0$ there exists $a\leq \bar{a}$ such that $\phi(a,T)>u(a)$). Fix some low type $L>\underline{T}$. 
+
+We will show that there is incentive compatibility if the valuation of the high type is sufficiently large. In particular, assume that $\phi_a(a,T)$ at each $a$ increases in $a$ and is unbounded. 
+
+We then obtain the following insight: \textit{ Under the assumptions in this subsection, if high type $T=H$ is sufficiently large, then in a candidate equilibrium where each firm type sends a message equal to its type no firm has incentives to deviate to the other message.}
+
+Establishing this follows the same logic as the proof for the specific production function of the main body of the paper. We highlight the key steps here. First, note that the same derivations that established the differential equation for the bidding function \eqref{wages} in the main body of the paper reveal that the bidding function in equilibrium at message $ m\in\{L,H \} $ is given by 
+\begin{equation}
+    b_{m}^{\prime }(a) = \phi_a(a,m) - b_{m}(a)\left[ u^{\prime \prime }(a)/u^{\prime }(a) - C(a) \right]
+\end{equation}
+where $C(a):=\phi_{aa}(a,m)/\phi_a{a,m}$ is the semi-elasticity of $\phi_a$ in $a$ and is independent of $T$ by our earlier assumptions. 
+Since the bid-equation at the high message becomes increasingly steep with higher $H$, it is easy to show that the set $A$ of worker abilities that would approach high type firms and make bid $b_H(a)$ below the output at the low firm (i.e., $b_H(a)<\phi(a,L)$) has measure that converges to zero and the highest such ability worker remains bounded.\footnote{Recall for this that the queue length of any given worker type is constant in $T$ by \eqref{generalized-queue-length}.} So for a low firm type the profit after a deviation to a high message shrinks to zero, and therefore becomes lower than their profit on the equilibrium path.
+
+For high type firms, the benefit of sending a high message is that  of trading with an ever-expanding set of trading partners (as $H$ increases the upper bounded increases to infinity and the set of active abilities has to increase to infinity as well as otherwise the lower end-point condition could not be satisfied). Trading with ever-larger set of types become eventually more profitable than deviating and trading with the fixed set $\left[\underline{a}_L,\bar{a}_L\right]$. This establishes incentive compatibility for both types when $H$ is sufficiently large. 
+
+\bigskip
+
+
+\subsection{Discussion of the Role of Imprecise Second Signals}
+\label{online_app:imprecise_second_signal} 
+
+When we establish incentive compatibility in Proposition \ref{prop:incentive_compat} we use the limit formulation with perfect second signals, but establish that incentives for truth-telling are strict when valuations are far enough apart, and because of convergence (as shown in Online Appendix \ref{online_app:second_signal}) this carries over to settings with imprecise second signals as long as the second signal is sufficiently precise. The limit results are useful because they allow us to take averages, which makes the derivations under signals (which are imperfect initially) and truthful messages (which reveal types perfectly right away) comparable and allows for relatively simple comparative statics. 
+
+While our results carry over when signals are sufficiently precise, it is worth discussing why we rather think of them as being imprecise and use the limit only for mathematical convenience. The reason becomes apparent when one considers what happens if there is no second signal and workers simply know the true firm type at that point. This does change incentive compatibility for the following reason: our current setup studies truthful cheap talk, and if an $L$-firm deviated and sends message $m=H$ then workers believe that this is an $H$-firm (as only these send such messages in equilibrium) and approach and bid at such firms as if it is an $H$-firm. The deviant firm would attract better workers but these would demand higher wages. If workers were to learn the actual firm type through the second message, low type firm that
+mis-represents its type could attract more applicants, but these would
+learn the firm's type and then bid low. One can show that truth-telling in this
+setting would not be sustained. So our formulation is best viewed as an
+approximation to the setting where signals are not fully revealing. It also
+highlights the value of our empirical setting: it is not obvious that
+allowing for cheap-talk will increase market information, as this would fail
+under different informational assumptions, and off course under different
+equilibria such as the well-known ``babbling'' equilibrium where no
+information is transmitted.
+
+
+
+
+
+\subsection{Partially Revealing Equilibria}
+\label{online_app:partially_revealing_eq}
+
+Truthful cheap talk is not the only
 equilibrium in cheap-talk games, even if such equilibria exists. It is
 well-known that there always exists a babbling equilibrium where receivers
-disregard the messages because senders have choosen them at random. Whether
+disregard the messages because senders have chosen them at random. Whether
 parameters admit a truthful equilibrium or not, there also often exist
 partially revealing equilibrium where some additional information is
 transmitted, but not all types are perfectly revealed. Here we briefly point
 out that if a cheap-talk intervention displays any effect, it must be linked
 to some information transmission. We show here that all equilibria where
 cheap-talk reveals some additional information inherit the same broad
-empirical implications: Proposition \ref{comparison1} and the Corollaries \ref%
+empirical implications: Part 1, 2 and 4 of Proposition \ref{comparison1} and the Corollaries \ref%
 {corollary} and \ref{corollary 2} that lead up to it are based around
 comparative statics. Less information essentially acts to average the
 valuation and the costs. The base model does it for the extreme case of
-starting with perfect information revelation. But the comparative statics
+starting with perfect information revelation, but the comparative statics
 hold similarly when messages are only partially informative.\footnote{%
 Parts 1, 3 and 4 of Proposition Proposition \ref{comparison1} rely on
 comparative statics and carry over to partially informative equilibria. In
@@ -1932,78 +2088,10 @@ about firms, but the technique of the proof does not extend if the amount of
 information goes to zero as the valuation of the high type firm becomes
 large.}
 
-\bigskip
 
-\textit{The role of the second signal:} The second signal captures that
-workers can target their bidding to more information after having read the
-details of the job description. Taking the limiting case where this signal
-is arbitrarily precise simplifies the mathematical representation of the
-problem substantially as the bid is determined simply as the weighted
-average of bids from two different differential equations.. Consider instead
-a setting where workers remain unsure about the firm type at the point of
-bidding, and assign probability $\Psi (T)$ to it being type $T$. It is easy
-to show that their bids would follow differential equation $b(a)/\left(
-\textstyle\sum\nolimits_{T}\lambda (a)\Psi (T)/(v_{T}-b^{\prime }(a))\right) =1.%
-\footnote{%
-See our previous working paper Horton, Johari and Kircher (2021) that
-derives this and solves the related model, but at the expense of assuming
-that workers do not receive any first signal. This entails the very strong
-implication that workers select among firms at random in the absence of
-messages. The formulation in this paper allows clear and tractable insights
-that allows for selection based on some information even without signals.}$
-This convergest to the differential equation in (\ref{wages}) when $\Psi
-(T)\longrightarrow 1$, as do the associated endpoint conditions. Working in
-the limit is easier as the expected bid of a worker after the first signal
-is simply the weighted average of the bids after the second signal, while
-the aggregation is much more cumbersome if uncertainty remains even after
-the second signal. This begs the question how workers interpret the signal
-after a truthful message. We assume here that they do not rely on the second
-signal if they believe the second signal to be truthful. This does matter
-for the incentives of firms to mis-represente their types. In particular,
-for low type firms who pretend to be high types this induces high wage
-demands. If workers were to learn the actual firm type, low type firms that
-mis-represented their type could attract more applicants, but these would
-learn their type and then bid low. One can show that truth-telling in this
-setting would not be sustained. So our formulation is best viewed as an
-approximation to the setting where signals are not fully revealing. It also
-highlights the value of our empirical setting: it is not obvious that
-allowing for cheap-talk will increase market information, as this would fail
-under different informational assumptions, and off course under different
-equilibria such as the well-known ``babbling'' equilibrium where no
-information is transmitted.
 
-\bigskip
 
-\textit{More general production functions}:\label{online_app:general_production} Our production function is
-special case of concave production function $\phi (a,T)$ that describes the
-output of a worker of type $a$ at a firm of type $T.$ Similar steps as in
-the main body yield in analogy to (\ref{equilibrium density}) that $\lambda
-_{m}(a)=u^{\prime \prime }(a)/u^{\prime }(a)-\phi _{aa}(a,m)/\phi _{a}(a,m),$
-with upper and lower end-point conditions $\phi _{a}(\bar{a}%
-_{m},m)=u^{\prime }(\bar{a}_{m})$ and $e^{-\Lambda (\underline{a}%
-_{m}|m)}\phi _{v}(\underline{a}_{m},v)=u(\underline{a}_{m}).$ The upper
-endpoint continues to be higher for higher firm types if $\phi $ is
-supermodular in $a$ and $T,$ which was assured in our baseline
-specification. The queue length $\lambda _{m}(a)$ was independent of $m$ in
-our baseline specification, which made the setup particularly tractable as
-it implied that workers choose among firms ``as if'' at random. From the
-earlier equation it is apparent that this only continues to apply more
-generally if the semi-elasticity of $\phi _{a}$ with respect to worker
-ability is independent of $m,$ as is the case for example for production $%
-\ln (v_{T}(a-c))+d$ or $f(v_{T})g(a-c)+h(v_{t})$ where $c$ and $d$ are
-positive constants and $f(.)$, $g(.)$ and $h()$ are non-negative and
-increasing functions. We note that in our base theory we introduced
-differences in costs $c$ across firm types to capture that fact that higher
-firm types might need higher worker types. Without this, the lowest worker
-types would be the same across firms, and simply more high types are added
-for higher firm types. With the more general production functions just
-mentioned, low types endogenously drop out as the firm valuation $v$
-increases even with a common cost $c$ because of additional comptition from
-higher worker types, iff the production is strictly log-supermodular in $a$
-and $v$ as proven in Proposition \ref{extension} in Appendix Section \ref{online_app:analysis}. This is
-the case in the examples before if $f(.)$ is more elastic than $h(.).$
-Things become substantially more involved when the semi-elasticity of $\phi
-_{a}$ depends on the firm type, which exceeds the bounds of this paper.
+
 \section{Empirical Appendix}
 
 
