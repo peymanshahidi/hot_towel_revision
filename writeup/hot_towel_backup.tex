@@ -493,17 +493,6 @@ b_{m}(a)=v_{m}[B(a)-B(\underline{a}_{m})+\underline{a}_{m}-c_{m}].
 
 It is worth noting that Proposition~\ref{equilibrium-characterization} fully characterizes the application and bidding behavior faced by firms that send messages, and that these results hold irrespective of whether all firms send messages ($\rho=1$) or only some fraction do ($\rho<1$). The characterization makes no reference to the number of firms that have the ability to message, nor to the behavior at firms that do not. This property of directed-search models with entry is known in the literature as ``block-recursiveness'' and arises because workers trade off entry against the number of firms present in the market: since workers can choose which firms to approach, what happens at firms that do not send messages is irrelevant for those who approach firms that do. We now turn to those firms.
 
-\bigskip
-
-We are now equipped to consider whether truth-telling is incentive compatible.
-We focus on the case where some workers choose low-type firms after truthtelling (i.e., the intervals $[\underline{a}_m, \bar{a}_m]$ overlap), as our empirical estimates indicate this is the relevant case.
-
-\begin{prop}
-\label{prop:incentive_compat} For given $u(a)$, $v_{L}$, and $c_{H}$, truthtelling is incentive compatible if $v_{H}$ is sufficiently large. For $c_{H}=0$, when $v_{H}$ approaches $v_{L}$, incentive compatibility for truthtelling generically fails.
-\end{prop}
-
-\noindent Proof: See Appendix~\ref{online_app:analysis}.$\square $\bigskip
-
 \subsection{Analysis Without Cheap Talk}
 
 \textit{Firms without messages:} The firms that cannot send a message could
@@ -549,7 +538,7 @@ Proof idea: The key challenge is to prove that workers who approach a firm will 
 Regarding the wage equation, it is worth noting that the wage conditions on the true valuation and cost $(v_{s_{2}},c_{s_{2}})$ revealed through the second signal, but the lowest type $\underline{a}_{\Psi}$ who extracts all surplus remains the one that expects average quality. This is because the decision of which firms to study in detail is made when the worker has less information.
 
 
-\subsection{Comparing Firms With and Without Messages}
+\subsection{Comparing Firms With and Without Messages}\label{sec:comparing}
 
 \bigskip
 
@@ -665,13 +654,29 @@ cheap-talk with otherwise identical counterparts that cannot.
 
 Proof: Parts 1 and 3 follow directly from Corollaries~\ref{corollary} and~\ref{corollary 2}. For parts 2 and 4 see Appendix~\ref{online_app:analysis}. Intuitively, the effect on the number of applicants is ambiguous because cheap talk shifts both the upper and lower bounds of the types that approach a firm, and which shift is larger depends on parameters. For the surplus result, note that the equilibrium implements the planner's allocation given the information frictions, but the planner can assign worker types in a more targeted way when he has more information about the firm type.$\square$
 
-\bigskip
+\subsection{Truth-telling}\label{sec:truth-telling}
 
-To conclude the theoretical section, it is worth noting
-that our entire exposition was built around the notion that firms send truthful messages. If low firm types would pretend to be high types, they would attract better workers, but each of these workers would also raise their wage. We show in Proposition \ref{prop:incentive_compat} in Appendix \ref{online_app:analysis} that sufficient differences in valuations indeed imply the
-existence of an equilibrium with truthful cheap talk. As in
-many cheap-talk games, this is generally not the case when payoffs of high
-and low types are very close together, as we also show in Proposition \ref{prop:incentive_compat}. Comfortingly, we can not only investigate proxies for truth-telling in the empirical exercise, but part 2 of Proposition \ref{comparison1} also entails distinct testable implications for low vs high differences in valuations that can be confronted with data. We relegate to Appendix \ref{online_app:robustness} a further discuss of robustness of our theory along three dimensions: (1) Also in partially revealing equilibria firms with messages inherit the same comparative statics outlined in Proposition \ref{comparison1} relative firms without messages. (2) Despite the precision-assumption of the second signal it is intended to approximate environments where some noise remains after seeing all signals. (3) Our environment extends to other production functions, including those that are strictly log-supermodular between $a$ and $v$, where differences in costs between firms are not needed to induce workers with low abilities to avoid high value firms. 
+Throughout Subsections~\ref{sec:truthful}--\ref{sec:comparing} we assumed that firms report their type truthfully through their messages, imposing only equilibrium conditions [1] and [3]. We now additionally impose condition [2] on firm optimality to investigate whether truth-telling is indeed incentive compatible and therefore an equilibrium.
+
+The basic trade-off is the following. A low-type firm that deviates from the candidate equilibrium and sends message $H$ is taken for a high-type firm, because in equilibrium only high-type firms send that message on the equilibrium path. Such a deviant firm would attract better workers, but each of these workers demands a higher wage. The opposite happens for a high-type firm that pretends to be a low-type firm. Since high-type firms value worker ability more and low-type firms value paying a low wage more, sufficient differences in valuations imply the existence of an equilibrium with truthful cheap talk. As in many cheap-talk games, however, if firm types are very similar, full type revelation generically fails.
+
+\begin{prop}
+\label{prop:incentive_compat} For given $u(a)$, $v_{L}$, and $c_{H}$, truth-telling is incentive compatible if $v_{H}$ is sufficiently large. For $c_{H}=c_{L}=0$, when $v_{H}$ approaches $v_{L}$, incentive compatibility for truth-telling generically fails.
+\end{prop}
+
+\noindent Proof: See Appendix~\ref{online_app:analysis}.$\square$\bigskip
+
+Proposition~\ref{prop:incentive_compat} shows that incentives for truth-telling are present in some situations, but they are not guaranteed in all situations. Beyond sufficient differences in firm types, incentives for truth-telling also rely on the presence of the second signal. We discuss both the extension to a broader class of production functions and the role of the second signal for incentive compatibility in Appendix~\ref{online_app:robustness}. Reassuringly, we do not have to speculate on truth-telling: the empirical exercise directly investigates proxies for it, and part 2 of Proposition~\ref{comparison1} delivers testable implications that distinguish truth-telling from alternatives by exploiting differences in valuations between high- and low-type firms.
+
+Moreover, our main comparison insights do not rely on perfect type revelation; they apply even to partially revealing equilibria:
+
+\begin{corollary}
+\label{cor:partially_revealing}For any partially revealing equilibrium in which messages carry some information (i.e., $\Psi(T|L,s_{1}) \neq \Psi(T|H,s_{1})$), the comparison of firms with and without messages is characterized by parts (1)--(4) of Proposition~\ref{comparison1}.
+\end{corollary}
+
+\noindent Proof: Parts 1--3 of Proposition~\ref{comparison1} rest on comparative statics that apply just as well to averaged valuations and costs, so they continue to hold — see Appendix~\ref{online_app:robustness}. Part 4 remains valid because workers continue to direct their search and equate market payoffs to their outside option, so the efficiency argument proceeds in analogous steps as in the fully revealing case.$\square$\bigskip
+
+Any equilibrium in which messages transmit some information therefore shares the same qualitative empirical implications as the fully revealing equilibrium discussed in Proposition~\ref{comparison1}. This arises because these implications depend primarily on comparative statics involving averaged valuations and costs.
 
 
 \section{Empirical Context} \label{sec:empirical_context}
@@ -1357,19 +1362,15 @@ b_{s_{2}}^{\prime }$ can be made arbitrarily close to $b_{s_{2}},$ the loss
 in the wage can be made arbitrarily small and, thus, less than the gain from
 the discrete jump in the hiring probability. $\square $
 
-\bigskip
 
 
 \subsection{Proof of Claim in Subsection~\ref{sec:truthful}}
 
-\noindent Subsection~\ref{sec:truthful} entailed the following claim that we
-prove here in the appendix: \textit{Consider firms that can send message }$m\in
-\{L,H\}$\textit{\ in a truthful equilibrium. At a given message }$m$\textit{%
-\ the worker abilities that enter in equilibrium form a non-empty interval }$%
-[\underline{a}_{m},\bar{a}_{m}],$\textit{\ and no single worker type enters
-with positive mass.}
+Subsection~\ref{sec:truthful} claimed the following, which we prove here: \textit{In a truthful equilibrium, for each message $m\in\{L,H\}$ the worker abilities that enter form a non-empty interval $[\underline{a}_{m},\bar{a}_{m}]$, and no single worker type enters with positive mass.}
 
-\textit{Proof}: We will first show that there is a positive mass of workers that
+\bigskip
+
+\textit{Proof of Claim}: We will first show that there is a positive mass of workers that
 enter and approach message $m.$ Assume not, and consider worker type $a$
 with $v_{T}(a-c_{T})-u\left( a\right) >0.$ This worker could enter, approach
 firms with message $m,$ and bid $b=v_{m}(a-c_{m}).$ Since he would be hired
@@ -1421,9 +1422,6 @@ strictly concave, this implies $e^{-\Gamma (\pi _{h}|m)}>e^{-\Gamma (\pi
 _{l}|m)}.$ But since the distribution of profits has no mass points and
 there are no bids between $\pi _{h}$ and $\pi _{l},$ it holds that $\Gamma
 (\pi _{h}|m)=\Gamma (\pi _{l}|m),$ yielding a contradiction. $\square $
-
-\bigskip \bigskip
-
 
 
 
@@ -1659,14 +1657,13 @@ concludes the proof for the case when the second signal has limit precision of $
 
 Finally, consider the case where there remains some imprecision in the second signal ($\psi_2 <1$), but precision is sufficiently high. We established earlier that under the assumption of truth-telling equilibria converge to the limit equilibrium when the precision $\psi_2$ of the second signal increases to 1. So payoffs from truth-telling and lying converge to the limit arguments. Since we have shown above that for sufficient differences in valuations both firm types strictly prefer truth-telling in a candidate equilibrium with full type revelation, this continues to hold when the signal is sufficiently precise. Furthermore, the proof above establishes that for equal costs and valuations that are very close only a vanishingly small set of parameter values induces truth-telling, while for all others at least one type has strict incentives to pretend to be the other type. For a given set of parameters where there are strict incentives to ``lie'' (i.e., strict incentives to send the message that does not correspond to the own type) when the second signal has limit precision, a sufficiently high second signals will again also induce incentives to lie.$\square $ 
 
+\bigskip
 
 We omit the generic failure of truth-telling when types are very close together as this is a standard result that appears in much of the literature. In Online Appendix~\ref{online_app:ic_general_prod} we prove incentive compatibility for more general production functions.
 
 
-\bigskip
 
-
-\subsection{Proof of Proposition \ref{equilibrium-notalk} and Corollary \ref{corollary}}
+\subsection{Proof of Proposition \ref{equilibrium-notalk}}
 
 \noindent \textit{Proof of Proposition \ref{equilibrium-notalk}:} Consider firms that
 cannot send a cheap-talk message. Given that we assumed precise second
@@ -1800,12 +1797,18 @@ _{s}|s)}\Psi (L|s)\geq \underline{v}_{T=L}(a),$ but this is contradicted by (%
 \ref{x}) and the fact that $\underline{v}_{T=L}(\underline{a}_{T=L})$ is the
 global minimum of $\underline{v}_{T=L}(\underline{a}).\square $
 
-\bigskip \bigskip
 
-\noindent \textit{The proof of Corollary \ref{corollary} entailed the claim that
-holding the lowest worker type }$\underline{a}_{m}$\textit{\ at truthful
+
+\subsection{Proof of Claim in Corollary \ref{corollary}}
+
+The proof of Corollary \ref{corollary} entailed the claim that
+\textit{holding the lowest worker type }$\underline{a}_{m}$\textit{\ at truthful
 message }$m$\textit{\ fixed but changing }$v_{m}$\textit{\ does not alter
-the expected utility at the lowest type, and we prove this here: }The
+the expected utility at the lowest type,} which we prove below.
+
+\bigskip 
+
+\textit{Proof of Claim:} The
 expected utility at $\underline{a}_{m}$ is according to (\ref%
 {equilibrium lowest type}) given by $e^{-\Lambda (\underline{a}_{m}|m)}v_{m}(%
 \underline{a}_{m}-c_{m}).$ We will see that the equilibrium utility at the
@@ -1838,26 +1841,13 @@ highest type}).$\square $
 \subsection{Proof of Proposition \ref{comparison1}}
 
 \noindent \textit{Proof of Proposition \ref{comparison1}:} Part 1 and 3 follow
-directly from Lemma \ref{corollary} and \ref{corollary 2}. For Part 2, note
+directly from Corollary \ref{corollary} and \ref{corollary 2}. For Part 2, note
 that effects on the number of applications are ambiguous since low firm
-types who send signals attract additional low types but loose high types.
-How this affects applications depends on the queue of such workers, which by
-(\ref{equilibrium density}) depends on $u^{\prime \prime }(a)/u^{\prime }(a)$
-in these various ability regions, on which we do not have clear
-restrictions. For $v_{H}\approx v_{L}$ the second effect vanishes, and
-truthful cheap-talk attract more workers to low-message firms. The opposite
-is the case for high-message firms, and the total can go either way
-depending on entry costs. For $v_{H}$ large, the second effect obviously
-dominates and low-type firms loose applicants when they send truthful
-messages relative to low-type firms who cannot send a message. High type
-firms with a message gain high ability workers but loose low-ability
-workers, relative to counterparts that cannot send messages. But since the
-elasticity of $u^{\prime }()$ is bounded by some number, say $B,$ the queue
-at worker types $a$ is bounded by $B/a.$ So the additional worker types that
-are added for high type firms have very little extra weight, which implies
-for large enough $v_{H}$ that the effect on low type firms dominates.
-
-For Part 4, note that efficiency per firm with a message is given by 
+types who send a truthful message attract additional low ability workers but loose high ability workers relative to their no-message counterparts.
+How this affects applications depends on the number of workers that they add at low abilities and the number of workers they loose at high abilities. This in turn depends on two things: how many additional ability types are added or lost, and the queue of workers at each ability level (conditional on applying at all) which by
+(\ref{equilibrium density}) equals $u^{\prime \prime }(a)/u^{\prime }(a)$. For $v_{H}\approx v_{L}$ the size of the high-ability segment that is lost shrinks to zero, and
+truthful cheap-talk attracts more workers to low-message firms. The opposite
+is the case for high-message firms. In the case of $v_{H}> v_L$ but $c_H \approx c_L$, the size of the low ability segment that is lost or added shrinks to zero, and truthful messages at low type firms induces a sizeable loss of high-ability workers without an offsetting gain at low-ability workers. For high type firm truthful cheap talk induces a gain in high ability workers with an offset of low ability workers. For Part 4, note that efficiency per firm with a message is given by 
 \begin{equation}
 \max_{\lambda _{m=L}^{P}(.),\lambda _{m=H}^{P}(.)}\delta
 _{L}S(v_{L},c_{L}|\lambda _{s=L}^{P}(.))+\delta _{H}S(v_{H},c_{H}|\lambda
@@ -1926,10 +1916,11 @@ P}(.|v_{L},c_{L})\neq \lambda ^{\ast P}(a|v_{H},c_{H}).\square $
 
 
 
+
 \section{Short Discussion of Model Features and Robustness}
 \label{online_app:robustness}
 
-This appendix section briefly discusses the three robustness points mentioned at the end of Subsection \ref{sec:truthful} in the main body. \bigskip
+This section briefly discusses an extension from Online Appendix~\ref{online_app:analysis} to more general production functions. We outline conditions under which comparative statics and incentive compatibility results similar to those in the main paper still hold.
 
 \subsection{More General Production Functions}
 \label{online_app:general_production}
