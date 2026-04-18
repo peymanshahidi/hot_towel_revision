@@ -800,52 +800,9 @@ However, when assessing the effects of the signaling feature on match outcomes, 
 
 \section{Results} \label{sec:results}
 
-\subsection{Informative Messages} \label{sec:results_existence} % 4.1
-At the end of the theory section we showed that truthful cheap talk can be sustained in equilibrium in some circumstances, but that this is not always possible (see Proposition \ref{prop:incentive_compat}). Here we investigate whether truthful cheap talk seems to be present in this market. We exploit that employers with \textsc{ShownPref}$=0$ in the explicit arm of the experiment have no strategic incentive since they know that their choice is not shown to potential applicants, and we assume they tell their true preferences. We will see that these employers clearly do make conscious choices as their responses display substantial variation across different types of jobs, in line with intuition. We compare their distribution of choices with those employers where \textsc{ShownPref}$=1$ in the explicit arm of the experiment, so that a strategic motive is present as they know that their choices will be shown to the other side of the market. If they are not telling the truth, their distribution should be tilted relative to the previous group. 
+Before turning to the main empirical analysis, one preliminary concern is worth addressing at the outset. The theory admits both truth-telling and babbling equilibria (see Proposition~\ref{prop:incentive_compat}), so in principle one cannot rule out that employers send messages strategically, either tailoring their tier choice to whether it will be shown to applicants or ignoring the message altogether. If employers in the explicit arm conditioned their tier selection on whether their choice was revealed, then selections in the ambiguous and explicit arms would not be comparable, and pooling them (as we do below) would not be justified. The validity of most downstream analysis rests on this pooling being innocuous, so it is worth examining before proceeding.
 
-Figure~\ref{fig:choices_by_cat} plots the fraction of employers selecting each of the three tiers, by category of work and by whether their choice was to be revealed.
-For this figure, we only use data from the explicit arm of the experiment. 
-For each fraction, a 95\% confidence interval is reported. 
-The number of openings in that category is reported at the top of each facet (``$n = \ldots$''). 
-
-\begin{figure}[h!] 
-\caption{Employer tier choice by category of work in the explicit arm of the experiment, by whether their choice would be shown to would-be applicants \label{fig:choices_by_cat}}
-\centering 
-\begin{minipage}{0.85 \linewidth}
-\includegraphics[width = 0.95\textwidth]{./plots/choices_by_cat.pdf}
-\\
-\end{minipage} 
-\begin{minipage}{1.0 \linewidth}
-  {\footnotesize
-    \begin{singlespace}
-      \emph{Notes:} This figure shows the fraction of employers in the explicit arm of the experiment selecting the various vertical preference tiers, by $\textsc{ShownPref}$,  and by the category of work of the associated job opening.
-      \signaldef{}.
-      \shownprefdef{}.
-      \explicitdef{}.
-      A 95\% confidence interval is shown for each point estimate.
-      Above each tier fraction in a category of work, the difference between the \mbox{$\textsc{ShownPref} = 1$} and \mbox{$\textsc{ShownPref} = 0$} fractions is shown, as well as the standard error for the difference. 
-    \end{singlespace}
-  }
-\end{minipage} 
-\end{figure} 
-
-Figure~\ref{fig:choices_by_cat} shows that vertical preferences vary both within and between categories of work.
-Between categories, if we look only at the $\textsc{ShownPref} = 0$ fractions, we can see that in ``Administrative Support,'' about \fracLowAdminSpt{}\% of employers selected the low tier.
-In contrast, in ``Networking and Information Systems'' only about \fracLowNetworking{}\% of employers selected the low tier.
-Although vertical preferences clearly vary between categories, the relationship is far from deterministic;
-within categories, there is substantial variation, though the medium tier is the most common selection in all categories except for ``Administrative Support'' and ``Customer Service.'' 
-Because of this within-category variation in tier choice, workers cannot fully learn an employer's vertical preferences simply by knowing the category of work. 
-
-When the experiment was designed, it was expected that employers might condition their tier choice on whether their choice would be shown to would-be applicants or just to the platform, as outlined before. The design intent of the explicit arm was to test this ``endogenous tier'' hypothesis.
-
-Despite this possibility of a gap between what employers would message to the platform versus job-seekers, there is no visual evidence in Figure~\ref{fig:choices_by_cat} that tier selection depended on revelation:
-within each category, the fractions choosing the different tiers do not seem to depend on \textsc{ShownPref}.
-In none of the categories of work is the difference in fractions (shown between bars, with the standard error) conventionally significant, and furthermore, a $\chi^2$-test of \textsc{ShownPref} versus tier selection has a p-value of $\pValue{}$.
-
-Despite no evidence of a difference in the fractions of employers picking the various tiers by \textsc{ShownPref}, there could be some hidden compositional shift that leaves the fractions unchanged.
-As such, we will primarily make use of data from ambiguous arm of the experiment.  
-Despite this caution, the simplest explanation is that employers did not, at least during the experimental period, believe that revelation to workers would be harmful, and so tier choices reflected preferences they were willing to share to both would-be applicants and with the platform.
-As such, the ambiguous and explicit arms can be safely pooled. 
+To address this, we use the explicit arm to compare the distribution of tier choices when employers know their choice will be revealed to workers ($\textsc{ShownPref}=1$) against the distribution when they know it will not ($\textsc{ShownPref}=0$). Across all nine categories of work and the three tier options within each, we find no statistically detectable shift in the distribution of selections (a $\chi^2$-test of \textsc{ShownPref} versus tier selection yields a p-value of $\pValue{}$). This is consistent with firms reporting their true preferences regardless of whether the report is strategically relevant, and it justifies pooling the ambiguous and explicit arms in the analyses that follow. The by-category figure, the associated tests, and a fuller discussion are reported in Online Appendix~\ref{online_app:informative_messages}.
 
 \subsection{Sorting} \label{sec:results_sorting} %4.2
 
@@ -1221,7 +1178,7 @@ To investigate the evolution of choices into the post-experimental period, Figur
 \end{minipage} 
 \end{figure} 
 
-We also looked at firms that posted jobs repeatedly during the experimental period. Recall that in the previous sections we only used the initial job posted by each of these firms. Our theory presumed that firms understand all features of the environment right away. It is conceivable that firms only slowly understand the strategic aspects of their environment, and even though they are truthful in their initial message they become more strategic over time, which could lead to pooling on particularly beneficial messages over time. In Online Appendix \ref{online_app:choice_over_time} we document that reporting is very stable over time: there is a slight trend away from low and medium-tier choices towards high-tier choices as firms repeatedly post jobs, but even after the tenth job posting firms are only 2\% point more likely to choose the high tier. Importantly, this is not affected by whether the preference was shown or hidden, which is another indication that firms tell the truth even when the message is strategically relevant (in line with the evidence of Section \ref{sec:results_existence}). 
+We also looked at firms that posted jobs repeatedly during the experimental period. Recall that in the previous sections we only used the initial job posted by each of these firms. Our theory presumed that firms understand all features of the environment right away. It is conceivable that firms only slowly understand the strategic aspects of their environment, and even though they are truthful in their initial message they become more strategic over time, which could lead to pooling on particularly beneficial messages over time. In Online Appendix \ref{online_app:choice_over_time} we document that reporting is very stable over time: there is a slight trend away from low and medium-tier choices towards high-tier choices as firms repeatedly post jobs, but even after the tenth job posting firms are only 2\% point more likely to choose the high tier. Importantly, this is not affected by whether the preference was shown or hidden, which is another indication that firms tell the truth even when the message is strategically relevant (in line with the evidence of Online Appendix~\ref{online_app:informative_messages}). 
 
 So overall, message frequencies stay remarkably stable even as individual employers post jobs repeatedly, but also for the whole market over time and across a large roll-out to all firms. 
 
@@ -2110,6 +2067,54 @@ The far right column also reports the percentage change in the $\textsc{ShownPre
 
 
 
+
+\subsection{Informative Messages: Evidence from the Explicit Arm} \label{online_app:informative_messages}
+
+At the end of the theory section we showed that truthful cheap talk can be sustained in equilibrium in some circumstances, but that this is not always possible (see Proposition~\ref{prop:incentive_compat}). Here we investigate whether truthful cheap talk seems to be present in this market. We exploit that employers with \textsc{ShownPref}$=0$ in the explicit arm of the experiment have no strategic incentive since they know that their choice is not shown to potential applicants, and we assume they tell their true preferences. We will see that these employers clearly do make conscious choices as their responses display substantial variation across different types of jobs, in line with intuition. We compare their distribution of choices with those employers where \textsc{ShownPref}$=1$ in the explicit arm of the experiment, so that a strategic motive is present as they know that their choices will be shown to the other side of the market. If they are not telling the truth, their distribution should be tilted relative to the previous group.
+
+Figure~\ref{fig:choices_by_cat} plots the fraction of employers selecting each of the three tiers, by category of work and by whether their choice was to be revealed.
+For this figure, we only use data from the explicit arm of the experiment.
+For each fraction, a 95\% confidence interval is reported.
+The number of openings in that category is reported at the top of each facet (``$n = \ldots$'').
+
+\begin{figure}[h!]
+\caption{Employer tier choice by category of work in the explicit arm of the experiment, by whether their choice would be shown to would-be applicants \label{fig:choices_by_cat}}
+\centering
+\begin{minipage}{0.85 \linewidth}
+\includegraphics[width = 0.95\textwidth]{./plots/choices_by_cat.pdf}
+\\
+\end{minipage}
+\begin{minipage}{1.0 \linewidth}
+  {\footnotesize
+    \begin{singlespace}
+      \emph{Notes:} This figure shows the fraction of employers in the explicit arm of the experiment selecting the various vertical preference tiers, by $\textsc{ShownPref}$,  and by the category of work of the associated job opening.
+      \signaldef{}.
+      \shownprefdef{}.
+      \explicitdef{}.
+      A 95\% confidence interval is shown for each point estimate.
+      Above each tier fraction in a category of work, the difference between the \mbox{$\textsc{ShownPref} = 1$} and \mbox{$\textsc{ShownPref} = 0$} fractions is shown, as well as the standard error for the difference.
+    \end{singlespace}
+  }
+\end{minipage}
+\end{figure}
+
+Figure~\ref{fig:choices_by_cat} shows that vertical preferences vary both within and between categories of work.
+Between categories, if we look only at the $\textsc{ShownPref} = 0$ fractions, we can see that in ``Administrative Support,'' about \fracLowAdminSpt{}\% of employers selected the low tier.
+In contrast, in ``Networking and Information Systems'' only about \fracLowNetworking{}\% of employers selected the low tier.
+Although vertical preferences clearly vary between categories, the relationship is far from deterministic;
+within categories, there is substantial variation, though the medium tier is the most common selection in all categories except for ``Administrative Support'' and ``Customer Service.''
+Because of this within-category variation in tier choice, workers cannot fully learn an employer's vertical preferences simply by knowing the category of work.
+
+When the experiment was designed, it was expected that employers might condition their tier choice on whether their choice would be shown to would-be applicants or just to the platform, as outlined before. The design intent of the explicit arm was to test this ``endogenous tier'' hypothesis.
+
+Despite this possibility of a gap between what employers would message to the platform versus job-seekers, there is no visual evidence in Figure~\ref{fig:choices_by_cat} that tier selection depended on revelation:
+within each category, the fractions choosing the different tiers do not seem to depend on \textsc{ShownPref}.
+In none of the categories of work is the difference in fractions (shown between bars, with the standard error) conventionally significant, and furthermore, a $\chi^2$-test of \textsc{ShownPref} versus tier selection has a p-value of $\pValue{}$.
+
+Despite no evidence of a difference in the fractions of employers picking the various tiers by \textsc{ShownPref}, there could be some hidden compositional shift that leaves the fractions unchanged.
+As such, we will primarily make use of data from ambiguous arm of the experiment.
+Despite this caution, the simplest explanation is that employers did not, at least during the experimental period, believe that revelation to workers would be harmful, and so tier choices reflected preferences they were willing to share to both would-be applicants and with the platform.
+As such, the ambiguous and explicit arms can be safely pooled.
 
 \subsection{Additional Empirical Results}\label{online_app:additional_empirical}
 
