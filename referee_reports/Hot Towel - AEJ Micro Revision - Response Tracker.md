@@ -515,13 +515,13 @@ Why not simplify the model by assuming the signal is perfectly revealing? With �
 
 - I did not understand the first full sentence on p. 25 (“This simplification of the model…”).
 
-> 🔴 **OPEN — Horton/Kircher**
+> ✅ **ADDRESSED**
 > 
-> **What:** First sentence on p.25 ('This simplification of the model…') not yet rewritten; proposed revision drafted and awaiting coauthor sign-off.
+> **What:** Rewrote the confusing "This simplification of the model follows from our focus on the changes induced by allowing cheap talk messages rather than levels" sentence. The original had three ambiguities R2 flagged (what is "this simplification", changes of what, levels of what). New text makes each referent explicit: the simplification is the random-approach assumption, "changes" are the differences $\hat{\beta}^1_k - \hat{\beta}^0_k$ within each tier, and "levels" are the baseline $\hat{\beta}^0_k$. Rewrite: "This is unsurprising, but note that this pattern is not a prediction of the model in Section~\ref{sec:theory}, which abstracts from baseline sorting by assuming workers approach firms at random. We adopt this simplification deliberately: the model is designed to study how revelation *changes* the applicant pool (that is, the difference $\hat{\beta}^1_k - \hat{\beta}^0_k$ within each tier), not to explain the baseline levels $\hat{\beta}^0_k$ that would arise in the message's absence."
 > 
-> **Location:** §V (around line 898)
+> **Location:** hot_towel.tex §V.A Sorting (around line 861)
 > 
-> **Commit / Issue:** Issue #6 item 3 open
+> **Commit / Issue:** this commit (closes Issue #6 item 3)
 
 - On p. 26, the authors might be clearer by continuing to use “prior cumulative earnings” instead of “experience.”
 
