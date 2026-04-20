@@ -259,7 +259,7 @@ Worker differ in ability and associated wage demands, and jobs differ in how muc
 (4) Job openings have text that entails a signal about the job and how much it relies on high ability, but this information is not codified and is hard to search. Cheap talk is explicitly introduced by asking employers to choose one from a discrete set of options in the spirit of ``looking for the highest ability even at high wages'' or ``looking to pay lowest wages, with less concern for ability'', which are codified and easy for workers to search over. 
 
 The theory is intended to capture these features in a simple way but does not attempt to provide the largest theoretical generality.
-Rather, we aim for tractability to help organize our thoughts regarding the kind of analysis and results we might expect to find in the experimental setting where cheap talk is or is not facilitated. The key insights are collected in our main proposition (Proposition \ref{comparison1}). For our derivations, we assume that the researcher can observe the true type of the firm, even though in the model this is the firms' private information that workers need to infer through cheap talk or signals. The subsequent experimental setting uses several treatment arms to achieve this. We next lay out the market environment in full detail, followed by our main proposition and an intuitive discussion of the driving forces behind it. Proofs, auxiliary discussions, and extensions are deferred to Appendices~\ref{online_app:analysis}--\ref{online_app:robustness}.
+Rather, we aim for tractability to help organize our thoughts regarding the kind of analysis and results we might expect to find in the experimental setting where cheap talk is or is not facilitated. The key insights are collected in our main proposition (Proposition \ref{comparison1}). For our derivations, we assume that the researcher can observe the true type of the firm, even though in the model this is the firms' private information that workers need to infer through cheap talk or signals. The subsequent experimental setting uses several treatment arms to achieve this. We next lay out the market environment in full detail, followed by our main proposition and an intuitive discussion of the driving forces behind it. Proofs, auxiliary discussions, and extensions are deferred to the Appendix.
 
 \subsection{Setup}\label{sec:setup}
 
@@ -333,7 +333,7 @@ From the perspective of a firm with type $T$ and observables $(m,s_{1},s_{2})$, 
 \begin{equation*}
 \Gamma(\pi|m,s_{1},s_{2},T)=\int_{\{a,b|\pi(a,b|T)\geq\pi\}}d\Lambda(\cdot|m,s_{1},s_{2}).
 \end{equation*}%
-We denote by $\Gamma_{+}(\pi|\cdot)$ the queue of workers that bid strictly more than $\pi$, and by $\bigtriangleup(\pi|m,s_{1},s_{2},T)$ the mass of workers who offer exactly the same profit.\footnote{Formally, $\Gamma_{+}(\pi|m,s_{1},s_{2},T)=\int_{\{a,b|\pi(a,b|T)>\pi\}}d\Lambda(\cdot|m,s_{1},s_{2})$.} We will later rule out the existence of such mass points in equilibrium. The chance that no worker offers a profit weakly above $\pi$ under a Poisson distribution is $\exp(-\Gamma(\pi|\cdot))$, so the chance of having at least one worker who offers such profit is the complement. A firm of type $T$ that sends message $m$ therefore earns expected profit
+We denote by $\Gamma_{+}(\pi|\cdot)$ the queue of workers that bid strictly more than $\pi$, and by $\bigtriangleup(\pi|m,s_{1},s_{2},T)$ the mass of workers who offer exactly the same profit.\footnote{Formally, $\Gamma_{+}(\pi|m,s_{1},s_{2},T)=\int_{\{a,b|\pi(a,b|T)>\pi\}}d\Lambda(\cdot|m,s_{1},s_{2})$.} We rule out the existence of such mass points in equilibrium in Appendix~\ref{online_app:value_and_lemma}. The chance that no worker offers a profit weakly above $\pi$ under a Poisson distribution is $\exp(-\Gamma(\pi|\cdot))$, so the chance of having at least one worker who offers such profit is the complement. A firm of type $T$ that sends message $m$ therefore earns expected profit
 \begin{equation}
 \Pi (m|T)=\sum_{s_{1},s_{2}}\left[ \psi (s_{1},s_{2}|T)\int_{\pi \geq 
 0,s_{1},s_{2}}\pi d(1-e^{-\Gamma (\pi |m,s_{1},s_{2},T)})\right] ,
@@ -345,7 +345,7 @@ and plans to bid $b_L$ and $b_H$ after observing a low or high second signal,
 respectively, the expected utility is
 \begin{equation}
 V(m,s_{1},a,b_{L},b_{H})=\sum_{s_{2},T}\Psi(s_{2},T|m,s_{1})\,b_{s_{2}} \left(
-  e^{-\Gamma_{+}(\pi(a,b_{s_{2}}|T)|m,s_{1},s_{2},T)} \right) .
+  e^{-\Gamma_{+}(\pi(a,b_{s_{2}}|T)|m,s_{1},s_{2},T)} \right),
 \label{value}
 \end{equation}
 as long as the worker generates weakly positive profits (i.e., $\pi (a,b_{s_2}|T)\geq 0$) and there are no mass points of workers that generate the same profit (i.e., $\bigtriangleup (.|m,s_{1},s_{2},T)=0$).\footnote{
@@ -372,8 +372,6 @@ $\Lambda(\cdot|m,s_{1})$.
 \end{definition*}
 
 The last condition ensures that workers obtain their outside option, or else the queue length is zero as no worker would want to join the platform. 
-We conclude by noting that meaningful mass points cannot exist in equilibrium. 
-We formally state and prove this result in Appendix~\ref{online_app:value_and_lemma}.
 
 
 
@@ -382,38 +380,55 @@ We formally state and prove this result in Appendix~\ref{online_app:value_and_le
 
 To understand this market, consider first the firms that can send a cheap-talk message. Their message space is $\{L,H\}$. As we will see, the following analysis is valid whether these firms constitute the entire market ($\rho=1$) or only part of it ($0<\rho<1$). Recall that firms chosen to send a message must declare a type. Assume for now that these firms declare their type truthfully in equilibrium. To investigate the market outcome for these firms, we impose truthful messages ($\mu(T|T)=1$) and equilibrium conditions (1) and (3). After characterizing this outcome, we additionally impose equilibrium condition (2) on firm optimality to study the conditions under which firms are willing to report truthfully. We study firms that cannot send a cheap-talk message in the next subsection.
 
-Under the assumption that firms report truthfully, workers do not rely on signals to infer the firm type. That is, $\Psi(T|T,s_{1},s_{2})=1$ for all $s_{1}$ and $s_{2}$, and it is easy to show that there is no benefit from conditioning visit strategies or bids on the signals. In what follows we suppress reference to the signals, so that $b=b_{H}=b_{L}$ and we write $\Lambda(a,b|m)$ instead of $\Lambda(a,b,b|m,s_{1})$. We can then express the value for a worker of ability $a$ who bids $b$ at a job with message $m\in\{L,H\}$ (regardless of the signals) as
+Under the assumption that firms report truthfully, workers do not rely on
+signals to infer the firm type and we ease notation by suppressing the reference to signals.\footnote{Workers not relying on signals simply means that $\Psi (T|T,s_{1},s_{2})=1$ for all $%
+s_{1}$ and $s_{2},$ and it is easy to show that there is no benefit from
+conditioning the workers' actions on the signals. Therefore, to ease notation, we suppress references to the signals, i.e., $b=b_{H}=b_{L}$
+and we write $\Lambda (a,b|m)$ instead of $\Lambda (a,b,b|m,s_{1}).$} As a simplification of \eqref{value}, we can
+now express the expected value for a worker of ability $a$ who bids $b$ at a job with
+message $m\in \{L,H\}$ (no matter what the signals are) by 
 \begin{equation}
 V(m,a,b)=e^{-\Gamma (\pi (a,b|m)|m)}b,
 \label{value-truth}
 \end{equation}%
-as long as the worker generates weakly positive profits $\pi (a,b|m)\geq 0$.
-Since the worker infers perfectly which firm it is facing, instead of
-bidding wage $b$ we can reformulate the problem as one of leaving profit $%
-\pi \geq 0$ to the firm and keeping the output minus this profit as pay. For
+as long as the worker generates weakly positive profits $\pi (a,b|m)\geq 0$. Since the worker perfectly infers the firm type on the equilibrium path, it is possible to reformulate the wage bid $b$ into the profit $%
+\pi \geq 0$ that the worker leaves to the firm. The worker then keeps the output minus this profit. For
 worker-firm pairs that have strictly positive output so that $%
 v_{m}(a-c_{m})\geq \pi \geq 0$ this delivers expected utility 
 \begin{equation}
 W(m,a,\pi )=e^{-\Gamma (\pi |m)}\left[ v_{m}(a-c_{m})-\pi \right] .
 \label{value-profit-truth}
 \end{equation}%
-Clearly $V(m,a,b)=W(m,a,\pi(a,b|m))$. By equilibrium condition (3), if workers with ability $a$ and bid $b$ enter at message $m$, i.e., if $(a,b)$ is in the support of $\Lambda(\cdot|m)$, then $b$ must maximize (\ref{value-truth}). It follows that $\pi(a,b|m)$ must be weakly positive and maximizes (\ref{value-profit-truth}).
+Clearly $V(m,a,b)=W(m,a,\pi (a,b|m)).$ By equilibrium condition $[3]$, if
+workers with ability $a$ and bid $b$ enter at message $m$ --- i.e. if $(a,b)$
+is in the support of $\Lambda (\cdot |m)$ --- then $b$ must maximize (\ref%
+{value-truth}). But then $\pi (a,b|m)$ must be weakly positive and maximizes
+(\ref{value-profit-truth}).
 
-We can therefore study the problem in which the worker's choice variable is $\pi$, chosen to maximize (\ref{value-profit-truth}). This objective is supermodular in $(a,\pi)$, indicating that it is less costly for high-ability types to offer high profits to firms. Consequently, higher-ability workers at a given message leave higher profits in equilibrium. And since there are no mass points, they leave strictly higher profits almost everywhere.
+
+We can therefore study the problem where the worker's choice variable is $%
+\pi ,$ which is chosen to maximize (\ref{value-profit-truth}). This
+objective is supermodular in $(a,\pi )$, indicating that it is less costly
+for high ability types to offer high profits to firms. It implies that
+higher ability workers at a given message leave higher profits in
+equilibrium. And since there are no mass points, this means that they leave
+strictly higher profits almost everywhere.
 
 For ease of notation, let 
 \begin{equation}
 U(a|m):=\arg \max_{\pi }W(m,a,\pi )  \label{value-profit-truth2}
 \end{equation}%
-denote the equilibrium utility for a worker of type $a$ who approaches message $m$. Free entry then requires that $U(a|m)\leq u(a)$, with equality if $a$ is in the support of $\lambda(a|m)$.
+denote the equilibrium utility for worker type $a$ that approaches message $%
+m,$ and free entry then requires that $U(a|m)\leq u(a),$ with equality if $a$
+is in the support of $\Lambda (a|m).$
 
 We can use this together with the definition of (\ref{value-profit-truth})
 to prove that at a given message $m$ the worker abilities that enter in
 equilibrium form a non-empty interval $[\underline{a}_{m},\bar{a}_{m}],$ and
-no single type enters with positive mass (see proof in Appendix~\ref{online_app:proof_claim}). The
-reason is that there is no mass point in terms of profits that are offered
-(see earlier Lemma) and for each profit level there is a
+no single type enters with positive mass (see proof in Online Appendix~\ref{online_app:proof_claim}). The reason is that there is no mass point in terms of profits that are offered
+(see earlier Lemma) and for each profit level, there is a
 different ability type that finds it optimal to enter.
+
 
 So the task is to characterize the non-empty interval $[\underline{a}_{m},%
 \bar{a}_{m}].$ Within this interval, consider a worker with ability $a$ that
@@ -478,7 +493,16 @@ b_{m}(a)=v_{m}[B(a)-B(\underline{a}_{m})+\underline{a}_{m}-c_{m}].
 
 \bigskip
 
-It is worth noting that Proposition~\ref{equilibrium-characterization} fully characterizes the application and bidding behavior faced by firms that send messages, and that these results hold irrespective of whether all firms send messages ($\rho=1$) or only some fraction do ($\rho<1$). The characterization makes no reference to the number of firms that have the ability to message, nor to the behavior at firms that do not. This property of directed-search models with entry is known in the literature as ``block-recursiveness'' and arises because workers trade off entry against the number of firms present in the market: since workers can choose which firms to approach, what happens at firms that do not send messages is irrelevant for those who approach firms that do. We now turn to those firms.
+It is worth noting that Proposition (\ref{equilibrium-characterization})
+fully characterizes the application and bidding behavior that firms face
+when they send messages, and that holds irrespective of whether all firms
+send such messages ($\rho =1)$ or only some fraction of the firms sends such
+messages ($\rho <1).$ The characterization makes no reference to the number
+of firms that have the ability to message, nor to the behavior at firms that
+do not. This property of directed search models is known in the
+literature as ``block-recursiveness'', and comes about since workers can see the message and enter for this message exactly as to equalize their outside option. If many firms with this message are present, many workers enter, and the opposite happens if few firms are present. A separate queue forms for each combination of messages or signals. Since workers can choose which firms to approach, for those who
+approach firms that send messages it is not important what happens at firms
+that do not send messages. We turn to those firms next.
 
 
 
@@ -488,8 +512,13 @@ The firms that cannot send a message could
 be in a different market where cheap-talk is impossible (i.e., $\rho =0)$,
 or they could be in the same market as the firms that can send messages
 (i.e., $0<\rho <1).$ Workers can only rely on the signals about these firms
-when they decide which firm to approach and which wage bid to place. For
-ease of analysis, we assume that the second signal is perfectly revealing ($\psi_{2}=1$), which lets us leverage the derivations developed under truthful cheap talk. This assumption can be relaxed: by continuity, the insights of this section hold when the second signal is sufficiently but not perfectly precise, and we discuss the role of this assumption in more detail in Appendix~\ref{online_app:imprecise_second_signal}.
+when they decide which firm to approach and which wage bid to place. 
+For ease of exposition and to be able to leverage previous derivations, assume
+that the second signal is so informative that it eliminates uncertainty about
+the firm type (i.e., $\psi _{2}=1)$. 
+We provide the appropriate analysis for $\psi _{2}<1$ in Appendix~\ref{online_app:second_signal}, and show convergence so that our results apply for high enough precision. Assuming perfect precision of the second signal allows us to consider the consequences of the first message, and enables us to draw heavily on the insights already developed earlier.
+
+
 
 Now consider workers who see signal $s_{1}$ and believe that the fraction of
 low firms at this signal is $\Psi (L|s_{1})$ where we suppressed the message
@@ -506,7 +535,7 @@ where $\Psi=\Psi(L|s_{1})$ represents the belief that the firm is of low type gi
 \begin{equation*}
 c_{\Psi}=\frac{\Psi v_{L}c_{L}+(1-\Psi)v_{H}c_{H}}{\Psi v_{L}+(1-\Psi)v_{H}},
 \end{equation*}%
-where $c_{\Psi}$ is in $[c_{L},c_{H}]$ and increases monotonically from $c_{L}$ to $c_{H}$ as $\Psi$ decreases from one to zero. Workers with types in $[\underline{a}_{\Psi},\bar{a}_{\Psi}]$ then approach such firms, and their bids are conditional on the second signal, which reveals whether the firm is of low or high type. Bids are still driven by (\ref{bidding1}), except that the lowest ability type who extracts all surplus is determined by the first signal rather than the second. We therefore have:
+where $c_{\Psi}$ is in $[c_{L},c_{H}]$ and increases monotonically from $c_{L}$ to $c_{H}$ as $\Psi$ decreases from one to zero. Workers with types in $[\underline{a}_{\Psi },\bar{a}_{\Psi }]$ then approach such firms, and their bids are then conditional on the second signals that indicates whether the firm is of low or high type. Bids are still driven by (\ref{bidding1}), except that the lowest ability type that extracts all surplus is determined by the first signal and not the second$.$ We therefore have:
 
 \begin{prop}
 \label{equilibrium-notalk}Firms with $m=\emptyset $ and signal $s_{1}$
@@ -524,12 +553,11 @@ _{s_{1}}-c_{s_{2}}].  \label{wages-general}
 
 \noindent Proof idea: The key challenge is to prove that workers who approach a firm will actually always bid there, which is not obvious: they approach under uncertainty and learn additional information from the second signal. Under our assumptions, this turns out to hold. The averaging then obtains exactly because the second signal is so precise, and it does not obtain otherwise, as we elaborate in the discussion section. For the full proof see Appendix~\ref{online_app:proof_notalk}.$\square$\bigskip
 
-Regarding the wage equation, it is worth noting that the wage conditions on the true valuation and cost $(v_{s_{2}},c_{s_{2}})$ revealed through the second signal, but the lowest type $\underline{a}_{\Psi}$ who extracts all surplus remains the one that expects average quality. This is because the decision of which firms to study in detail is made when the worker has less information.
+For the wage equation, note that bids condition on the true valuation and cost $(v_{s_{2}},c_{s_{2}})$ revealed by the second signal, but the applicant pool itself is formed earlier: at the application stage the worker has only the first signal, not having spent enough time preparing her bid to know all the information about the job. The second signal therefore reveals the firm's type for the worker at the bidding stage but does not change the competition she faces. This matters because the equilibrium bid depends not only on the worker-firm type pair but on the entire applicant pool, which was locked in by $(m,s_{1})$. A worker's optimal bid balances her probability of winning against the wage she receives conditional on winning, and the lowest type $\underline{a}_{\Psi}$, who extracts all surplus, makes her decision where to apply based on the average quality of the firm under $(m,s_{1})$. Wages therefore depend on $\underline{a}_{s_{1}}$, which is pinned down by $(m,s_{1})$ rather than by $s_{2}$, and wage effects on a given worker-firm type pair persist even in the $\psi_{2}\to 1$ limit. Indeed, that limit is what lets us express wages cleanly as a function of $\underline{a}_{s_{1}}$.
+
 
 
 \subsection{Comparing Firms With and Without Messages}\label{sec:comparing}
-
-To understand the empirical implications of the results, we now compare firms. For this, we assume that the empiricist has elicited the true firm type for both the firms that send messages and those that do not. There are many ways to achieve this, and in reality the message can take many forms. For example, one could ask firms a fictitious question: Do you prefer (``rookie'', \$) or (``expert'', \$\$\$)? Firms might interpret this as a choice between two combinations of ability and wage bid, $(a_{1},b_{1})$ or $(a_{2},b_{2})$ with $a_{1}<a_{2}$ and $b_{1}<b_{2}$. If there are no consequences to the question, firms might simply pick the option that would generate more profit; if two firms choose differently, then the $L$ type chooses the first and the $H$ type the second, so the answer to the question reveals the type. In the empirical implementation we carefully discuss how we make firms comparable.
 
 To compare firms, it is useful to study the comparative statics on the types of workers who approach these firms and on their bidding. The worker types are governed by the valuation $v$ and cost $c$, which equal the true type for firms with truthful messages and equal the average (interim) type after workers have observed the first signal for firms without messages.
 
@@ -550,7 +578,7 @@ threshold $c$ (but does not depend on $v$).
 
 \noindent Proof: See Online Appendix~\ref{online_app:proof_corollary}.
 
-We can directly apply these comparative statics, noting that $v$ and $c$ are lowest for firms with a truthful low message, higher for firms without a message but with a low first signal, even higher for firms without a message but with a high first signal, and highest for firms with a truthful high message. Both the lower and the upper bound of the interval $[\underline{a},\bar{a}]$ of workers who approach these firms therefore increase in this order. Whenever these intervals overlap across firms with different messages or signals, the worker types in the overlap generate the same queue at each firm according to (\ref{equilibrium density}). This means workers can implement this queue length by choosing among these firms at random. An individual worker might not choose at random, but the aggregate outcome is indistinguishable from one in which they do.
+We can directly apply these comparative statics noting that $v$ and $c$ are lowest for firms with a truthful low message, higher for firms without a message but with a low first signal, even higher for firms without a message but with a high first signal, and highest for firms with a truthful high message. Both the lower and the upper bound of the interval $[\underline{a},\bar{a}]$ of workers who approach these firms therefore increase in this order. Wherever these intervals overlap across firms with different messages or signals, the worker types in the overlap generate the same queue at each firm according to (\ref{equilibrium density}), so they can implement this queue length by choosing among these firms at random.
 
 Figure \ref{messages} illustrates graphically how workers choose between
 firms. It is easiest to explain by thinking about two separate markets.
@@ -572,27 +600,7 @@ Panel B considers a market where firms cannot send messages and workers rely on 
 
 Which side of Panel B's vertical axis is active determines the sign of the application effect. If firms differ only in valuations ($v_H > v_L$, $c_H = c_L$), then only the upper arrows in Panel B are active, narrowing the set of high-ability workers that fully direct their search; the low-ability types that fully direct their search do not change across panels (and are in fact absent in both). In this case, applications shift away from low toward high firms when cheap talk becomes possible (i.e., moving from Panel B to Panel A). If costs are the main source of difference among firms ($c_H > c_L$, $v_H \approx v_L$), then mainly the lower arrows in Panel B are active and the fully directed set among high-ability workers is essentially absent. In that case the consequences of cheap talk on applications are reversed.
 
-As mentioned earlier, the same insights carry over even if firms without messages interact in the same market as firms with messages. Note that workers whose ability types lead them to approach multiple messages/signals continue to do so at random, even though this is not visible from Figure~\ref{messages}. For example, workers slightly above $a'$ apply to high-message firms as well as to no-message firms with either a low or high first signal. Their queue length is the same at all of them, so they can implement this queue by choosing between them at random. They do not apply to low-message firms, however.
-
-More generally, the results in this section do not depend on the fraction $\rho$ of firms that can send messages (Part 5 of Proposition~\ref{comparison1}). The comparison holds whether we compare a market in which all firms can send messages with another market in which no firm can, or whether we compare a fraction of firms that can send messages with another fraction that cannot within the same larger market. The reason is that workers can direct their search, which effectively separates the market even when firms with and without messages coexist in the same overall setting.
-
-If one conditions on high firms in the right picture, most of them get
-applicants according to the high signal but some get applicants according to
-the low signal. Both are first order stochastically dominated by the
-distribution of worker abilities that high message firms obtain. For low
-type firms the opposite holds.
-
-%\FRAME{ftbpFU}{13.0327in}{4.0248in}{0pt}{\Qcb{Panel A shows the application
-%behavior per worker-ability type $a$ to firms that truthfully send a high or
-%low message. Panel B: shows the application behavior per worker-ability type 
-%$a$ to firms that have a high or low first signal and no message. Note that
-%in Panel B the types that are directed are more compressed while the types
-%that apply at random expand, relative to Panel A. }}{\Qlb{messages}}{Figure}{%
-%\special{language "Scientific Word";type "GRAPHIC";maintain-aspect-ratio
-%TRUE;display "USEDEF";valid_file "T";width 13.0327in;height 4.0248in;depth
-%0pt;original-width 17.5868in;original-height 5.4129in;cropleft "0";croptop
-%"1";cropright "1";cropbottom "0";tempfilename
-%'RPQ7RX00.bmp';tempfile-properties "XPR";}}\bigskip
+These results extend straightforwardly beyond the stylized two-market picture. When message-sending and no-message firms coexist in the same market, workers whose intervals overlap across messages and signals choose at random among them: for example, workers slightly above $a'$ apply to high-message firms as well as to no-message firms with either first signal, but not to low-message firms. Consequently, the same comparison holds for any fraction $\rho$ of messaging firms, because directed search effectively separates the market (see Part~5 of Proposition~\ref{comparison1} for the formal statement). And from the firm's perspective, the FOSD visible in Panel A has a mirror in Panel B: conditioning on a high-type firm, both the high-signal and low-signal applicant distributions are first-order stochastically dominated by the high-message distribution, with the converse for low-type firms.
 
 \begin{figure}
 \caption{Illustration of how workers approach firms with and without messages. \label{messages}}
@@ -653,7 +661,7 @@ The basic trade-off is the following. A low-type firm that deviates from the can
 
 \noindent Proof: See Appendix~\ref{online_app:ic_proof}.$\square$\bigskip
 
-Proposition~\ref{prop:incentive_compat} shows that incentives for truth-telling are present in some situations, but they are not guaranteed in all situations. Beyond sufficient differences in firm types, incentives for truth-telling also rely on the presence of the second signal; we discuss the role of the second signal for incentive compatibility in Appendix~\ref{online_app:imprecise_second_signal}, and the extension to a broader class of production functions in Appendix~\ref{online_app:ic_general_prod}. Comfortingly, we do not just have to speculate on truth-telling but can investigate proxies for truth-telling in the empirical exercise. Moreover, one can show that our insights do not rely on perfect type revelation, but apply even to partially revealing equilibria:
+This highlights that incentives for truth-telling are present in some situations, but are not guaranteed in all situations. Beyond sufficient differences in firm types, incentives for truth-telling also rely on the presence of the second signal, as we discuss in Appendix~\ref{online_app:second_signal}. Comfortingly, we do not just have to speculate on truth-telling but can investigate proxies for truth-telling in the empirical exercise. Moreover, one can show that our insights do not rely on perfect type revelation, but apply even to partially revealing equilibria:
 
 \begin{corollary}
 \label{cor:partially_revealing}For any partially revealing equilibrium in which messages carry some information (i.e., $\Psi(T|L,s_{1}) \neq \Psi(T|H,s_{1})$), the comparison of firms with and without messages is characterized by parts (1)--(5) of Proposition~\ref{comparison1}.
@@ -661,9 +669,9 @@ Proposition~\ref{prop:incentive_compat} shows that incentives for truth-telling 
 
 \noindent Proof: The first three points in Proposition \ref{comparison1} are based on comparative statics that continue to apply (see Online Appendix~\ref{online_app:partially_revealing_eq}). Point (5) remains valid because workers continue to direct their search and equate market payoffs to their outside option, and the efficiency proof proceeds in analogous steps as in the full-information case. $\square $ \bigskip
 
-Therefore, any equilibrium where messages transmit some information shares the same qualitative empirical implications as the fully revealing equilibrium discussed in Proposition~\ref{comparison1}.\footnote{For more discussion on partial information revelation see Online Appendix~\ref{online_app:partially_revealing_eq}.} This arises because these implications primarily depend on comparative statics involving averaged valuations and costs.
+Therefore, any equilibrium where messages transmit some information shares the same qualitative empirical implications as the fully revealing equilibrium discussed in Proposition~\ref{comparison1}. This arises because these implications primarily depend on comparative statics involving averaged valuations and costs.
 
-Finally, to build the bridge to the ensuing empirical section, we conclude by discussing how we interpret ``truth-telling'' in an empirical setting: For this, we ask firms without a message a fictitious question: Do you prefer (``rookie'', \$) or (``expert'', \$\$\$)? Firms arguably interpret this as choosing between two combinations of ability and wage-bid: $(a_{1},b_{1})$ or $(a_{2},b_{2})$ with $a_{1}<a_{2}$ and $b_{1}<b_{2}.$ Since there are no consequences to the question, firms might simply select the option that would generate more profits. Under this assumption, if two firms choose differently, the one that chooses the first must be the $L$ type and the one that chose the second must be the $H$ type. This holds not only for our specific production function but for any supermodular production function, and one can extend this idea to more than two types.\footnote{One can easily extend this logic to more messages: In the empirical setting we also ask additionally about (``intermediate'', \$\$). Assume firms interpret this message as ability-wage combination $(a_{\text{medium}},b_{\text{medium}})$ with $a_{\text{medium}} \in \{a_1,a_2 \}$ and $b_{\text{medium}} \in \{b_1,b_2 \}$. If there is a third type of firms with $v_{\text{medium}} \in \{v_L,v_H\}$ and some firms choose each of the messages, then $L$ firms choose the low ability, $I$ firms choose the intermediate ability, and $H$ firms choose the high ability due to supermodularity between the firm's valuation and ability.} Empirically we first check if the fraction of firms that choose the first answer varies meaningfully across different occupations, and then -- more importantly -- we compare the distribution of answers for these firms that have no strategic incentives with the distribution of answers of firms whose choices are revealed to workers. The latter group is the one whose answers serve as messages to workers and who faces strategic incentives, but if they continue to answer truthfully their distribution of answers should be similar to that of the first group of firms. We will next describe the empirical setup, followed by the empirical results on truth-telling, and subsequently we return to the empirical counterparts of the five points in Proposition \ref{comparison1}.
+Finally, to build the bridge to the ensuing empirical section, we conclude by discussing how we interpret ``truth-telling'' in an empirical setting: For this, we ask firms without a message a fictitious question: Do you prefer (``rookie'', \$) or (``expert'', \$\$\$)? Firms arguably interpret this as choosing between two combinations of ability and wage-bid: $(a_{1},b_{1})$ or $(a_{2},b_{2})$ with $a_{1}<a_{2}$ and $b_{1}<b_{2}.$ Since there are no consequences to the question, firms might simply select the option that would generate more profits. Under this assumption, if two firms choose differently, the one that chooses the first must be the $L$ type and the one that chose the second must be the $H$ type. This holds not only for our specific production function but for any supermodular production function (see Appendix~\ref{online_app:robustness}), and one can extend this idea to more than two types.\footnote{One can easily extend this logic to more messages: In the empirical setting we also ask additionally about (``intermediate'', \$\$). Assume firms interpret this message as ability-wage combination $(a_{\text{medium}},b_{\text{medium}})$ with $a_{\text{medium}} \in \{a_1,a_2 \}$ and $b_{\text{medium}} \in \{b_1,b_2 \}$. If there is a third type of firms with $v_{\text{medium}} \in \{v_L,v_H\}$ and some firms choose each of the messages, then $L$ firms choose the low ability, $I$ firms choose the intermediate ability, and $H$ firms choose the high ability due to supermodularity between the firm's valuation and ability.} Empirically we first check if the fraction of firms that choose the first answer varies meaningfully across different occupations, and then, more importantly, we compare the distribution of answers for these firms that have no strategic incentives with the distribution of answers of firms whose choices are revealed to workers. The latter group is the one whose answers serve as messages to workers and who faces strategic incentives, but if they continue to answer truthfully their distribution of answers should be similar to that of the first group of firms. We will next describe the empirical setup, followed by the empirical results on truth-telling, and subsequently we return to the empirical counterparts of the five points in Proposition \ref{comparison1}.
 
 
 \section{Empirical Context} \label{sec:empirical_context}
@@ -1649,7 +1657,8 @@ Finally, Part 5 is a direct consequence of block-recursivity. The characterizati
 \section{Information Revelation}
 \label{online_app:info_revelation}
 
-The comparison in Subsection~\ref{sec:comparing} rests on the property that workers who approach both messages, or both first-signal realizations, behave as if they were choosing among firms at random, so only the boundary abilities that approach each message/signal matter for sorting. This appendix discusses the features underpinning this property and the related content on how much information is revealed to workers. Appendix~\ref{online_app:second_signal} lays out the role of the second signal and the convergence argument that justifies taking $\psi_{2}\to 1$ as a tractable limit; Appendix~\ref{online_app:ic_proof} uses that limit to prove incentive compatibility of the truthful-messaging equilibrium (Proposition~\ref{prop:incentive_compat}); Appendix~\ref{online_app:imprecise_second_signal} discusses why we conceptually view the second signal as imprecise rather than literally precise; and Appendix~\ref{online_app:partially_revealing_eq} shows that the main comparison results extend to partially revealing equilibria.
+\textcolor{red}{Modify after the changes to role of second signal} The comparison in Subsection~\ref{sec:comparing} rests on the property that workers who approach both messages, or both first-signal realizations, behave as if they were choosing among firms at random, so only the boundary abilities that approach each message/signal matter for sorting. This appendix discusses the features underpinning this property and the related content on how much information is revealed to workers. Appendix~\ref{online_app:second_signal} lays out the role of the second signal and the convergence argument that justifies taking $\psi_{2}\to 1$ as a tractable limit; Appendix~\ref{online_app:ic_proof} uses that limit to prove incentive compatibility of the truthful-messaging equilibrium (Proposition~\ref{prop:incentive_compat}); Appendix~\ref{online_app:imprecise_second_signal} discusses why we conceptually view the second signal as imprecise rather than literally precise; and Appendix~\ref{online_app:partially_revealing_eq} shows that the main comparison results extend to partially revealing equilibria.
+
 
 \subsection{Role of the Second Signal and Convergence}
 \label{online_app:second_signal}
@@ -1658,7 +1667,7 @@ The second signal captures that workers can target their bidding to more informa
 details of the job description. Taking the limiting case where this signal
 is arbitrarily precise simplifies the mathematical representation of the
 problem substantially as the bid is determined simply as the weighted
-average of bids from two different differential equations.. Consider instead
+average of bids from two different differential equations. Consider instead
 a setting where workers remain unsure about the firm type at the point of
 bidding, and assign probability $\Psi (T)$ to it being type $T$. It is easy
 to show that their bids would follow differential equation\footnote{
@@ -1673,9 +1682,22 @@ that allows for selection based on some information even without signals.}
 \frac{b(a)}{\sum\nolimits_{T}\lambda (a)\Psi (T)/(v_{T}-b^{\prime }(a))} =1.
 \]
 
-This converges to the differential equation in (\ref{wages}) when $\Psi(T)\longrightarrow 1$, as do the associated endpoint conditions. Working in the limit is easier as the expected bid of a worker after the first signal is simply the weighted average of the bids after the second signal, while the aggregation is much more cumbersome if uncertainty remains even after the second signal. For this reason, we carry out the incentive compatibility proof below in the $\psi_{2}\to 1$ limit; by the convergence just established, the conclusion carries over to settings where the second signal is imprecise but sufficiently precise. We return to the conceptual question of how to interpret the second signal (in particular, why we think of it as almost precise rather than perfectly precise) in Appendix~\ref{online_app:imprecise_second_signal}.
+This converges to the differential equation in (\ref{wages}) when $\Psi(T)\longrightarrow 1$, as do the associated endpoint conditions. Working in the limit is easier as the expected bid of a worker after the first signal is simply the weighted average of the bids after the second signal, while the aggregation is much more cumbersome if uncertainty remains even after the second signal. For this reason, we carry out the incentive compatibility proof in the $\psi_{2}\to 1$ limit; by the convergence just established, the conclusion carries over to settings where the second signal is imprecise but sufficiently precise. 
 
-\subsection{Proof of Proposition \ref{prop:incentive_compat}}
+While our results carry over when signals are sufficiently precise, it is worth discussing why we rather think of them as being imprecise and use the limit only for mathematical convenience. The reason becomes apparent when one considers what happens if there is no second signal and workers simply know the true firm type at that point. This does change incentive compatibility for the following reason: our current setup studies truthful cheap talk, and if an $L$-firm deviated and sends message $m=H$ then workers believe that this is an $H$-firm (as only these send such messages in equilibrium) and approach and bid at such firms as if it is an $H$-firm. The deviant firm would attract better workers but these would demand higher wages. If workers were to learn the actual firm type through the second message, low type firm that
+misrepresents its type could attract more applicants, but these would
+learn the firm's type and then bid low. One can show that truth-telling in this
+setting would not be sustained. So our formulation is best viewed as an
+approximation to the setting where signals are not fully revealing. It also
+highlights the value of our empirical setting: it is not obvious that
+allowing for cheap-talk will increase market information, as this would fail
+under different informational assumptions, and off course under different
+equilibria such as the well-known ``babbling'' equilibrium where no
+information is transmitted.
+
+
+
+\subsection{Proof of Proposition~\ref{prop:incentive_compat}}
 \label{online_app:ic_proof}
 
 \noindent \textit{Proof of Proposition \ref{prop:incentive_compat}:} Consider first the limiting case where the second signal has very high precision.
@@ -1858,21 +1880,6 @@ Finally, consider the case where there remains some imprecision in the second si
 \bigskip
 
 We omit the generic failure of truth-telling when types are very close together as this is a standard result that appears in much of the literature. In Online Appendix~\ref{online_app:ic_general_prod} we prove incentive compatibility for more general production functions.
-
-
-
-
-
-
-\subsection{Discussion of the Role of Imprecise Second Signals}
-\label{online_app:imprecise_second_signal}
-
-As shown in Appendix~\ref{online_app:second_signal}, the incentive compatibility result in Proposition~\ref{prop:incentive_compat} is derived in the $\psi_{2}\to 1$ limit, and the convergence argument there extends the conclusion to sufficiently precise but imprecise second signals. Here we explain why, conceptually, we view the second signal as almost precise rather than perfectly precise, even though the precise limit is what we use for computation.
-
-The reason becomes apparent when one considers what would happen if there were no second signal and workers simply knew the true firm type at the bidding stage. This changes incentive compatibility for the following reason: our setup studies truthful cheap talk, so if an $L$-firm deviates and sends message $m=H$, workers believe they face an $H$-firm (only $H$-types send that message on the equilibrium path) and approach and bid at such firms accordingly. The deviant firm would attract better workers, but these workers would demand higher wages. If workers could instead learn the actual firm type at the bidding stage, the deviating low-type firm could still attract more applicants but these workers would then bid low, and truth-telling in this setting would not be sustained. So our formulation with a near-perfect second signal is best viewed as an approximation to the setting where signals are not fully revealing. This also highlights the value of our empirical setting: it is not obvious that allowing for cheap talk will increase market information, since it fails under different informational assumptions, and, of course, under different equilibria, such as the well-known ``babbling'' equilibrium in which no information is transmitted.
-
-
-
 
 
 \subsection{Partially Revealing Equilibria}
