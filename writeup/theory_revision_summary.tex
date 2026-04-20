@@ -1,0 +1,107 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titling}
+
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=MidnightBlue}
+
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{0pt}
+
+\title{\vspace{-2em}Hot Towel --- Theory Section Revision Summary\\[0.3em]\large for coauthor review}
+\author{Peyman Shahidi}
+\date{\today}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\begin{document}
+
+\maketitle
+\vspace{-2em}
+
+\section*{Purpose}
+
+This document summarizes the status of theory-relevant referee comments on the first-round submission of \emph{Sorting through Cheap Talk}. It covers: (i) items that have been addressed in the current working draft (\texttt{writeup/hot\_towel.tex}), with pointers to where in the paper the fix lives and the commit that implemented it; and (ii) items that remain open and are either waiting on coauthor input or deliberately held back pending your direction. The goal is to give you a map of what to review and what decisions I am waiting for before iterating further. Full issue-level discussion is maintained on the \href{https://github.com/peymanshahidi/hot_towel_revision/issues}{GitHub issue tracker}.
+
+\section*{Items addressed}
+
+\begin{longtable}{L{3.2cm} L{7.5cm} L{4.5cm}}
+\toprule
+\textbf{Source} & \textbf{What was done} & \textbf{Location / commit} \\
+\midrule
+\endhead
+
+Editor \S1 (Model) & Theory body reverted to the earlier FOC + comparative-statics structure; proofs, extensions, and robustness moved to appendix; wording and expositional fixes from the submitted version layered back in. & \S III.A--E in the body; Appendices A--C. Commits: \texttt{9d8fcc6} (theory rewrite merge), \texttt{c3a8cf4} (Corollary 2 proof relocation). \\
+\addlinespace
+
+Editor \S1.b (move robustness + second signal to appendix) & ``Model Omissions, Extensions and Robustness'' and second-signal machinery moved from body to appendix. Second signal retained for comparative-statics use. & Appendix B (Information Revelation) and Appendix C (Model Extensions). \\
+\addlinespace
+
+R2 \S3 / Issue \#2 ($\psi_2$ paradox) & Two-pronged response: (i) a wage-mechanism clarification at the end of \S III.C explaining why wage effects on a worker-firm type pair survive the $\psi_2 \to 1$ limit (pool is locked by $(m, s_1)$ before $s_2$); (ii) an IC-based justification for why the second signal is modeled as ``almost precise'' rather than perfectly precise, in \S III.E and Appendix B.1. & \S III.C tail paragraph; \S III.E; Appendix B.1. Commits: \texttt{1183eb0}, \texttt{3f3b5c0}. \\
+\addlinespace
+
+R2 \S2a (truth-telling empirical validation) & Three-sentence paragraph added at the end of \S III.E noting that the downstream predictions on ability sorting, wage bidding, and efficiency are derived under truth-telling, so their empirical confirmation serves as a second, independent anchor for the assumption alongside Proposition 3's IC argument. & End of \S III.E, immediately after the rookie/expert bridge paragraph. Commit: \texttt{9235bc1}. \\
+\addlinespace
+
+R2 / R1 typos and wording & Manuscript-wide typo and grammar pass; subsection and cross-reference labels reconciled after the theory restructure; stray minus-sign / punctuation slips corrected. & Throughout. Commit: \texttt{9c14d38} (Issue \#7 closed). \\
+\addlinespace
+
+R3 \S4 (Section V.A ``unsurprising'') & ``Informative Messages'' subsection (old \S V.A) moved to the Empirical Appendix; a two-paragraph preemptive-defense summary replaces it in the body, framing the pooling question and reporting the $\chi^2$ null. & Top of \S V; Empirical Appendix (\texttt{online\_app:informative\_messages}). Commit: \texttt{c0ad729}. \\
+\addlinespace
+
+Figure 1 description consolidation & Six paragraphs around Figure 1 reduced to four, with three scattered extension paragraphs (coexistence, $\rho$-independence, firm-perspective FOSD) consolidated into one paragraph. Dead commented-out Scientific Word \texttt{\textbackslash FRAME} block removed. No substantive content lost. & \S III.D around Figure 1. Commit: \texttt{e62ec76}. \\
+\addlinespace
+
+Redundant ``Two features of the wage mechanism'' paragraph removed & Paragraph in \S III.D duplicated the wage-mechanism content already delivered at the end of \S III.C; removed. Corollary 2 walk-through now flows directly into Proposition 1. & \S III.D, between Corollary 2 and Proposition 1. Commit: \texttt{bfe06c8}. \\
+
+\bottomrule
+\end{longtable}
+
+\section*{Items open --- your input would unblock}
+
+\begin{longtable}{L{3.2cm} L{7.5cm} L{4.5cm}}
+\toprule
+\textbf{Source} & \textbf{What's needed} & \textbf{Why deferred} \\
+\midrule
+\endhead
+
+Issue \#1 residuals (body-level minor items from the rewrite) & Small decisions on items the rewrite did not automatically resolve: (i) should truth-telling be introduced \emph{before} Proposition 1 rather than after? (ii) ``large market'' precise definition (continuum of firms/jobs?); (iii) Poisson-distribution-at-each-firm assertion clarity; (iv) $u'$ bounded vs.~unbounded at market entry; (v) role of $s_1$ --- R2 asked whether it is needed just for baseline sorting, consider dropping. & These are structural/expositional calls where I did not want to pre-commit to a direction that you might reverse. \\
+\addlinespace
+
+Editor \S2 \& R3 \S1--\S3 (framing vs. modern cheap-talk literature) & Positioning paragraphs explicitly connecting to Backus, Blake \& Tadelis (2019, JPE); distinguishing our IC cheap talk from the linkage-principle setup of Tadelis \& Zettelmeyer (2015); adding a garbling-device paragraph citing Backus et~al.~(2019) and Ambrus, Chaney \& Salitskiy (2018, QE); connection to costly-signaling in labor markets. & Author-level positioning. The specific framing you want to lead with will determine the mechanical citation/cleanup pass that I own (Issue \#3). \\
+\addlinespace
+
+R2 \S2b (inconsistent pooling across figures) & Audit and reconcile the three places R2 flagged: Figure 1 (pooled), Figure 4 (not pooled), \S V.E (pooled). Decide the rule and apply it consistently, or add a footnote at Figure 4 explaining why it stays unpooled. & This is partially empirical, partially theoretical; your view on the right framing (see next item) affects how to justify each case. \\
+\addlinespace
+
+R2 \S2c (intro vs.~theory framing of truth-telling) & The introduction currently treats truth-telling as a plausible \emph{behavioral} assumption; the theory section treats it as an imposed assumption that Proposition 3 then justifies via IC. These two framings need to be reconciled to speak with one voice throughout. & R2 explicitly asked us to pick one framing and be explicit. I want to route the wording past you (or John) before finalizing, because it affects the intro narrative and the citation choices in Issue \#3. \\
+\addlinespace
+
+Model-section writeup choices & (i) Intro paragraphs to the model section --- imported from the submitted version and only lightly edited at the close; (ii) Figure 1 discussion --- currently combines insights from both the submitted version and the earlier FOC-structure draft, and is running long; (iii) Truth-telling subsection length --- imported from the submitted version and extended by the R2 \S2a paragraph. & These are the three places the body is running long against the AEJ Micro page limit. Per the accompanying email: I defer to your judgment on how much to keep, what to condense, and whether Figure 1 should sit pre- or post-Proposition 1. \\
+
+\bottomrule
+\end{longtable}
+
+\section*{Items deferred to Horton (for completeness)}
+
+The following theory-adjacent items rest with John:
+\begin{itemize}[leftmargin=1.4em, topsep=0pt, itemsep=0pt]
+    \item \textbf{Editor Additional Comment \#3 (wage determination on Upwork):} needs institutional knowledge of how wages are in fact set on the platform (Issue \#5).
+    \item \textbf{R2 \S2b pooling audit (empirical-side execution):} once the framing is picked (R2 \S2c), John is best placed to do the actual audit of the three figures.
+    \item \textbf{Issue \#9 (absolute-value parameters):} a purely code-side fix in the R macro pipeline that produces LaTeX parameter macros, unrelated to the theory section.
+\end{itemize}
+
+\section*{Files in the project directory}
+
+\begin{itemize}[leftmargin=1.4em, topsep=0pt, itemsep=0pt]
+    \item \texttt{writeup/hot\_towel.tex} --- the working version with the most recent updates (the one to review).
+    \item \texttt{writeup/hot\_towel\_submitted.tex} --- the version submitted to the journal, retained for cross-reference against the referee reports.
+    \item \texttt{writeup/hot\_towel\_old\_theory.tex} --- the most recent version I could find in the old documents containing the full model with the FOC + comparative-statics structure you mentioned.
+\end{itemize}
+
+\end{document}
