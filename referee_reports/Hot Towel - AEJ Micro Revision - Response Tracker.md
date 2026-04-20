@@ -136,13 +136,20 @@ Besides these points, please incorporate any other referee suggestions you find 
 
   - p.9: Clarify that a is a real (presumably nonnegative) number. Define subscript T on v_T when first introduced—it indexes job type. (Minor: consider lowercase t instead of uppercase T.) Using \delta for probability is nonstandard; consider p. When you write “in principle firms could have…,” are you stating the model allows it or only conceptually?
 
-> 🔴 **OPEN — Issue #1 residual**
+> 🟡 **PARTIALLY ADDRESSED — one open item**
 > 
-> **What:** p.9 items not yet touched: a-nonnegative clarification, v_T subscript first-use definition, δ→p rename, 'in principle firms could have…' wording. Held for PK's theory-body pass.
+> **What:** Four of the five sub-items addressed in the Setup paragraph (§III.A, lines 266–272):
 > 
-> **Location:** §III.A setup
+> 1. Ability `a` now explicitly declared as a nonnegative real: "Workers have heterogeneous ability $a \in \mathbb{R}_{+}$".
+> 2. Subscript `T` now introduced explicitly at first use: "differences across job types, indexed by the subscript $T$: a job of type $T$ has marginal valuation $v_T$ for workers' ability."
+> 3. `\delta` replaced with `p` throughout the paper (14 subscripted occurrences swept: the probability of high types is now $p_H$, low types $p_L$). The one remaining `\delta` at line 1348 is kept as-is since it denotes a generic small positive real in a proof, not a probability.
+> 4. "In principle firms could have…" wording clarified. New text makes the model-vs-reality distinction explicit: "In reality a firm may post several job openings, potentially of different types; in the model, however, we restrict attention to the case where each firm posts a single opening, and we use the words 'job' and 'firm' interchangeably throughout."
 > 
-> **Commit / Issue:** Issue #1 open
+> OPEN (minor): editor's parenthetical suggestion to use lowercase $t$ rather than uppercase $T$ — kept as uppercase per Peyman's call; deferred to PK for a final call.
+> 
+> **Location:** hot_towel.tex §III.A Setup (lines 266–272 for the main paragraph); manuscript-wide for the δ→p sweep.
+> 
+> **Commit / Issue:** this commit; Issue #1 open for the uppercase-vs-lowercase T decision
 
   - p.10: Workers care only about wages—so more difficult jobs don’t imply higher disutility?
 

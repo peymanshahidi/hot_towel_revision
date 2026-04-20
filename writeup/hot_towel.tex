@@ -263,13 +263,10 @@ Rather, we aim for tractability to help organize our thoughts regarding the kind
 
 \subsection{Setup}\label{sec:setup}
 
-\textit{Players and Production}: There is an endogenous mass $W(a)$ of workers
-with heterogeneous abilities weakly below $a$. Each worker knows his/her ability and is looking for one job. Firms post jobs openings. Sometimes a given job involves tasks that rely on high worker ability, sometimes less so. We capture this through differences in the marginal valuation $v_{T}$ of workers' ability: Each job can hire at most one
-worker, and a match between job type $T$ and worker ability $a$ produces
-output $v_{T}(a-c_{T}),$ where $c_{T}$ allows more complex jobs to have higher ability requirements (i.e., ``costs'') to achieve positive output.\footnote{This production function seems natural and allows for easy comparative statics later on. Appendix~\ref{online_app:general_production} lays out a more general production function $\phi(a,T)$ that is increasing and concave in ability. When the elasticity of $\phi_a$ is constant in $T$, our comparative statics continue to apply if $\phi$ is strictly supermodular and log-supermodular. Incentive compatibility for truth-telling continues to apply if the valuation of high types and low types are sufficiently far apart.}
+\textit{Players and Production}: Workers have heterogeneous ability $a \in \mathbb{R}_{+}$, and there is an endogenous mass $W(a)$ of workers with ability weakly below $a$. Each worker knows his/her own ability and is looking for one job. Firms post job openings. Sometimes a given job involves tasks that rely on high worker ability, sometimes less so. We capture this through differences across job types, indexed by the subscript $T$: a job of type $T$ has marginal valuation $v_{T}$ for workers' ability. Each job can hire at most one worker, and a match between job type $T$ and worker ability $a$ produces output $v_{T}(a-c_{T}),$ where $c_{T}$ allows more complex jobs to have higher ability requirements (i.e., ``costs'') to achieve positive output.\footnote{This production function seems natural and allows for easy comparative statics later on. Appendix~\ref{online_app:general_production} lays out a more general production function $\phi(a,T)$ that is increasing and concave in ability. When the elasticity of $\phi_a$ is constant in $T$, our comparative statics continue to apply if $\phi$ is strictly supermodular and log-supermodular. Incentive compatibility for truth-telling continues to apply if the valuation of high types and low types are sufficiently far apart.}
 For simplicity we focus on two types of jobs: $T\in \{H,L\}.$ High types value
 ability more: $v_{H}>v_{L}>0,$ and their jobs might have higher requirements: $%
-c_{H}\geq c_{L}\geq 0$. The probability of a high job type is $\delta _{H}$, and $\delta_L = 1-\delta_H$ is the fraction of low type jobs. The firm knows the job type when it posts it. Workers have to learn about it as we explain below. For ease of description we will associate each firm with a single job, and use the word ``job'' and ``firm'' interchangeably, though in principle firms could have multiple jobs of which some are more sensitive to ability than others.
+c_{H}\geq c_{L}\geq 0$. The probability of a high job type is $p_{H}$, and $p_{L} = 1-p_{H}$ is the fraction of low type jobs. The firm knows the job type when it posts it. Workers have to learn about it as we explain below. In reality a firm may post several job openings, potentially of different types; in the model, however, we restrict attention to the case where each firm posts a single opening, and we use the words ``job'' and ``firm'' interchangeably throughout.
 
 \textit{Payoffs for market participants:} If a worker is hired for a job, the firm's profit is the output
 minus the wage it pays to the worker. Therefore, a worker of type $a$ who
@@ -524,8 +521,8 @@ Now consider workers who see signal $s_{1}$ and believe that the fraction of
 low firms at this signal is $\Psi (L|s_{1})$ where we suppressed the message
 because it is absent ($m=\emptyset ).$ The fraction with high type is
 evidently the complement. Note that these fractions are exogenously given;
-for example, $\Psi (L|L)=\psi _{1}\delta _{L}/(\psi _{1}\delta _{L}+(1-\psi
-_{1})\delta _{H}),$ and do not depend on the equilibrium interaction.
+for example, $\Psi (L|L)=\psi _{1}p_{L}/(\psi _{1}p_{L}+(1-\psi
+_{1})p_{H}),$ and do not depend on the equilibrium interaction.
 
 It turns out that workers approach these firms as if facing firms whose valuation is the average of $v_{L}$ and $v_{H}$ weighted by the workers' beliefs. That is, workers approach firms as if their productivity were averaged according to
 \begin{equation*}
@@ -1406,7 +1403,7 @@ from the notation. Now consider workers who see signal $s$ and believe that
 the fraction of low (high) firms at this signal is $\Psi (L|s)$ ($\Psi
 (H|s)) $ where we suppressed the message because it is absent ($m=\emptyset
 ).$ Note that these fractions are exogenously given; for example, $\Psi
-(L|L)=\psi _{1}\delta _{L}/(\psi _{1}\delta _{L}+(1-\psi _{1})\delta _{H})$
+(L|L)=\psi _{1}p_{L}/(\psi _{1}p_{L}+(1-\psi _{1})p_{H})$
 and does not depend on the equilibrium interaction.
 
 Similar to (\ref{value-profit-truth}) and (\ref{value-profit-truth2}) we can
@@ -1588,8 +1585,7 @@ How this affects applications depends on the number of workers that they add at 
 truthful cheap-talk attracts more workers to low-message firms. The opposite
 is the case for high-message firms. In the case of $v_{H}> v_L$ but $c_H \approx c_L$, the size of the low ability segment that is lost or added shrinks to zero, and truthful messages at low type firms induces a sizeable loss of high-ability workers without an offsetting gain at low-ability workers. For high type firm truthful cheap talk induces a gain in high ability workers with an offset of low ability workers. For Part 4, note that efficiency per firm with a message is given by 
 \begin{equation}
-\max_{\lambda _{m=L}^{P}(.),\lambda _{m=H}^{P}(.)}\delta
-_{L}S(v_{L},c_{L}|\lambda _{s=L}^{P}(.))+\delta _{H}S(v_{H},c_{H}|\lambda
+\max_{\lambda _{m=L}^{P}(.),\lambda _{m=H}^{P}(.)}p_{L}S(v_{L},c_{L}|\lambda _{s=L}^{P}(.))+p_{H}S(v_{H},c_{H}|\lambda
 _{m=H}^{P}(.))  \label{max1}
 \end{equation}%
 where 
@@ -1609,16 +1605,15 @@ The optimality conditions for this problem coincide nearly everywhere with
 the equilibrium conditions (\ref{first derivative}) for a given firm type,
 and it shares the same boundary conditions. This establishes that the
 equilibrium decentralizes the planner's solution. Evidently the value of
-program (\ref{max1}) is given by $\delta _{L}\mathcal{S}(v_{L},c_{L})+\delta
-_{H}\mathcal{S}(v_{H},c_{H}).$
+program (\ref{max1}) is given by $p_{L}\mathcal{S}(v_{L},c_{L})+p_{H}\mathcal{S}(v_{H},c_{H}).$
 
 For firms who cannot send a message the maximal efficiency per firm is
 attainable through queue of 
 \begin{eqnarray}
-\max_{\lambda _{s=L}^{P}(.),\lambda _{s=H}^{P}(.)} &&\delta _{L}\left[ \psi
+\max_{\lambda _{s=L}^{P}(.),\lambda _{s=H}^{P}(.)} &&p_{L}\left[ \psi
 _{1}S(v_{L},c_{L}|\lambda _{s=L}^{P}(.))+(1-\psi _{1})S(v_{L},c_{L}|\lambda
 _{s=H}^{P}(.))\right]  \label{max2} \\
-&&+\delta _{H}\left[ \psi _{1}S(v_{H},c_{H}|\lambda _{s=H}^{P}(.))+(1-\psi
+&&+p_{H}\left[ \psi _{1}S(v_{H},c_{H}|\lambda _{s=H}^{P}(.))+(1-\psi
 _{1})S(v_{H},c_{H}|\lambda _{s=L}^{P}(.))\right] ,  \notag
 \end{eqnarray}%
 where $S(.)$ still denotes the output minus the forgone outside option of
@@ -1634,8 +1629,8 @@ both $S(v_{L},c_{L}|\lambda _{s=L}^{\ast }(.))$ and $S(v_{L},c_{L}|\lambda
 _{s=H}^{\ast }(.))$ are bounded above by $\mathcal{S}(v_{L},c_{L}),$ and $%
 S(v_{H},c_{H}|\lambda _{s=H}^{P}(.))$ and $S(v_{H},c_{H}|\lambda
 _{s=L}^{P}(.))$ are bounded above by $\mathcal{S}(v_{L},c_{L}).$ Therefore
-the value of problem (\ref{max2}) is bounded from above by $\delta _{L}%
-\mathcal{S}(v_{L},c_{L})+\delta _{H}\mathcal{S}(v_{H},c_{H}),$ which
+the value of problem (\ref{max2}) is bounded from above by $p_{L}%
+\mathcal{S}(v_{L},c_{L})+p_{H}\mathcal{S}(v_{H},c_{H}),$ which
 coincides with the value of problem (\ref{max1}).
 
 In fact, one can prove that value of problem (\ref{max2}) is strictly below
