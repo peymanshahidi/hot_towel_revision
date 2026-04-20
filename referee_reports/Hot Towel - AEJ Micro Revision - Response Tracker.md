@@ -585,13 +585,13 @@ Why not simplify the model by assuming the signal is perfectly revealing? With �
 
 - On p. 10 (“market entry”), clarify whether u’ is bounded or unbounded. Both statements seem to appear, and it is unclear whether this assumption is maintained throughout or only where needed.
 
-> 🔴 **OPEN — Issue #1 residual**
+> ✅ **ADDRESSED**
 > 
-> **What:** p.10 u' bounded vs. unbounded clarification not yet touched. Awaiting PK pass.
+> **What:** Rewrote the Market Entry paragraph to disambiguate two different "bounded/unbounded" claims that R2 read as contradictory. The paper's actual position: (i) $u$ is increasing, strictly convex, and satisfies Inada conditions $u'(0)=0$ and $\lim_{a \to \infty} u'(a) = \infty$ — so $u'$ itself is unbounded, maintained **throughout**; (ii) a **separate** regularity condition, used only where specific proofs require it (e.g., the wage ODE in the proof of Corollary 2 at line 1573), is that the *elasticity* of $u'$, namely $a \cdot u''(a)/u'(a)$, is bounded away from zero and infinity. These two claims are compatible: the elasticity condition restricts the *rate* at which $u'$ grows, not $u'$ itself. The rewrite explicitly labels one as maintained globally and the other as used where needed, and adds a clarifying sentence noting the compatibility.
 > 
-> **Location:** §III.A setup
+> **Location:** hot_towel.tex §III.A Market Entry paragraph (lines 280–290)
 > 
-> **Commit / Issue:** Issue #1 open
+> **Commit / Issue:** this commit (closes the p.10 u' clarification item)
 
 ## R3 Report
 
