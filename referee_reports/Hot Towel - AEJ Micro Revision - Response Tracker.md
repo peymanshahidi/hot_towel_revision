@@ -1,6 +1,6 @@
 # Hot Towel — AEJ Micro Revision Response Tracker
 
-_Running document mapping every editor/referee comment to our revision status, where the fix lives in the paper, and the commit / issue reference. Edit this file directly to add new responses or update existing ones; the sibling `.docx` version is regenerated from `build_response_tracker.py`._
+_Running document mapping every editor/referee comment to our revision status, where the fix lives in the paper, and the commit / issue reference. This markdown file is the primary working copy — edit it directly to add new responses or update existing ones._
 
 **Status legend:** ✅ addressed / verified · 🟡 partially addressed (open items remain) · 🔴 open (awaiting coauthor input or further work) · 🟣 declined per referee's own suggestion.
 
