@@ -604,33 +604,33 @@ I don’t have many comments; the paper is in great shape. However, I do have so
 - p.6 – “Perhaps the closest related paper is Tadelis and Zettelmeyer (2015)…”
 I see the connection to Tadelis and Zettelmeyer (2015), although I think there is another Tadelis paper that is also closely related — his more recent paper in JPE (Backus et al., 2019).
 
-> 🔴 **OPEN — coauthors (Issue #3)**
+> 🟡 **PARTIALLY ADDRESSED — bib ref added, text awaiting PK**
 > 
-> **What:** Adding Backus, Blake & Tadelis (2019, JPE) reference alongside Tadelis & Zettelmeyer (2015). Needs PK-level positioning paragraph.
+> **What:** `backus2019empirical` (Backus, Blake & Tadelis, JPE 2019) is now present in `writeup/hot_towel.bib`, ready to be cited. The positioning paragraph that ties this reference into §II Literature is PK's to write — connecting our contribution to the Backus-Blake-Tadelis framework is a framing call that Peyman will not pre-commit to.
 > 
-> **Location:** §II Literature
+> **Location:** bib ready; §II Literature text pending
 > 
-> **Commit / Issue:** Issue #3 open
+> **Commit / Issue:** bib entry added (in-flight edit); text-level incorporation open under Issue #3
 
   - Tadelis and Zettelmeyer (2015) get improved match value first through the linkage principle, and then, motivated by the empirical findings, through additional entry. Note that the linkage principle is not incentive compatible; low types would prefer not to reveal their type, but they end up doing better through additional entry.
 
-> 🔴 **OPEN — coauthors (Issue #3)**
+> 🔴 **OPEN — PK**
 > 
-> **What:** Distinguishing Tadelis & Zettelmeyer (2015)'s linkage principle from our IC cheap talk. Needs PK-level framing.
+> **What:** Distinguishing Tadelis & Zettelmeyer (2015)'s linkage principle from our IC cheap talk. This is a substantive framing call about how our mechanism differs from theirs, held for PK.
 > 
 > **Location:** §II Literature
 > 
-> **Commit / Issue:** Issue #3 open
+> **Commit / Issue:** Issue #3 open (PK)
 
   - Backus, Blake, and Tadelis (2019) do not emphasize improved match value, but they do, like this paper, obtain incentive-compatible cheap talk and endogenous matching. Perhaps more helpfully for the empirical parts of this paper, they set out a framework for thinking about the empirical content of such equilibria, much of which is implicitly re-invented here. My main suggestion for improving this paper would be connecting it to that literature by outlining how the empirical evidence comports with the framework advanced there.
 
-> 🔴 **OPEN — coauthors (Issue #3)**
+> 🟡 **PARTIALLY ADDRESSED — bib ref added, text awaiting PK**
 > 
-> **What:** Explicit paragraph connecting our empirical evidence to Backus, Blake & Tadelis (2019)'s framework. R3's main framing ask. Needs PK/Horton.
+> **What:** `backus2019empirical` is now in the bib. R3's main framing ask — an explicit paragraph connecting our empirical evidence to Backus-Blake-Tadelis (2019)'s framework on the empirical content of IC cheap talk — is held for PK. This is the flagship framing deliverable of Issue #3.
 > 
-> **Location:** §II Literature + intro
+> **Location:** bib ready; §II Literature + intro text pending
 > 
-> **Commit / Issue:** Issue #3 open
+> **Commit / Issue:** bib entry added; text-level incorporation open under Issue #3 (PK)
 
 - p.18 – “The marketplace we study is not the only market for online work, and so it is important to keep in mind the ‘market’ versus ‘marketplace’ distinction made by Roth (2018).”
 Please spell this out more clearly.
@@ -646,13 +646,13 @@ Please spell this out more clearly.
 - p.19 – “In this arm, employees were then randomized to have their choice revealed or not.”
 I think of this as akin to the garbling device discussed in Backus et al. (2019), and the first, best example I know of using this to study signaling is Ambrus et al. (2018).
 
-> 🔴 **OPEN — coauthors (Issue #3)**
+> 🟡 **PARTIALLY ADDRESSED — bib refs added, text awaiting PK**
 > 
-> **What:** Frame probabilistic revelation arm as the garbling device in Backus et al. (2019) and Ambrus, Chaney & Salitskiy (2018, QE). Needs PK-level paragraph.
+> **What:** Both `backus2019empirical` and `ambrus2018pirates` (Ambrus, Chaney & Salitskiy, QE 2018) are now in `writeup/hot_towel.bib`, ready to be cited. Framing our probabilistic revelation arm as the garbling device in Backus et al. (2019), with Ambrus et al. (2018) as the first signaling application of this design, is PK's paragraph to write.
 > 
-> **Location:** §IV.A + §II Literature
+> **Location:** bib ready; §IV.A + §II Literature text pending
 > 
-> **Commit / Issue:** Issue #3 open
+> **Commit / Issue:** bib entries added; text-level incorporation open under Issue #3 (PK)
 
 - Section V.A:
 I did not find these results surprising.
