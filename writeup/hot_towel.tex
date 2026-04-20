@@ -266,7 +266,7 @@ Rather, we aim for tractability to help organize our thoughts regarding the kind
 \textit{Players and Production}: There is an endogenous mass $W(a)$ of workers
 with heterogeneous abilities weakly below $a$. Each worker knows his/her ability and is looking for one job. Firms post jobs openings. Sometimes a given job involves tasks that rely on high worker ability, sometimes less so. We capture this through differences in the marginal valuation $v_{T}$ of workers' ability: Each job can hire at most one
 worker, and a match between job type $T$ and worker ability $a$ produces
-output $v_{T}(a-c_{T}),$ where $c_{T}$ allows more complex jobs to have higher ability requirements (i.e., ``costs'') to achieve positive output.\footnote{This production function seems natural and allows for easy comparative statics later on. Online Appendix~\ref{online_app:general_production} lays out a more general production function $\phi(a,T)$ that is increasing and concave in ability. When the elasticity of $\phi_a$ is constant in $T$, our comparative statics continue to apply if $\phi$ is strictly supermodular and log-supermodular. Incentive compatibility for truth-telling continues to apply if the valuation of high types and low types are sufficiently far apart.}
+output $v_{T}(a-c_{T}),$ where $c_{T}$ allows more complex jobs to have higher ability requirements (i.e., ``costs'') to achieve positive output.\footnote{This production function seems natural and allows for easy comparative statics later on. Appendix~\ref{online_app:general_production} lays out a more general production function $\phi(a,T)$ that is increasing and concave in ability. When the elasticity of $\phi_a$ is constant in $T$, our comparative statics continue to apply if $\phi$ is strictly supermodular and log-supermodular. Incentive compatibility for truth-telling continues to apply if the valuation of high types and low types are sufficiently far apart.}
 For simplicity we focus on two types of jobs: $T\in \{H,L\}.$ High types value
 ability more: $v_{H}>v_{L}>0,$ and their jobs might have higher requirements: $%
 c_{H}\geq c_{L}\geq 0$. The probability of a high job type is $\delta _{H}$, and $\delta_L = 1-\delta_H$ is the fraction of low type jobs. The firm knows the job type when it posts it. Workers have to learn about it as we explain below. For ease of description we will associate each firm with a single job, and use the word ``job'' and ``firm'' interchangeably, though in principle firms could have multiple jobs of which some are more sensitive to ability than others.
@@ -350,7 +350,7 @@ V(m,s_{1},a,b_{L},b_{H})=\sum_{s_{2},T}\Psi(s_{2},T|m,s_{1})\,b_{s_{2}} \left(
 \end{equation}
 as long as the worker generates weakly positive profits (i.e., $\pi (a,b_{s_2}|T)\geq 0$) and there are no mass points of workers that generate the same profit (i.e., $\bigtriangleup (.|m,s_{1},s_{2},T)=0$).\footnote{
 If the worker generates negative profits firms of type $T$ would not hire this worker. If there is a mass point of workers that generate exactly the same profit (i.e., $\bigtriangleup (\pi
-(a,b_{s_2}|T)|m,s_{1},s_{2},T)=0$ for some $s_2$ and $T$) profits would be strictly lower than in (\ref{value}) because the firm would randomize its hiring among these equally-attractive workers. Online Appendix~\ref{online_app:value_and_lemma} gives the exact expression that captures these cases.}
+(a,b_{s_2}|T)|m,s_{1},s_{2},T)=0$ for some $s_2$ and $T$) profits would be strictly lower than in (\ref{value}) because the firm would randomize its hiring among these equally-attractive workers. Appendix~\ref{online_app:value_and_lemma} gives the exact expression that captures these cases.}
 The first factor is the probability of facing signal $s_{2}$ and firm type $T$;
 the second is the wage the worker collects if hired; the third is the Poisson
 probability that no other worker at the firm generates a strictly higher profit.
@@ -425,7 +425,7 @@ is in the support of $\Lambda (a|m).$
 We can use this together with the definition of (\ref{value-profit-truth})
 to prove that at a given message $m$ the worker abilities that enter in
 equilibrium form a non-empty interval $[\underline{a}_{m},\bar{a}_{m}],$ and
-no single type enters with positive mass (see proof in Online Appendix~\ref{online_app:proof_claim}). The reason is that there is no mass point in terms of profits that are offered
+no single type enters with positive mass (see proof in Appendix~\ref{online_app:proof_claim}). The reason is that there is no mass point in terms of profits that are offered
 (see earlier Lemma) and for each profit level, there is a
 different ability type that finds it optimal to enter.
 
@@ -576,7 +576,7 @@ threshold $c$ (but does not depend on $v$).
 \end{itemize}
 \end{corollary}
 
-\noindent Proof: See Online Appendix~\ref{online_app:proof_corollary}.
+\noindent Proof: See Appendix~\ref{online_app:proof_corollary}.
 
 We can directly apply these comparative statics noting that $v$ and $c$ are lowest for firms with a truthful low message, higher for firms without a message but with a low first signal, even higher for firms without a message but with a high first signal, and highest for firms with a truthful high message. Both the lower and the upper bound of the interval $[\underline{a},\bar{a}]$ of workers who approach these firms therefore increase in this order. Wherever these intervals overlap across firms with different messages or signals, the worker types in the overlap generate the same queue at each firm according to (\ref{equilibrium density}), so they can implement this queue length by choosing among these firms at random.
 
@@ -665,13 +665,15 @@ This highlights that incentives for truth-telling are present in some situations
 \label{cor:partially_revealing}For any partially revealing equilibrium in which messages carry some information (i.e., $\Psi(T|L,s_{1}) \neq \Psi(T|H,s_{1})$), the comparison of firms with and without messages is characterized by parts (1)--(5) of Proposition~\ref{comparison1}.
 \end{corollary}
 
-\noindent Proof: The first three points in Proposition \ref{comparison1} are based on comparative statics that continue to apply (see Online Appendix~\ref{online_app:partially_revealing_eq}). Point (5) remains valid because workers continue to direct their search and equate market payoffs to their outside option, and the efficiency proof proceeds in analogous steps as in the full-information case. $\square $ \bigskip
+\noindent Proof: The first three points in Proposition \ref{comparison1} are based on comparative statics that continue to apply (see Appendix~\ref{online_app:partially_revealing_eq}). Point (5) remains valid because workers continue to direct their search and equate market payoffs to their outside option, and the efficiency proof proceeds in analogous steps as in the full-information case. $\square $ \bigskip
 
 Therefore, any equilibrium where messages transmit some information shares the same qualitative empirical implications as the fully revealing equilibrium discussed in Proposition~\ref{comparison1}. This arises because these implications primarily depend on comparative statics involving averaged valuations and costs.
 
-Finally, to build the bridge to the ensuing empirical section, we conclude by discussing how we interpret ``truth-telling'' in an empirical setting: For this, we ask firms without a message a fictitious question: Do you prefer (``rookie'', \$) or (``expert'', \$\$\$)? Firms arguably interpret this as choosing between two combinations of ability and wage-bid: $(a_{1},b_{1})$ or $(a_{2},b_{2})$ with $a_{1}<a_{2}$ and $b_{1}<b_{2}.$ Since there are no consequences to the question, firms might simply select the option that would generate more profits. Under this assumption, if two firms choose differently, the one that chooses the first must be the $L$ type and the one that chose the second must be the $H$ type. This holds not only for our specific production function but for any supermodular production function (see Appendix~\ref{online_app:robustness}), and one can extend this idea to more than two types.\footnote{One can easily extend this logic to more messages: In the empirical setting we also ask additionally about (``intermediate'', \$\$). Assume firms interpret this message as ability-wage combination $(a_{\text{medium}},b_{\text{medium}})$ with $a_{\text{medium}} \in \{a_1,a_2 \}$ and $b_{\text{medium}} \in \{b_1,b_2 \}$. If there is a third type of firms with $v_{\text{medium}} \in \{v_L,v_H\}$ and some firms choose each of the messages, then $L$ firms choose the low ability, $I$ firms choose the intermediate ability, and $H$ firms choose the high ability due to supermodularity between the firm's valuation and ability.} Empirically we first check if the fraction of firms that choose the first answer varies meaningfully across different occupations, and then, more importantly, we compare the distribution of answers for these firms that have no strategic incentives with the distribution of answers of firms whose choices are revealed to workers. The latter group is the one whose answers serve as messages to workers and who faces strategic incentives, but if they continue to answer truthfully their distribution of answers should be similar to that of the first group of firms. We will next describe the empirical setup, followed by the empirical results on truth-telling, and subsequently we return to the empirical counterparts of the five points in Proposition \ref{comparison1}.
+Finally, to build the bridge to the ensuing empirical section, we conclude by discussing how we interpret ``truth-telling'' in an empirical setting: For this, we ask firms without a message a fictitious question: Do you prefer (``rookie'', \$) or (``expert'', \$\$\$)? Firms arguably interpret this as choosing between two combinations of ability and wage-bid: $(a_{1},b_{1})$ or $(a_{2},b_{2})$ with $a_{1}<a_{2}$ and $b_{1}<b_{2}.$ Since there are no consequences to the question, firms might simply select the option that would generate more profits. Under this assumption, if two firms choose differently, the one that chooses the first must be the $L$ type and the one that chose the second must be the $H$ type. This holds not only for our specific production function but for any supermodular production function (see Appendix~\ref{online_app:robustness}), and one can extend this idea to more than two types.\footnote{One can easily extend this logic to more messages: In the empirical setting we also ask additionally about (``intermediate'', \$\$). Assume firms interpret this message as ability-wage combination $(a_{\text{medium}},b_{\text{medium}})$ with $a_{\text{medium}} \in \{a_1,a_2 \}$ and $b_{\text{medium}} \in \{b_1,b_2 \}$. If there is a third type of firms with $v_{\text{medium}} \in \{v_L,v_H\}$ and some firms choose each of the messages, then $L$ firms choose the low ability, $I$ firms choose the intermediate ability, and $H$ firms choose the high ability due to supermodularity between the firm's valuation and ability.} Empirically we first check if the fraction of firms that choose the first answer varies meaningfully across different occupations, and then, more importantly, we compare the distribution of answers for these firms that have no strategic incentives with the distribution of answers of firms whose choices are revealed to workers. The latter group is the one whose answers serve as messages to workers and who faces strategic incentives, but if they continue to answer truthfully their distribution of answers should be similar to that of the first group of firms.
 
-Beyond this direct empirical test, the truth-telling assumption also receives indirect support from the rest of the analysis. The downstream predictions on ability sorting, wage bidding, and efficiency are all derived under truth-telling, and their confirmation in the data would be difficult to reconcile with pervasive strategic misreporting or babbling. Their empirical validation therefore constitutes a second, independent anchor for truth-telling, alongside the incentive-compatibility argument of Proposition~\ref{prop:incentive_compat}.
+Beyond this direct empirical test, the truth-telling assumption also receives indirect support from the rest of the analysis. The downstream predictions on ability sorting, wage bidding, and efficiency are all derived under truth-telling, and their confirmation in the data would be difficult to reconcile with pervasive strategic misreporting or babbling. The empirical validation therefore constitutes a second, independent anchor for truth-telling, alongside the incentive compatibility argument of Proposition~\ref{prop:incentive_compat}. 
+
+We will next describe the empirical setup, followed by the empirical results on truth-telling, and subsequently we return to the empirical counterparts of the five points in Proposition \ref{comparison1}.
 
 
 \section{Empirical Context} \label{sec:empirical_context}
@@ -793,7 +795,7 @@ The labeling was prominently displayed to make it salient to applying workers.\f
   However, we find no evidence this was the case, and so for simplicity, we pool these observations together, ignoring this feature of the design.
   As it is, it appeared to have no effect on any outcome it could have affected. 
 }
-Randomization was effective (see Online Appendix~\ref{online_app:balance}). 
+Randomization was effective (see Appendix~\ref{online_app:balance}). 
 
 It is important to note that with our experimental design, workers could simultaneously see and interact with job openings by employers in different cells. 
 As such, the SUTVA condition is inherently, and intentionally, violated.
@@ -810,7 +812,7 @@ However, when assessing the effects of the signaling feature on match outcomes, 
 
 Before turning to the main empirical analysis, one preliminary concern is worth addressing at the outset. The theory admits both truth-telling and babbling equilibria (see Proposition~\ref{prop:incentive_compat}), so in principle one cannot rule out that employers send messages strategically, either tailoring their tier choice to whether it will be shown to applicants or ignoring the message altogether. If employers in the explicit arm conditioned their tier selection on whether their choice was revealed, then selections in the ambiguous and explicit arms would not be comparable, and pooling them (as we do below) would not be justified. The validity of most downstream analysis rests on this pooling being innocuous, so it is worth examining before proceeding.
 
-To address this, we use the explicit arm to compare the distribution of tier choices when employers know their choice will be revealed to workers ($\textsc{ShownPref}=1$) against the distribution when they know it will not ($\textsc{ShownPref}=0$). Across all nine categories of work and the three tier options within each, we find no statistically detectable shift in the distribution of selections (a $\chi^2$-test of \textsc{ShownPref} versus tier selection yields a p-value of $\pValue{}$). This is consistent with firms reporting their true preferences regardless of whether the report is strategically relevant, and it justifies pooling the ambiguous and explicit arms in the analyses that follow. The by-category figure, the associated tests, and a fuller discussion are reported in Online Appendix~\ref{online_app:informative_messages}.
+To address this, we use the explicit arm to compare the distribution of tier choices when employers know their choice will be revealed to workers ($\textsc{ShownPref}=1$) against the distribution when they know it will not ($\textsc{ShownPref}=0$). Across all nine categories of work and the three tier options within each, we find no statistically detectable shift in the distribution of selections (a $\chi^2$-test of \textsc{ShownPref} versus tier selection yields a p-value of $\pValue{}$). This is consistent with firms reporting their true preferences regardless of whether the report is strategically relevant, and it justifies pooling the ambiguous and explicit arms in the analyses that follow. The by-category figure, the associated tests, and a fuller discussion are reported in Appendix~\ref{online_app:informative_messages}.
 
 \subsection{Sorting} \label{sec:results_sorting} %4.2
 
@@ -874,7 +876,7 @@ That is, if one measures the $n$-th decile of the ability of applicants at a giv
 
 A deeper theoretical prediction (Corollary~\ref{corollary}, proved in Appendix~\ref{online_app:proof_corollary}) is that differences in the applicant pool should primarily be driven by high-ability workers when valuation differences dominate and by low-ability workers if cost differences are key. 
 As our theoretical context in the previous subsection emphasized valuation differences, we expect significant sorting at higher quantiles of the ability distribution. 
-We show that this is indeed the case in Online Appendix~\ref{online_app:empirical_analysis}, where we present empirical evidence based on quantiles of applicant experience, our proxy for ability.
+We show that this is indeed the case in Appendix~\ref{online_app:empirical_analysis}, where we present empirical evidence based on quantiles of applicant experience, our proxy for ability.
 
 
 We have studied the application and bidding behavior of workers, but the final hiring decision lies with employers.
@@ -993,7 +995,7 @@ revelation raised the profile rates of applicants to high tier openings by \Effe
 Note that these low and high tier revelation effects for the wage bid are about twice as large in magnitude compared to the profile rates. 
 Finding smaller effects for profile rates than for wage bids is suggestive that workers are marking up or marking down their wage bids directly in response to the tier choice.\footnote{
   As a direct measure of wage bid conditioning, we can use as an outcome the ``markup'' in the wage bid, or the difference between the wage bid and profile rate, divided by the profile rate.
-  See Online Appendix~\ref{online_app:markup} for an analysis showing higher markups in response to revelation of a high-type signal and lower markups in response to revelation of a low-type signal.
+  See Appendix~\ref{online_app:markup} for an analysis showing higher markups in response to revelation of a high-type signal and lower markups in response to revelation of a low-type signal.
 }
 
 %\subsection{Within-worker approach for detecting wage bid conditioning}
@@ -1050,7 +1052,7 @@ The pattern of wage bidding results are consistent with workers directly conditi
 However, there are alternatives explanations.
 For example, perhaps workers perceive the message as indicating the worker's likely costs.
 However, we view these alternative explanations as implausible. 
-We show in Online Appendix~\ref{online_app:compensating_differentials}, there is no evidence that high tier employers were harsher reviewers when giving feedback even when preferences were not revealed.
+We show in Appendix~\ref{online_app:compensating_differentials}, there is no evidence that high tier employers were harsher reviewers when giving feedback even when preferences were not revealed.
 This suggests that high tier employers did not have costlier expectations for workers that would require a compensating differential. 
 It is also unlikely that some firms are viewed as more attractive.
 The relatively impersonal nature of these online interactions, along with their short-duration and lack of brand-name firms all make it unlikely workers have strong non-monetary preference over firms \emph{\`{a} la} \cite{sorkin2018ranking}. 
@@ -1085,7 +1087,7 @@ To increase statistical power, we pool both the explicit and ambiguous arms.
 Furthermore, we include not only the first job opening, but all subsequent openings by that employer during the experimental period, adjusting for the hierarchical data that results.
 This gives us a total sample size of \TotalSampleSize{} jobs openings, of which  \TotalFilledSampleSize{} were filled. 
 
-Although our preferred estimates for match outcomes are made with the full sample, in Online Appendix~\ref{online_app:trt_effects_robust} we report estimates for all the different possible sample combinations (e.g., explicit arm, first openings; ambiguous arm, first openings, all arms, all openings, and so on).
+Although our preferred estimates for match outcomes are made with the full sample, in Appendix~\ref{online_app:trt_effects_robust} we report estimates for all the different possible sample combinations (e.g., explicit arm, first openings; ambiguous arm, first openings, all arms, all openings, and so on).
 The point estimates differ with the sample, but the same general pattern of results is the same as reported when using all arms and all openings. 
 
 To measure match outcomes, our regression specification is 
@@ -1132,7 +1134,7 @@ Although the number of matches did not discernibly change, there are several pie
 In the third panel from the top of Figure~\ref{fig:trt_effects}, we can see that revelation in the high tier increased hired worker wages by \mbox{\WageEffectHigh{}\%}, while revelation in the low tier decreases wages by \mbox{\WageEffectLow{}\%}, with little effect on the medium tier.
 The net overall effect, indicated by ``Pooled,'' is slightly negative.
 However, this does not necessarily imply workers were made worse-off, as we saw that substantially less experienced workers were hired in the low tier (recall Figure~\ref{fig:signal_effects_experience}).
-In Online Appendix~\ref{online_app:welfare}, we show that on a per-application basis and with worker specific fixed effects, workers had higher application success probabilities and higher expected values (wage bids times success probability), when applying to {$\textsc{ShownPref}=1$} job openings.
+In Appendix~\ref{online_app:welfare}, we show that on a per-application basis and with worker specific fixed effects, workers had higher application success probabilities and higher expected values (wage bids times success probability), when applying to {$\textsc{ShownPref}=1$} job openings.
 
 In the bottom two panels, we can see that revelation led to more hours-worked and a larger wage bill.
 Pooled across tiers, revelation increased hours-worked by \HoursEffectPool{}\%, with increases of \HoursEffectHigh{}\% in the high tier and \HoursEffectLow{}\% in the low tier.  
@@ -1186,7 +1188,7 @@ To investigate the evolution of choices into the post-experimental period, Figur
 \end{minipage} 
 \end{figure} 
 
-We also looked at firms that posted jobs repeatedly during the experimental period. Recall that in the previous sections we only used the initial job posted by each of these firms. Our theory presumed that firms understand all features of the environment right away. It is conceivable that firms only slowly understand the strategic aspects of their environment, and even though they are truthful in their initial message they become more strategic over time, which could lead to pooling on particularly beneficial messages over time. In Online Appendix \ref{online_app:choice_over_time} we document that reporting is very stable over time: there is a slight trend away from low and medium-tier choices towards high-tier choices as firms repeatedly post jobs, but even after the tenth job posting firms are only 2\% point more likely to choose the high tier. Importantly, this is not affected by whether the preference was shown or hidden, which is another indication that firms tell the truth even when the message is strategically relevant (in line with the evidence of Online Appendix~\ref{online_app:informative_messages}). 
+We also looked at firms that posted jobs repeatedly during the experimental period. Recall that in the previous sections we only used the initial job posted by each of these firms. Our theory presumed that firms understand all features of the environment right away. It is conceivable that firms only slowly understand the strategic aspects of their environment, and even though they are truthful in their initial message they become more strategic over time, which could lead to pooling on particularly beneficial messages over time. In Appendix \ref{online_app:choice_over_time} we document that reporting is very stable over time: there is a slight trend away from low and medium-tier choices towards high-tier choices as firms repeatedly post jobs, but even after the tenth job posting firms are only 2\% point more likely to choose the high tier. Importantly, this is not affected by whether the preference was shown or hidden, which is another indication that firms tell the truth even when the message is strategically relevant (in line with the evidence of Appendix~\ref{online_app:informative_messages}). 
 
 So overall, message frequencies stay remarkably stable even as individual employers post jobs repeatedly, but also for the whole market over time and across a large roll-out to all firms. 
 
@@ -1243,7 +1245,7 @@ Essentially any feature of the economic relationship for which buyers and seller
 
 \begin{centering}
     \Large{``Sorting through Cheap Talk: Theory and Evidence from a Labor Market'' by John Horton, Ramesh Johari and Philipp Kircher \\ \bigskip 
-    \LARGE Online Appendix
+    \LARGE Appendix
     \\ \bigskip}
 \end{centering}
 
@@ -1879,7 +1881,7 @@ Finally, consider the case where there remains some imprecision in the second si
 
 \bigskip
 
-We omit the generic failure of truth-telling when types are very close together as this is a standard result that appears in much of the literature. In Online Appendix~\ref{online_app:ic_general_prod} we prove incentive compatibility for more general production functions.
+We omit the generic failure of truth-telling when types are very close together as this is a standard result that appears in much of the literature. In Appendix~\ref{online_app:ic_general_prod} we prove incentive compatibility for more general production functions.
 
 
 \subsection{Partially Revealing Equilibria}
@@ -1918,7 +1920,7 @@ large.}
 \section{Model Extensions: General Production Functions}
 \label{online_app:robustness}
 
-This section briefly discusses an extension from Online Appendix~\ref{online_app:analysis} to more general production functions. We outline conditions under which comparative statics and incentive compatibility results similar to those in the main paper still hold.
+This section briefly discusses an extension from Appendix~\ref{online_app:analysis} to more general production functions. We outline conditions under which comparative statics and incentive compatibility results similar to those in the main paper still hold.
 
 \subsection{More General Production Functions}
 \label{online_app:general_production}
@@ -2010,7 +2012,7 @@ strict log-supermodularity. The opposite holds for strict log-submodularity.$%
 \label{online_app:ic_general_prod}
 
 Proposition \ref{prop:incentive_compat} proves that in a candidate equilibrium with truth-telling each type has incentives to reveal the truth when valuations between high and low type firms are sufficiently far apart. This was done for the specific production function $v_T (a-c_t)$.
-This also holds for the somewhat broader class of production functions studied in Online Appendix~\ref{online_app:general_production}. To see this, consider again a production function $\phi(a,T)$ on $\mathbb{R}^2_{+}$ that is increasing in both arguments, convex in $a$, and where the semi-elasticity of $\phi_a(a,T)$ with respect to $a$ is constant in $T$. Again assume that for each $T>\underline{T}$ at least some ability has positive surplus, and assume that the lowest firm type for which this arises remains bounded (i.e., for each $T>0$ there exists $a\leq \bar{a}$ such that $\phi(a,T)>u(a)$). Fix some low type $L>\underline{T}$. 
+This also holds for the somewhat broader class of production functions studied in Appendix~\ref{online_app:general_production}. To see this, consider again a production function $\phi(a,T)$ on $\mathbb{R}^2_{+}$ that is increasing in both arguments, convex in $a$, and where the semi-elasticity of $\phi_a(a,T)$ with respect to $a$ is constant in $T$. Again assume that for each $T>\underline{T}$ at least some ability has positive surplus, and assume that the lowest firm type for which this arises remains bounded (i.e., for each $T>0$ there exists $a\leq \bar{a}$ such that $\phi(a,T)>u(a)$). Fix some low type $L>\underline{T}$. 
 
 We will show that there is incentive compatibility if the valuation of the high type is sufficiently large. In particular, assume that $\phi_a(a,T)$ at each $a$ increases in $a$ and is unbounded. 
 
