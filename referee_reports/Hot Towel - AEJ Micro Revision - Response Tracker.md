@@ -239,7 +239,8 @@ AEJ Micro policy requires that authors provide all data, code, and documentation
 
 Please delete redundant files before completing your resubmission. Revised manuscripts not submitted within a year may be treated as new submissions.
 
-R1 Report
+
+## R1 Report
 
 This paper offers a theoretical model and field experiment in an online labor market, analyzing the sorting benefits of allowing job posters the ability to signal to workers their preference over hiring high-skilled workers at higher prices or low-skilled workers at lower prices (or an intermediate option).
 
@@ -399,23 +400,28 @@ a. There is a lot of defensive writing that inflates the model section. For exam
 
 b. The intuition is mixed into the formal setup, making it unclear what is definitional versus explanatory. For instance, at the bottom of p. 10, the authors discuss “multiple exogenous signals” of job type—this appears without prior introduction. The same issue occurs with the paragraph on outside options.
 
-> 🔴 **OPEN — Issue #1 residual**
+> 🔴 **OPEN — likely moot after the rewrite, but keep on radar**
 > 
-> **What:** 'Multiple exogenous signals' introduction (p.10 bottom) and outside-options paragraph still appear without proper setup. Awaiting PK pass.
+> **What:** The 'multiple exogenous signals' and outside-options paragraphs that R2 flagged sat in the submitted version's §III.A. The theory-section rewrite (commit `9d8fcc6`) significantly restructured this subsection — the mixed formal/intuitive exposition that R2 objected to is substantially different in the new draft, and this specific complaint may no longer apply. **Flag:** keep this comment on the radar through PK's next pass; if the new setup still exhibits the same issue — intuition interleaved with definitions without proper setup — we need to clean it up. If the rewrite has already dissolved the concern, we can mark this addressed in a later revision. For now: provisional.
 > 
-> **Location:** §III.A
+> **Location:** §III.A (rewritten)
 > 
-> **Commit / Issue:** Issue #1 open
+> **Commit / Issue:** 9d8fcc6 (rewrite may have resolved); revisit during PK's pass
 
 c. Certain key assumptions are undefined. The text refers to “a mass of workers” (p. 9) and a “large market” (p. 11). Does this imply a continuum of firms or jobs? The assertion on p. 11 that “randomness leads to a Poisson distribution of workers at a given firm” is also unclear.
 
-> 🔴 **OPEN — Issue #1 residual**
+> 🟡 **PARTIALLY ADDRESSED — one sub-item done, two open (PK call)**
 > 
-> **What:** Key assumptions 'mass of workers', 'large market', Poisson-at-each-firm not yet formalized. Awaiting PK pass.
+> **What:** The 'mass of workers' ambiguity is addressed in the new Setup paragraph (commit `f625faf`): ability $a$ is now declared as a nonnegative real, and $W(a)$ is defined as the endogenous mass of workers with ability weakly below $a$. This clarifies the object R2 found undefined.
 > 
-> **Location:** §III.A setup
+> Still OPEN — both items are PK calls:
 > 
-> **Commit / Issue:** Issue #1 open
+> 1. **'Large market' precise definition.** Whether this is a continuum of firms/jobs, what the exact limit-taking convention is, etc. Needs PK to state the intended formal definition.
+> 2. **Poisson-at-each-firm assertion.** The claim that randomness leads to a Poisson distribution of workers at a given firm needs a clean derivation or a pointer to the directed-search literature convention PK has in mind.
+> 
+> **Location:** §III.A Setup (mass-of-workers addressed); 'large market' and Poisson still in §III.A
+> 
+> **Commit / Issue:** f625faf (mass-of-workers sub-item); Issue #1 open for the remaining two
 
 d. Has truthful reporting been defined before Proposition 1? Section III.C, which discusses truthtelling, is quite useful and might be moved earlier.
 
@@ -465,13 +471,13 @@ b. The choice to pool the sample is not always consistent: it is done after Figu
 
 c. The assumption of truthtelling should be stated more explicitly and consistently. The introduction presents it as a plausible behavioral assumption, while the main text treats it as an imposed assumption.
 
-> 🔴 **OPEN — awaiting PK/Horton call (Issue #4 §2c)**
+> 🔴 **OPEN — PK to address**
 > 
-> **What:** Reconciling intro ('plausible behavioral assumption') with theory ('imposed assumption + IC justification'). Routed to PK or Horton before finalizing wording; affects intro narrative and the Kartik/Abeler citation placement.
+> **What:** Reconciling the two framings: intro treats truth-telling as a plausible *behavioral* assumption; theory body treats it as an *imposed* assumption that Proposition 3 then justifies via IC. These need to speak with one voice throughout. **This item is routed to PK** — it affects the intro narrative, the placement of the Kartik (2009) / Abeler et al. (2019) citations now in the bibliography (commit `207d38f`), and the framing of the ex-post validation paragraph at the end of §III.E (commit `9235bc1`). Peyman will not pre-commit to a direction.
 > 
 > **Location:** Intro + §III.E
 > 
-> **Commit / Issue:** Issue #4 §2c open
+> **Commit / Issue:** Issue #4 §2c (held for PK)
 
 ### 3. The second signal (ψ₂)
 
