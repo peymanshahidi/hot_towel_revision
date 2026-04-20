@@ -635,13 +635,13 @@ I see the connection to Tadelis and Zettelmeyer (2015), although I think there i
 - p.18 – “The marketplace we study is not the only market for online work, and so it is important to keep in mind the ‘market’ versus ‘marketplace’ distinction made by Roth (2018).”
 Please spell this out more clearly.
 
-> 🔴 **OPEN — Peyman (Issue #3 mechanical)**
+> ✅ **ADDRESSED**
 > 
-> **What:** Spell out 'market' vs. 'marketplace' distinction (Roth 2018) more clearly on p.18. Held pending PK's framing direction so language aligns.
+> **What:** Restructured the paragraph opening so Roth's terminology is defined explicitly and immediately connected to the multi-homing concern that follows. Rewrite: "The marketplace we study is one of several venues within the broader market for online work. In the terminology of \cite{roth2018}, a *marketplace* is a specific institutional venue governed by particular rules, namely the online platform on which the experiment was run, while a *market* is the set of all buyers and sellers who could potentially transact for the type of work in question, short-term remote labor in our case. Because our intervention operates at the marketplace level, a natural concern is that every job opening we see on the platform could be simultaneously posted on several other online labor market sites and in the conventional market." The downstream survey-evidence sentences on multi-homing are left intact (still waiting for Horton's input on which survey is being cited).
 > 
-> **Location:** §IV.A (Empirical Context)
+> **Location:** hot_towel.tex §IV.A Empirical Context (line 698 area)
 > 
-> **Commit / Issue:** Issue #3 Peyman-drafts
+> **Commit / Issue:** this commit
 
 - p.19 – “In this arm, employees were then randomized to have their choice revealed or not.”
 I think of this as akin to the garbling device discussed in Backus et al. (2019), and the first, best example I know of using this to study signaling is Ambrus et al. (2018).
