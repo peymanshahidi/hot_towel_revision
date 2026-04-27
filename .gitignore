@@ -15,6 +15,10 @@
 *.pdf
 !notes/*.pdf
 
+# Writeup images — keep these tracked in the repo
+!writeup/images/
+!writeup/images/**
+
 # Figures folder (redundant but explicit)
 figures/
 
