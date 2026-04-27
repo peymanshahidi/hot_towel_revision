@@ -409,19 +409,27 @@ The model is presented in a way that is neither fully formal nor purely intuitiv
 
 My preference would be to expand the model description and explanation so it can stand alone in the body of the paper. If the editor or authors disagree, it might even be cleaner to move the entire model to an appendix and present only the results in the main text as a guide to the experiment.
 
-> ✅ **ADDRESSED**
+> 🟡 **PARTIALLY ADDRESSED — awaiting PK's theory pass**
 > 
-> **What we did:** Rewrote the model section so it stands alone in the body: formal model, first-order conditions, and comparative statics in the body; extensions, proofs, and second-signal machinery in the appendix.
+> **What we did:** Restructured the theory section so the body carries the formal model setup, first-order conditions, and comparative statics, while extensions, proofs, and second-signal machinery have been moved to the appendix. This is a structural first pass — it gets the section closer to standing alone in the body, but the prose still needs work and PK's iterations before we can call the section truly self-contained at AEJ Micro standards.
 > 
 > **Where in the paper:** Theory section (Section III) and appendices A–C.
 > 
-> **Internal tracking:** commit `9d8fcc6`.
+> **Internal tracking:** commit `9d8fcc6`. Awaiting PK's iteration.
 
 If the authors opt for the first approach, I suggest creating:
 
 - a technical section that presents the model formally, and
 
 - a separate section (either before or after) that discusses the intuition, assumptions, and modeling choices.
+
+> 🔴 **OPEN — awaiting PK's theory pass**
+> 
+> **What we did:** Not yet addressed. R2 is asking for a structural split of the theory section into (i) a technical section with the formal model only, and (ii) a separate intuition/assumptions/modeling-choices section placed before or after. The current rewrite already moves in this direction (formal setup in the body, intuition no longer interleaved with definitions), but a clean two-subsection split has not been performed. Whether to commit to that split — and if so, whether the intuition section sits before or after the technical one — is a structural call held for PK.
+> 
+> **Where in the paper:** Theory section (Section III).
+> 
+> **Internal tracking:** GitHub Issue #1 (residual, structural).
 
 Specific confusions:
 
@@ -497,13 +505,16 @@ a. The authors could emphasize that additional support for this assumption comes
 
 b. The choice to pool the sample is not always consistent: it is done after Figure 1, except in Figure 4, and again in Section V.E. A brief clarification would help.
 
-> 🔴 **OPEN — awaiting framing call first**
+> 🔴 **OPEN — awaiting framing call from PK + audit input from John**
 > 
-> **What we did:** Not yet addressed. The audit of pooling across Figure 1 (pooled), Figure 4 (not pooled), and Section V.E (pooled) has not been performed. The rule to apply consistently depends on the framing choice for R2 §2c below (plausible behavioral assumption vs. imposed-then-justified), so we are holding this until that is settled.
+> **What we did:** Not yet addressed. Two dependencies before this can be resolved:
+> 
+> 1. **PK's framing call (R2 §2c below):** the rule to apply consistently depends on whether truth-telling is framed as a plausible behavioral assumption or as an imposed-then-justified assumption. Until §2c is settled, we cannot pick a pooling rule.
+> 2. **John's empirical audit:** once the rule is set, someone needs to walk through Figure 1 (pooled), Figure 4 (not pooled), and Section V.E (pooled) and confirm what each currently does and why. John ran the empirical pipeline and is best positioned to say whether the inconsistency is a deliberate empirical choice or an oversight, and to re-run any specifications that need to change.
 > 
 > **Where in the paper:** Figures 1 and 4 and Section V.E.
 > 
-> **Internal tracking:** GitHub Issue #4 §2b (open, waiting for §2c resolution).
+> **Internal tracking:** GitHub Issue #4 §2b (open, waiting on PK §2c + John audit).
 
 c. The assumption of truthtelling should be stated more explicitly and consistently. The introduction presents it as a plausible behavioral assumption, while the main text treats it as an imposed assumption.
 
